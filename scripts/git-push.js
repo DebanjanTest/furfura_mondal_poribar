@@ -5,9 +5,19 @@ import path from 'path';
 
 const projectDir = path.resolve('.');
 
-async function pushRepo(token = null) {
+async function pushRepo(token) {
+  if (!token) {
+    console.error("No token provided!");
+    process.exit(1);
+  }
+
+  console.log("Preparing push to https://github.com/DebanjanTest/furfura_mondal_poribar.git (branch: main)...");
+  
+  // Ensure current branch is main
+  const currentBranch = await git.currentBranch({ fs, dir: projectDir });
+  console.log("Current branch:", currentBranch);
+
   try {
-    console.log("Attempting push to origin/main...");
     const pushResult = await git.push({
       fs,
       http,
@@ -16,19 +26,46 @@ async function pushRepo(token = null) {
       ref: 'main',
       force: true,
       onAuth: () => {
-        if (token) {
-          return { username: token };
-        }
-        return undefined;
+        return {
+          username: token,
+          password: ''
+        };
+      },
+      onProgress: (evt) => {
+        console.log(`[Push Progress] ${evt.phase}: ${evt.loaded}/${evt.total || '?'}`);
       }
     });
-    console.log("Push result:", pushResult);
+
+    console.log("✅ Git push succeeded!");
+    console.log("Push details:", JSON.stringify(pushResult, null, 2));
   } catch (err) {
-    console.error("Push status:", err.message);
-    if (err.data) console.error("Error data:", err.data);
+    console.warn("Attempt 1 error:", err.message);
+    
+    // Try fallback auth pattern (username + password)
+    console.log("Retrying with OAuth token auth pattern...");
+    try {
+      const fallbackResult = await git.push({
+        fs,
+        http,
+        dir: projectDir,
+        remote: 'origin',
+        ref: 'main',
+        force: true,
+        onAuth: () => {
+          return {
+            username: 'x-access-token',
+            password: token
+          };
+        }
+      });
+      console.log("✅ Git push succeeded on fallback auth!");
+      console.log("Push details:", JSON.stringify(fallbackResult, null, 2));
+    } catch (err2) {
+      console.error("❌ Fallback error:", err2.message);
+      if (err2.data) console.error("Error data:", err2.data);
+    }
   }
 }
 
-// Check if token passed as CLI arg or environment variable
-const token = process.argv[2] || process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+const token = process.argv[2];
 pushRepo(token).catch(console.error);
