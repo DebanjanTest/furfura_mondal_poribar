@@ -26,6 +26,7 @@ const state = {
     masterPercent: 120
   },
   activeTab: 'durgaPuja',
+  isUserScrubbing: false,
   activeGalleryCategory: 'all',
   storyGen: {
     theme: 'early-morning',
@@ -41,6 +42,7 @@ let particles = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   initAtmosphere();
+  initDynamicIsland();
   initCountdown();
   initOnlineCounter();
   initAudioPlayer();
@@ -139,6 +141,11 @@ function updateAtmosphere() {
     item.classList.toggle('active', item.getAttribute('data-vibe') === state.activeVibe);
   });
 
+  // Active state on island vibe chips
+  document.querySelectorAll('.island-vibe-chip').forEach((chip) => {
+    chip.classList.toggle('active', chip.getAttribute('data-vibe') === state.activeVibe);
+  });
+
   // Update particles color & lighting theme
   if (particles) {
     particles.setTimeOfDay(effectiveTime);
@@ -146,27 +153,190 @@ function updateAtmosphere() {
 }
 
 /* ==========================================================================
-   2. COUNTDOWN & ONLINE LIVE COUNTER
+   2. MOBILE FLOATING DYNAMIC ISLAND SYSTEM
+   ========================================================================== */
+
+function initDynamicIsland() {
+  const island = document.getElementById('dynamic-island');
+  const btnExpand = document.getElementById('btn-island-expand');
+  const btnActiveExpand = document.getElementById('btn-island-active-expand');
+  const idleTapTarget = document.getElementById('island-idle-tap-target');
+  const activeTapTarget = document.getElementById('island-active-tap-target');
+  const islandPlayPause = document.getElementById('island-btn-play-pause');
+
+  const toggleDrawer = (e) => {
+    e?.stopPropagation();
+    island?.classList.toggle('drawer-open');
+  };
+
+  btnExpand?.addEventListener('click', toggleDrawer);
+  btnActiveExpand?.addEventListener('click', toggleDrawer);
+  idleTapTarget?.addEventListener('click', toggleDrawer);
+
+  // Active Island Tap -> Opens Player Sheet (Playlists or Dhak)
+  activeTapTarget?.addEventListener('click', () => {
+    if (state.isLiveDhakPlaying) {
+      openModal('dhak-modal');
+    } else {
+      openModal('playlists-modal');
+    }
+  });
+
+  // Island Play / Pause Touch Trigger
+  islandPlayPause?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (state.isLiveDhakPlaying) {
+      if (state.dhakEngineMode === 'pure') {
+        if (dhakSequencer.isPlaying) {
+          dhakSequencer.stop();
+          state.isLiveDhakPlaying = false;
+          updateLiveDhakPlayState(false);
+        } else {
+          playLivePart(state.currentLiveDhakIndex);
+        }
+      } else {
+        if (ytAudioPlayer.isPlaying) {
+          ytAudioPlayer.pause();
+          state.isLiveDhakPlaying = false;
+          updateLiveDhakPlayState(false);
+        } else {
+          playLivePart(state.currentLiveDhakIndex);
+        }
+      }
+    } else {
+      handleTogglePlay();
+    }
+    updateDynamicIslandState();
+  });
+
+  // Quick Action Hub Buttons inside Island
+  document.getElementById('island-quick-shankha')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    audioEngine.playShankha(2.8);
+    showShankhaHud();
+    island?.classList.remove('drawer-open');
+  });
+
+  document.getElementById('island-quick-dhak')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openModal('dhak-modal');
+    island?.classList.remove('drawer-open');
+  });
+
+  document.getElementById('island-quick-radio')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openModal('playlists-modal');
+    island?.classList.remove('drawer-open');
+  });
+
+  document.getElementById('island-quick-story')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openModal('story-generator-modal');
+    renderStoryCanvas();
+    island?.classList.remove('drawer-open');
+  });
+
+  document.getElementById('island-quick-heritage')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openModal('pujo-info-modal');
+    island?.classList.remove('drawer-open');
+  });
+
+  // Atmosphere Chips inside Island
+  document.querySelectorAll('.island-vibe-chip').forEach((chip) => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const selectedVibe = chip.getAttribute('data-vibe');
+      state.activeVibe = selectedVibe;
+      updateAtmosphere();
+      island?.classList.remove('drawer-open');
+    });
+  });
+
+  // Close island drawer when tapping outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#mobile-dynamic-island-container')) {
+      island?.classList.remove('drawer-open');
+    }
+  });
+
+  updateDynamicIslandState();
+}
+
+function updateDynamicIslandState() {
+  const idleState = document.getElementById('island-idle-state');
+  const activeState = document.getElementById('island-active-state');
+  const islandIconPlay = document.getElementById('island-icon-play');
+  const islandIconPause = document.getElementById('island-icon-pause');
+  const islandTrackTitle = document.getElementById('island-track-title');
+  const islandArtistName = document.getElementById('island-artist-name');
+  const islandArtImg = document.getElementById('island-art-img');
+  const islandPlayingIcon = document.getElementById('island-playing-icon');
+
+  if (state.isLiveDhakPlaying) {
+    if (idleState) idleState.style.display = 'none';
+    if (activeState) activeState.style.display = 'flex';
+    if (islandIconPlay) islandIconPlay.style.display = 'none';
+    if (islandIconPause) islandIconPause.style.display = 'block';
+    if (islandPlayingIcon) islandPlayingIcon.textContent = '🥁';
+
+    const part = authenticLiveDhakParts[state.currentLiveDhakIndex];
+    if (islandTrackTitle) islandTrackTitle.textContent = part?.title_bn || 'খাঁটি ঢাকের বোল';
+    if (islandArtistName) islandArtistName.textContent = 'ঢাকের ৬টি পর্ব ও লুপ';
+    if (islandArtImg) islandArtImg.src = '/favicon.png';
+  } else if (state.isAudioPlaying) {
+    if (idleState) idleState.style.display = 'none';
+    if (activeState) activeState.style.display = 'flex';
+    if (islandIconPlay) islandIconPlay.style.display = 'none';
+    if (islandIconPause) islandIconPause.style.display = 'block';
+    if (islandPlayingIcon) islandPlayingIcon.textContent = '🎵';
+
+    const track = getCurrentTrack();
+    if (islandTrackTitle) islandTrackTitle.textContent = track?.title || 'Dugga Elo';
+    if (islandArtistName) islandArtistName.textContent = track?.artist || 'মন্ডল বাড়ি রেডিও';
+    if (islandArtImg) islandArtImg.src = track?.cover || '/favicon.png';
+  } else {
+    if (idleState) idleState.style.display = 'flex';
+    if (activeState) activeState.style.display = 'none';
+    if (islandIconPlay) islandIconPlay.style.display = 'block';
+    if (islandIconPause) islandIconPause.style.display = 'none';
+  }
+}
+
+/* ==========================================================================
+   3. COUNTDOWN & ONLINE LIVE COUNTER
    ========================================================================== */
 
 function initCountdown() {
   function tick() {
     const cd = getCountdown();
     const daysEl = document.getElementById('countdown-days-val');
+    const hoursEl = document.getElementById('countdown-hours-val');
+    const minsEl = document.getElementById('countdown-mins-val');
+    const secsEl = document.getElementById('countdown-secs-val');
     const labelEl = document.getElementById('countdown-sub-label');
 
     if (daysEl) {
       daysEl.textContent = cd.days;
     }
+    if (hoursEl) {
+      hoursEl.textContent = cd.hours < 10 ? `0${cd.hours}` : cd.hours;
+    }
+    if (minsEl) {
+      minsEl.textContent = cd.minutes < 10 ? `0${cd.minutes}` : cd.minutes;
+    }
+    if (secsEl) {
+      secsEl.textContent = cd.seconds < 10 ? `0${cd.seconds}` : cd.seconds;
+    }
     if (labelEl) {
-      labelEl.textContent = `days until Mondal Barir Pujo 2026`;
+      labelEl.textContent = `মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • নির্ঘণ্ট ও সূচি`;
     }
   }
 
   tick();
   setInterval(tick, 1000);
 
-  // Click on countdown subtext button opens Mondal Barir Pujo Info / Schedule
+  // Click on countdown card opens Mondal Barir Pujo Info / Schedule
   document.getElementById('btn-countdown-details')?.addEventListener('click', () => {
     openModal('pujo-info-modal');
   });
@@ -174,12 +344,17 @@ function initCountdown() {
 
 function initOnlineCounter() {
   const countText = document.getElementById('online-count-text');
+  const islandCountText = document.getElementById('island-online-text');
+
   setInterval(() => {
     // Subtle realistic organic fluctuation (+/- 2)
     const change = Math.floor(Math.random() * 5) - 2;
     state.onlineCount = Math.max(42, Math.min(94, state.onlineCount + change));
     if (countText) {
       countText.textContent = `${state.onlineCount} online`;
+    }
+    if (islandCountText) {
+      islandCountText.textContent = `${state.onlineCount}`;
     }
   }, 4500);
 }
@@ -189,7 +364,7 @@ function initOnlineCounter() {
    ========================================================================== */
 
 function initAudioPlayer() {
-  const currentList = playlists[state.currentPlaylistKey].tracks;
+  const currentList = playlists[state.currentPlaylistKey]?.tracks || [];
   const initialTrack = currentList[0];
   updatePlayerUI(initialTrack);
 
@@ -207,7 +382,9 @@ function initAudioPlayer() {
       }
     } else if (event.type === 'trackChange') {
       if (!event.isLiveDhak) {
+        if (event.playlistKey) state.currentPlaylistKey = event.playlistKey;
         updatePlayerUI(event.track);
+        updateEqualizerAnimation();
       }
     } else if (event.type === 'liveDhakChange') {
       if (state.dhakEngineMode === 'youtube') {
@@ -262,14 +439,47 @@ function initAudioPlayer() {
     openModal('playlists-modal');
   });
 
-  // Scrubber Drag
+  // Scrubber Drag & Touch Handling with Zero-Jitter Interactivity
   const scrubber = document.getElementById('player-scrubber');
-  scrubber?.addEventListener('input', (e) => {
-    const val = parseFloat(e.target.value);
-    const duration = getCurrentTrack()?.duration || 200;
-    const targetSeconds = (val / 100) * duration;
-    ytAudioPlayer.seekTo(targetSeconds);
-  });
+  if (scrubber) {
+    const handleScrubStart = () => {
+      state.isUserScrubbing = true;
+    };
+    const handleScrubEnd = (e) => {
+      const val = parseFloat(e.target.value);
+      const track = getCurrentTrack();
+      const trackStart = track?.start || 0;
+      const trackEnd = (track?.end !== undefined && track?.end !== null) ? track.end : null;
+      const duration = track?.duration || (trackEnd !== null ? (trackEnd - trackStart) : 200);
+      const targetSeconds = (val / 100) * duration;
+      ytAudioPlayer.seekTo(targetSeconds);
+      state.isUserScrubbing = false;
+    };
+    const handleScrubInput = (e) => {
+      state.isUserScrubbing = true;
+      const val = parseFloat(e.target.value);
+      const track = getCurrentTrack();
+      const trackStart = track?.start || 0;
+      const trackEnd = (track?.end !== undefined && track?.end !== null) ? track.end : null;
+      const duration = track?.duration || (trackEnd !== null ? (trackEnd - trackStart) : 200);
+      const curSec = (val / 100) * duration;
+      const timeLabel = document.getElementById('player-time-text');
+      if (timeLabel) {
+        const curMin = Math.floor(curSec / 60);
+        const curS = Math.floor(curSec % 60).toString().padStart(2, '0');
+        const totMin = Math.floor(duration / 60);
+        const totS = Math.floor(duration % 60).toString().padStart(2, '0');
+        timeLabel.textContent = `${curMin}:${curS} / ${totMin}:${totS}`;
+      }
+    };
+
+    scrubber.addEventListener('mousedown', handleScrubStart);
+    scrubber.addEventListener('touchstart', handleScrubStart, { passive: true });
+    scrubber.addEventListener('input', handleScrubInput);
+    scrubber.addEventListener('change', handleScrubEnd);
+    scrubber.addEventListener('mouseup', handleScrubEnd);
+    scrubber.addEventListener('touchend', handleScrubEnd);
+  }
 
   // Open Playlists Modal buttons
   document.getElementById('btn-open-playlists')?.addEventListener('click', () => {
@@ -319,6 +529,12 @@ function getCurrentTrack() {
 function updatePlayerUI(track) {
   if (!track) return;
 
+  const displayTitle = track.title_bn || track.title || 'দুগ্গা এলো';
+  const displayArtist = `${track.artist || 'Agomoni'}${track.composer ? ` • ${track.composer}` : ''}`;
+  const displayCover = track.cover || '/favicon.png';
+  const displayDuration = track.durationLabel || '3:30';
+  const displayPill = playlists[state.currentPlaylistKey]?.pillLabel || 'PUJA RADIO';
+
   // Desktop Dock Elements
   const titleEl = document.getElementById('player-track-title');
   const artistEl = document.getElementById('player-track-artist');
@@ -326,20 +542,23 @@ function updatePlayerUI(track) {
   const timeEl = document.getElementById('player-time-text');
   const launcherText = document.getElementById('launcher-pill-text');
 
-  if (titleEl) titleEl.textContent = track.title;
-  if (artistEl) artistEl.textContent = track.artist || 'Agomoni';
-  if (coverImg) coverImg.src = track.cover || '/favicon.png';
-  if (timeEl) timeEl.textContent = `0:00 / ${track.durationLabel || '3:30'}`;
-  if (launcherText) launcherText.textContent = playlists[state.currentPlaylistKey]?.pillLabel || 'PUJA RADIO';
+  if (titleEl) titleEl.textContent = displayTitle;
+  if (artistEl) artistEl.textContent = displayArtist;
+  if (coverImg) coverImg.src = displayCover;
+  if (timeEl) timeEl.textContent = `0:00 / ${displayDuration}`;
+  if (launcherText) launcherText.textContent = displayPill;
 
   // Mobile Elements
   const mobTitleEl = document.getElementById('mobile-track-title');
   const mobArtistEl = document.getElementById('mobile-track-artist');
   const mobCoverImg = document.getElementById('mobile-cover-img');
 
-  if (mobTitleEl) mobTitleEl.textContent = track.title;
-  if (mobArtistEl) mobArtistEl.textContent = track.artist || 'Agomoni';
-  if (mobCoverImg) mobCoverImg.src = track.cover || '/favicon.png';
+  if (mobTitleEl) mobTitleEl.textContent = displayTitle;
+  if (mobArtistEl) mobArtistEl.textContent = displayArtist;
+  if (mobCoverImg) mobCoverImg.src = displayCover;
+
+  // Dynamic Island UI Sync
+  updateDynamicIslandState();
 }
 
 function updatePlayPauseButton(isPlaying) {
@@ -358,6 +577,9 @@ function updatePlayPauseButton(isPlaying) {
     mobIconPlay.style.display = isPlaying ? 'none' : 'block';
     mobIconPause.style.display = isPlaying ? 'block' : 'none';
   }
+
+  // Dynamic Island Sync
+  updateDynamicIslandState();
 }
 
 function updateArtVinylAnimation(isPlaying) {
@@ -374,8 +596,10 @@ function updateArtVinylAnimation(isPlaying) {
 }
 
 function updateScrubber(currentSec, totalSec, progress) {
-  const scrubber = document.getElementById('player-scrubber');
-  if (scrubber) scrubber.value = progress || 0;
+  if (!state.isUserScrubbing) {
+    const scrubber = document.getElementById('player-scrubber');
+    if (scrubber) scrubber.value = progress || 0;
+  }
 
   const timeLabel = document.getElementById('player-time-text');
   if (timeLabel) {
@@ -388,17 +612,21 @@ function updateScrubber(currentSec, totalSec, progress) {
 }
 
 function playNextTrack() {
-  const trackList = playlists[state.currentPlaylistKey].tracks;
+  const trackList = playlists[state.currentPlaylistKey]?.tracks || [];
+  if (trackList.length === 0) return;
   state.currentTrackIndex = (state.currentTrackIndex + 1) % trackList.length;
   const nextTrack = trackList[state.currentTrackIndex];
+  updatePlayerUI(nextTrack);
   ytAudioPlayer.loadTrack(nextTrack, state.currentPlaylistKey, true);
   renderPlaylistTracks(state.activeTab);
 }
 
 function playPrevTrack() {
-  const trackList = playlists[state.currentPlaylistKey].tracks;
+  const trackList = playlists[state.currentPlaylistKey]?.tracks || [];
+  if (trackList.length === 0) return;
   state.currentTrackIndex = (state.currentTrackIndex - 1 + trackList.length) % trackList.length;
   const prevTrack = trackList[state.currentTrackIndex];
+  updatePlayerUI(prevTrack);
   ytAudioPlayer.loadTrack(prevTrack, state.currentPlaylistKey, true);
   renderPlaylistTracks(state.activeTab);
 }
@@ -420,6 +648,8 @@ function renderPlaylistTracks(playlistKey) {
     row.setAttribute('data-track-index', index);
 
     const numLabel = track.num || (index + 1 < 10 ? `0${index + 1}` : `${index + 1}`);
+    const rowTitle = track.title_bn || track.title;
+    const rowArtist = `${track.artist || 'Traditional'}${track.composer ? ` • ${track.composer}` : ''}`;
 
     row.innerHTML = `
       <span class="track-row-num">
@@ -433,8 +663,8 @@ function renderPlaylistTracks(playlistKey) {
       </span>
       <img class="track-row-thumb" src="${track.cover}" alt="${track.title}" loading="lazy" />
       <div class="track-row-info">
-        <div class="track-row-title">${track.title}</div>
-        <div class="track-row-artist">${track.artist || 'Traditional'}</div>
+        <div class="track-row-title">${rowTitle}</div>
+        <div class="track-row-artist">${rowArtist}</div>
       </div>
       <span class="track-row-dur">${track.durationLabel || '3:30'}</span>
     `;
@@ -442,6 +672,7 @@ function renderPlaylistTracks(playlistKey) {
     row.addEventListener('click', () => {
       state.currentPlaylistKey = playlistKey;
       state.currentTrackIndex = index;
+      updatePlayerUI(track);
       ytAudioPlayer.loadTrack(track, playlistKey, true);
       renderPlaylistTracks(playlistKey);
     });
@@ -873,6 +1104,7 @@ function updateLiveDhakPlayState(isPlaying) {
   }
 
   highlightLivePartCard(state.currentLiveDhakIndex);
+  updateDynamicIslandState();
 }
 
 function highlightLivePartCard(activeIndex) {

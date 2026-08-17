@@ -1,5 +1,5 @@
-// YouTube IFrame API Background Audio Integration
-// Supports Radio Tracks, Mahalaya Segments & Authentic Live Dhak Master Playback (8EA8JrDMZbM)
+// YouTube IFrame API Background Audio Integration & High-Precision Audio Stream Sync Engine
+// Supports Agomoni Puja Radio, 6-Segment Mahalaya Master & Authentic Live Dhak Percussion Playback
 
 class YouTubeAudioPlayer {
   constructor() {
@@ -7,10 +7,13 @@ class YouTubeAudioPlayer {
     this.isReady = false;
     this.currentTrack = null;
     this.currentPlaylistKey = 'durgaPuja';
+    this.currentVideoId = null;
     this.isPlaying = false;
     this.isLiveDhakMode = false;
     this.isLooping = true;
     this.isAudioBoosted = false;
+    this.isTransitioning = false;
+    this.hasEndedFired = false;
     this.boostSettings = {
       bassBoostDb: 6,
       snapBoostDb: 4,
@@ -93,105 +96,161 @@ class YouTubeAudioPlayer {
   }
 
   notify(data) {
-    this.listeners.forEach((fn) => fn(data));
+    this.listeners.forEach((fn) => {
+      try {
+        fn(data);
+      } catch (e) {
+        console.error('Audio Player subscriber error:', e);
+      }
+    });
   }
 
   handleStateChange(event) {
     // YT.PlayerState: -1 unstarted, 0 ended, 1 playing, 2 paused, 3 buffering, 5 cued
     if (event.data === window.YT.PlayerState.PLAYING) {
       this.isPlaying = true;
+      this.isTransitioning = false;
       this.startProgressTicker();
-      this.notify({ type: 'state', isPlaying: true, isLiveDhak: this.isLiveDhakMode });
+      this.notify({
+        type: 'state',
+        isPlaying: true,
+        isLiveDhak: this.isLiveDhakMode,
+        track: this.currentTrack,
+        playlistKey: this.currentPlaylistKey
+      });
     } else if (event.data === window.YT.PlayerState.PAUSED) {
       this.isPlaying = false;
       this.stopProgressTicker();
-      this.notify({ type: 'state', isPlaying: false, isLiveDhak: this.isLiveDhakMode });
+      this.notify({
+        type: 'state',
+        isPlaying: false,
+        isLiveDhak: this.isLiveDhakMode,
+        track: this.currentTrack,
+        playlistKey: this.currentPlaylistKey
+      });
     } else if (event.data === window.YT.PlayerState.ENDED) {
       if (this.isLiveDhakMode && this.isLooping && this.currentTrack) {
-        // Continuous loop for Live Dhak video mode
+        // Continuous loop for Live Dhak mode
         this.seekTo(0);
         this.play();
-      } else {
+      } else if (this.isLiveDhakMode && !this.isLooping) {
         this.isPlaying = false;
         this.stopProgressTicker();
-        this.notify({ type: 'ended', isLiveDhak: this.isLiveDhakMode });
+        this.notify({ type: 'liveDhakEnded', part: this.currentTrack });
+      } else {
+        if (!this.hasEndedFired) {
+          this.hasEndedFired = true;
+          this.isPlaying = false;
+          this.stopProgressTicker();
+          this.notify({ type: 'ended', isLiveDhak: false, track: this.currentTrack });
+        }
       }
     } else if (event.data === window.YT.PlayerState.BUFFERING) {
-      this.notify({ type: 'buffering' });
+      this.notify({ type: 'buffering', track: this.currentTrack });
     }
   }
 
   loadTrack(track, playlistKey = 'durgaPuja', autoplay = true) {
+    if (!track) return;
+
     this.currentTrack = track;
     this.currentPlaylistKey = playlistKey;
     this.isLiveDhakMode = false;
+    this.isTransitioning = true;
+    this.hasEndedFired = false;
+
+    // Immediately notify UI of the track change for zero-latency metadata sync
+    this.notify({
+      type: 'trackChange',
+      track: this.currentTrack,
+      playlistKey: this.currentPlaylistKey,
+      isPlaying: autoplay,
+      isLiveDhak: false
+    });
 
     if (!this.player || !this.isReady) {
-      console.warn('Player not yet ready, will play once loaded');
+      console.warn('Player not yet ready, queued for initial playback');
       return;
     }
 
-    const videoId = track.videoId || 'SFJeglBF5cg';
+    const targetVideoId = track.videoId || 'xlElO06nQy8';
     const startSeconds = track.start || 0;
 
     if (this.cueDebounceTimer) clearTimeout(this.cueDebounceTimer);
 
     this.cueDebounceTimer = setTimeout(() => {
-      if (autoplay) {
-        this.player.loadVideoById({
-          videoId: videoId,
-          startSeconds: startSeconds
-        });
-        this.isPlaying = true;
+      // Seamless seek if the same video is already loaded (e.g. Mahalaya chapters)
+      if (this.currentVideoId === targetVideoId) {
+        this.player.seekTo(startSeconds, true);
+        if (autoplay) {
+          this.player.playVideo();
+          this.isPlaying = true;
+        } else {
+          this.player.pauseVideo();
+          this.isPlaying = false;
+        }
       } else {
-        this.player.cueVideoById({
-          videoId: videoId,
-          startSeconds: startSeconds
-        });
-        this.isPlaying = false;
+        this.currentVideoId = targetVideoId;
+        if (autoplay) {
+          this.player.loadVideoById({
+            videoId: targetVideoId,
+            startSeconds: startSeconds
+          });
+          this.isPlaying = true;
+        } else {
+          this.player.cueVideoById({
+            videoId: targetVideoId,
+            startSeconds: startSeconds
+          });
+          this.isPlaying = false;
+        }
       }
-
-      this.notify({
-        type: 'trackChange',
-        track: this.currentTrack,
-        playlistKey: this.currentPlaylistKey,
-        isPlaying: this.isPlaying,
-        isLiveDhak: false
-      });
-    }, 50);
+      this.player.setVolume(this.getEffectiveVolume());
+    }, 40);
   }
 
-  // Dedicated Authentic Live Dhak Part Cueing & Playback
+  // Dedicated Authentic Live Dhak Part Cueing & Continuous Playback
   playLiveDhakPart(part, loop = true) {
+    if (!part) return;
+
     this.currentTrack = part;
     this.currentPlaylistKey = 'liveDhakMaster';
     this.isLiveDhakMode = true;
     this.isLooping = loop;
+    this.isTransitioning = true;
+    this.hasEndedFired = false;
+
+    this.notify({
+      type: 'liveDhakChange',
+      part: this.currentTrack,
+      isLooping: this.isLooping,
+      isPlaying: true
+    });
 
     if (!this.player || !this.isReady) {
       console.warn('Player not yet ready for Live Dhak');
       return;
     }
 
-    const videoId = part.videoId || '8EA8JrDMZbM';
+    const targetVideoId = part.videoId || '8EA8JrDMZbM';
     const startSeconds = part.start || 0;
 
     if (this.cueDebounceTimer) clearTimeout(this.cueDebounceTimer);
 
     this.cueDebounceTimer = setTimeout(() => {
-      this.player.loadVideoById({
-        videoId: videoId,
-        startSeconds: startSeconds
-      });
+      if (this.currentVideoId === targetVideoId) {
+        this.player.seekTo(startSeconds, true);
+        this.player.playVideo();
+      } else {
+        this.currentVideoId = targetVideoId;
+        this.player.loadVideoById({
+          videoId: targetVideoId,
+          startSeconds: startSeconds
+        });
+      }
       this.isPlaying = true;
-
-      this.notify({
-        type: 'liveDhakChange',
-        part: this.currentTrack,
-        isLooping: this.isLooping,
-        isPlaying: true
-      });
-    }, 50);
+      this.player.setVolume(this.getEffectiveVolume());
+    }, 40);
   }
 
   setLiveDhakLoop(isLooping) {
@@ -227,7 +286,12 @@ class YouTubeAudioPlayer {
     if (this.player && this.isReady && typeof this.player.playVideo === 'function') {
       this.player.playVideo();
       this.isPlaying = true;
-      this.notify({ type: 'state', isPlaying: true, isLiveDhak: this.isLiveDhakMode });
+      this.notify({
+        type: 'state',
+        isPlaying: true,
+        isLiveDhak: this.isLiveDhakMode,
+        track: this.currentTrack
+      });
     }
   }
 
@@ -235,7 +299,12 @@ class YouTubeAudioPlayer {
     if (this.player && this.isReady && typeof this.player.pauseVideo === 'function') {
       this.player.pauseVideo();
       this.isPlaying = false;
-      this.notify({ type: 'state', isPlaying: false, isLiveDhak: this.isLiveDhakMode });
+      this.notify({
+        type: 'state',
+        isPlaying: false,
+        isLiveDhak: this.isLiveDhakMode,
+        track: this.currentTrack
+      });
     }
   }
 
@@ -250,7 +319,7 @@ class YouTubeAudioPlayer {
   seekTo(seconds) {
     if (this.player && this.isReady && typeof this.player.seekTo === 'function') {
       const trackStart = this.currentTrack?.start || 0;
-      const actualTarget = trackStart + seconds;
+      const actualTarget = Math.max(0, trackStart + seconds);
       this.player.seekTo(actualTarget, true);
     }
   }
@@ -284,7 +353,7 @@ class YouTubeAudioPlayer {
     this.stopProgressTicker();
     this.progressInterval = setInterval(() => {
       this.checkTrackBounds();
-    }, 250);
+    }, 200);
   }
 
   stopProgressTicker() {
@@ -296,15 +365,20 @@ class YouTubeAudioPlayer {
 
   checkTrackBounds() {
     if (!this.player || typeof this.player.getCurrentTime !== 'function') return;
+    if (this.isTransitioning) return;
 
     try {
       const rawCurrent = this.player.getCurrentTime() || 0;
       const trackStart = this.currentTrack?.start || 0;
-      const trackEnd = this.currentTrack?.end || null;
-      const trackDuration = this.currentTrack?.duration || (trackEnd ? trackEnd - trackStart : (this.player.getDuration() || 0));
+      const trackEnd = (this.currentTrack?.end !== undefined && this.currentTrack?.end !== null)
+        ? this.currentTrack.end
+        : null;
 
-      // Handle Exact Live Dhak or Segment Boundary Reached
-      if (trackEnd && rawCurrent >= trackEnd) {
+      const trackDuration = this.currentTrack?.duration ||
+        (trackEnd !== null ? Math.max(1, trackEnd - trackStart) : (this.player.getDuration() || 0));
+
+      // Handle Segment Boundary Reached (for segmented broadcasts or Live Dhak parts)
+      if (trackEnd !== null && rawCurrent >= (trackEnd - 0.3)) {
         if (this.isLiveDhakMode && this.isLooping) {
           this.player.seekTo(trackStart, true);
           this.notify({
@@ -321,31 +395,36 @@ class YouTubeAudioPlayer {
           this.notify({ type: 'liveDhakEnded', part: this.currentTrack });
           return;
         } else {
-          this.notify({ type: 'ended' });
+          if (!this.hasEndedFired) {
+            this.hasEndedFired = true;
+            this.notify({ type: 'ended', isLiveDhak: false, track: this.currentTrack });
+          }
           return;
         }
       }
 
-      if (rawCurrent < trackStart - 0.2) {
+      // Guard if player time is before track start
+      if (trackStart > 0 && rawCurrent < trackStart - 0.4) {
         this.player.seekTo(trackStart, true);
         return;
       }
 
       const relativeCurrent = Math.max(0, Math.min(trackDuration, rawCurrent - trackStart));
+      const progress = trackDuration > 0 ? (relativeCurrent / trackDuration) * 100 : 0;
 
       this.notify({
         type: 'timeUpdate',
         currentTime: relativeCurrent,
         duration: trackDuration,
-        progress: trackDuration > 0 ? (relativeCurrent / trackDuration) * 100 : 0,
+        progress: progress,
         isLiveDhak: this.isLiveDhakMode,
-        part: this.currentTrack
+        part: this.currentTrack,
+        track: this.currentTrack
       });
     } catch (e) {
-      // ignore transient errors
+      // Ignore transient ticker exceptions
     }
   }
 }
 
 export const ytAudioPlayer = new YouTubeAudioPlayer();
-
