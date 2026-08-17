@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="bn" class="h-full antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>পুজো আসছে — মন্ডল বাড়ির পুজো | Mondal Barir Pujo 2026 Countdown & Festive Radio</title>
+    <meta name="description" content="মন্ডল বাড়ির পুজো (Mondal Barir Pujo) — Durga Puja 2026 live countdown, timeless Agomoni & Mahalaya radio, Dhak rhythms, 150+ years Bonedi heritage celebration and Instagram Story Generator." />
+    
+    <!-- Primary Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Open Graph / Meta Previews -->
+    <meta property="og:title" content="পুজো আসছে — মন্ডল বাড়ির পুজো (Mondal Barir Pujo 2026)" />
+    <meta property="og:description" content="Durga Puja 2026 live countdown, curated Agomoni & Mahalaya radio, authentic Dhak beats, Instagram story generator, and traditional Mondal Barir Pujo celebrations." />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- High-Performance Typography Preconnect & Font Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body>
+    <div id="app" class="app-wrapper">
+      
+      <!-- ==========================================
+           BACKGROUND & SCENIC ATMOSPHERE SYSTEM
+           ========================================== -->
+      <div class="background-container" id="bg-container">
+        <picture>
+          <source media="(max-width: 768px)" srcset="/bg-mobile/early-morning-mobile.webp" />
+          <img id="bg-early-morning" class="bg-layer" src="/bg/early-morning-1920.webp" alt="Early Morning Puja Atmosphere" />
+        </picture>
+        <picture>
+          <source media="(max-width: 768px)" srcset="/bg-mobile/morning-mobile.webp" />
+          <img id="bg-morning" class="bg-layer" src="/bg/morning-1920.webp" alt="Morning Puja Atmosphere" />
+        </picture>
+        <picture>
+          <source media="(max-width: 768px)" srcset="/bg-mobile/afternoon-mobile.webp" />
+          <img id="bg-afternoon" class="bg-layer" src="/bg/afternoon-1920.webp" alt="Afternoon Autumn Atmosphere" />
+        </picture>
+        <picture>
+          <source media="(max-width: 768px)" srcset="/bg-mobile/evening-mobile.webp" />
+          <img id="bg-evening" class="bg-layer" src="/bg/evening-1920.webp" alt="Evening Sandhya Aarti Atmosphere" />
+        </picture>
+        <picture>
+          <source media="(max-width: 768px)" srcset="/bg-mobile/night-mobile.webp" />
+          <img id="bg-night" class="bg-layer" src="/bg/night-1920.webp" alt="Festive Night Atmosphere" />
+        </picture>
+        <picture>
+          <source media="(max-width: 768px)" srcset="/bg-mobile/midnight-mobile.webp" />
+          <img id="bg-midnight" class="bg-layer" src="/bg/midnight-1920.webp" alt="Midnight Serenity Atmosphere" />
+        </picture>
+
+        <!-- Ambient Cinematic Lighting & Canvas Particle Overlay -->
+        <div class="bg-vignette"></div>
+        <canvas id="particle-canvas"></canvas>
+      </div>
+
+      <!-- ==========================================
+           TOP NAVIGATION / CONTROLS HEADER BAR
+           ========================================== -->
+      <header class="header-bar" role="banner">
+        <div class="header-left">
+          <!-- Live Online Indicator -->
+          <div class="glass-pill online-pill" id="online-counter" title="Active Visitors Online" aria-label="Live visitors count">
+            <span class="beacon-dot" aria-hidden="true"></span>
+            <span id="online-count-text">54 online</span>
+          </div>
+
+          <!-- Mondal Barir Pujo Sole Branding Pill -->
+          <button class="glass-pill pujo-tag-pill" id="btn-open-pujo-info" title="মন্ডল বাড়ির পুজো — ঐতিহ্য, নির্ঘণ্ট ও ফটো গ্যালারি">
+            <span class="pill-icon" aria-hidden="true">🪔</span>
+            <span class="brand-text">মন্ডল বাড়ির পুজো</span>
+            <span class="badge-heritage">১৫০+ বছর</span>
+          </button>
+        </div>
+
+        <div class="header-right">
+          <!-- Instagram Story Generator Quick Trigger -->
+          <button class="glass-pill story-nav-pill" id="btn-open-story-gen" title="Generate Aesthetic Instagram Story Card (Key I)">
+            <span class="pill-icon" aria-hidden="true">📸</span>
+            <span class="hide-on-mobile">স্টোরি কার্ড</span>
+          </button>
+
+          <!-- Official Instagram Link Pill -->
+          <a href="https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp" target="_blank" rel="noopener noreferrer" class="glass-pill insta-link-pill hide-on-mobile" title="Follow Furfura Mondal Poribar on Instagram @furfura_mondal_poribar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span>@furfura_mondal_poribar</span>
+          </a>
+
+          <!-- Interactive Soundboard Quick Triggers (Desktop / Tablet) -->
+          <div class="quick-soundboard-group hide-on-mobile">
+            <button class="icon-btn" id="btn-quick-shankha" title="Blow Sacred Shankha (শাঁখের ধ্বনি — Key S)" aria-label="Play Shankha Sound">
+              <span aria-hidden="true">🐚</span>
+              <span class="tooltip-kbd">S</span>
+            </button>
+            <button class="icon-btn" id="btn-quick-dhak" title="Play Dhak Drum Studio (ঢাকের বোল — Key D)" aria-label="Play Dhak Beat">
+              <span aria-hidden="true">🥁</span>
+              <span class="tooltip-kbd">D</span>
+            </button>
+            <button class="icon-btn" id="btn-toggle-particles" title="Toggle Falling Shiuli Flowers (শিউলি ফুল — Key F)" aria-label="Toggle Falling Flowers">
+              <span aria-hidden="true">🌸</span>
+              <span class="tooltip-kbd">F</span>
+            </button>
+          </div>
+
+          <!-- Atmosphere Vibe Selector -->
+          <div class="vibe-selector-wrapper">
+            <button class="glass-pill vibe-selector-btn" id="btn-vibe-dropdown" aria-haspopup="true" aria-expanded="false" title="Change Atmosphere Lighting">
+              <span id="current-vibe-icon" aria-hidden="true">🌅</span>
+              <span id="current-vibe-label">Bhor (Dawn)</span>
+              <span class="dropdown-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="vibe-dropdown-menu" id="vibe-menu" role="menu">
+              <button class="vibe-item" data-vibe="early-morning" role="menuitem"><span>🌅 ভোর (Early Morning)</span></button>
+              <button class="vibe-item" data-vibe="morning" role="menuitem"><span>☀️ সকাল (Morning)</span></button>
+              <button class="vibe-item" data-vibe="afternoon" role="menuitem"><span>🌤️ দুপুর (Afternoon)</span></button>
+              <button class="vibe-item" data-vibe="evening" role="menuitem"><span>🌆 সন্ধ্যা (Evening)</span></button>
+              <button class="vibe-item" data-vibe="night" role="menuitem"><span>🏮 রাত (Night)</span></button>
+              <button class="vibe-item" data-vibe="midnight" role="menuitem"><span>✨ মধ্যরাত (Midnight)</span></button>
+              <div class="vibe-divider"></div>
+              <button class="vibe-item" data-vibe="auto" role="menuitem"><span>🔄 অটো সিঙ্ক (Sync Clock)</span></button>
+            </div>
+          </div>
+
+          <!-- Desktop Keyboard Shortcuts HUD Trigger -->
+          <button class="glass-pill shortcuts-pill hide-on-mobile" id="btn-open-shortcuts" title="View Keyboard Shortcuts (Key ?)">
+            <span class="kbd-icon" aria-hidden="true">⌨</span>
+            <span>শর্টকাট</span>
+            <kbd class="mini-kbd">?</kbd>
+          </button>
+        </div>
+      </header>
+
+      <!-- ==========================================
+           MAIN HERO: CALLIGRAPHY & COUNTDOWN
+           ========================================== -->
+      <main class="hero-container" role="main">
+        <!-- Heritage Bengali Title -->
+        <h1 class="hero-title-bengali" id="hero-title">
+          <span class="hero-word-top">পুজো</span>
+          <span class="hero-word-bottom">আসছে</span>
+        </h1>
+
+        <!-- Mondal Barir Pujo Sub-Tagline -->
+        <div class="hero-subtag">
+          <span class="subtag-dot">✦</span>
+          <span>মন্ডল বাড়ির পুজো ২০২৬ • ১৫০+ বছরের ঐতিহ্য</span>
+          <span class="subtag-dot">✦</span>
+        </div>
+
+        <!-- Countdown Pill Subtext Button -->
+        <button class="countdown-subtext-btn" id="btn-countdown-details" title="Click to inspect Mondal Barir Pujo 2026 Schedule">
+          <span class="countdown-calendar-icon" aria-hidden="true">🗓️</span>
+          <span class="countdown-days-number" id="countdown-days-val">--</span>
+          <span id="countdown-sub-label" class="countdown-label-text">days until Mondal Barir Pujo 2026</span>
+          <span class="countdown-arrow-indicator" aria-hidden="true">›</span>
+        </button>
+
+        <!-- Floating Sound Triggers Bar (Desktop / Hero) -->
+        <div class="floating-sound-triggers hide-on-mobile">
+          <button class="glass-pill sound-trigger-pill" id="btn-trig-shankha" title="Play Shankha Sound (Key S)">
+            <span class="sound-icon">🐚</span>
+            <span>শাঁখের আওয়াজ</span>
+          </button>
+          <button class="glass-pill sound-trigger-pill" id="btn-trig-dhak" title="Play Dhak Drum Studio (Key D)">
+            <span class="sound-icon">🥁</span>
+            <span>ঢাকের বোল</span>
+          </button>
+          <button class="glass-pill sound-trigger-pill" id="btn-trig-kashor" title="Play Kashor Bell Sound (Key 3)">
+            <span class="sound-icon">🔔</span>
+            <span>কাঁসর ঘণ্টা</span>
+          </button>
+          <button class="glass-pill sound-trigger-pill story-sparkle-pill" id="btn-trig-story-gen" title="Generate Instagram Story (Key I)">
+            <span class="sound-icon">✨</span>
+            <span>স্টোরি তৈরি করুন</span>
+          </button>
+        </div>
+      </main>
+
+      <!-- ==========================================
+           BOTTOM DUAL INTERFACE: DESKTOP GLASS DOCK & MOBILE DRAWER
+           ========================================== -->
+      <footer class="bottom-system-container" role="contentinfo">
+        
+        <!-- Desktop Floating Glass Dock (768px+) -->
+        <div class="desktop-dock-wrapper hide-on-mobile">
+          <div class="player-dock">
+            <!-- Vinyl Cover Art -->
+            <div class="track-art-wrapper" id="player-art-btn" title="Open Curated Radio Playlists">
+              <img id="player-cover-img" class="track-art-img" src="https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg" alt="Now Playing Track Artwork" />
+              <div class="art-overlay-icon" aria-hidden="true">🎵</div>
+            </div>
+
+            <!-- Track Metadata & Interactive Seekbar -->
+            <div class="track-info-box">
+              <div class="track-meta-row">
+                <div class="track-title-text" id="player-track-title">Dugga Elo</div>
+                <span class="track-meta-separator" aria-hidden="true">•</span>
+                <div class="track-artist-text" id="player-track-artist">Monali Thakur</div>
+              </div>
+              <div class="scrubber-row">
+                <input type="range" class="scrubber-slider" id="player-scrubber" min="0" max="100" value="0" aria-label="Music Track Progress" />
+              </div>
+              <div class="timecode-row">
+                <span class="track-time-label" id="player-time-text">0:00 / 2:27</span>
+                <span class="radio-source-badge">MONDAL BARI RADIO</span>
+              </div>
+            </div>
+
+            <!-- Playback Transport Controls -->
+            <div class="playback-controls">
+              <button class="ctrl-btn" id="btn-prev-track" title="Previous Track (Left Arrow)" aria-label="Previous Track">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                </svg>
+              </button>
+              <button class="ctrl-btn play-main" id="btn-play-pause" title="Play / Pause (Spacebar)" aria-label="Play or Pause Track">
+                <svg id="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <svg id="icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+              </button>
+              <button class="ctrl-btn" id="btn-next-track" title="Next Track (Right Arrow)" aria-label="Next Track">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Playlist Launcher Pill -->
+            <button class="playlist-launcher-btn" id="btn-open-playlists" title="Open Full Puja Playlists (Key P)">
+              <span class="launcher-pulse"></span>
+              <span id="launcher-pill-text">PUJA RADIO</span>
+              <span class="launcher-icon">⌄</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile UI: Compact Media Pill & Thumb Navigation Bar (<768px) -->
+        <div class="mobile-system-wrapper hide-on-desktop">
+          
+          <!-- Compact Floating Media Pill -->
+          <div class="mobile-media-pill" id="mobile-media-pill-btn">
+            <div class="mobile-pill-art-wrap">
+              <img id="mobile-cover-img" class="mobile-pill-art" src="https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg" alt="Track Cover" />
+            </div>
+            <div class="mobile-pill-info">
+              <div class="mobile-pill-title" id="mobile-track-title">Dugga Elo</div>
+              <div class="mobile-pill-artist" id="mobile-track-artist">Monali Thakur</div>
+            </div>
+            <div class="mobile-pill-actions">
+              <button class="mobile-ctrl-btn" id="mobile-btn-play-pause" aria-label="Play/Pause">
+                <svg id="mobile-icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                <svg id="mobile-icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+              </button>
+              <button class="mobile-ctrl-btn" id="mobile-btn-next-track" aria-label="Next">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Drawer Navigation Bar (One-Thumb Reachable) -->
+          <nav class="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
+            <button class="mobile-nav-item" id="mobile-nav-radio" aria-label="Open Radio Playlists">
+              <span class="nav-icon">📻</span>
+              <span class="nav-label">রেডিও</span>
+            </button>
+            <button class="mobile-nav-item" id="mobile-nav-shankha" aria-label="Blow Shankha">
+              <span class="nav-icon">🐚</span>
+              <span class="nav-label">শাঁখ</span>
+            </button>
+            <button class="mobile-nav-item primary-pulse" id="mobile-nav-dhak" aria-label="Open Dhak Beats">
+              <span class="nav-icon">🥁</span>
+              <span class="nav-label">ঢাকের বোল</span>
+            </button>
+            <button class="mobile-nav-item" id="mobile-nav-story" aria-label="Generate Story Card">
+              <span class="nav-icon">📸</span>
+              <span class="nav-label">স্টোরি</span>
+            </button>
+            <button class="mobile-nav-item" id="mobile-nav-pujo" aria-label="Mondal Barir Pujo Heritage">
+              <span class="nav-icon">🪔</span>
+              <span class="nav-label">মন্ডল বাড়ি</span>
+            </button>
+          </nav>
+
+        </div>
+
+      </footer>
+
+      <!-- ==========================================
+           PLAYLISTS MODAL DIALOG / MOBILE BOTTOM SHEET
+           ========================================== -->
+      <div class="modal-backdrop" id="playlists-modal" role="dialog" aria-modal="true" aria-labelledby="playlists-modal-title">
+        <div class="modal-card">
+          <!-- Mobile Drawer Grab Handle -->
+          <div class="drawer-notch hide-on-desktop" aria-hidden="true"></div>
+
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <span class="modal-subtitle">MONDAL BARI PUJO</span>
+              <h2 class="modal-title" id="playlists-modal-title">FESTIVE AUDIO PLAYLISTS</h2>
+            </div>
+            <button class="close-btn" id="btn-close-playlists" aria-label="Close Playlists">✕</button>
+          </div>
+
+          <!-- Playlist Category Filter Tabs -->
+          <div class="modal-tabs" role="tablist">
+            <button class="tab-pill active" data-playlist="durgaPuja" role="tab" aria-selected="true">DURGA PUJA</button>
+            <button class="tab-pill" data-playlist="ogMahalaya" role="tab" aria-selected="false">MAHALAYA</button>
+            <button class="tab-pill" data-playlist="mahalayaSongs" role="tab" aria-selected="false">MAHALAYA SONGS</button>
+          </div>
+
+          <div class="tab-description" id="playlist-tab-desc">
+            The main curated Durga Puja playlist.
+          </div>
+
+          <!-- Track List Scrollable -->
+          <div class="track-list-scroll" id="track-list-container">
+            <!-- Dynamically injected track items -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           MONDAL BARIR PUJO SHOWCASE & GALLERY MODAL
+           ========================================== -->
+      <div class="modal-backdrop" id="pujo-info-modal" role="dialog" aria-modal="true" aria-labelledby="pujo-modal-title">
+        <div class="modal-card slideover-card">
+          <!-- Mobile Drawer Grab Handle -->
+          <div class="drawer-notch hide-on-desktop" aria-hidden="true"></div>
+
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <span class="modal-subtitle">BONEDI BARI HERITAGE</span>
+              <h2 class="modal-title" id="pujo-modal-title">মন্ডল বাড়ির পুজো (MONDAL BARIR PUJO)</h2>
+            </div>
+            <button class="close-btn" id="btn-close-pujo-info" aria-label="Close Modal">✕</button>
+          </div>
+
+          <div class="modal-body-scroll">
+            
+            <!-- Mondal Bari Heritage Welcome Banner -->
+            <div class="heritage-intro-banner">
+              <div class="heritage-intro-badge">🏛️ ১৫০+ বছরের বনেদি ঐতিহ্য</div>
+              <h3 class="heritage-intro-title">মন্ডল বাড়ির দুর্গাপূজা ২০২৬ — ঐতিহ্য, ভক্তি ও মিলনমেলা</h3>
+              <p class="heritage-intro-text">
+                ১৮৭০-এর দশক থেকে চলে আসা আমাদের মন্ডল বাড়ির পুজো কেবল একটি ধর্মীয় আচার নয়, এটি পরিবার, আত্মীয়-স্বজন ও ভক্তদের মিলনমেলা। সাবেকি একচালা ডাকের সাজের প্রতিমা, কূলপুরোহিতের বিশুদ্ধ চণ্ডীপাঠ, ১০৮ পদ্ম ও প্রদীপে সন্ধিপূজা, আর নাটমন্দির কাঁপানো ঐতিহ্যবাহী ঢাকের বোলে প্রতিবছর ঘরে ফিরে আসেন ঘরের মেয়ে মা দুর্গা।
+              </p>
+            </div>
+
+            <!-- Instagram Connect Banner -->
+            <div class="instagram-banner">
+              <div class="insta-banner-left">
+                <div class="insta-title">Follow Furfura Mondal Poribar on Instagram</div>
+                <div class="insta-sub">Live pandal darshan, anjali timings, dhunuchi reels & festival updates</div>
+              </div>
+              <div class="insta-banner-right">
+                <a href="https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp" target="_blank" rel="noopener noreferrer" class="insta-btn">
+                  <span>📸 @furfura_mondal_poribar</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Puja Schedule & Rituals -->
+            <div class="section-block">
+              <h4 class="section-title">
+                <span class="title-icon">🪔</span>
+                <span>পূজার নির্ঘণ্ট ও তিথি (Durga Puja 2026 Schedule)</span>
+              </h4>
+              <div class="timeline-list" id="pujo-timeline-list">
+                <!-- Dynamically rendered timeline -->
+              </div>
+            </div>
+
+            <!-- Heritage Highlights 4-Grid -->
+            <div class="section-block">
+              <h4 class="section-title">
+                <span class="title-icon">✨</span>
+                <span>পুজোর বিশেষ আকর্ষণ (Heritage Highlights)</span>
+              </h4>
+              <div class="highlights-grid" id="pujo-highlights-grid">
+                <!-- Dynamically injected highlights -->
+              </div>
+            </div>
+
+            <!-- Heritage Photo Showcase with Category Tabs -->
+            <div class="section-block">
+              <div class="gallery-header-row">
+                <h4 class="section-title" style="margin-bottom: 0;">
+                  <span class="title-icon">📸</span>
+                  <span>ছবি ও মুহূর্ত (Photo Gallery)</span>
+                </h4>
+                <span class="gallery-sub-hint">Tap photo to switch atmosphere</span>
+              </div>
+
+              <!-- Gallery Category Filters -->
+              <div class="gallery-category-tabs" id="gallery-category-tabs">
+                <!-- Dynamically injected category buttons -->
+              </div>
+
+              <div class="gallery-grid" id="pujo-gallery-grid">
+                <!-- Dynamically injected gallery cards -->
+              </div>
+            </div>
+
+            <!-- Dual Actions: Story Generator & Social Share -->
+            <div class="pujo-modal-actions-row">
+              <button class="story-launch-modal-btn" id="btn-modal-open-story">
+                <span>📸 Create Instagram Story Card</span>
+              </button>
+              <button class="share-invitation-btn" id="btn-share-website">
+                <span class="share-btn-icon">💌</span>
+                <span>Share Puja Invitation (WhatsApp)</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           INSTAGRAM STORY / SHARE CARD GENERATOR MODAL
+           ========================================== -->
+      <div class="modal-backdrop" id="story-generator-modal" role="dialog" aria-modal="true" aria-labelledby="story-modal-title">
+        <div class="modal-card story-modal-card">
+          <!-- Mobile Drawer Grab Handle -->
+          <div class="drawer-notch hide-on-desktop" aria-hidden="true"></div>
+
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <span class="modal-subtitle">INSTAGRAM & WHATSAPP</span>
+              <h2 class="modal-title" id="story-modal-title">📸 STORY & SHARE CARD GENERATOR</h2>
+            </div>
+            <button class="close-btn" id="btn-close-story-gen" aria-label="Close Story Generator">✕</button>
+          </div>
+
+          <div class="story-gen-body">
+            <!-- Canvas Preview Container (9:16 Aspect Ratio) -->
+            <div class="story-canvas-preview-wrapper">
+              <canvas id="story-card-canvas" width="1080" height="1920"></canvas>
+              <div class="canvas-badge-overlay">9:16 High-Res Story (1080×1920)</div>
+            </div>
+
+            <!-- Customizer Controls Panel -->
+            <div class="story-controls-panel">
+              <!-- Atmosphere Theme Selector -->
+              <div class="control-group">
+                <label class="control-label">🎨 আবহ ও রঙের থিম (Atmosphere Theme)</label>
+                <div class="story-theme-selector" id="story-theme-selector">
+                  <button class="theme-btn active" data-theme="early-morning">🌅 ভোর (Dawn)</button>
+                  <button class="theme-btn" data-theme="morning">☀️ সকাল (Morning)</button>
+                  <button class="theme-btn" data-theme="evening">🌆 সন্ধ্যা (Aarti)</button>
+                  <button class="theme-btn" data-theme="night">🏮 রাত (Night)</button>
+                  <button class="theme-btn" data-theme="afternoon">🌤️ শরৎ (Autumn)</button>
+                </div>
+              </div>
+
+              <!-- Message Headline Style -->
+              <div class="control-group">
+                <label class="control-label">✍️ বার্তা ও শিরোনাম (Headline Quote)</label>
+                <select class="story-select-input" id="story-headline-select">
+                  <option value="pujo-asche">পুজো আসছে — মন্ডল বাড়ির পুজো ২০২৬</option>
+                  <option value="subho-saradiya">শুভ শারদীয়া — মন্ডল বাড়ির দুর্গাপূজা</option>
+                  <option value="maa-aschen">মা আসছেন ঘরে — ১৫০+ বছরের ঐতিহ্য</option>
+                  <option value="sandhi-puja">১০৮ পদ্ম ও প্রদীপে মহামিলনোৎসব</option>
+                </select>
+              </div>
+
+              <!-- Options Toggles -->
+              <div class="control-group">
+                <label class="control-label">⚙️ কার্ডের উপাদান (Card Elements)</label>
+                <div class="toggle-pills-row">
+                  <label class="toggle-pill-label">
+                    <input type="checkbox" id="chk-show-countdown" checked />
+                    <span>⏳ কাউন্টডাউন</span>
+                  </label>
+                  <label class="toggle-pill-label">
+                    <input type="checkbox" id="chk-show-schedule" checked />
+                    <span>🗓️ নির্ঘণ্ট</span>
+                  </label>
+                  <label class="toggle-pill-label">
+                    <input type="checkbox" id="chk-show-handle" checked />
+                    <span>📸 @furfura_mondal_poribar</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="story-actions-wrapper">
+                <button class="story-action-btn primary-download" id="btn-download-story-png">
+                  <span>📥 Download Story Card (PNG)</span>
+                </button>
+                <button class="story-action-btn share-native" id="btn-share-story-native">
+                  <span>📤 Share to Instagram / WhatsApp</span>
+                </button>
+                <button class="story-action-btn copy-caption" id="btn-copy-story-caption">
+                  <span>📋 Copy Caption & Hashtags</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           INTERACTIVE DHAK DRUM STUDIO & LIVE DHAK MASTER MODAL
+           ========================================== -->
+      <!-- ==========================================
+           INTERACTIVE DHAK DRUM STUDIO & LIVE DHAK MASTER MODAL
+           ========================================== -->
+      <div class="modal-backdrop" id="dhak-modal" role="dialog" aria-modal="true" aria-labelledby="dhak-modal-title">
+        <div class="modal-card dhak-card">
+          <!-- Mobile Drawer Grab Handle -->
+          <div class="drawer-notch hide-on-desktop" aria-hidden="true"></div>
+
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <span class="modal-subtitle">BONEDI BARI HERITAGE PERCUSSION</span>
+              <h2 class="modal-title" id="dhak-modal-title">🥁 ঢাকের বোল স্টুডিও (DHAK STUDIO & MASTER)</h2>
+            </div>
+            <button class="close-btn" id="btn-close-dhak" aria-label="Close Drum Studio">✕</button>
+          </div>
+
+          <!-- Audio Engine Source Selector / Switcher Bar -->
+          <div class="dhak-engine-source-bar">
+            <span class="engine-source-label">অডিও ইঞ্জিন সোর্স:</span>
+            <div class="engine-source-radios" role="radiogroup" aria-label="Dhak Audio Engine Source">
+              <button class="engine-source-btn active" id="btn-engine-pure" data-engine="pure" role="radio" aria-checked="true" title="Zero-Latency Pure Percussion — Gapless, Zero Talk, Continuous Loop">
+                <span class="source-icon">⚡</span>
+                <span class="source-text-wrap">
+                  <span class="source-name">পিওর স্টুডিও লুপ ইঞ্জিন</span>
+                  <span class="source-sub">Pure DSP Studio — Gapless, No Talk</span>
+                </span>
+                <span class="source-badge-recommended">রীতিসম্মত / ডিফল্ট</span>
+              </button>
+              <button class="engine-source-btn" id="btn-engine-yt" data-engine="youtube" role="radio" aria-checked="false" title="Original Field Recording with Dhaki Speech (8EA8JrDMZbM)">
+                <span class="source-icon">📻</span>
+                <span class="source-text-wrap">
+                  <span class="source-name">ইউটিউব অরিজিনাল স্ট্রিম</span>
+                  <span class="source-sub">YouTube Field Stream (8EA8JrDMZbM)</span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Segmented Top Mode Switcher -->
+          <div class="dhak-top-nav-tabs" role="tablist">
+            <button class="dhak-tab-btn active" id="tab-btn-live-dhak" data-view="live" role="tab" aria-selected="true">
+              <span class="tab-icon">🎧</span>
+              <span class="tab-text-wrap">
+                <span class="tab-title-main">খাঁটি ঢাকের ৬ পর্ব ও লুপ</span>
+                <span class="tab-title-sub">6 Authentic Dhak Parts & Seamless Looper</span>
+              </span>
+              <span class="tab-live-badge" id="tab-engine-indicator">⚡ PURE ENGINE</span>
+            </button>
+            <button class="dhak-tab-btn" id="tab-btn-synth-dhak" data-view="synth" role="tab" aria-selected="false">
+              <span class="tab-icon">🥁</span>
+              <span class="tab-text-wrap">
+                <span class="tab-title-main">ইন্টারেক্টিভ ড্রাম প্যাড</span>
+                <span class="tab-title-sub">Interactive Drum Studio & Sequencer</span>
+              </span>
+              <span class="tab-synth-badge">SYNTH</span>
+            </button>
+          </div>
+
+          <div class="dhak-modal-content">
+            
+            <!-- ==========================================================
+                 VIEW 1: AUTHENTIC LIVE DHAK MASTER & SEAMLESS LOOPER
+                 ========================================================== -->
+            <div class="dhak-view-panel active" id="dhak-live-view">
+              
+              <!-- Live Master Hero & Now Playing Banner -->
+              <div class="live-dhak-now-playing-banner" id="live-dhak-now-playing-banner">
+                <div class="live-banner-top">
+                  <div class="live-banner-meta">
+                    <div class="live-status-pills-row">
+                      <span class="live-pulse-badge">
+                        <span class="live-dot"></span>
+                        <span id="live-engine-status-text">PURE STUDIO LOOP ENGINE</span>
+                      </span>
+                      <span class="seamless-loop-badge" id="seamless-loop-status-pill">
+                        <span class="loop-icon-mini">🔁</span>
+                        <span>সিমলেস লুপ সক্রিয় (Gapless)</span>
+                      </span>
+                    </div>
+                    <h3 class="live-playing-title" id="live-dhak-banner-title">১. রথের বাজনা (রথযাত্রা শোভাযাত্রা)</h3>
+                    <p class="live-playing-subtitle" id="live-dhak-banner-subtitle">ভারী ডুগি বেস ও দোদুল দোল সহ শোভাযাত্রার প্রাণবন্ত তাল • Processional Driving Kaharwa</p>
+                  </div>
+
+                  <!-- Animated Real-Time Loop Pulse & Equalizer -->
+                  <div class="live-playing-status-right">
+                    <div class="loop-pulse-ring-wrap" title="Real-Time Musical Bar Cycle">
+                      <div class="loop-pulse-ring" id="loop-pulse-ring"></div>
+                      <div class="loop-pulse-center" id="loop-bar-counter">BAR 1</div>
+                    </div>
+                    <div class="live-playing-eq" id="live-dhak-master-eq">
+                      <div class="live-eq-bar"></div>
+                      <div class="live-eq-bar"></div>
+                      <div class="live-eq-bar"></div>
+                      <div class="live-eq-bar"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Live Scrubber & Timecode -->
+                <div class="live-scrubber-wrap">
+                  <input type="range" class="dhak-live-scrubber" id="dhak-live-scrubber" min="0" max="100" value="0" aria-label="Live Dhak Progress" />
+                  <div class="live-timecode-row">
+                    <span class="live-time-current" id="live-dhak-current-time">Step: 1/16</span>
+                    <span class="live-time-badge" id="live-dhak-segment-badge">পর্ব ০১/০৬ • 112 BPM • Processional Swing</span>
+                    <span class="live-time-total" id="live-dhak-total-time">0:18 Loop</span>
+                  </div>
+                </div>
+
+                <!-- Live Transport & Loop Controls -->
+                <div class="live-transport-row">
+                  <div class="live-transport-buttons">
+                    <button class="live-ctrl-btn" id="btn-live-prev-part" title="Previous Part (1-Tap Seamless Transition)" aria-label="Previous Part">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                      </svg>
+                    </button>
+                    <button class="live-ctrl-btn play-master" id="btn-live-play-pause" title="Play / Pause Seamless Dhak Loop" aria-label="Play Live Dhak">
+                      <span id="live-play-icon">▶</span>
+                      <span id="live-play-label">লুপ বাজান (Play Loop)</span>
+                    </button>
+                    <button class="live-ctrl-btn" id="btn-live-next-part" title="Next Part (1-Tap Seamless Transition)" aria-label="Next Part">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Quick Accompany Triggers -->
+                  <div class="live-quick-triggers">
+                    <button class="mini-trigger-btn" id="btn-live-shankha" title="Blow Sacred Shankha (শাঁখ)">
+                      <span>🐚 শাঁখ</span>
+                    </button>
+                    <button class="mini-trigger-btn" id="btn-live-kashor" title="Strike Bell-Metal Gong (কাঁসর)">
+                      <span>🔔 কাঁসর</span>
+                    </button>
+                  </div>
+
+                  <!-- Seamless Continuous Loop Toggle -->
+                  <label class="live-loop-toggle" title="Toggle continuous seamless looping without interruption">
+                    <input type="checkbox" id="chk-live-dhak-loop" checked />
+                    <span class="loop-toggle-track"></span>
+                    <span class="loop-toggle-label">🔁 অবিরাম লুপ (Seamless Loop)</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Studio Sound Booster & EQ Controls Panel -->
+              <div class="live-sound-booster-card">
+                <div class="booster-header">
+                  <div class="booster-title-group">
+                    <span class="booster-icon">🎛️</span>
+                    <div>
+                      <h4 class="booster-title">স্টুডিও সাউন্ড বুস্টার ও ইকুয়ালাইজার (STUDIO EQ & BOOSTER)</h4>
+                      <span class="booster-sub">Enhanced low-frequency punch, crisp stick snap & master volume gain</span>
+                    </div>
+                  </div>
+                  <span class="booster-badge-active" id="booster-status-pill">BOOST ACTIVE</span>
+                </div>
+
+                <!-- Booster Quick Preset Pills -->
+                <div class="booster-presets-row">
+                  <button class="booster-preset-btn" data-preset="flat">⚡ স্ট্যান্ডার্ড (Flat)</button>
+                  <button class="booster-preset-btn active" data-preset="bass-heavy">🔊 বেস বুস্ট (+6dB)</button>
+                  <button class="booster-preset-btn" data-preset="crisp-snap">🥢 কঞ্চি স্ন্যাপ (+4dB)</button>
+                  <button class="booster-preset-btn" data-preset="festival-loud">🚀 মহোৎসব লাউডনেস (150%)</button>
+                </div>
+
+                <!-- Sliders Grid -->
+                <div class="booster-sliders-grid">
+                  <div class="booster-slider-item">
+                    <div class="booster-slider-label-row">
+                      <span class="booster-slider-name">🥁 গভীর বেস বুস্ট (Barrel Bass 80Hz):</span>
+                      <span class="booster-slider-val" id="booster-bass-val">+6 dB</span>
+                    </div>
+                    <input type="range" class="dhak-range-input" id="booster-bass-slider" min="0" max="12" value="6" step="1" aria-label="Bass Boost Gain" />
+                  </div>
+
+                  <div class="booster-slider-item">
+                    <div class="booster-slider-label-row">
+                      <span class="booster-slider-name">🥢 কঞ্চি কাঠি স্ন্যাপ (Stick Snap 2.4kHz):</span>
+                      <span class="booster-slider-val" id="booster-snap-val">+4 dB</span>
+                    </div>
+                    <input type="range" class="dhak-range-input" id="booster-snap-slider" min="0" max="8" value="4" step="1" aria-label="Snap Boost Gain" />
+                  </div>
+
+                  <div class="booster-slider-item">
+                    <div class="booster-slider-label-row">
+                      <span class="booster-slider-name">🔊 মাস্টার গেইন ভলিউম (Master Loudness):</span>
+                      <span class="booster-slider-val" id="booster-master-val">120%</span>
+                    </div>
+                    <input type="range" class="dhak-range-input" id="booster-master-slider" min="50" max="150" value="120" step="5" aria-label="Master Volume Gain" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- 6 Categorized Live Dhak Part Selector Cards Grid -->
+              <div class="live-parts-section">
+                <div class="live-parts-header">
+                  <span class="dhak-section-label">খাঁটি ঢাকের ৬টি সাবেকি পর্ব (6 AUTHENTIC MASTER PARTS):</span>
+                  <span class="live-parts-hint">১-ট্যাপে সরাসরি সুইচ ও নিরবচ্ছিন্ন লুপ করুন (Zero Latency)</span>
+                </div>
+
+                <div class="live-parts-grid" id="live-dhak-parts-grid">
+                  <!-- Dynamically rendered 6 authentic live parts -->
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ==========================================================
+                 VIEW 2: INTERACTIVE DRUM STUDIO & SEQUENCER (SYNTH)
+                 ========================================================== -->
+            <div class="dhak-view-panel" id="dhak-synth-view" style="display: none;">
+              
+              <!-- 1. Playing Style Mode Selector -->
+              <div class="dhak-mode-selector-wrap">
+                <span class="dhak-section-label">বোল বাজনার শৈলী (Playing Style):</span>
+                <div class="dhak-mode-pills" id="dhak-style-modes" role="radiogroup" aria-label="Dhak Style Modes">
+                  <button class="dhak-mode-btn" data-mode="ak_kathi" role="radio" aria-checked="false">
+                    <span class="mode-icon">🎋</span>
+                    <span class="mode-title">এক কাঠি</span>
+                    <span class="mode-sub">Ak-Kathi</span>
+                  </button>
+                  <button class="dhak-mode-btn active" data-mode="duk_kathi" role="radio" aria-checked="true">
+                    <span class="mode-icon">🥢</span>
+                    <span class="mode-title">দুক কাঠি</span>
+                    <span class="mode-sub">Duk-Kathi</span>
+                  </button>
+                  <button class="dhak-mode-btn" data-mode="dankuni_hooghly_heritage" role="radio" aria-checked="false">
+                    <span class="mode-icon">🏛️</span>
+                    <span class="mode-title">ডানকুনী ঘরানা</span>
+                    <span class="mode-sub">Dankuni Heritage</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 2. Traditional Bol Selector & Card Details -->
+              <div class="dhak-bol-selector-wrap">
+                <div class="dhak-bol-select-header">
+                  <label for="dhak-bol-select" class="dhak-section-label">ঐতিহ্যবাহী পূজার বোল (Traditional Puja Bol):</label>
+                  <span class="dhak-bol-count-badge" id="dhak-bol-count">৬টি সাবেকি বোল</span>
+                </div>
+                <select class="dhak-select-input" id="dhak-bol-select" aria-label="Select Puja Bol">
+                  <option value="1">১. রথের বাজনা ("ড্যাং তাং ড্যাং তাং | ধা ধা গুড়গুড় ধা")</option>
+                  <option value="2">২. আগমনী ও বরণ বাজনা ("ড্যাং ড্যাং ড্যাংকা ড্যাং, মা আসছেন ঘরে")</option>
+                  <option value="3" selected>৩. সন্ধ্যা আরতি ও ধুনুচি নৃত্য ("তাক দুমা দুম তাক দুমা দুম, ঝম ঝমাকা ঝম")</option>
+                  <option value="4">৪. সন্ধিপূজা ও ১০৮ প্রদীপ মহোৎসব ("কড়াতাং কড়াতাং গুড় গুড় ধা")</option>
+                  <option value="5">৫. বিসর্জন ও বিজয়া শোভাযাত্রা ("বলো দুর্গা মাইকি জয়! আসছে বছর আবার হবে")</option>
+                  <option value="6">৬. এক কাঠি ও দুক কাঠি যুগলবন্দী ("ধাগে তেটে তাক তাং, কড়াতাং কড়াতাং ধা")</option>
+                </select>
+
+                <!-- Bol Metadata Banner -->
+                <div class="dhak-bol-info-card" id="dhak-bol-info-card">
+                  <div class="bol-card-badges">
+                    <span class="bol-badge-taal" id="dhak-badge-taal">Dhunuchi Kaharwa Drut</span>
+                    <span class="bol-badge-time" id="dhak-badge-time">4/4 • 16 Matra</span>
+                    <span class="bol-badge-style" id="dhak-badge-style">Duk-Kathi</span>
+                  </div>
+                  <div class="bol-vocal-phrase" id="dhak-vocal-phrase">
+                    তাক দুমা দুম | তাক দুমা দুম || ঝম ঝমাকা ঝম | ঝম ঝমাকা ঝম ||
+                  </div>
+                  <div class="bol-romanized-phrase" id="dhak-roman-phrase">
+                    Tak Duma Dum | Tak Duma Dum || Jham Jhamaka Jham | Jham Jhamaka Jham ||
+                  </div>
+                  <div class="bol-description-text" id="dhak-desc-text">
+                    Electrifying rhythm played during the evening incense and Dhunuchi dance in the Mondal Bari Natmandir. Twin bamboo sticks create syncopated polyrhythms locking with Kanshor ringing.
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Live 16-Step Rhythmic Visualizer Grid -->
+              <div class="dhak-visualizer-section">
+                <div class="dhak-vis-header">
+                  <span class="dhak-section-label">লাইভ ১৬-মাত্রা ট্র্যাকার (Live 16-Step Visualizer Grid):</span>
+                  <span class="dhak-active-step-badge" id="dhak-active-step-label">Step: -- / 16</span>
+                </div>
+                <div class="dhak-step-grid" id="dhak-step-grid" aria-label="16-Step Beat Grid">
+                  <!-- Dynamically injected step cells -->
+                </div>
+              </div>
+
+              <!-- 4. 6 Physical Drum Pads -->
+              <div class="dhak-pads-section">
+                <div class="dhak-pads-header">
+                  <span class="dhak-section-label">ঢাকের খাঁটি ধ্বনি প্যাড (6 Physical Drum & Bell Pads):</span>
+                  <span class="dhak-kbd-hint">কীবোর্ড [1 to 6] প্রেস করুন</span>
+                </div>
+                <div class="dhak-pad-container">
+                  <button class="drum-pad" id="pad-dha" data-key="1" aria-label="Dha Bass Pad">
+                    <span class="drum-pad-emoji" aria-hidden="true">🥁</span>
+                    <strong class="drum-pad-label">ধা (Dha)</strong>
+                    <span class="drum-pad-sub">খোলা বেস (Bass)</span>
+                    <span class="drum-pad-key">Key 1</span>
+                  </button>
+                  <button class="drum-pad" id="pad-dyang" data-key="2" aria-label="Dyang Bamboo Snap Pad">
+                    <span class="drum-pad-emoji" aria-hidden="true">🥢</span>
+                    <strong class="drum-pad-label">ড্যাং (Dyang)</strong>
+                    <span class="drum-pad-sub">কঞ্চি কাঠি (Snap)</span>
+                    <span class="drum-pad-key">Key 2</span>
+                  </button>
+                  <button class="drum-pad" id="pad-ta" data-key="3" aria-label="Ta Rim Slap Pad">
+                    <span class="drum-pad-emoji" aria-hidden="true">🥢</span>
+                    <strong class="drum-pad-label">তা (Ta)</strong>
+                    <span class="drum-pad-sub">খোলা চাট্টি (Rim)</span>
+                    <span class="drum-pad-key">Key 3</span>
+                  </button>
+                  <button class="drum-pad" id="pad-kut" data-key="4" aria-label="Kut Ghost Mute Pad">
+                    <span class="drum-pad-emoji" aria-hidden="true">🤏</span>
+                    <strong class="drum-pad-label">কুট (Kut)</strong>
+                    <span class="drum-pad-sub">মিউটেড খটকা (Mute)</span>
+                    <span class="drum-pad-key">Key 4</span>
+                  </button>
+                  <button class="drum-pad" id="pad-gurgur" data-key="5" aria-label="Gurgur Roll Pad">
+                    <span class="drum-pad-emoji" aria-hidden="true">⚡</span>
+                    <strong class="drum-pad-label">গুড়গুড় (Roll)</strong>
+                    <span class="drum-pad-sub">দুই কাঠির রুল</span>
+                    <span class="drum-pad-key">Key 5</span>
+                  </button>
+                  <button class="drum-pad" id="pad-kashor" data-key="6" aria-label="Kanshor Bell Pad">
+                    <span class="drum-pad-emoji" aria-hidden="true">🔔</span>
+                    <strong class="drum-pad-label">কাঁসর (Kanshor)</strong>
+                    <span class="drum-pad-sub">কাঁসার ঘণ্টা (Gong)</span>
+                    <span class="drum-pad-key">Key 6</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 5. Master Tempo, Accelerando & Playback Controls -->
+              <div class="dhak-controls-panel">
+                <div class="dhak-ctrl-row">
+                  <!-- Tempo Slider -->
+                  <div class="dhak-slider-group">
+                    <div class="dhak-slider-meta">
+                      <span class="ctrl-sub-label">গতি / লয় (Tempo BPM):</span>
+                      <span class="dhak-val-badge" id="dhak-bpm-val">124 BPM</span>
+                    </div>
+                    <input type="range" class="dhak-range-input" id="dhak-bpm-slider" min="60" max="180" value="124" aria-label="Dhak Tempo BPM" />
+                  </div>
+
+                  <!-- Tap Tempo Button -->
+                  <button class="dhak-tap-tempo-btn" id="btn-tap-tempo" title="Click rhythmically to set tempo">
+                    <span class="tap-icon">👆</span>
+                    <span>ট্যাপ টেম্পো (Tap)</span>
+                  </button>
+                </div>
+
+                <div class="dhak-ctrl-row secondary-row">
+                  <!-- Volume Slider -->
+                  <div class="dhak-slider-group vol-group">
+                    <div class="dhak-slider-meta">
+                      <span class="ctrl-sub-label">সাউন্ড ভলিউম (Volume):</span>
+                      <span class="dhak-val-badge" id="dhak-vol-val">100%</span>
+                    </div>
+                    <input type="range" class="dhak-range-input" id="dhak-vol-slider" min="0" max="100" value="100" aria-label="Dhak Sequencer Volume" />
+                  </div>
+
+                  <!-- Accelerando Toggle -->
+                  <label class="dhak-toggle-switch">
+                    <input type="checkbox" id="chk-dhak-accelerando" />
+                    <span class="toggle-track"></span>
+                    <span class="toggle-label">🚀 দ্রুতলয় বৃদ্ধি (Accelerando)</span>
+                  </label>
+                </div>
+
+                <!-- Action Triggers: Master Bol Play/Stop, Quick Shankha & Kanshor -->
+                <div class="dhak-actions-grid">
+                  <button class="rhythm-loop-btn main-play-btn" id="btn-loop-dhak-rhythm">
+                    <span class="loop-icon" id="dhak-play-icon">▶</span>
+                    <span id="dhak-play-text">বোল বাজানো শুরু করুন (Play Bol)</span>
+                  </button>
+                  <button class="dhak-quick-btn" id="btn-dhak-shankha" title="Blow Conch Shell">
+                    <span>🐚 শাঁখ (Shankha)</span>
+                  </button>
+                  <button class="dhak-quick-btn" id="btn-dhak-kashor" title="Strike Bell-Metal Gong">
+                    <span>🔔 কাঁসর (Kanshor)</span>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           DESKTOP KEYBOARD SHORTCUTS HUD MODAL
+           ========================================== -->
+      <div class="modal-backdrop" id="shortcuts-modal" role="dialog" aria-modal="true" aria-labelledby="shortcuts-modal-title">
+        <div class="modal-card shortcuts-card">
+          <div class="modal-header">
+            <div class="modal-title-wrap">
+              <span class="modal-subtitle">POWER USER CONTROLS</span>
+              <h2 class="modal-title" id="shortcuts-modal-title">⌨ KEYBOARD SHORTCUTS HUD</h2>
+            </div>
+            <button class="close-btn" id="btn-close-shortcuts" aria-label="Close Shortcuts">✕</button>
+          </div>
+
+          <div class="shortcuts-content">
+            <div class="shortcuts-grid">
+              <div class="shortcut-item">
+                <span class="shortcut-action">Play / Pause Radio</span>
+                <kbd class="hud-kbd">Space</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Next Track</span>
+                <kbd class="hud-kbd">➔ / N</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Previous Track</span>
+                <kbd class="hud-kbd">⬅ / P</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Dhak Studio Modal</span>
+                <kbd class="hud-kbd">D</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Blow Sacred Shankha (শাঁখ)</span>
+                <kbd class="hud-kbd">S</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Dhak Bass (১. ধা)</span>
+                <kbd class="hud-kbd">1</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Dhak Bamboo Snap (২. ড্যাং)</span>
+                <kbd class="hud-kbd">2</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Dhak Rim Slap (৩. তা)</span>
+                <kbd class="hud-kbd">3</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Dhak Ghost Mute (৪. কুট)</span>
+                <kbd class="hud-kbd">4</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Dhak Micro-Roll (৫. গুড়গুড়)</span>
+                <kbd class="hud-kbd">5</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Kanshor Bell (৬. কাঁসর)</span>
+                <kbd class="hud-kbd">6</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Instagram Story Generator</span>
+                <kbd class="hud-kbd">I</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Toggle Falling Flowers</span>
+                <kbd class="hud-kbd">F</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Mondal Barir Pujo Info</span>
+                <kbd class="hud-kbd">M</kbd>
+              </div>
+              <div class="shortcut-item">
+                <span class="shortcut-action">Close Active Dialog</span>
+                <kbd class="hud-kbd">Esc</kbd>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           FULLSCREEN SHANKHA BLAST RIPPLE HUD
+           ========================================== -->
+      <div class="shankha-ripple-hud" id="shankha-hud" aria-hidden="true">
+        <div class="wave-ring"></div>
+        <div class="wave-ring"></div>
+        <div class="wave-ring"></div>
+        <div class="sacred-conch-icon">🐚</div>
+        <div class="shankha-blessing-text">শুভ শারদীয়া • শঙ্খধ্বনি</div>
+      </div>
+
+    </div>
+
+    <!-- Main Application Entrypoint -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
