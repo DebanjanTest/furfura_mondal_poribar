@@ -10,6 +10,25 @@ export const playlists = {
     tracksAreDistinctVideos: true,
     tracks: [
       {
+        id: "durga-ambient-00",
+        num: "✨",
+        title: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondal Bari Ambient)",
+        title_bn: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত",
+        title_en: "Mondal Bari Festive Ambient",
+        artist: "ফুরফুরা মণ্ডল পরিবার আবহ",
+        composer: "ঐতিহ্য শারদ সুরমালা",
+        lyricist: "শারদোৎসব",
+        videoId: "DZ21CSg22nc",
+        start: 0,
+        end: 9999,
+        duration: 9999,
+        durationLabel: "Ambient",
+        cover: "https://img.youtube.com/vi/DZ21CSg22nc/hqdefault.jpg",
+        sourceUrl: "https://youtu.be/DZ21CSg22nc",
+        description: "Serene sacred background ambient Durga Puja melody playing continuously in low tone.",
+        bengaliDesc: "মন্ডল বাড়ির পুজো প্রাঙ্গণের জন্য নির্ধারিত শান্ত, স্নিগ্ধ ও আবহ সঙ্গীত।"
+      },
+      {
         id: "durga-001",
         num: "01",
         title: "দুগ্গা এলো (Dugga Elo)",

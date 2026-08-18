@@ -4,12 +4,12 @@
 import { ytAudioPlayer } from './youtubePlayer.js';
 
 // Default background ambient YouTube video (serene Durga Puja Agomoni melody)
-// Users can easily override this anytime via window.BG_AMBIENT_YOUTUBE_ID or setAmbientVideo()
+// User official link: https://youtu.be/DZ21CSg22nc
 export const DEFAULT_AMBIENT_CONFIG = {
-  videoId: '1xN5c3YV4yE', // Dugga Ma / Agomoni Ambient Theme
-  title: 'মন্ডল বাড়ি শারদ আবহ (Mondal Bari Ambient)',
-  artist: 'ঐতিহ্য আবহ সঙ্গীত',
-  lowVolume: 18, // 18% gentle smooth volume
+  videoId: 'DZ21CSg22nc', // User requested YouTube ambient audio stream
+  title: 'মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondal Bari Ambient)',
+  artist: 'ফুরফুরা মণ্ডল পরিবার আবহ',
+  lowVolume: 18, // 18% gentle smooth low tone
   fadeInDurationMs: 2500
 };
 
