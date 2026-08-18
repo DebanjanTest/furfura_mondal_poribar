@@ -135,6 +135,15 @@
               </button>
             </div>
             
+            <!-- Language Quick Selector inside Island -->
+            <div class="island-vibe-section island-lang-section">
+              <span class="island-vibe-title">🌐 ভাষা পরিবর্তন (Language):</span>
+              <div class="island-vibe-chips">
+                <button class="island-vibe-chip active" id="island-lang-bn" data-lang="bn">🇧🇩 বাংলা</button>
+                <button class="island-vibe-chip" id="island-lang-en" data-lang="en">🇬🇧 English</button>
+              </div>
+            </div>
+
             <!-- Atmosphere Quick Selector inside Island -->
             <div class="island-vibe-section">
               <span class="island-vibe-title">আবহাওয়া পরিবর্তন (Atmosphere Vibe):</span>
@@ -152,8 +161,8 @@
             <button class="island-heritage-banner" id="island-quick-heritage">
               <span class="island-banner-icon">🪔</span>
               <div class="island-banner-text">
-                <strong>মন্ডল বাড়ির পূজার সম্পূর্ণ নির্ঘণ্ট ও ইতিহাস</strong>
-                <span>১৫০+ বছরের বনেদি ঐতিহ্য ও ফটো গ্যালারি</span>
+                <strong data-i18n="brand_title">মন্ডল বাড়ির পুজো</strong>
+                <span data-i18n="pujo_history">১৫০+ বছরের বনেদি ঐতিহ্য ও ফটো গ্যালারি</span>
               </div>
               <span class="island-banner-arrow">›</span>
             </button>
@@ -179,16 +188,22 @@
             <!-- Mondal Barir Pujo Sole Branding Pill -->
             <button class="glass-pill pujo-tag-pill" id="btn-open-pujo-info" title="মন্ডল বাড়ির পুজো — ঐতিহ্য, নির্ঘণ্ট ও ফটো গ্যালারি">
               <span class="pill-icon" aria-hidden="true">🪔</span>
-              <span class="brand-text">মন্ডল বাড়ির পুজো</span>
-              <span class="badge-heritage">১৫০+ বছর</span>
+              <span class="brand-text" data-i18n="brand_title">মন্ডল বাড়ির পুজো</span>
+              <span class="badge-heritage" data-i18n="brand_heritage_badge">১৫০+ বছর</span>
             </button>
           </div>
 
           <div class="header-right">
+            <!-- Language Switcher Pill -->
+            <button class="glass-pill lang-toggle-pill" id="btn-toggle-lang" title="Toggle Language (বাংলা / English)" aria-label="Change Language">
+              <span class="pill-icon">🌐</span>
+              <span id="lang-current-label">বাংলা</span>
+            </button>
+
             <!-- Instagram Story Generator Quick Trigger -->
             <button class="glass-pill story-nav-pill" id="btn-open-story-gen" title="Generate Aesthetic Instagram Story Card (Key I)">
               <span class="pill-icon" aria-hidden="true">📸</span>
-              <span>স্টোরি কার্ড</span>
+              <span data-i18n="photo_story">স্টোরি কার্ড</span>
             </button>
 
             <!-- Official Instagram Link Pill -->
@@ -1592,6 +1607,70 @@
               </button>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           WELCOME ONBOARDING PREFERENCE GATE MODAL
+           ========================================== -->
+      <div class="welcome-modal-overlay" id="welcome-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="welcome-modal-title">
+        <div class="welcome-modal-card">
+          <!-- Traditional Emblem Decor -->
+          <div class="welcome-header-decor">
+            <span class="welcome-diya-icon">🪔</span>
+            <span class="welcome-badge-pill" data-i18n="welcome_badge">🪔 শারদ অভিবাদন</span>
+          </div>
+
+          <h2 class="welcome-title" id="welcome-modal-title" data-i18n="welcome_title">মন্ডল বাড়ির পুজোয় আপনাকে স্বাগত</h2>
+          <p class="welcome-subtitle" data-i18n="welcome_subtitle">ফুরফুরা মণ্ডল পরিবারের ১৫০+ বছরের ঐতিহ্যবাহী শারদোৎসবের ডিজিটাল প্রাঙ্গণে প্রবেশ করুন</p>
+
+          <div class="welcome-options-container">
+            <!-- 1. Language Preference Selection -->
+            <div class="welcome-option-group">
+              <label class="welcome-group-label" data-i18n="welcome_lang_label">🌐 আপনার পছন্দের ভাষা নির্বাচন করুন (Select Language)</label>
+              <div class="welcome-choice-grid welcome-choice-lang">
+                <button type="button" class="welcome-choice-btn active" id="welcome-lang-bn" data-lang="bn">
+                  <span class="choice-flag">🇧🇩</span>
+                  <span class="choice-text">বাংলা (Bengali)</span>
+                  <span class="choice-check">✓</span>
+                </button>
+                <button type="button" class="welcome-choice-btn" id="welcome-lang-en" data-lang="en">
+                  <span class="choice-flag">🇬🇧</span>
+                  <span class="choice-text">English</span>
+                  <span class="choice-check">✓</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Ambient Audio & Dhak Preference Selection -->
+            <div class="welcome-option-group">
+              <label class="welcome-group-label" data-i18n="welcome_sound_label">🎶 আবহ সঙ্গীত ও ঢাকের আওয়াজ (Ambient Sound & Dhak)</label>
+              <div class="welcome-choice-grid welcome-choice-sound">
+                <button type="button" class="welcome-choice-btn active" id="welcome-sound-yes" data-sound="yes">
+                  <span class="choice-icon">🥁</span>
+                  <div class="choice-details">
+                    <span class="choice-main-text" data-i18n="welcome_sound_yes">🔊 হ্যাঁ, আবহ সঙ্গীত ও ঢাক চালান</span>
+                    <span class="choice-sub-text">মৃদু ও স্নিগ্ধ শব্দে স্বয়ংক্রিয়ভাবে বাজবে</span>
+                  </div>
+                  <span class="choice-check">✓</span>
+                </button>
+                <button type="button" class="welcome-choice-btn" id="welcome-sound-no" data-sound="no">
+                  <span class="choice-icon">🔇</span>
+                  <div class="choice-details">
+                    <span class="choice-main-text" data-i18n="welcome_sound_no">🔇 শব্দহীন রাখুন</span>
+                    <span class="choice-sub-text">পরবর্তীতে যেকোনো সময় চালু করতে পারেন</span>
+                  </div>
+                  <span class="choice-check">✓</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enter Site Button -->
+          <button type="button" class="welcome-enter-btn" id="btn-welcome-enter">
+            <span class="enter-btn-text" data-i18n="welcome_btn_enter">প্রবেশ করুন (Enter Mondal Bari) 🪔</span>
+            <span class="enter-btn-sparkle">✨</span>
+          </button>
         </div>
       </div>
 

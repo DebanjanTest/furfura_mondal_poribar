@@ -1,8 +1,10 @@
 import { playlists, nativePujoData, authenticLiveDhakParts, liveDhakMeta, photoRiverRows, onnotaCategories, onnotaCreations } from './data/playlists.js';
 import { ytAudioPlayer } from './audio/youtubePlayer.js';
+import { bgAmbience } from './audio/backgroundAmbience.js';
 import { audioEngine, dhakSequencer, TRADITIONAL_BOLS } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
+import { getLanguage, setLanguage, t, applyTranslations } from './utils/i18n.js';
 
 // Application State
 const state = {
@@ -42,12 +44,22 @@ const state = {
 let particles = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Stored Language Preference
+  try {
+    const savedLang = localStorage.getItem('mondal_pujo_lang') || 'bn';
+    setLanguage(savedLang);
+  } catch (e) {
+    setLanguage('bn');
+  }
+
   initAtmosphere();
   initDynamicIsland();
   initCountdown();
   initOnlineCounter();
   initAudioPlayer();
   initModals();
+  initWelcomeModal();
+  initLanguageSwitcher();
   initSoundTriggers();
   initPujoInfoAndGallery();
   initPhotoRiver();
@@ -2941,6 +2953,100 @@ function closeModal(modalId) {
 function closeAllModals() {
   document.querySelectorAll('.modal-backdrop').forEach((b) => b.classList.remove('active'));
   audioEngine.stopAll();
+}
+
+function initWelcomeModal() {
+  const welcomeOverlay = document.getElementById('welcome-modal-overlay');
+  if (!welcomeOverlay) return;
+
+  const langBnBtn = document.getElementById('welcome-lang-bn');
+  const langEnBtn = document.getElementById('welcome-lang-en');
+  const soundYesBtn = document.getElementById('welcome-sound-yes');
+  const soundNoBtn = document.getElementById('welcome-sound-no');
+  const enterBtn = document.getElementById('btn-welcome-enter');
+
+  let selectedLang = getLanguage() || 'bn';
+  let selectedSound = 'yes';
+
+  // Language choice buttons
+  const updateLangChoices = (lang) => {
+    selectedLang = lang;
+    langBnBtn?.classList.toggle('active', lang === 'bn');
+    langEnBtn?.classList.toggle('active', lang === 'en');
+    setLanguage(lang);
+  };
+
+  langBnBtn?.addEventListener('click', () => updateLangChoices('bn'));
+  langEnBtn?.addEventListener('click', () => updateLangChoices('en'));
+
+  // Sound choice buttons
+  const updateSoundChoices = (sound) => {
+    selectedSound = sound;
+    soundYesBtn?.classList.toggle('active', sound === 'yes');
+    soundNoBtn?.classList.toggle('active', sound === 'no');
+  };
+
+  soundYesBtn?.addEventListener('click', () => updateSoundChoices('yes'));
+  soundNoBtn?.addEventListener('click', () => updateSoundChoices('no'));
+
+  // Enter Site Action
+  enterBtn?.addEventListener('click', () => {
+    // 1. Save language
+    setLanguage(selectedLang);
+
+    // 2. Handle audio
+    if (selectedSound === 'yes') {
+      bgAmbience.isEnabled = true;
+      bgAmbience.startAmbientPlayback();
+      try {
+        audioEngine.playShankha(2.0);
+      } catch (e) {}
+    } else {
+      bgAmbience.isEnabled = false;
+      ytAudioPlayer.setMute(true);
+    }
+
+    // 3. Animate away modal
+    welcomeOverlay.classList.add('hidden');
+    setTimeout(() => {
+      welcomeOverlay.remove();
+    }, 500);
+  });
+}
+
+function initLanguageSwitcher() {
+  // Desktop header language toggle
+  const desktopToggle = document.getElementById('btn-toggle-lang');
+  const desktopLabel = document.getElementById('lang-current-label');
+
+  const updateHeaderLabel = (lang) => {
+    if (desktopLabel) {
+      desktopLabel.textContent = lang === 'bn' ? 'বাংলা' : 'English';
+    }
+    const islandBn = document.getElementById('island-lang-bn');
+    const islandEn = document.getElementById('island-lang-en');
+    islandBn?.classList.toggle('active', lang === 'bn');
+    islandEn?.classList.toggle('active', lang === 'en');
+  };
+
+  desktopToggle?.addEventListener('click', () => {
+    const nextLang = getLanguage() === 'bn' ? 'en' : 'bn';
+    setLanguage(nextLang);
+    updateHeaderLabel(nextLang);
+  });
+
+  // Dynamic Island language buttons
+  document.getElementById('island-lang-bn')?.addEventListener('click', () => {
+    setLanguage('bn');
+    updateHeaderLabel('bn');
+  });
+
+  document.getElementById('island-lang-en')?.addEventListener('click', () => {
+    setLanguage('en');
+    updateHeaderLabel('en');
+  });
+
+  updateHeaderLabel(getLanguage());
 }
 
 function copyTextToClipboard(text, btnElement, successMsg) {
