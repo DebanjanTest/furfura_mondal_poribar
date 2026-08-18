@@ -221,6 +221,7 @@ button {
   z-index: 1;
   overflow: hidden;
   pointer-events: none;
+  background: radial-gradient(ellipse at center top, #28190c 0%, #101320 55%, #05070c 100%);
 }
 
 .bg-layer {
@@ -231,8 +232,9 @@ button {
   object-fit: cover;
   object-position: center bottom;
   opacity: 0;
-  transition: opacity var(--transition-bg), transform 1.8s ease-out;
-  transform: scale(1.03);
+  transition: opacity 0.45s ease-out, transform 1.2s ease-out;
+  transform: scale(1.02);
+  will-change: opacity;
 }
 
 .bg-layer.active {
@@ -4684,6 +4686,8 @@ button {
   width: 100%;
   padding: 4rem 1.5rem 10rem;
   box-sizing: border-box;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
 }
 
 .gallery-section-container {
@@ -5653,6 +5657,8 @@ button {
   padding: 4.5rem 0 3.5rem;
   background: linear-gradient(180deg, rgba(7, 10, 18, 0.4) 0%, rgba(13, 17, 28, 0.85) 50%, rgba(7, 10, 18, 0.6) 100%);
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
 }
 
 .photo-river-container {
@@ -5913,6 +5919,8 @@ button {
   background: linear-gradient(180deg, rgba(13, 17, 28, 0.88) 0%, rgba(18, 24, 38, 0.96) 50%, rgba(10, 14, 22, 0.95) 100%);
   border-top: 1px solid rgba(255, 207, 64, 0.16);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 800px;
 }
 
 .onnota-section-container {

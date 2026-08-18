@@ -1738,7 +1738,7 @@ function createRiverCardElement(item) {
   const likeCount = getPhotoLikeCount(item.id, item.likes || 18);
 
   card.innerHTML = `
-    <img class="river-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" />
+    <img class="river-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" decoding="async" />
     <div class="river-card-overlay">
       <div class="river-card-top">
         <span class="river-category-pill">${item.categoryLabel || '🌸 দর্শন'}</span>
@@ -2042,7 +2042,7 @@ function renderGrandGalleryGrid(isNewUpload = false) {
 
     card.innerHTML = `
       <div class="gallery-card-img-wrap">
-        <img class="gallery-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" />
+        <img class="gallery-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" decoding="async" />
         <span class="gallery-card-badge">${item.categoryLabel || item.category}</span>
         ${item.isCommunity ? '<span class="gallery-card-community-badge">📸 ভক্তের ছবি</span>' : ''}
       </div>
@@ -2173,7 +2173,7 @@ function renderOnnotaGrid() {
 
     card.innerHTML = `
       <div class="onnota-card-img-wrap">
-        <img class="onnota-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" />
+        <img class="onnota-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" decoding="async" />
         <span class="onnota-card-badge">${item.categoryLabel || item.category}</span>
         ${item.tag ? `<span class="onnota-card-tag">${item.tag}</span>` : ''}
       </div>

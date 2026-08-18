@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite --port 3000 --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "optimize:images": "node scripts/optimize-images.js"
   },
   "devDependencies": {
     "isomorphic-git": "^1.41.4",
+    "sharp": "^0.35.3",
     "vite": "^6.0.0"
   }
 }
