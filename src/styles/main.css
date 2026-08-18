@@ -5593,25 +5593,20 @@ button {
   color: var(--heritage-gold);
 }
 
-.footer-insta-link {
+.footer-heritage-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.55rem 1.15rem;
-  background: linear-gradient(135deg, rgba(225, 48, 108, 0.25), rgba(131, 58, 180, 0.2));
-  border: 1px solid rgba(225, 48, 108, 0.45);
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  background: rgba(255, 207, 64, 0.08);
+  border: 1px solid rgba(255, 207, 64, 0.28);
   border-radius: var(--radius-pill);
-  color: #ffb8d2;
+  color: var(--heritage-gold);
+  font-family: var(--font-bengali-sans);
   font-size: 0.8125rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all var(--transition-fast);
-}
-
-.footer-insta-link:hover {
-  background: linear-gradient(135deg, rgba(225, 48, 108, 0.45), rgba(131, 58, 180, 0.38));
-  color: #ffffff;
-  border-color: #e1306c;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* ==========================================================================
