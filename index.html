@@ -752,12 +752,21 @@
       </nav>
 
       <!-- ==========================================
-           BOTTOM DUAL INTERFACE: DESKTOP GLASS DOCK & MOBILE DRAWER
+           BOTTOM DUAL INTERFACE: MINIMIZABLE DESKTOP GLASS DOCK & MOBILE DRAWER
            ========================================== -->
       <footer class="bottom-system-container" role="contentinfo">
         
+        <!-- Desktop Floating Minimal Music Launcher Pill (When Dock is Minimized) -->
+        <button class="floating-music-launcher hide-on-mobile" id="btn-floating-music-launcher" title="রেডিও প্লেয়ার খুলুন (Key P)" aria-label="Open Radio Player">
+          <span class="launcher-note-icon">🎵</span>
+          <span class="launcher-text" id="floating-pill-title">পুজো রেডিও</span>
+          <span class="launcher-eq-bars" id="floating-pill-eq">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+
         <!-- Desktop Floating Glass Dock (768px+) -->
-        <div class="desktop-dock-wrapper hide-on-mobile">
+        <div class="desktop-dock-wrapper hide-on-mobile minimized" id="desktop-dock-wrapper">
           <div class="player-dock">
             <!-- Vinyl Cover Art -->
             <div class="track-art-wrapper" id="player-art-btn" title="Open Curated Radio Playlists">
@@ -809,11 +818,18 @@
               <span id="launcher-pill-text">PUJA RADIO</span>
               <span class="launcher-icon">⌄</span>
             </button>
+
+            <!-- Minimize Player Dock Button -->
+            <button class="dock-minimize-btn" id="btn-minimize-dock" title="প্লেয়ার লুকিয়ে রাখুন (Minimize)" aria-label="Minimize Player Dock">✕</button>
           </div>
         </div>
 
-        <!-- Mobile UI: Compact Media Pill & Thumb Navigation Bar (<768px) -->
-        <div class="mobile-system-wrapper hide-on-desktop">
+        <!-- Mobile UI: Floating Music Launcher & Collapsible Bottom Drawer (<768px) -->
+        <button class="mobile-floating-music-btn hide-on-desktop" id="btn-mobile-floating-music" title="রেডিও প্লেয়ার খুলুন" aria-label="Open Mobile Radio">
+          <span class="mobile-music-icon">🎵</span>
+        </button>
+
+        <div class="mobile-system-wrapper hide-on-desktop minimized" id="mobile-system-wrapper">
           
           <!-- Compact Floating Media Pill -->
           <div class="mobile-media-pill" id="mobile-media-pill-btn">
@@ -838,6 +854,7 @@
                   <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
                 </svg>
               </button>
+              <button class="mobile-ctrl-btn mobile-minimize-btn" id="btn-minimize-mobile-dock" aria-label="Minimize">✕</button>
             </div>
           </div>
 
