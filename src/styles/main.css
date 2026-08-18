@@ -131,10 +131,10 @@
 
 html, body {
   width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
   background-color: var(--obsidian-deep);
   color: var(--text-primary);
   font-family: var(--font-sans);
@@ -208,13 +208,15 @@ button {
 .app-wrapper {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  -webkit-overflow-scrolling: touch;
 }
 
 .background-container {
@@ -263,7 +265,7 @@ button {
 }
 
 /* ==========================================================================
-   HERO VIEWPORT FOLD (100dvh Vertical Viewport)
+   HERO VIEWPORT FOLD (100dvh Vertical Viewport — Snap Section 1)
    ========================================================================== */
 
 .hero-viewport-section {
@@ -271,7 +273,8 @@ button {
   z-index: 10;
   min-height: 100vh;
   min-height: 100dvh;
-  height: auto;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -279,6 +282,8 @@ button {
   width: 100%;
   box-sizing: border-box;
   padding-top: max(8px, env(safe-area-inset-top, 0px));
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Hero Scroll Down Cue */
@@ -4721,6 +4726,8 @@ button {
   box-sizing: border-box;
   content-visibility: auto;
   contain-intrinsic-size: 1px 900px;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
 }
 
 .gallery-section-container {
@@ -5687,11 +5694,19 @@ button {
   position: relative;
   z-index: 12;
   width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding: 4.5rem 0 3.5rem;
   background: linear-gradient(180deg, rgba(7, 10, 18, 0.4) 0%, rgba(13, 17, 28, 0.85) 50%, rgba(7, 10, 18, 0.6) 100%);
   overflow: hidden;
   content-visibility: auto;
   contain-intrinsic-size: 1px 700px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .photo-river-container {
@@ -5948,12 +5963,20 @@ button {
   position: relative;
   z-index: 12;
   width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding: 4.5rem 1.5rem 3.5rem;
   background: linear-gradient(180deg, rgba(13, 17, 28, 0.88) 0%, rgba(18, 24, 38, 0.96) 50%, rgba(10, 14, 22, 0.95) 100%);
   border-top: 1px solid rgba(255, 207, 64, 0.16);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   content-visibility: auto;
   contain-intrinsic-size: 1px 800px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .onnota-section-container {
@@ -6252,5 +6275,112 @@ button {
   gap: 1rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   DESKTOP FLOATING SECTION SNAP NAVIGATION DOTS (COMPUTER UI)
+   ========================================================================== */
+
+.desktop-snap-nav {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0.75rem 0.5rem;
+  background: rgba(13, 17, 28, 0.68);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 207, 64, 0.28);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65), 0 0 16px rgba(255, 207, 64, 0.12);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.snap-nav-dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  transition: all var(--transition-fast);
+}
+
+.snap-dot-core {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.38);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.snap-nav-dot:hover .snap-dot-core {
+  background: var(--heritage-gold);
+  transform: scale(1.35);
+  box-shadow: 0 0 10px var(--heritage-gold);
+}
+
+.snap-nav-dot.active .snap-dot-core {
+  width: 10px;
+  height: 10px;
+  background: var(--heritage-gold);
+  box-shadow: 0 0 12px var(--heritage-gold), 0 0 20px rgba(255, 207, 64, 0.6);
+  transform: scale(1.25);
+}
+
+.snap-dot-label {
+  position: absolute;
+  right: 36px;
+  white-space: nowrap;
+  font-family: var(--font-bengali-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(13, 17, 28, 0.94);
+  border: 1px solid rgba(255, 207, 64, 0.35);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(8px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.snap-nav-dot:hover .snap-dot-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Mobile Ergonomics for Scroll Snap */
+@media (max-width: 768px) {
+  .app-wrapper {
+    scroll-snap-type: y proximity;
+  }
+
+  .photo-river-section {
+    min-height: calc(100vh - 56px);
+    min-height: calc(100dvh - 56px);
+    padding: 3rem 0 2.5rem;
+  }
+
+  .onnota-section {
+    min-height: calc(100vh - 56px);
+    min-height: calc(100dvh - 56px);
+    padding: 3rem 1rem 2.5rem;
+  }
+
+  .desktop-snap-nav {
+    display: none !important;
+  }
 }
 

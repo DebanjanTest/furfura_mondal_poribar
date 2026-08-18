@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStoryGenerator();
   initKeyboardShortcuts();
   initParticles();
+  initSectionScrollLocking();
 
   // Initialize YouTube Audio Player
   ytAudioPlayer.init().then(() => {
@@ -2942,3 +2943,129 @@ function initParticles() {
   toggleBtn?.addEventListener('click', handleParticleToggle);
   mobToggleBtn?.addEventListener('click', handleParticleToggle);
 }
+
+/* ==========================================================================
+   9. SECTION SCROLL SNAP & ACCESSIBLE GESTURE CONTROLLER
+   ========================================================================== */
+
+function initSectionScrollLocking() {
+  const appWrapper = document.querySelector('.app-wrapper') || document.documentElement;
+  const snapNavDots = document.querySelectorAll('.snap-nav-dot');
+  
+  const snapSections = [
+    { id: 'hero-section', name: 'Hero' },
+    { id: 'photo-river-section', name: 'Photo River' },
+    { id: 'onnota-section', name: 'Onnota' },
+    { id: 'gallery-section', name: 'Gallery' } // Free-scrolling exemption
+  ];
+
+  // 1. Navigation Dots Click Handlers
+  snapNavDots.forEach((dot) => {
+    dot.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = dot.getAttribute('data-target');
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // 2. IntersectionObserver to update active navigation dots
+  const observerOptions = {
+    root: appWrapper === document.documentElement ? null : appWrapper,
+    threshold: 0.35
+  };
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const activeId = entry.target.id;
+        snapNavDots.forEach((dot) => {
+          const isMatch = dot.getAttribute('data-target') === activeId;
+          dot.classList.toggle('active', isMatch);
+          dot.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+        });
+      }
+    });
+  }, observerOptions);
+
+  snapSections.forEach(({ id }) => {
+    const el = document.getElementById(id);
+    if (el) sectionObserver.observe(el);
+  });
+
+  // 3. Computer UI: Smooth Section Wheel Transition (Wheel Locking with Gallery Exemption)
+  let isWheelGliding = false;
+  let wheelTimeout = null;
+
+  appWrapper.addEventListener('wheel', (e) => {
+    const galleryEl = document.getElementById('gallery-section');
+    if (!galleryEl) return;
+
+    const galleryRect = galleryEl.getBoundingClientRect();
+    const isInsideGallery = galleryRect.top <= 120 && galleryRect.bottom >= window.innerHeight * 0.3;
+
+    // If user is inside the Grand Gallery section, allow free continuous vertical scrolling without lock
+    if (isInsideGallery) {
+      return;
+    }
+
+    // Otherwise, for snap sections (Hero, Photo River, Onnota), provide smooth single-scroll glides
+    if (Math.abs(e.deltaY) < 35 || isWheelGliding) return;
+
+    const scrollDirection = e.deltaY > 0 ? 1 : -1;
+    const currentScrollTop = appWrapper.scrollTop;
+    const vh = window.innerHeight;
+
+    // Identify current snap index based on scroll position
+    let currentIdx = 0;
+    if (currentScrollTop < vh * 0.7) {
+      currentIdx = 0; // Hero
+    } else if (currentScrollTop < vh * 1.7) {
+      currentIdx = 1; // Photo River
+    } else if (currentScrollTop < vh * 2.7) {
+      currentIdx = 2; // Onnota
+    } else {
+      currentIdx = 3; // Gallery
+    }
+
+    const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentIdx + scrollDirection));
+    if (nextIdx !== currentIdx) {
+      const targetSec = document.getElementById(snapSections[nextIdx].id);
+      if (targetSec) {
+        isWheelGliding = true;
+        targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        clearTimeout(wheelTimeout);
+        wheelTimeout = setTimeout(() => {
+          isWheelGliding = false;
+        }, 650);
+      }
+    }
+  }, { passive: true });
+
+  // 4. Keyboard Page Navigation (ArrowDown, ArrowUp, PageDown, PageUp)
+  window.addEventListener('keydown', (e) => {
+    if (['input', 'textarea', 'select'].includes(document.activeElement?.tagName?.toLowerCase())) return;
+
+    if (e.key === 'PageDown' || e.key === 'PageUp') {
+      const currentScrollTop = appWrapper.scrollTop;
+      const vh = window.innerHeight;
+      const direction = e.key === 'PageDown' ? 1 : -1;
+
+      let currentIdx = 0;
+      if (currentScrollTop < vh * 0.7) currentIdx = 0;
+      else if (currentScrollTop < vh * 1.7) currentIdx = 1;
+      else if (currentScrollTop < vh * 2.7) currentIdx = 2;
+      else currentIdx = 3;
+
+      const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentIdx + direction));
+      const targetSec = document.getElementById(snapSections[nextIdx].id);
+      if (targetSec) {
+        e.preventDefault();
+        targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+}
+
