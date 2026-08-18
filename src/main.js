@@ -3001,24 +3001,46 @@ function initWelcomeModal() {
   soundNoBtn?.addEventListener('click', () => updateSoundChoices('no'));
 
   // Enter Site Action
-  enterBtn?.addEventListener('click', () => {
-    // 1. Save language
-    setLanguage(selectedLang);
+  const handleEnterSite = (e) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
 
-    // 2. Handle audio
-    if (selectedSound === 'yes') {
-      bgAmbience.isEnabled = true;
-      bgAmbience.startAmbientPlayback();
-    } else {
-      bgAmbience.isEnabled = false;
-      ytAudioPlayer.setMute(true);
+    try {
+      // 1. Save language
+      setLanguage(selectedLang);
+
+      // 2. Handle audio based on user choice
+      if (selectedSound === 'yes') {
+        bgAmbience.isEnabled = true;
+        bgAmbience.startAmbientPlayback();
+      } else {
+        bgAmbience.isEnabled = false;
+        if (typeof ytAudioPlayer.pause === 'function') {
+          ytAudioPlayer.pause();
+        }
+        if (typeof ytAudioPlayer.setMute === 'function') {
+          ytAudioPlayer.setMute(true);
+        }
+      }
+    } catch (err) {
+      console.warn('Audio preference init notice on enter:', err);
+    } finally {
+      // 3. Always Animate away modal and safely unlock view
+      if (welcomeOverlay) {
+        welcomeOverlay.classList.add('hidden');
+        setTimeout(() => {
+          welcomeOverlay.remove();
+        }, 400);
+      }
     }
+  };
 
-    // 3. Animate away modal
-    welcomeOverlay.classList.add('hidden');
-    setTimeout(() => {
-      welcomeOverlay.remove();
-    }, 500);
+  enterBtn?.addEventListener('click', handleEnterSite);
+  enterBtn?.addEventListener('touchend', (e) => {
+    // Prevent double firing on fast mobile tap
+    if (!welcomeOverlay.classList.contains('hidden')) {
+      handleEnterSite(e);
+    }
   });
 }
 

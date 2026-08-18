@@ -351,6 +351,18 @@ class YouTubeAudioPlayer {
     }
   }
 
+  setMute(isMuted) {
+    this.isMuted = !!isMuted;
+    if (this.player && this.isReady) {
+      if (this.isMuted) {
+        if (typeof this.player.mute === 'function') this.player.mute();
+      } else {
+        if (typeof this.player.unMute === 'function') this.player.unMute();
+      }
+    }
+    this.notify({ type: 'volume', volume: this.volume, isMuted: this.isMuted });
+  }
+
   startProgressTicker() {
     this.stopProgressTicker();
     this.progressInterval = setInterval(() => {
