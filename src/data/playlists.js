@@ -633,7 +633,7 @@ export const nativePujoData = {
       bengaliDesc: "১৮৭০-এর দশক থেকে বংশপরম্পরায় পূজিত সাবেকি একচালা ডাকের সাজের প্রতিমার দিব্য দর্শন।",
       author: "মন্ডল পরিবার মহাফেজখানা",
       likes: 356,
-      src: "/gallery/river_idol_01.webp"
+      src: "/gallery/art_hero_idol.webp"
     },
     {
       id: "gal-2",
@@ -645,7 +645,7 @@ export const nativePujoData = {
       bengaliDesc: "নাটমন্দিরে ধুনুচির ধোঁয়া, মাটির প্রদীপের আলো ও কাঁসর-ঘণ্টার বোলে সন্ধ্যার মহাশক্তি আরতি।",
       author: "ফুরফুরা মণ্ডল পরিবার",
       likes: 294,
-      src: "/gallery/river_aarti_01.webp"
+      src: "/gallery/art_evening_aarti.webp"
     },
     {
       id: "gal-3",
@@ -657,7 +657,7 @@ export const nativePujoData = {
       bengaliDesc: "উৎসবের আলোয় ঝলমলে বনেদি নাটমন্দির প্রাঙ্গণ ও বহু দূর-দূরান্ত থেকে আসা ভক্তদের আন্তরিক মিলনমেলা।",
       author: "মন্ডল পরিবার সংগ্রহ",
       likes: 218,
-      src: "/gallery/river_heritage_01.webp"
+      src: "/gallery/art_night_grandeur.webp"
     },
     {
       id: "gal-4",
@@ -669,7 +669,7 @@ export const nativePujoData = {
       bengaliDesc: "ভোরের শিশিরভেজা শিউলিতলায় বীরেন্দ্রকৃষ্ণ ভদ্রের চণ্ডীপাঠ ও শঙ্খধ্বনিতে শারদ আবাহন।",
       author: "ঐতিহ্য স্মৃতি ভাণ্ডার",
       likes: 275,
-      src: "/gallery/river_sindoor_01.webp"
+      src: "/gallery/art_dawn_mahalaya.webp"
     },
     {
       id: "gal-5",
@@ -681,7 +681,7 @@ export const nativePujoData = {
       bengaliDesc: "ফুরফুরার মুক্ত মাঠে কাশফুলের দোলা ও শরতের নীল আকাশে মেঘের ভেলা — মা আসছেন ঘরে।",
       author: "ফুরফুরা মণ্ডল পরিবার",
       likes: 189,
-      src: "/gallery/river_alpona_01.webp"
+      src: "/gallery/art_afternoon_kash.webp"
     },
     {
       id: "gal-6",
@@ -693,7 +693,7 @@ export const nativePujoData = {
       bengaliDesc: "নিঝুম রাতের মায়াবী পরিবেশ, ধূপের সুবাস ও শান্ত স্নিগ্ধ পুজো মণ্ডপ।",
       author: "মন্ডল পরিবার মহাফেজখানা",
       likes: 242,
-      src: "/gallery/river_bisarjan_01.webp"
+      src: "/gallery/art_midnight_serenity.webp"
     }
   ]
 };
@@ -1102,7 +1102,7 @@ export const photoRiverRows = [
         title_bn: "সাবেকি একচালা ডাকের সাজ",
         category: "protima",
         categoryLabel: "🌸 প্রতিমা দর্শন",
-        src: "/gallery/river_idol_01.webp",
+        src: "/gallery/art_hero_idol.webp",
         desc_bn: "ফুরফুরা মন্ডল পরিবারের ১৫০+ বছরের সাবেকি একচালা প্রতিমার স্বর্ণাভ দিব্য দর্শন।",
         author: "মন্ডল পরিবার মহাফেজখানা",
         likes: 428
@@ -1113,7 +1113,7 @@ export const photoRiverRows = [
         title_bn: "মহাষষ্ঠীর বোধন ও অধিবাস",
         category: "protima",
         categoryLabel: "🌸 প্রতিমা দর্শন",
-        src: "/gallery/river_sandhi_01.webp",
+        src: "/gallery/art_morning_puja.webp",
         desc_bn: "বিল্ববৃক্ষমূলে দেবীর বোধন ও মা দুর্গার ঘরের আঙিনায় প্রথম পা।",
         author: "ফুরফুরা মণ্ডল পরিবার",
         likes: 312
@@ -1124,7 +1124,7 @@ export const photoRiverRows = [
         title_bn: "নবপত্রিকা স্নান ও প্রবেশ",
         category: "protima",
         categoryLabel: "🌸 প্রতিমা দর্শন",
-        src: "/gallery/river_ghat_01.webp",
+        src: "/gallery/art_dawn_mahalaya.webp",
         desc_bn: "সপ্তমীর ভোরে গঙ্গাজলে নবপত্রিকা স্নান করিয়ে নাটমন্দিরে প্রবেশ।",
         author: "ঐতিহ্য সংরক্ষণ পরিষদ",
         likes: 290
@@ -1135,7 +1135,7 @@ export const photoRiverRows = [
         title_bn: "শোলার ডাকের সাজ ও চালচিত্র",
         category: "protima",
         categoryLabel: "🌸 প্রতিমা দর্শন",
-        src: "/gallery/river_shola_01.webp",
+        src: "/gallery/art_heritage_emblem.webp",
         desc_bn: "প্রাচীন শিল্পীদের হাতে তৈরি নিখুঁত শোলার গহনা ও শিব-দুর্গা চালচিত্র।",
         author: "মন্ডল পরিবার সংগ্রহ",
         likes: 384
@@ -1146,7 +1146,7 @@ export const photoRiverRows = [
         title_bn: "মহাষ্টমীর কুমারী পূজা",
         category: "protima",
         categoryLabel: "🌸 প্রতিমা দর্শন",
-        src: "/gallery/river_family_01.webp",
+        src: "/gallery/art_afternoon_kash.webp",
         desc_bn: "মহাষ্টমীর পুণ্যলগ্নে জীবন্ত দেবীরূপে কুমারী কন্যার অর্চনা ও আরতি।",
         author: "ফুরফুরা মণ্ডল পরিবার",
         likes: 345
@@ -1157,7 +1157,7 @@ export const photoRiverRows = [
         title_bn: "ত্রিনয়ন ও মায়ের দিব্য রূপ",
         category: "protima",
         categoryLabel: "🌸 প্রতিমা দর্শন",
-        src: "/gallery/river_aarti_01.webp",
+        src: "/gallery/art_evening_aarti.webp",
         desc_bn: "মায়ের করুণাময়ী অথচ তেজস্বিনী তিনটি চোখ — সৃষ্টি, স্থিতি ও প্রলয়ের প্রতীক।",
         author: "মন্ডল পরিবার আর্কাইভ",
         likes: 512
@@ -1176,7 +1176,7 @@ export const photoRiverRows = [
         title_bn: "ধুনোর ধোঁয়ায় সন্ধ্যা আরতি",
         category: "aarti",
         categoryLabel: "🔥 ধুনুচি ও আরতি",
-        src: "/gallery/river_dhunuchi_01.webp",
+        src: "/gallery/art_evening_aarti.webp",
         desc_bn: "নাটমন্দিরে ধুনোর সুবাসিত ধোঁয়া ও কাঁসর-ঘণ্টার বোলে সন্ধ্যার মহাশক্তি আরতি।",
         author: "ফুরফুরা মণ্ডল পরিবার",
         likes: 462
@@ -1187,7 +1187,7 @@ export const photoRiverRows = [
         title_bn: "১০৮ পদ্ম ও মাটির প্রদীপ",
         category: "aarti",
         categoryLabel: "🔥 ধুনুচি ও আরতি",
-        src: "/gallery/river_aarti_01.webp",
+        src: "/gallery/art_night_grandeur.webp",
         desc_bn: "অষ্টমী-নবমীর মাহেন্দ্রক্ষণে ১০৮ প্রদীপের আলোর রোশনাইয়ে সন্ধিপূজা।",
         author: "মন্ডল পরিবার মহাফেজখানা",
         likes: 538
@@ -1198,7 +1198,7 @@ export const photoRiverRows = [
         title_bn: "নবমীর ধুনুচি নৃত্যের উন্মাদনা",
         category: "aarti",
         categoryLabel: "🔥 ধুনুচি ও আরতি",
-        src: "/gallery/river_dhunuchi_01.webp",
+        src: "/gallery/art_evening_aarti.webp",
         desc_bn: "ঢাকের তাকডুম তাকডুম বোলে যুবক-বৃদ্ধদের একাত্ম হয়ে ধুনুচি নৃত্য।",
         author: "ঐতিহ্য স্মৃতি ভাণ্ডার",
         likes: 395
@@ -1209,7 +1209,7 @@ export const photoRiverRows = [
         title_bn: "ভোরের শিশিরভেজা শিউলিতলা",
         category: "sharat",
         categoryLabel: "🌾 শরতের আগমনী",
-        src: "/gallery/river_alpona_01.webp",
+        src: "/gallery/art_dawn_mahalaya.webp",
         desc_bn: "ভোরের প্রথম আলোয় শিউলি ফুলের বিছানা ও বীরেন্দ্রকৃষ্ণ ভদ্রের চণ্ডীপাঠ।",
         author: "মন্ডল পরিবার",
         likes: 310
@@ -1220,7 +1220,7 @@ export const photoRiverRows = [
         title_bn: "নীল আকাশে সাদা মেঘ ও কাশফুল",
         category: "sharat",
         categoryLabel: "🌾 শরতের আগমনী",
-        src: "/gallery/river_prasad_01.webp",
+        src: "/gallery/art_afternoon_kash.webp",
         desc_bn: "ফুরফুরার দিগন্তবিস্তৃত মাঠে কাশফুলের দোলা — বার্তা দেয় মা আসছেন ঘরে।",
         author: "ফুরফুরা মণ্ডল পরিবার",
         likes: 378
@@ -1231,7 +1231,7 @@ export const photoRiverRows = [
         title_bn: "পঞ্চপ্রদীপ আরতি বন্দনা",
         category: "aarti",
         categoryLabel: "🔥 ধুনুচি ও আরতি",
-        src: "/gallery/river_sandhi_01.webp",
+        src: "/gallery/art_night_grandeur.webp",
         desc_bn: "কূলপুরোহিতের পঞ্চপ্রদীপ ঘূর্ণন ও সমবেত ভক্তবৃন্দের পুষ্পাঞ্জলি নিবেদন।",
         author: "মন্ডল পরিবার মহাফেজখানা",
         likes: 420
@@ -1250,7 +1250,7 @@ export const photoRiverRows = [
         title_bn: "শতাব্দীপ্রাচীন নাটমন্দির প্রাঙ্গণ",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/river_heritage_01.webp",
+        src: "/gallery/art_midnight_serenity.webp",
         desc_bn: "১৮৭০-এর দশক থেকে সংরক্ষিত মন্ডল বাড়ির স্থাপত্য ও পারিবারিক ইতিহাস।",
         author: "মন্ডল পরিবার মহাফেজখানা",
         likes: 334
@@ -1261,7 +1261,7 @@ export const photoRiverRows = [
         title_bn: "বিজয়া দশমীর সিঁদুর খেলা",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/river_sindoor_01.webp",
+        src: "/gallery/art_morning_puja.webp",
         desc_bn: "দেবী বরণের পর গৃহবধূদের সিঁদুরে রাঙা আনন্দ ও চোখের জলে মা-কে বিদায়।",
         author: "ফুরফুরা মণ্ডল পরিবার",
         likes: 490
@@ -1272,7 +1272,7 @@ export const photoRiverRows = [
         title_bn: "বিসর্জন ও ভাসান শোভাযাত্রা",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/river_bisarjan_01.webp",
+        src: "/gallery/art_hero_idol.webp",
         desc_bn: "কাঁধে করে প্রতিমা নিয়ে ঘাটের দিকে যাত্রা — 'আসছে বছর আবার হবে'।",
         author: "ঐতিহ্য সংরক্ষণ পরিষদ",
         likes: 445
@@ -1283,7 +1283,7 @@ export const photoRiverRows = [
         title_bn: "পরিবারের আন্তরিক মিলনমেলা",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/river_family_01.webp",
+        src: "/gallery/art_night_grandeur.webp",
         desc_bn: "দেশ-বিদেশে ছড়িয়ে থাকা পরিবারের সদস্যদের শিকড়ে ফেরার মধুর মুহূর্ত।",
         author: "মন্ডল পরিবার আর্কাইভ",
         likes: 362
@@ -1294,7 +1294,7 @@ export const photoRiverRows = [
         title_bn: "মহাপ্রসাদ ও ভোগের আনন্দ",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/river_prasad_01.webp",
+        src: "/gallery/art_afternoon_kash.webp",
         desc_bn: "শালপাতায় ভোগের খিচুড়ি, লাবড়া ও মিষ্টি মুখের চিরন্তন সাবেকি স্বাদ।",
         author: "মন্ডল পরিবার",
         likes: 320
@@ -1305,7 +1305,7 @@ export const photoRiverRows = [
         title_bn: "শান্তিজল ও শুভ বিজয়ার আশীর্বাদ",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/river_ghat_01.webp",
+        src: "/gallery/art_midnight_serenity.webp",
         desc_bn: "বিসর্জনের পর অপরাজিতা সুতো ধারণ, শান্তিজল গ্রহণ ও গুরুজনদের প্রণাম।",
         author: "ফুরফুরা মণ্ডল পরিবার",
         likes: 512
@@ -1329,7 +1329,7 @@ export const onnotaCreations = [
     title_bn: "শারদ রূপরেখা — দশভুজা মহামায়া",
     category: "art",
     categoryLabel: "🎨 চিত্রশিল্প ও অলঙ্করণ",
-    src: "/onnota/onnota_art_01.webp",
+    src: "/onnota/art_hero_idol.webp",
     desc_bn: "জলরং ও ডিজিটাল ক্যানভাসে মা দুর্গার মহিষাসুরমর্দিনী রূপের পটচিত্র শৈলীর অলঙ্করণ।",
     desc_en: "Digital gouache and folk Patachitra fusion depicting Devi Durga's cosmic power.",
     author: "অন্যতা (Onnota)",
@@ -1343,7 +1343,7 @@ export const onnotaCreations = [
     title_bn: "হুগলী নদীর তীরে শারদ সন্ধ্যা",
     category: "photography",
     categoryLabel: "📷 উৎসব আলোকচিত্র",
-    src: "/onnota/onnota_photo_01.webp",
+    src: "/onnota/art_evening_aarti.webp",
     desc_bn: "গঙ্গার ঘাটে সান্ধ্য আরতির আলোর ঝিলিক ও নৌকার ছায়ায় এক নিঃশব্দ উৎসবের ফ্রেম।",
     desc_en: "Twilight reflections and sacred evening aarti lamps along the holy riverbanks.",
     author: "অন্যতা (Onnota)",
@@ -1357,7 +1357,7 @@ export const onnotaCreations = [
     title_bn: "নাটমন্দির চত্বরে সাবেকি চালের গুঁড়োর আলপনা",
     category: "crafts",
     categoryLabel: "🪔 হস্তশিল্প ও আলপনা",
-    src: "/onnota/onnota_craft_01.webp",
+    src: "/onnota/art_morning_puja.webp",
     desc_bn: "শালুক, পদ্ম ও দেবী চরণের নিখুঁত হাতের টানে আঁকা মন্ডল বাড়ির সাবেকি পিটুলি আলপনা।",
     desc_en: "Handmade sacred floor art using rice flour paste with lotus and conch flourishes.",
     author: "অন্যতা (Onnota)",
@@ -1371,7 +1371,7 @@ export const onnotaCreations = [
     title_bn: "শিউলির গন্ধে নস্টালজিয়া — পুজোর ফেলে আসা দিন",
     category: "literature",
     categoryLabel: "📜 সাহিত্য ও স্মৃতিচারণ",
-    src: "/onnota/onnota_lit_01.webp",
+    src: "/onnota/art_dawn_mahalaya.webp",
     desc_bn: "ভোরের রেডিওতে মহালয়ার সুর, নতুন জামার গন্ধ ও শৈশবের পুজোর আন্তরিক স্মৃতিচারণ।",
     desc_en: "An evocative prose memoir reminiscing early morning AIR broadcasts and ancestral warmth.",
     author: "অন্যতা (Onnota)",
@@ -1385,7 +1385,7 @@ export const onnotaCreations = [
     title_bn: "ত্রিনয়নী — মায়ের শান্ত স্নেহময় রূপ",
     category: "art",
     categoryLabel: "🎨 চিত্রশিল্প ও অলঙ্করণ",
-    src: "/onnota/onnota_canvas_01.webp",
+    src: "/onnota/art_night_grandeur.webp",
     desc_bn: "অ্যাক্রিলিক ক্যানভাসে ফুটে ওঠা মায়ের করুণাময়ী ত্রিনয়ন ও স্বর্ণাভ মুকুটের আভা।",
     desc_en: "Acrylic study focusing on the divine third eye radiating maternal benevolence.",
     author: "অন্যতা (Onnota)",
@@ -1399,7 +1399,7 @@ export const onnotaCreations = [
     title_bn: "কাশবনের দোলা ও শরতের নীল আকাশ",
     category: "photography",
     categoryLabel: "📷 উৎসব আলোকচিত্র",
-    src: "/onnota/onnota_kash_01.webp",
+    src: "/onnota/art_afternoon_kash.webp",
     desc_bn: "ফুরফুরার দিগন্তজোড়া কাশবনে বাতাসের ঢেউ ও শুভ্র মেঘমালার শারদ অভিবাদন।",
     desc_en: "Dancing white Kash plumes framed against dramatic autumn cloudscapes.",
     author: "অন্যতা (Onnota)",
@@ -1413,7 +1413,7 @@ export const onnotaCreations = [
     title_bn: "পোড়ামাটির মঙ্গল প্রদীপ ও শোলার কাজ",
     category: "crafts",
     categoryLabel: "🪔 হস্তশিল্প ও আলপনা",
-    src: "/onnota/onnota_diya_01.webp",
+    src: "/onnota/art_midnight_serenity.webp",
     desc_bn: "মাটির প্রদীপে সাবেকি রঙের নকশা ও হাতে তৈরি ধবধবে সাদা শোলার ফুল।",
     desc_en: "Artisanal clay lamps painted with folk patterns and delicate Shola pith carvings.",
     author: "অন্যতা (Onnota)",
@@ -1427,7 +1427,7 @@ export const onnotaCreations = [
     title_bn: "আগমনী কবিতা — ঘরের মেয়ে মা আসছেন ঘরে",
     category: "literature",
     categoryLabel: "📜 সাহিত্য ও স্মৃতিচারণ",
-    src: "/onnota/onnota_poem_01.webp",
+    src: "/onnota/art_dawn_mahalaya.webp",
     desc_bn: "\"মেঘের কোলে রোদ হেসেছে, বাদল গেছে টুটি... কৈলাস থেকে ঘরের মেয়ে ফিরছে মায়ের কুটির।\"",
     desc_en: "A poetic Bengali ode capturing the bittersweet emotions of daughter Uma's arrival.",
     author: "অন্যতা (Onnota)",
@@ -1441,7 +1441,7 @@ export const onnotaCreations = [
     title_bn: "ধুনুচির অগ্নিশিখা ও ছন্দের মেলবন্ধন",
     category: "art",
     categoryLabel: "🎨 চিত্রশিল্প ও অলঙ্করণ",
-    src: "/onnota/onnota_vector_01.webp",
+    src: "/onnota/art_evening_aarti.webp",
     desc_bn: "ধুনোর লালচে অঙ্গার ও ঢাকের উত্তাল তালের গতিময় ডিজিটাল অলঙ্করণ।",
     desc_en: "Dynamic vector illustration illustrating the raw spiritual fury of Dhunuchi dancers.",
     author: "অন্যতা (Onnota)",
@@ -1455,7 +1455,7 @@ export const onnotaCreations = [
     title_bn: "দশমীর বিদায় — বিসর্জনের জলে প্রতিবিম্ব",
     category: "photography",
     categoryLabel: "📷 উৎসব আলোকচিত্র",
-    src: "/onnota/onnota_dashami_01.webp",
+    src: "/onnota/art_hero_idol.webp",
     desc_bn: "গঙ্গার জলে প্রতিমা বিসর্জনের শান্ত লহরী — চোখের জলে 'আসছে বছর আবার হবে'।",
     desc_en: "A poignant photographic capture of farewell ripples during deity immersion.",
     author: "অন্যতা (Onnota)",
@@ -1469,7 +1469,7 @@ export const onnotaCreations = [
     title_bn: "সাবেকি শোলার মুকুট ও কদমমালা",
     category: "crafts",
     categoryLabel: "🪔 হস্তশিল্প ও আলপনা",
-    src: "/onnota/onnota_crown_01.webp",
+    src: "/onnota/art_heritage_emblem.webp",
     desc_bn: "বনেদি প্রতিমার জন্য তৈরি সূক্ষ্ম শোলার মুকুট, কদম ফুল ও ময়ূরপঙ্খী চালচিত্র।",
     desc_en: "Ancestral heritage craftsmanship sculpted purely out of aquatic shola reed.",
     author: "অন্যতা (Onnota)",
@@ -1483,7 +1483,7 @@ export const onnotaCreations = [
     title_bn: "ঢাকের বোল ও স্মৃতির সুর — এক সাংস্কৃতিক রূপরেখা",
     category: "literature",
     categoryLabel: "📜 সাহিত্য ও স্মৃতিচারণ",
-    src: "/onnota/onnota_essay_01.webp",
+    src: "/onnota/art_night_grandeur.webp",
     desc_bn: "এক কাঠি থেকে দুক কাঠি — ঢাকের চামড়ার প্রতিটি কম্পন কীভাবে বাঙালি মননকে জাগিয়ে তোলে।",
     desc_en: "A comprehensive cultural essay exploring the acoustic legacy of Bengali master dhakis.",
     author: "অন্যতা (Onnota)",
