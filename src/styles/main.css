@@ -281,8 +281,8 @@ button {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  padding-top: max(8px, env(safe-area-inset-top, 0px));
-  padding-bottom: max(10px, env(safe-area-inset-bottom, 0px));
+  padding-top: clamp(4.5rem, 8vh, 6.25rem);
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
@@ -377,60 +377,16 @@ button {
 }
 
 /* ==========================================================================
-   TOP NAVIGATION / CONTROLS HEADER BAR (DESKTOP)
-   ========================================================================== */
-
-.header-bar {
-  position: relative;
-  z-index: 25;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  gap: 1rem;
-  width: 100%;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  flex-wrap: nowrap;
-  max-width: calc(50% - 225px);
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.55rem;
-  flex-wrap: nowrap;
-  max-width: calc(50% - 225px);
-}
-
-@media (max-width: 1280px) and (min-width: 769px) {
-  .shortcuts-pill {
-    display: none !important;
-  }
-  .insta-link-pill span {
-    display: none;
-  }
-  .header-left, .header-right {
-    max-width: calc(50% - 215px);
-  }
-}
-
-/* ==========================================================================
-   UNIVERSAL FLOATING DYNAMIC ISLAND (DESKTOP & MOBILE)
+   UNIVERSAL UNIFIED FLOATING DYNAMIC ISLAND (DESKTOP & MOBILE)
    ========================================================================== */
 
 .universal-dynamic-island-container {
   position: fixed;
-  top: 1.15rem;
+  top: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 85;
-  width: min(90vw, 420px);
+  z-index: 1000;
+  width: min(92vw, 460px);
   display: flex;
   justify-content: center;
   pointer-events: none;
@@ -523,6 +479,49 @@ button {
   font-size: 0.75rem;
   font-weight: 600;
   color: #a7f3d0;
+}
+
+.island-lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  background: rgba(255, 207, 64, 0.12);
+  border: 1px solid rgba(255, 207, 64, 0.35);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-bengali-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--heritage-gold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.island-lang-pill:hover {
+  background: var(--heritage-gold);
+  color: #070a12;
+  border-color: var(--heritage-gold);
+  transform: translateY(-1px);
+}
+
+.island-lang-pill-mini {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 207, 64, 0.12);
+  border: 1px solid rgba(255, 207, 64, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--heritage-gold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.island-lang-pill-mini:hover {
+  background: var(--heritage-gold);
+  color: #070a12;
 }
 
 .island-expand-btn {

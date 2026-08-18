@@ -188,7 +188,12 @@ function initDynamicIsland() {
 
   btnExpand?.addEventListener('click', toggleDrawer);
   btnActiveExpand?.addEventListener('click', toggleDrawer);
-  idleTapTarget?.addEventListener('click', toggleDrawer);
+
+  // Idle Island Tap -> Opens Mondal Barir Pujo Heritage & Schedule
+  idleTapTarget?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openModal('pujo-info-modal');
+  });
 
   // Active Island Tap -> Opens Player Sheet (Playlists or Dhak)
   activeTapTarget?.addEventListener('click', () => {
@@ -243,6 +248,12 @@ function initDynamicIsland() {
   document.getElementById('island-quick-radio')?.addEventListener('click', (e) => {
     e.stopPropagation();
     openModal('playlists-modal');
+    island?.classList.remove('drawer-open');
+  });
+
+  document.getElementById('island-quick-particles')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (particles) particles.toggle();
     island?.classList.remove('drawer-open');
   });
 
@@ -3026,7 +3037,15 @@ function initLanguageSwitcher() {
     islandEn?.classList.toggle('active', lang === 'en');
   };
 
-  desktopToggle?.addEventListener('click', () => {
+  desktopToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const nextLang = getLanguage() === 'bn' ? 'en' : 'bn';
+    setLanguage(nextLang);
+    updateHeaderLabel(nextLang);
+  });
+
+  document.getElementById('btn-toggle-lang-active')?.addEventListener('click', (e) => {
+    e.stopPropagation();
     const nextLang = getLanguage() === 'bn' ? 'en' : 'bn';
     setLanguage(nextLang);
     updateHeaderLabel(nextLang);

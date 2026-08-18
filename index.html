@@ -51,34 +51,41 @@
       </div>
 
       <!-- ==========================================
-           UNIVERSAL FLOATING DYNAMIC ISLAND (DESKTOP & MOBILE)
+           UNIVERSAL UNIFIED DYNAMIC ISLAND (DESKTOP & MOBILE)
            ========================================== -->
       <div class="universal-dynamic-island-container" id="universal-dynamic-island-container">
         <div class="dynamic-island" id="dynamic-island" role="region" aria-label="Mondal Barir Pujo Dynamic Island">
           
           <!-- Island State A: Default / Idle Pill -->
           <div class="island-state island-idle" id="island-idle-state">
-            <div class="island-left" id="island-idle-tap-target">
+            <div class="island-left" id="island-idle-tap-target" title="মন্ডল বাড়ির পুজো — ঐতিহ্য ও নির্ঘণ্ট">
               <span class="island-emblem" aria-hidden="true">🪔</span>
               <div class="island-brand-text">
-                <span class="island-title">মন্ডল বাড়ির পুজো</span>
-                <span class="island-badge">১৫০+ বছর</span>
+                <span class="island-title" data-i18n="brand_title">মন্ডল বাড়ির পুজো</span>
+                <span class="island-badge" data-i18n="brand_heritage_badge">১৫০+ বছর</span>
               </div>
             </div>
             <div class="island-right">
-              <div class="island-live-pill" id="island-online-pill" title="Live Visitors">
+              <!-- Live Visitor Count Pill -->
+              <div class="island-live-pill" id="island-online-pill" title="Live Visitors Online">
                 <span class="beacon-dot" aria-hidden="true"></span>
                 <span id="island-online-text">54</span>
               </div>
-              <button class="island-expand-btn" id="btn-island-expand" aria-label="Toggle Quick Hub">
+              <!-- Fast Language Toggle Pill -->
+              <button class="island-lang-pill" id="btn-toggle-lang" title="Toggle Language (বাংলা / English)" aria-label="Change Language">
+                <span class="pill-lang-icon">🌐</span>
+                <span id="lang-current-label">বাংলা</span>
+              </button>
+              <!-- Expand Quick Hub Menu Button -->
+              <button class="island-expand-btn" id="btn-island-expand" title="Open Quick Action Menu" aria-label="Toggle Quick Hub">
                 <span class="island-chevron-icon" id="island-chevron">▾</span>
               </button>
             </div>
           </div>
 
-          <!-- Island State B: Active Audio / Dhak Playing Pill -->
+          <!-- Island State B: Active Audio / Ambient / Dhak Playing Pill -->
           <div class="island-state island-active" id="island-active-state" style="display: none;">
-            <div class="island-left" id="island-active-tap-target">
+            <div class="island-left" id="island-active-tap-target" title="Click to open full player">
               <div class="island-art-wrap">
                 <img id="island-art-img" class="island-art-thumb" src="/favicon.png" alt="Now Playing Artwork" />
                 <span class="island-playing-tag" id="island-playing-icon">🎵</span>
@@ -91,12 +98,13 @@
                     <span class="island-eq-bar"></span>
                     <span class="island-eq-bar"></span>
                   </div>
-                  <span id="island-artist-name">মন্ডল বাড়ি রেডিও</span>
+                  <span id="island-artist-name">মন্ডল বাড়ি আবহ</span>
                 </div>
               </div>
             </div>
             <div class="island-right">
-              <button class="island-ctrl-btn" id="island-btn-play-pause" aria-label="Play or Pause">
+              <!-- Island Play / Pause -->
+              <button class="island-ctrl-btn" id="island-btn-play-pause" aria-label="Play or Pause Audio">
                 <svg id="island-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
@@ -104,7 +112,12 @@
                   <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                 </svg>
               </button>
-              <button class="island-expand-btn" id="btn-island-active-expand" aria-label="Toggle Quick Hub">
+              <!-- Fast Language Switcher in Active Mode -->
+              <button class="island-lang-pill-mini" id="btn-toggle-lang-active" title="Toggle Language" aria-label="Change Language">
+                <span>🌐</span>
+              </button>
+              <!-- Expand Quick Hub Button -->
+              <button class="island-expand-btn" id="btn-island-active-expand" title="Open Quick Action Menu" aria-label="Toggle Quick Hub">
                 <span class="island-chevron-icon">▾</span>
               </button>
             </div>
@@ -113,17 +126,21 @@
           <!-- Island Dropdown Quick Action Hub (Expanded State) -->
           <div class="island-quick-drawer" id="island-quick-drawer">
             <div class="island-quick-grid">
-              <button class="island-quick-item" id="island-quick-shankha" aria-label="Play Shankha">
-                <span class="island-quick-icon">🐚</span>
-                <span class="island-quick-label">শাঁখের ধ্বনি</span>
+              <button class="island-quick-item" id="island-quick-radio" aria-label="Open Radio">
+                <span class="island-quick-icon">📻</span>
+                <span class="island-quick-label">পূজা রেডিও</span>
               </button>
               <button class="island-quick-item" id="island-quick-dhak" aria-label="Open Dhak Studio">
                 <span class="island-quick-icon">🥁</span>
                 <span class="island-quick-label">ঢাকের বোল</span>
               </button>
-              <button class="island-quick-item" id="island-quick-radio" aria-label="Open Radio">
-                <span class="island-quick-icon">📻</span>
-                <span class="island-quick-label">পূজা রেডিও</span>
+              <button class="island-quick-item" id="island-quick-shankha" aria-label="Play Shankha">
+                <span class="island-quick-icon">🐚</span>
+                <span class="island-quick-label">শাঁখের ধ্বনি</span>
+              </button>
+              <button class="island-quick-item" id="island-quick-particles" aria-label="Toggle Falling Flowers">
+                <span class="island-quick-icon">🌸</span>
+                <span class="island-quick-label">শিউলি ফুল</span>
               </button>
               <button class="island-quick-item" id="island-quick-story" aria-label="Open Story Generator">
                 <span class="island-quick-icon">📸</span>
@@ -157,12 +174,12 @@
               </div>
             </div>
 
-            <!-- Quick Link to Pujo Info -->
+            <!-- Quick Link to Pujo Info & Schedule -->
             <button class="island-heritage-banner" id="island-quick-heritage">
               <span class="island-banner-icon">🪔</span>
               <div class="island-banner-text">
-                <strong data-i18n="brand_title">মন্ডল বাড়ির পুজো</strong>
-                <span data-i18n="pujo_history">১৫০+ বছরের বনেদি ঐতিহ্য ও ফটো গ্যালারি</span>
+                <strong data-i18n="brand_title">মন্ডল বাড়ির পুজো ও নির্ঘণ্ট</strong>
+                <span data-i18n="pujo_history">১৫০+ বছরের বনেদি ঐতিহ্য, সম্পূর্ণ পূজার সূচি ও ফটো গ্যালারি</span>
               </div>
               <span class="island-banner-arrow">›</span>
             </button>
@@ -175,88 +192,6 @@
            HERO VIEWPORT FOLD (100dvh Vertical Viewport)
            ========================================== -->
       <section class="hero-viewport-section" id="hero-section">
-
-        <!-- TOP NAVIGATION / CONTROLS HEADER BAR (DESKTOP) -->
-        <header class="header-bar hide-on-mobile" role="banner">
-          <div class="header-left">
-            <!-- Live Online Indicator -->
-            <div class="glass-pill online-pill" id="online-counter" title="Active Visitors Online" aria-label="Live visitors count">
-              <span class="beacon-dot" aria-hidden="true"></span>
-              <span id="online-count-text">54 online</span>
-            </div>
-
-            <!-- Mondal Barir Pujo Sole Branding Pill -->
-            <button class="glass-pill pujo-tag-pill" id="btn-open-pujo-info" title="মন্ডল বাড়ির পুজো — ঐতিহ্য, নির্ঘণ্ট ও ফটো গ্যালারি">
-              <span class="pill-icon" aria-hidden="true">🪔</span>
-              <span class="brand-text" data-i18n="brand_title">মন্ডল বাড়ির পুজো</span>
-              <span class="badge-heritage" data-i18n="brand_heritage_badge">১৫০+ বছর</span>
-            </button>
-          </div>
-
-          <div class="header-right">
-            <!-- Language Switcher Pill -->
-            <button class="glass-pill lang-toggle-pill" id="btn-toggle-lang" title="Toggle Language (বাংলা / English)" aria-label="Change Language">
-              <span class="pill-icon">🌐</span>
-              <span id="lang-current-label">বাংলা</span>
-            </button>
-
-            <!-- Instagram Story Generator Quick Trigger -->
-            <button class="glass-pill story-nav-pill" id="btn-open-story-gen" title="Generate Aesthetic Instagram Story Card (Key I)">
-              <span class="pill-icon" aria-hidden="true">📸</span>
-              <span data-i18n="photo_story">স্টোরি কার্ড</span>
-            </button>
-
-            <!-- Official Instagram Link Pill -->
-            <a href="https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp" target="_blank" rel="noopener noreferrer" class="glass-pill insta-link-pill" title="Follow Furfura Mondal Poribar on Instagram @furfura_mondal_poribar">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-              <span>@furfura_mondal_poribar</span>
-            </a>
-
-            <!-- Interactive Soundboard Quick Triggers (Desktop / Tablet) -->
-            <div class="quick-soundboard-group">
-              <button class="icon-btn" id="btn-quick-shankha" title="Blow Sacred Shankha (শাঁখের ধ্বনি — Key S)" aria-label="Play Shankha Sound">
-                <span aria-hidden="true">🐚</span>
-                <span class="tooltip-kbd">S</span>
-              </button>
-              <button class="icon-btn" id="btn-quick-dhak" title="Play Dhak Drum Studio (ঢাকের বোল — Key D)" aria-label="Play Dhak Beat">
-                <span aria-hidden="true">🥁</span>
-                <span class="tooltip-kbd">D</span>
-              </button>
-              <button class="icon-btn" id="btn-toggle-particles" title="Toggle Falling Shiuli Flowers (শিউলি ফুল — Key F)" aria-label="Toggle Falling Flowers">
-                <span aria-hidden="true">🌸</span>
-                <span class="tooltip-kbd">F</span>
-              </button>
-            </div>
-
-            <!-- Atmosphere Vibe Selector -->
-            <div class="vibe-selector-wrapper">
-              <button class="glass-pill vibe-selector-btn" id="btn-vibe-dropdown" aria-haspopup="true" aria-expanded="false" title="Change Atmosphere Lighting">
-                <span id="current-vibe-icon" aria-hidden="true">🌅</span>
-                <span id="current-vibe-label">Bhor (Dawn)</span>
-                <span class="dropdown-chevron" aria-hidden="true">▾</span>
-              </button>
-              <div class="vibe-dropdown-menu" id="vibe-menu" role="menu">
-                <button class="vibe-item" data-vibe="early-morning" role="menuitem"><span>🌅 ভোর (Early Morning)</span></button>
-                <button class="vibe-item" data-vibe="morning" role="menuitem"><span>☀️ সকাল (Morning)</span></button>
-                <button class="vibe-item" data-vibe="afternoon" role="menuitem"><span>🌤️ দুপুর (Afternoon)</span></button>
-                <button class="vibe-item" data-vibe="evening" role="menuitem"><span>🌆 সন্ধ্যা (Evening)</span></button>
-                <button class="vibe-item" data-vibe="night" role="menuitem"><span>🏮 রাত (Night)</span></button>
-                <button class="vibe-item" data-vibe="midnight" role="menuitem"><span>✨ মধ্যরাত (Midnight)</span></button>
-                <div class="vibe-divider"></div>
-                <button class="vibe-item" data-vibe="auto" role="menuitem"><span>🔄 অটো সিঙ্ক (Sync Clock)</span></button>
-              </div>
-            </div>
-
-            <!-- Desktop Keyboard Shortcuts HUD Trigger -->
-            <button class="glass-pill shortcuts-pill" id="btn-open-shortcuts" title="View Keyboard Shortcuts (Key ?)">
-              <span class="kbd-icon" aria-hidden="true">⌨</span>
-              <span>শর্টকাট</span>
-              <kbd class="mini-kbd">?</kbd>
-            </button>
-          </div>
-        </header>
 
         <!-- MAIN HERO: CALLIGRAPHY & COUNTDOWN SYSTEM -->
         <main class="hero-container" role="main">
