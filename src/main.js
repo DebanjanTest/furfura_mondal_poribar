@@ -2998,9 +2998,6 @@ function initWelcomeModal() {
     if (selectedSound === 'yes') {
       bgAmbience.isEnabled = true;
       bgAmbience.startAmbientPlayback();
-      try {
-        audioEngine.playShankha(2.0);
-      } catch (e) {}
     } else {
       bgAmbience.isEnabled = false;
       ytAudioPlayer.setMute(true);
