@@ -63,14 +63,13 @@ class BackgroundAmbienceEngine {
         isAmbientBackground: true
       };
 
-      // Set initial volume low before starting
-      ytAudioPlayer.setVolume(2);
-      ytAudioPlayer.cueTrack(ambientTrack, 'durgaPuja');
-      ytAudioPlayer.play();
+      // Set initial volume before starting
+      ytAudioPlayer.setVolume(this.targetVolume || 18);
+      ytAudioPlayer.loadTrack(ambientTrack, 'durgaPuja', true);
       this.isPlaying = true;
 
       // Smooth volume fade-in up to lowVolume
-      this.smoothFadeIn(this.targetVolume, DEFAULT_AMBIENT_CONFIG.fadeInDurationMs);
+      this.smoothFadeIn(this.targetVolume || 18, DEFAULT_AMBIENT_CONFIG.fadeInDurationMs);
     } catch (e) {
       console.warn('Background ambient start deferred:', e);
     }

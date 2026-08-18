@@ -51,26 +51,28 @@ class YouTubeAudioPlayer {
       container = document.createElement('div');
       container.id = containerId;
       container.style.position = 'fixed';
-      container.style.top = '-9999px';
-      container.style.left = '-9999px';
-      container.style.width = '1px';
-      container.style.height = '1px';
-      container.style.opacity = '0';
+      container.style.bottom = '-600px';
+      container.style.right = '-600px';
+      container.style.width = '240px';
+      container.style.height = '180px';
+      container.style.zIndex = '-9999';
+      container.style.opacity = '0.01';
       container.style.pointerEvents = 'none';
       document.body.appendChild(container);
     }
 
     this.player = new window.YT.Player(containerId, {
-      height: '1',
-      width: '1',
+      height: '180',
+      width: '240',
       playerVars: {
+        enablejsapi: 1,
         playsinline: 1,
         controls: 0,
         disablekb: 1,
         fs: 0,
         rel: 0,
         modestbranding: 1,
-        autoplay: 0,
+        autoplay: 1,
         origin: window.location.origin
       },
       events: {
