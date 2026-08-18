@@ -1,4 +1,4 @@
-import { playlists, nativePujoData, authenticLiveDhakParts, liveDhakMeta } from './data/playlists.js';
+import { playlists, nativePujoData, authenticLiveDhakParts, liveDhakMeta, photoRiverRows, onnotaCategories, onnotaCreations } from './data/playlists.js';
 import { ytAudioPlayer } from './audio/youtubePlayer.js';
 import { audioEngine, dhakSequencer, TRADITIONAL_BOLS } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
@@ -28,6 +28,7 @@ const state = {
   activeTab: 'durgaPuja',
   isUserScrubbing: false,
   activeGalleryCategory: 'all',
+  activeOnnotaCategory: 'all',
   storyGen: {
     theme: 'early-morning',
     headline: 'pujo-asche',
@@ -49,7 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initSoundTriggers();
   initPujoInfoAndGallery();
+  initPhotoRiver();
   initGrandGallery();
+  initOnnotaSection();
   initStoryGenerator();
   initKeyboardShortcuts();
   initParticles();
@@ -697,7 +700,7 @@ function updateEqualizerAnimation() {
    ========================================================================== */
 
 function initSoundTriggers() {
-  // Quick Sound Triggers (Header & Floating Bar)
+  // Quick Sound Triggers (Header, Floating Bar & Executive Festive Bar)
   const triggerShankha = () => {
     audioEngine.playShankha(2.8);
     showShankhaHud();
@@ -705,6 +708,7 @@ function initSoundTriggers() {
 
   document.getElementById('btn-quick-shankha')?.addEventListener('click', triggerShankha);
   document.getElementById('btn-trig-shankha')?.addEventListener('click', triggerShankha);
+  document.getElementById('bar-quick-shankha')?.addEventListener('click', triggerShankha);
   document.getElementById('mobile-nav-shankha')?.addEventListener('click', triggerShankha);
 
   // Dhak Studio Modal Openers
@@ -714,6 +718,7 @@ function initSoundTriggers() {
 
   document.getElementById('btn-quick-dhak')?.addEventListener('click', openDhakModal);
   document.getElementById('btn-trig-dhak')?.addEventListener('click', openDhakModal);
+  document.getElementById('bar-quick-dhak')?.addEventListener('click', openDhakModal);
   document.getElementById('mobile-nav-dhak')?.addEventListener('click', openDhakModal);
 
   // Quick Kashor Trigger
@@ -1611,6 +1616,14 @@ function initPujoInfoAndGallery() {
     openModal('pujo-info-modal');
   });
 
+  // Executive Festive Bar modal openers
+  document.getElementById('bar-btn-pujo-info')?.addEventListener('click', () => {
+    openModal('pujo-info-modal');
+  });
+  document.getElementById('bar-quick-radio')?.addEventListener('click', () => {
+    openModal('playlists-modal');
+  });
+
   // Open Story Modal from Pujo Modal
   document.getElementById('btn-modal-open-story')?.addEventListener('click', () => {
     closeModal('pujo-info-modal');
@@ -1684,6 +1697,77 @@ function renderModalGalleryItems() {
 }
 
 /* ==========================================================================
+   PHOTO RIVER (দৃষ্টিসুখ — উৎসব ও স্মৃতিধারা) INFINITE SCROLLING SYSTEM
+   ========================================================================== */
+
+let flatRiverPhotos = [];
+
+function initPhotoRiver() {
+  flatRiverPhotos = [];
+  if (photoRiverRows && Array.isArray(photoRiverRows)) {
+    photoRiverRows.forEach((row) => {
+      if (row.photos) {
+        flatRiverPhotos.push(...row.photos);
+      }
+    });
+  }
+
+  photoRiverRows.forEach((row, rowIndex) => {
+    const trackContent = document.getElementById(`river-track-content-${rowIndex + 1}`);
+    if (!trackContent || !row.photos) return;
+
+    trackContent.innerHTML = '';
+
+    // To ensure seamless continuous infinite scrolling loop without blanks, duplicate cards
+    const itemsToRender = [...row.photos, ...row.photos];
+
+    itemsToRender.forEach((item) => {
+      const card = createRiverCardElement(item);
+      trackContent.appendChild(card);
+    });
+  });
+}
+
+function createRiverCardElement(item) {
+  const card = document.createElement('div');
+  card.className = 'river-card';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-label', item.bengaliTitle || item.title);
+
+  const likeCount = getPhotoLikeCount(item.id, item.likes || 18);
+
+  card.innerHTML = `
+    <img class="river-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" />
+    <div class="river-card-overlay">
+      <div class="river-card-top">
+        <span class="river-category-pill">${item.categoryLabel || '🌸 দর্শন'}</span>
+        <span class="river-zoom-badge" aria-hidden="true">🔍</span>
+      </div>
+      <div class="river-card-bottom">
+        <h4 class="river-card-title">${item.bengaliTitle || item.title}</h4>
+        <span class="river-card-likes">❤️ <span class="like-val">${toBengaliNumerals(likeCount)}</span> প্রণাম</span>
+      </div>
+    </div>
+  `;
+
+  card.addEventListener('click', () => {
+    const foundIndex = flatRiverPhotos.findIndex((p) => p.id === item.id);
+    const targetIdx = foundIndex !== -1 ? foundIndex : 0;
+    openGalleryLightbox(targetIdx, flatRiverPhotos);
+  });
+
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      card.click();
+    }
+  });
+
+  return card;
+}
+
+/* ==========================================================================
    GRAND HERITAGE GALLERY SHOWCASE & INTERACTIVE COMMUNITY UPLOADS
    ========================================================================== */
 
@@ -1694,7 +1778,7 @@ function initGrandGallery() {
   const scrollIndicator = document.getElementById('btn-scroll-to-gallery');
   scrollIndicator?.addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('gallery-section')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('photo-river-section')?.scrollIntoView({ behavior: 'smooth' });
   });
 
   const jumpTopBtn = document.getElementById('btn-jump-top');
@@ -1979,7 +2063,7 @@ function renderGrandGalleryGrid(isNewUpload = false) {
     // Card click -> Opens Lightbox
     card.addEventListener('click', (e) => {
       if (!e.target.closest('.gallery-like-btn')) {
-        openGalleryLightbox(index);
+        openGalleryLightbox(index, filtered);
       }
     });
 
@@ -1988,6 +2072,145 @@ function renderGrandGalleryGrid(isNewUpload = false) {
     likeBtn?.addEventListener('click', (e) => {
       e.stopPropagation();
       const updatedCount = incrementPhotoLike(item.id, item.likes || 12);
+      likeBtn.classList.add('liked');
+      const numEl = likeBtn.querySelector('.like-num');
+      if (numEl) numEl.textContent = toBengaliNumerals(updatedCount);
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+/* ==========================================================================
+   OTHERS BY ONNOTA (অন্যান্য সৃষ্টি — অন্যতা) SHOWCASE SECTION
+   ========================================================================== */
+
+function initOnnotaSection() {
+  updateOnnotaCategoryCounts();
+
+  const chips = document.querySelectorAll('#onnota-category-chips .onnota-filter-chip');
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const cat = chip.getAttribute('data-category');
+      state.activeOnnotaCategory = cat;
+      chips.forEach((c) => {
+        const isMatch = c === chip;
+        c.classList.toggle('active', isMatch);
+        c.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+      renderOnnotaGrid();
+    });
+  });
+
+  renderOnnotaGrid();
+
+  document.getElementById('btn-onnota-jump-top')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('btn-onnota-open-schedule')?.addEventListener('click', () => {
+    openModal('pujo-info-modal');
+  });
+}
+
+function updateOnnotaCategoryCounts() {
+  const counts = {
+    all: onnotaCreations.length,
+    art: 0,
+    photography: 0,
+    crafts: 0,
+    literature: 0
+  };
+
+  onnotaCreations.forEach((item) => {
+    if (item.category && counts[item.category] !== undefined) {
+      counts[item.category]++;
+    }
+  });
+
+  const countAll = document.getElementById('onnota-count-all');
+  const countArt = document.getElementById('onnota-count-art');
+  const countPhoto = document.getElementById('onnota-count-photography');
+  const countCrafts = document.getElementById('onnota-count-crafts');
+  const countLit = document.getElementById('onnota-count-literature');
+
+  if (countAll) countAll.textContent = toBengaliNumerals(counts.all);
+  if (countArt) countArt.textContent = toBengaliNumerals(counts.art);
+  if (countPhoto) countPhoto.textContent = toBengaliNumerals(counts.photography);
+  if (countCrafts) countCrafts.textContent = toBengaliNumerals(counts.crafts);
+  if (countLit) countLit.textContent = toBengaliNumerals(counts.literature);
+}
+
+function renderOnnotaGrid() {
+  const grid = document.getElementById('onnota-cards-grid');
+  if (!grid) return;
+
+  const currentCat = state.activeOnnotaCategory || 'all';
+  const filtered = currentCat === 'all'
+    ? onnotaCreations
+    : onnotaCreations.filter((item) => item.category === currentCat);
+
+  grid.innerHTML = '';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: rgba(255,255,255,0.7); font-family: var(--font-bengali-sans);">
+        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">এই বিভাগে এখনও কোনো সৃষ্টি যুক্ত হয়নি।</p>
+      </div>
+    `;
+    return;
+  }
+
+  filtered.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.className = 'onnota-card';
+    card.setAttribute('role', 'article');
+    card.setAttribute('tabindex', '0');
+
+    const likeCount = getPhotoLikeCount(item.id, item.likes || 25);
+    const isLiked = photoLikes[item.id] !== undefined;
+
+    card.innerHTML = `
+      <div class="onnota-card-img-wrap">
+        <img class="onnota-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" />
+        <span class="onnota-card-badge">${item.categoryLabel || item.category}</span>
+        ${item.tag ? `<span class="onnota-card-tag">${item.tag}</span>` : ''}
+      </div>
+      <div class="onnota-card-body">
+        <h3 class="onnota-card-title">${item.bengaliTitle || item.title}</h3>
+        <p class="onnota-card-desc">${item.desc_bn || item.desc_en || ''}</p>
+      </div>
+      <div class="onnota-card-footer">
+        <div class="onnota-card-meta">
+          <span class="onnota-card-author">👤 ${item.author || 'অন্যতা'}</span>
+          <span class="onnota-card-date">🗓️ ${item.date || 'শরৎ ২০২৬'}</span>
+        </div>
+        <button type="button" class="onnota-like-btn ${isLiked ? 'liked' : ''}" data-item-id="${item.id}" aria-label="Give Pranam Blessing">
+          <span class="like-heart">❤️</span>
+          <span class="like-num">${toBengaliNumerals(likeCount)}</span>
+          <span>প্রণাম</span>
+        </button>
+      </div>
+    `;
+
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('.onnota-like-btn')) {
+        openGalleryLightbox(index, filtered);
+      }
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('.onnota-like-btn')) {
+        e.preventDefault();
+        openGalleryLightbox(index, filtered);
+      }
+    });
+
+    const likeBtn = card.querySelector('.onnota-like-btn');
+    likeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const updatedCount = incrementPhotoLike(item.id, item.likes || 25);
       likeBtn.classList.add('liked');
       const numEl = likeBtn.querySelector('.like-num');
       if (numEl) numEl.textContent = toBengaliNumerals(updatedCount);
@@ -2031,6 +2254,8 @@ function initGalleryLightbox() {
     incrementPhotoLike(item.id, item.likes || 12);
     updateLightboxUI();
     renderGrandGalleryGrid();
+    renderOnnotaGrid();
+    initPhotoRiver();
   });
 
   downloadBtn?.addEventListener('click', (e) => {
@@ -2082,9 +2307,14 @@ function initGalleryLightbox() {
   });
 }
 
-function openGalleryLightbox(index) {
+function openGalleryLightbox(index, customList = null) {
+  if (customList && customList.length > 0) {
+    currentLightboxList = customList;
+  } else {
+    currentLightboxList = getAllGalleryPhotos();
+  }
   if (!currentLightboxList || currentLightboxList.length === 0) return;
-  currentLightboxIndex = index;
+  currentLightboxIndex = Math.max(0, Math.min(index, currentLightboxList.length - 1));
   updateLightboxUI();
   openModal('gallery-lightbox-modal');
 }
@@ -2106,10 +2336,10 @@ function updateLightboxUI() {
     imgEl.alt = item.bengaliTitle || item.title;
   }
   if (catEl) catEl.textContent = item.categoryLabel || item.category;
-  if (authorEl) authorEl.textContent = `👤 ${item.author || 'মন্ডল পরিবার'}`;
+  if (authorEl) authorEl.textContent = `👤 ${item.author || 'মন্ডল পরিবার'}${item.date ? ` • ${item.date}` : ''}`;
   if (counterEl) counterEl.textContent = `${toBengaliNumerals(currentLightboxIndex + 1)} / ${toBengaliNumerals(currentLightboxList.length)}`;
   if (titleEl) titleEl.textContent = item.bengaliTitle || item.title;
-  if (descEl) descEl.textContent = item.bengaliDesc || item.title;
+  if (descEl) descEl.textContent = item.bengaliDesc || item.desc_bn || item.desc || item.title;
 
   const count = getPhotoLikeCount(item.id, item.likes || 12);
   if (likeCountEl) likeCountEl.textContent = toBengaliNumerals(count);
