@@ -645,7 +645,7 @@ export const nativePujoData = {
       bengaliDesc: "নাটমন্দিরে ধুনুচির ধোঁয়া, মাটির প্রদীপের আলো ও কাঁসর-ঘণ্টার বোলে সন্ধ্যার মহাশক্তি আরতি।",
       author: "ফুরফুরা মণ্ডল পরিবার",
       likes: 294,
-      src: "/gallery/art_evening_aarti.webp"
+      src: "/gallery/user_dhunuchi_01.webp"
     },
     {
       id: "gal-3",
@@ -657,7 +657,7 @@ export const nativePujoData = {
       bengaliDesc: "উৎসবের আলোয় ঝলমলে বনেদি নাটমন্দির প্রাঙ্গণ ও বহু দূর-দূরান্ত থেকে আসা ভক্তদের আন্তরিক মিলনমেলা।",
       author: "মন্ডল পরিবার সংগ্রহ",
       likes: 218,
-      src: "/gallery/art_night_grandeur.webp"
+      src: "/gallery/user_dhunuchi_05.webp"
     },
     {
       id: "gal-4",
@@ -673,27 +673,27 @@ export const nativePujoData = {
     },
     {
       id: "gal-5",
-      category: "sharat",
-      categoryLabel: "শরতের আগমনী",
-      title: "Autumn Breeze & Kash Phool Vibes",
-      bengaliTitle: "শরতের কাশফুল ও নীল আকাশ",
-      desc: "White fluffy clouds under the autumn azure sky heralding the sacred homecoming festival.",
-      bengaliDesc: "ফুরফুরার মুক্ত মাঠে কাশফুলের দোলা ও শরতের নীল আকাশে মেঘের ভেলা — মা আসছেন ঘরে।",
+      category: "crafts",
+      categoryLabel: "হস্তশিল্প ও আলপনা",
+      title: "Traditional Handcrafted Rice Flour Alpana",
+      bengaliTitle: "নাটমন্দির চত্বরে সাবেকি চালের গুঁড়োর আলপনা",
+      desc: "Authentic handmade sacred floor art intricately drawn with rice flour paste across the Mondal Bari Natmandir.",
+      bengaliDesc: "শালুক, পদ্ম ও দেবী চরণের নিখুঁত হাতের টানে আঁকা মন্ডল বাড়ির ঐতিহ্যবাহী সাবেকি পিটুলি আলপনা।",
       author: "ফুরফুরা মণ্ডল পরিবার",
-      likes: 189,
-      src: "/gallery/art_afternoon_kash.webp"
+      likes: 389,
+      src: "/gallery/user_alpona.webp"
     },
     {
       id: "gal-6",
-      category: "heritage",
-      categoryLabel: "ঐতিহ্য ও পরিবার",
-      title: "Midnight Serenity in Mandap Courtyard",
-      bengaliTitle: "শান্ত স্নিগ্ধ নাটমন্দির প্রাঙ্গণ",
-      desc: "Sacred silence and starry skies before the dawn Dhak rhythms awaken the ancestral household.",
-      bengaliDesc: "নিঝুম রাতের মায়াবী পরিবেশ, ধূপের সুবাস ও শান্ত স্নিগ্ধ পুজো মণ্ডপ।",
+      category: "aarti",
+      categoryLabel: "ধুনুচি ও আরতি",
+      title: "Dhunuchi Dance in Ancestral Courtyard",
+      bengaliTitle: "নাটমন্দিরে ধুনুচি নৃত্যের উন্মাদনা",
+      desc: "Sacred incense ecstasy with twin earthen dhunuchis, rhythmic dhak beats, and traditional brass gongs.",
+      bengaliDesc: "ধুনোর গন্ধ ও কাঁসর-ঘণ্টার বোলে মন্ডল বাড়ির প্রাঙ্গণে আন্তরিক ধুনুচি নৃত্যের চিরন্তন স্মৃতি।",
       author: "মন্ডল পরিবার মহাফেজখানা",
-      likes: 242,
-      src: "/gallery/art_midnight_serenity.webp"
+      likes: 342,
+      src: "/gallery/user_dhunuchi_03.webp"
     }
   ]
 };
@@ -1109,14 +1109,14 @@ export const photoRiverRows = [
       },
       {
         id: "river-102",
-        title: "Bodhon & Sacred Invocation",
-        title_bn: "মহাষষ্ঠীর বোধন ও অধিবাস",
-        category: "protima",
-        categoryLabel: "🌸 প্রতিমা দর্শন",
-        src: "/gallery/art_morning_puja.webp",
-        desc_bn: "বিল্ববৃক্ষমূলে দেবীর বোধন ও মা দুর্গার ঘরের আঙিনায় প্রথম পা।",
+        title: "Traditional Handcrafted Rice Flour Alpana",
+        title_bn: "নাটমন্দির চত্বরে সাবেকি চালের গুঁড়োর আলপনা",
+        category: "crafts",
+        categoryLabel: "🪔 হস্তশিল্প ও আলপনা",
+        src: "/gallery/user_alpona.webp",
+        desc_bn: "শালুক, পদ্ম ও দেবী চরণের নিখুঁত হাতের টানে আঁকা মন্ডল বাড়ির ঐতিহ্যবাহী সাবেকি পিটুলি আলপনা।",
         author: "ফুরফুরা মণ্ডল পরিবার",
-        likes: 312
+        likes: 412
       },
       {
         id: "river-103",
@@ -1153,13 +1153,13 @@ export const photoRiverRows = [
       },
       {
         id: "river-106",
-        title: "Trinayana Darshan",
-        title_bn: "ত্রিনয়ন ও মায়ের দিব্য রূপ",
-        category: "protima",
-        categoryLabel: "🌸 প্রতিমা দর্শন",
-        src: "/gallery/art_evening_aarti.webp",
-        desc_bn: "মায়ের করুণাময়ী অথচ তেজস্বিনী তিনটি চোখ — সৃষ্টি, স্থিতি ও প্রলয়ের প্রতীক।",
-        author: "মন্ডল পরিবার আর্কাইভ",
+        title: "Sandhya Aarti & Incense Smoke",
+        title_bn: "ধুনোর ধোঁয়ায় সন্ধ্যা আরতি",
+        category: "aarti",
+        categoryLabel: "🔥 ধুনুচি ও আরতি",
+        src: "/gallery/user_dhunuchi_01.webp",
+        desc_bn: "নাটমন্দিরে ধুনোর সুবাসিত ধোঁয়া ও কাঁসর-ঘণ্টার বোলে সন্ধ্যার মহাশক্তি আরতি।",
+        author: "ফুরফুরা মণ্ডল পরিবার",
         likes: 512
       }
     ]
@@ -1172,69 +1172,69 @@ export const photoRiverRows = [
     photos: [
       {
         id: "river-201",
-        title: "Sandhya Aarti Smoke & Glow",
-        title_bn: "ধুনোর ধোঁয়ায় সন্ধ্যা আরতি",
+        title: "Dhunuchi Dance in Full Swing",
+        title_bn: "ধুনুচি নৃত্যের উন্মাদনাময় মুহূর্ত",
         category: "aarti",
         categoryLabel: "🔥 ধুনুচি ও আরতি",
-        src: "/gallery/art_evening_aarti.webp",
-        desc_bn: "নাটমন্দিরে ধুনোর সুবাসিত ধোঁয়া ও কাঁসর-ঘণ্টার বোলে সন্ধ্যার মহাশক্তি আরতি।",
-        author: "ফুরফুরা মণ্ডল পরিবার",
+        src: "/gallery/user_dhunuchi_03.webp",
+        desc_bn: "ঢাকের তাকডুম তাকডুম বোলে যুবক-বৃদ্ধদের একাত্ম হয়ে ধুনুচি নৃত্য।",
+        author: "মন্ডল পরিবার মহাফেজখানা",
         likes: 462
       },
       {
         id: "river-202",
-        title: "108 Deepam Sandhi Puja",
-        title_bn: "১০৮ পদ্ম ও মাটির প্রদীপ",
+        title: "Aarti Fire Glow & Devotion",
+        title_bn: "১০৮ প্রদীপ ও ধুনুচির অগ্নিশিখা",
         category: "aarti",
         categoryLabel: "🔥 ধুনুচি ও আরতি",
-        src: "/gallery/art_night_grandeur.webp",
+        src: "/gallery/user_dhunuchi_02.webp",
         desc_bn: "অষ্টমী-নবমীর মাহেন্দ্রক্ষণে ১০৮ প্রদীপের আলোর রোশনাইয়ে সন্ধিপূজা।",
-        author: "মন্ডল পরিবার মহাফেজখানা",
+        author: "ফুরফুরা মণ্ডল পরিবার",
         likes: 538
       },
       {
         id: "river-203",
-        title: "Dhunuchi Naach Frenzy",
-        title_bn: "নবমীর ধুনুচি নৃত্যের উন্মাদনা",
+        title: "Traditional Panchapradip Aarti",
+        title_bn: "পঞ্চপ্রদীপ ও ধুনুচি আরতি বন্দনা",
         category: "aarti",
         categoryLabel: "🔥 ধুনুচি ও আরতি",
-        src: "/gallery/art_evening_aarti.webp",
-        desc_bn: "ঢাকের তাকডুম তাকডুম বোলে যুবক-বৃদ্ধদের একাত্ম হয়ে ধুনুচি নৃত্য।",
+        src: "/gallery/user_dhunuchi_04.webp",
+        desc_bn: "কূলপুরোহিতের পঞ্চপ্রদীপ ঘূর্ণন ও সমবেত ভক্তবৃন্দের পুষ্পাঞ্জলি নিবেদন।",
         author: "ঐতিহ্য স্মৃতি ভাণ্ডার",
         likes: 395
       },
       {
         id: "river-204",
-        title: "Shiuli Morning Carpet",
-        title_bn: "ভোরের শিশিরভেজা শিউলিতলা",
-        category: "sharat",
-        categoryLabel: "🌾 শরতের আগমনী",
-        src: "/gallery/art_dawn_mahalaya.webp",
-        desc_bn: "ভোরের প্রথম আলোয় শিউলি ফুলের বিছানা ও বীরেন্দ্রকৃষ্ণ ভদ্রের চণ্ডীপাঠ।",
-        author: "মন্ডল পরিবার",
-        likes: 310
+        title: "Authentic Mondal Bari Alpana",
+        title_bn: "নাটমন্দিরের সাবেকি চালের গুঁড়োর আলপনা",
+        category: "crafts",
+        categoryLabel: "🪔 হস্তশিল্প ও আলপনা",
+        src: "/gallery/user_alpona.webp",
+        desc_bn: "বংশপরম্পরায় সংরক্ষিত মন্ডল বাড়ির সাবেকি পিটুলি আলপনার মননশীল রূপ।",
+        author: "ফুরফুরা মণ্ডল পরিবার",
+        likes: 420
       },
       {
         id: "river-205",
-        title: "Kash Phool Autumn Breeze",
-        title_bn: "নীল আকাশে সাদা মেঘ ও কাশফুল",
-        category: "sharat",
-        categoryLabel: "🌾 শরতের আগমনী",
-        src: "/gallery/art_afternoon_kash.webp",
-        desc_bn: "ফুরফুরার দিগন্তবিস্তৃত মাঠে কাশফুলের দোলা — বার্তা দেয় মা আসছেন ঘরে।",
-        author: "ফুরফুরা মণ্ডল পরিবার",
-        likes: 378
+        title: "Courtyard Dhunuchi Ecstasy",
+        title_bn: "নাটমন্দিরে ধুনুচি আরতি ও উল্লাস",
+        category: "aarti",
+        categoryLabel: "🔥 ধুনুচি ও আরতি",
+        src: "/gallery/user_dhunuchi_05.webp",
+        desc_bn: "ধুনোর গন্ধ ও কাঁসর-ঘণ্টার বোলে মন্ডল বাড়ির প্রাঙ্গণে আন্তরিক উৎসবের আমেজ।",
+        author: "মন্ডল পরিবার মহাফেজখানা",
+        likes: 478
       },
       {
         id: "river-206",
-        title: "Panchapradip Aarti Stuti",
-        title_bn: "পঞ্চপ্রদীপ আরতি বন্দনা",
+        title: "Festive Joy & Farewell Dance",
+        title_bn: "উৎসবের আনন্দ ও ধুনুচি অভিবাদন",
         category: "aarti",
         categoryLabel: "🔥 ধুনুচি ও আরতি",
-        src: "/gallery/art_night_grandeur.webp",
-        desc_bn: "কূলপুরোহিতের পঞ্চপ্রদীপ ঘূর্ণন ও সমবেত ভক্তবৃন্দের পুষ্পাঞ্জলি নিবেদন।",
-        author: "মন্ডল পরিবার মহাফেজখানা",
-        likes: 420
+        src: "/gallery/user_dhunuchi_06.webp",
+        desc_bn: "নবমীর রাতে সমবেত আরতি ও ঢাকের বোলে দেবীকে শেষ অভিবাদন।",
+        author: "ফুরফুরা মণ্ডল পরিবার",
+        likes: 450
       }
     ]
   },
@@ -1250,7 +1250,7 @@ export const photoRiverRows = [
         title_bn: "শতাব্দীপ্রাচীন নাটমন্দির প্রাঙ্গণ",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/art_midnight_serenity.webp",
+        src: "/gallery/user_dhunuchi_05.webp",
         desc_bn: "১৮৭০-এর দশক থেকে সংরক্ষিত মন্ডল বাড়ির স্থাপত্য ও পারিবারিক ইতিহাস।",
         author: "মন্ডল পরিবার মহাফেজখানা",
         likes: 334
@@ -1279,25 +1279,25 @@ export const photoRiverRows = [
       },
       {
         id: "river-304",
-        title: "Bonedi Pujo Reunion",
-        title_bn: "পরিবারের আন্তরিক মিলনমেলা",
+        title: "Ancestral Gathering & Aarti",
+        title_bn: "পরিবারের আন্তরিক মিলনমেলা ও আরতি",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/art_night_grandeur.webp",
+        src: "/gallery/user_dhunuchi_04.webp",
         desc_bn: "দেশ-বিদেশে ছড়িয়ে থাকা পরিবারের সদস্যদের শিকড়ে ফেরার মধুর মুহূর্ত।",
         author: "মন্ডল পরিবার আর্কাইভ",
         likes: 362
       },
       {
         id: "river-305",
-        title: "Mahaprasad Bhog Distribution",
-        title_bn: "মহাপ্রসাদ ও ভোগের আনন্দ",
-        category: "heritage",
-        categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
-        src: "/gallery/art_afternoon_kash.webp",
-        desc_bn: "শালপাতায় ভোগের খিচুড়ি, লাবড়া ও মিষ্টি মুখের চিরন্তন সাবেকি স্বাদ।",
-        author: "মন্ডল পরিবার",
-        likes: 320
+        title: "Mondal Bari Alpona Tradition",
+        title_bn: "ঐতিহ্যবাহী আলপনা শিল্প",
+        category: "crafts",
+        categoryLabel: "🪔 হস্তশিল্প ও আলপনা",
+        src: "/gallery/user_alpona.webp",
+        desc_bn: "পুজো মণ্ডপ সাজাতে পরিবারের সদস্যদের নিপুণ হাতে আঁকা সাবেকি আলপনা।",
+        author: "ফুরফুরা মণ্ডল পরিবার",
+        likes: 380
       },
       {
         id: "river-306",
@@ -1339,30 +1339,30 @@ export const onnotaCreations = [
   },
   {
     id: "on-02",
-    title: "Hooghly Riverbank Festive Twilight",
-    title_bn: "হুগলী নদীর তীরে শারদ সন্ধ্যা",
+    title: "Sandhya Aarti Smoke & Incense Light",
+    title_bn: "ধুনোর ধোঁয়ায় সন্ধ্যা আরতি — নাটমন্দির",
     category: "photography",
     categoryLabel: "📷 উৎসব আলোকচিত্র",
-    src: "/onnota/art_evening_aarti.webp",
-    desc_bn: "গঙ্গার ঘাটে সান্ধ্য আরতির আলোর ঝিলিক ও নৌকার ছায়ায় এক নিঃশব্দ উৎসবের ফ্রেম।",
-    desc_en: "Twilight reflections and sacred evening aarti lamps along the holy riverbanks.",
+    src: "/onnota/user_dhunuchi_01.webp",
+    desc_bn: "সন্ধ্যা আরতির সময় ধুনোর মেঘ ও প্রদীপের আলোর জাদুকরী ফ্রেম।",
+    desc_en: "Twilight reflections and sacred evening aarti lamps inside the heritage Natmandir.",
     author: "অন্যতা (Onnota)",
     date: "অক্টোবর ২০২৬",
-    likes: 184,
-    tag: "ল্যান্ডস্কেপ ফটো"
+    likes: 284,
+    tag: "উৎসব ফটো"
   },
   {
     id: "on-03",
-    title: "Traditional Rice Flour Alpana Motifs",
-    title_bn: "নাটমন্দির চত্বরে সাবেকি চালের গুঁড়োর আলপনা",
+    title: "Traditional Handcrafted Rice Flour Alpana",
+    title_bn: "নাটমন্দির চত্বরে সাবেকি চালের গুঁড়োর আলপনা",
     category: "crafts",
     categoryLabel: "🪔 হস্তশিল্প ও আলপনা",
-    src: "/onnota/art_morning_puja.webp",
+    src: "/onnota/user_alpona.webp",
     desc_bn: "শালুক, পদ্ম ও দেবী চরণের নিখুঁত হাতের টানে আঁকা মন্ডল বাড়ির সাবেকি পিটুলি আলপনা।",
-    desc_en: "Handmade sacred floor art using rice flour paste with lotus and conch flourishes.",
+    desc_en: "Authentic handmade sacred floor art using rice flour paste with lotus flourishes.",
     author: "অন্যতা (Onnota)",
     date: "মহাষষ্ঠী ২০২৬",
-    likes: 298,
+    likes: 398,
     tag: "ঐতিহ্য আলপনা"
   },
   {
@@ -1409,17 +1409,17 @@ export const onnotaCreations = [
   },
   {
     id: "on-07",
-    title: "Terracotta Diya & Shola Pith Ornaments",
-    title_bn: "পোড়ামাটির মঙ্গল প্রদীপ ও শোলার কাজ",
-    category: "crafts",
-    categoryLabel: "🪔 হস্তশিল্প ও আলপনা",
-    src: "/onnota/art_midnight_serenity.webp",
-    desc_bn: "মাটির প্রদীপে সাবেকি রঙের নকশা ও হাতে তৈরি ধবধবে সাদা শোলার ফুল।",
-    desc_en: "Artisanal clay lamps painted with folk patterns and delicate Shola pith carvings.",
+    title: "Panchapradip Aarti & Devotional Glow",
+    title_bn: "পঞ্চপ্রদীপ আরতি ও মঙ্গলময় দীপ্তি",
+    category: "photography",
+    categoryLabel: "📷 উৎসব আলোকচিত্র",
+    src: "/onnota/user_dhunuchi_04.webp",
+    desc_bn: "কূলপুরোহিতের পঞ্চপ্রদীপ ঘূর্ণন ও সমবেত ভক্তবৃন্দের পুষ্পাঞ্জলি নিবেদন।",
+    desc_en: "Sacred brass lamps rotating in rhythmic circles during the grand evening stuti.",
     author: "অন্যতা (Onnota)",
     date: "মহাষ্টমী ২০২৬",
-    likes: 226,
-    tag: "হস্তশিল্প"
+    likes: 326,
+    tag: "উৎসব ফটো"
   },
   {
     id: "on-08",
@@ -1437,27 +1437,27 @@ export const onnotaCreations = [
   },
   {
     id: "on-09",
-    title: "Dhunuchi Fire & Rhythm Graphic Art",
+    title: "Dhunuchi Dance Rhythm & Fury",
     title_bn: "ধুনুচির অগ্নিশিখা ও ছন্দের মেলবন্ধন",
-    category: "art",
-    categoryLabel: "🎨 চিত্রশিল্প ও অলঙ্করণ",
-    src: "/onnota/art_evening_aarti.webp",
-    desc_bn: "ধুনোর লালচে অঙ্গার ও ঢাকের উত্তাল তালের গতিময় ডিজিটাল অলঙ্করণ।",
-    desc_en: "Dynamic vector illustration illustrating the raw spiritual fury of Dhunuchi dancers.",
+    category: "photography",
+    categoryLabel: "📷 উৎসব আলোকচিত্র",
+    src: "/onnota/user_dhunuchi_03.webp",
+    desc_bn: "ধুনোর লালচে অঙ্গার ও ঢাকের উত্তাল তালে নাটমন্দিরে ধুনুচি নাচের আবেগঘন মুহূর্ত।",
+    desc_en: "Authentic photographic capture of master dhunuchi dancers in ecstatic motion.",
     author: "অন্যতা (Onnota)",
-    date: "মহাশ্বরৎ ২০২৬",
-    likes: 274,
-    tag: "গ্রাফিক আর্ট"
+    date: "মহানবমী ২০২৬",
+    likes: 474,
+    tag: "উৎসব ফটো"
   },
   {
     id: "on-10",
-    title: "Dashami Farewell Reflections",
-    title_bn: "দশমীর বিদায় — বিসর্জনের জলে প্রতিবিম্ব",
+    title: "Festive Courtyard Celebrations",
+    title_bn: "নাটমন্দিরে ধুনুচি আরতি ও উল্লাস",
     category: "photography",
     categoryLabel: "📷 উৎসব আলোকচিত্র",
-    src: "/onnota/art_hero_idol.webp",
-    desc_bn: "গঙ্গার জলে প্রতিমা বিসর্জনের শান্ত লহরী — চোখের জলে 'আসছে বছর আবার হবে'।",
-    desc_en: "A poignant photographic capture of farewell ripples during deity immersion.",
+    src: "/onnota/user_dhunuchi_05.webp",
+    desc_bn: "মন্ডল পরিবারের প্রাঙ্গণে ধুনুচি নাচ ও পরিবারের আন্তরিক উপস্থিতি।",
+    desc_en: "Devotees and family gathered together during high-energy evening arati.",
     author: "অন্যতা (Onnota)",
     date: "বিজয়া ২০২৬",
     likes: 352,
@@ -1479,17 +1479,17 @@ export const onnotaCreations = [
   },
   {
     id: "on-12",
-    title: "Resonance of the Dhak: A Cultural Essay",
-    title_bn: "ঢাকের বোল ও স্মৃতির সুর — এক সাংস্কৃতিক রূপরেখা",
-    category: "literature",
-    categoryLabel: "📜 সাহিত্য ও স্মৃতিচারণ",
-    src: "/onnota/art_night_grandeur.webp",
-    desc_bn: "এক কাঠি থেকে দুক কাঠি — ঢাকের চামড়ার প্রতিটি কম্পন কীভাবে বাঙালি মননকে জাগিয়ে তোলে।",
-    desc_en: "A comprehensive cultural essay exploring the acoustic legacy of Bengali master dhakis.",
+    title: "Joyous Festive Finale & Dhunuchi Dance",
+    title_bn: "উৎসবের আনন্দ ও বিদায় অভিবাদন",
+    category: "photography",
+    categoryLabel: "📷 উৎসব আলোকচিত্র",
+    src: "/onnota/user_dhunuchi_06.webp",
+    desc_bn: "ঢাকের চামড়ার প্রতিটি কম্পনে ধুনুচি হাতে দেবীকে প্রণতি জানানো ভক্তের নিখাদ ভক্তি।",
+    desc_en: "Poignant final salute to Maa Durga before immersion with glowing incense embers.",
     author: "অন্যতা (Onnota)",
     date: "শরৎ ২০২৬",
-    likes: 260,
-    tag: "সাংস্কৃতিক প্রবন্ধ"
+    likes: 360,
+    tag: "উৎসব ফটো"
   }
 ];
 
