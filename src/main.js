@@ -43,7 +43,23 @@ const state = {
 // Particle System Instance
 let particles = null;
 
+// Force browser to disable automatic scroll restoration so page always lands on Hero section
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
+// Immediate top scroll lock
+window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Clear any anchor hash on initial load so user starts on Hero section
+  if (window.location.hash && window.location.hash !== '#hero-section') {
+    try {
+      history.replaceState(null, '', window.location.pathname);
+    } catch (_) {}
+  }
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
   // Initialize Stored Language Preference
   try {
     const savedLang = localStorage.getItem('mondal_pujo_lang') || 'bn';
@@ -1694,7 +1710,7 @@ function initPujoInfoAndGallery() {
   // Share Puja Invitation (WhatsApp / Web Share API)
   const shareBtn = document.getElementById('btn-share-website');
   shareBtn?.addEventListener('click', async () => {
-    const shareText = `🌸 পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) • ১৫০+ বছরের ঐতিহ্য ও মিলনমেলা।
+    const shareText = `🌸 পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য ও মিলনমেলা।
 🗓️ মহালয়া: ১০ অক্টোবর | মহাষ্টমী ও সন্ধিপূজা: ১৮ অক্টোবর ২০২৬
 ✨ লাইভ কাউন্টডাউন ও আগমনী রেডিও: ${window.location.href}
 📸 Instagram: @furfura_mondal_poribar (${nativePujoData.instagramUrl})`;
@@ -2335,7 +2351,7 @@ function initGalleryLightbox() {
     const item = currentLightboxList[currentLightboxIndex];
     if (!item) return;
 
-    const shareText = `🌸 মন্ডল বাড়ির পুজো ২০২৬ (১৫০+ বছরের ঐতিহ্য): "${item.bengaliTitle || item.title}"
+    const shareText = `🌸 মন্ডল বাড়ির পুজো ২০২৬ (১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য): "${item.bengaliTitle || item.title}"
 📸 @furfura_mondal_poribar • লাইভ ফটো গ্যালারি ও আগমনী রেডিও: ${window.location.href}`;
 
     if (navigator.share) {
@@ -2473,7 +2489,7 @@ function initStoryGenerator() {
     const shareBtn = document.getElementById('btn-share-story-native');
     if (!canvas) return;
 
-    const shareText = `🌸 পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondal Poribar) • ১৫০+ বছরের ঐতিহ্য। Follow @furfura_mondal_poribar ${nativePujoData.instagramUrl}`;
+    const shareText = `🌸 পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondal Poribar) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য। Follow @furfura_mondal_poribar ${nativePujoData.instagramUrl}`;
 
     if (navigator.share && canvas.toBlob) {
       canvas.toBlob(async (blob) => {
@@ -2511,7 +2527,7 @@ function initStoryGenerator() {
 📍 Furfura Mondal Poribar Natmandir, Dankuni / Hooghly, Bengal
 ⏳ আর মাত্র ${cd.days} দিন বাকি (Maha Shasthi: 16 Oct 2026)
 
-✨ ১৫০+ বছরের ঐতিহ্য, সাবেকি একচালা ডাকের সাজ, ১০৮ পদ্মে সন্ধিপূজা ও ধুনুচি নাচ।
+✨ ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য, সাবেকি একচালা ডাকের সাজ, ১০৮ পদ্মে সন্ধিপূজা ও ধুনুচি নাচ।
 🎵 আগমনী রেডিও ও লাইভ কাউন্টডাউন দেখুন: ${window.location.href}
 
 📸 Follow on Instagram: @furfura_mondal_poribar
@@ -2597,7 +2613,7 @@ function renderStoryCanvas() {
   drawCornerMotif(width - 52, height - 52, -1, -1);
   ctx.restore();
 
-  // 5. Header Header Badge: "মন্ডল বাড়ির পুজো • ১৫০+ বছরের ঐতিহ্য"
+  // 5. Header Badge: "মন্ডল বাড়ির পুজো • ১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য"
   ctx.save();
   ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
   ctx.beginPath();
@@ -2610,7 +2626,7 @@ function renderStoryCanvas() {
   ctx.fillStyle = '#ffffff';
   ctx.font = '600 24px "Noto Sans Bengali", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('🪔 মন্ডল বাড়ির পুজো • ১৫০+ বছরের ঐতিহ্য', width / 2, 138);
+  ctx.fillText('🪔 মন্ডল বাড়ির পুজো • ১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য', width / 2, 138);
   ctx.restore();
 
   // 6. Central Sacred Maa Durga Iconography / Mandala
@@ -2647,7 +2663,7 @@ function renderStoryCanvas() {
   const headlinesMap = {
     'pujo-asche': { top: 'পুজো', bot: 'আসছে', full: 'মন্ডল বাড়ির পুজো ২০২৬' },
     'subho-saradiya': { top: 'শুভ', bot: 'শারদীয়া', full: 'মন্ডল বাড়ির দুর্গাপূজা' },
-    'maa-aschen': { top: 'মা আসছেন', bot: 'ঘরে', full: '১৫০+ বছরের ঐতিহ্য ও আনন্দ' },
+    'maa-aschen': { top: 'মা আসছেন', bot: 'ঘরে', full: '১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য ও আনন্দ' },
     'sandhi-puja': { top: '১০৮ পদ্মে', bot: 'সন্ধিপূজা', full: 'মহামিলনোৎসবে সপরিবারে আমন্ত্রণ' }
   };
 
@@ -3031,6 +3047,13 @@ function initWelcomeModal() {
         setTimeout(() => {
           welcomeOverlay.remove();
         }, 400);
+      }
+
+      // 4. Always ensure viewport starts at the top of Hero section
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      const heroEl = document.getElementById('hero-section');
+      if (heroEl) {
+        heroEl.scrollIntoView({ behavior: 'instant', block: 'start' });
       }
     }
   };

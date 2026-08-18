@@ -5,7 +5,7 @@ export const translations = {
   bn: {
     // Brand & Island
     "brand_title": "মন্ডল বাড়ির পুজো",
-    "brand_heritage_badge": "১৫০+ বছর",
+    "brand_heritage_badge": "১৯৯৭ থেকে",
     "live_visitors": "লাইভ দর্শনার্থী",
     "quick_hub": "কুইক হাব",
     "shankha_sound": "শাঁখের ধ্বনি",
@@ -31,7 +31,7 @@ export const translations = {
     // Others by Onnota
     "onnota_badge": "✨ অন্যান্য সৃষ্টি",
     "onnota_title": "অন্যান্য সৃষ্টি — অন্যতা (Onnota)",
-    "onnota_subtitle": "শারদ সাহিত্যের নস্টালজিয়া, আলোকচিত্র, সাবেকি আলপনা ও ডিজিটাল ক্যানভাসের এক অপূর্ব শৈল্পিক সংকলন",
+    "onnota_subtitle": "শারদ সাহিত্যের নস্টালজিয়া, আলোকচিত্র, সাবেকি আলপনা ও ডিজিটাল ক্যানভাস",
     "onnota_filter_all": "সমস্ত সৃষ্টি",
     "onnota_filter_art": "🎨 চিত্রশিল্প",
     "onnota_filter_photography": "📷 আলোকচিত্র",
@@ -41,7 +41,7 @@ export const translations = {
     // Heritage Gallery
     "gallery_badge": "🏛️ ঐতিহ্যবাহী মহাফেজখানা",
     "gallery_title": "ঐতিহ্য ফটো গ্যালারি ও উৎসব স্মৃতি",
-    "gallery_subtitle": "১৮৭০-এর দশক থেকে সংরক্ষিত মন্ডল বাড়ির সাবেকি প্রতিমা দর্শন, সন্ধিপূজা ও পারিবারিক উৎসবের ঐতিহাসিক অ্যালবাম",
+    "gallery_subtitle": "১৯৯৭ সাল থেকে সংরক্ষিত মন্ডল বাড়ির সাবেকি প্রতিমা দর্শন, সন্ধিপূজা ও পারিবারিক উৎসবের ঐতিহাসিক অ্যালবাম",
     "gallery_filter_all": "সমস্ত ছবি",
     "gallery_filter_protima": "🌸 প্রতিমা দর্শন",
     "gallery_filter_aarti": "🔥 ধুনুচি ও আরতি",
@@ -59,7 +59,7 @@ export const translations = {
     // Welcome Onboarding Modal
     "welcome_badge": "🪔 শারদ অভিবাদন",
     "welcome_title": "মন্ডল বাড়ির পুজোয় আপনাকে স্বাগত",
-    "welcome_subtitle": "ফুরফুরা মণ্ডল পরিবারের ১৫০+ বছরের ঐতিহ্যবাহী শারদোৎসবের ডিজিটাল প্রাঙ্গণে প্রবেশ করুন",
+    "welcome_subtitle": "ফুরফুরা মণ্ডল পরিবারের ১৯৯৭ সাল থেকে অনুষ্ঠিত ঐতিহ্যবাহী শারদোৎসবের ডিজিটাল প্রাঙ্গণে প্রবেশ করুন",
     "welcome_lang_label": "🌐 আপনার পছন্দের ভাষা নির্বাচন করুন (Select Language)",
     "welcome_sound_label": "🎶 আবহ সঙ্গীত ও ঢাকের আওয়াজ (Ambient Sound & Dhak)",
     "welcome_sound_yes": "🔊 হ্যাঁ, আবহ সঙ্গীত ও ঢাকের আওয়াজ চালান (Play Ambient Sound)",
@@ -69,7 +69,7 @@ export const translations = {
   en: {
     // Brand & Island
     "brand_title": "Mondal Barir Pujo",
-    "brand_heritage_badge": "150+ Years",
+    "brand_heritage_badge": "Est. 1997",
     "live_visitors": "Live Visitors",
     "quick_hub": "Quick Hub",
     "shankha_sound": "Sacred Shankha",
@@ -84,7 +84,7 @@ export const translations = {
     "hero_hours": "Hours",
     "hero_minutes": "Mins",
     "hero_seconds": "Secs",
-    "hero_quote": "\"The resonance of ancient gongs and sacred mantras herald the homecoming of Maa Durga.\"",
+    "hero_quote": "\"The resonance of sacred drums and mantras herald the homecoming of Maa Durga.\"",
     "hero_scroll_hint": "Scroll down to begin your festive walkthrough",
 
     // Photo River
@@ -105,7 +105,7 @@ export const translations = {
     // Heritage Gallery
     "gallery_badge": "🏛️ Ancestral Archives",
     "gallery_title": "Heritage Photo Gallery & Festive Memories",
-    "gallery_subtitle": "Preserved photographic chronicle of Mondal Bari traditional idol darshan, Sandhi Puja, and family homecoming since the 1870s",
+    "gallery_subtitle": "Preserved photographic chronicle of Mondal Bari traditional idol darshan, Sandhi Puja, and family homecoming since 1997",
     "gallery_filter_all": "All Photos",
     "gallery_filter_protima": "🌸 Divine Darshan",
     "gallery_filter_aarti": "🔥 Dhunuchi & Aarti",
@@ -123,7 +123,7 @@ export const translations = {
     // Welcome Onboarding Modal
     "welcome_badge": "🪔 Festive Greetings",
     "welcome_title": "Welcome to Mondal Barir Pujo",
-    "welcome_subtitle": "Enter the 150+ years ancestral Durga Puja digital celebration of the Furfura Mondal Family",
+    "welcome_subtitle": "Enter the traditional Durga Puja digital celebration of the Furfura Mondal Family, celebrated since 1997",
     "welcome_lang_label": "🌐 Select Your Preferred Language",
     "welcome_sound_label": "🎶 Background Ambient Sound & Dhak Rhythms",
     "welcome_sound_yes": "🔊 Yes, Play Background Ambient & Dhak (Smooth Low Volume)",

@@ -548,15 +548,15 @@ export const nativePujoData = {
   pujoName: "মন্ডল বাড়ির পুজো / Furfura Mondal Poribar",
   bengaliName: "মন্ডল বাড়ির পুজো (ফুরফুরা মণ্ডল পরিবার)",
   englishName: "Furfura Mondal Poribar Pujo",
-  tagline: "Celebrating 150+ Years of Bonedi Heritage, Devotion & Homecoming",
-  bengaliTagline: "১৫০+ বছরের ঐতিহ্য, সাবেকি রীতিনীতি ও আন্তরিক মিলনোৎসব",
+  tagline: "Celebrating 30th Year of Heritage & Devotion (Est. 1997)",
+  bengaliTagline: "১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য, সাবেকি রীতিনীতি ও আন্তরিক মিলনোৎসব",
   instagramHandle: "@furfura_mondal_poribar",
   instagramUrl: "https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp",
   location: "Furfura Mondal Poribar Natmandir, Dankuni / Hooghly, Bengal",
   history: {
     title: "মন্ডল বাড়ির পুজোর ঐতিহ্য ও ইতিহাস",
-    subtitle: "150+ Years of Heritage & Ancestral Devotion",
-    desc: "মন্ডল বাড়ির পুজো শুধুমাত্র একটি উৎসব নয়, এটি আমাদের পারিবারিক ভালোবাসা, শিকড় ও শতাব্দীপ্রাচীন সংস্কৃতির অমলিন মেলবন্ধন। ১৮৭০-এর দশক থেকে নিরবচ্ছিন্নভাবে উদযাপিত হয়ে আসা এই পুজোয় আজও সংরক্ষিত রয়েছে প্রাচীন বনেদি প্রথা। সাবেকি একচালা ডাকের সাজের প্রতিমা, কূলপুরোহিতের কণ্ঠে বিশুদ্ধ চণ্ডীপাঠ, ১০৮ পদ্ম ও মাটির প্রদীপে সন্ধিপূজা, আর নাটমন্দির কাঁপানো ঐতিহ্যবাহী ঢাকের বোলে প্রতিবছর ঘরে ফিরে আসেন ঘরের মেয়ে মা দুর্গা।",
+    subtitle: "30th Year of Heritage & Ancestral Devotion • Est. 1997",
+    desc: "মন্ডল বাড়ির পুজো শুধুমাত্র একটি উৎসব নয়, এটি আমাদের পারিবারিক ভালোবাসা, শিকড় ও সনাতন সংস্কৃতির অমলিন মেলবন্ধন। ১৯৯৭ সাল থেকে নিরবচ্ছিন্নভাবে উদযাপিত হয়ে আসা এই পুজোয় আজও সংরক্ষিত রয়েছে নিষ্ঠাপূর্ণ সাবেকি প্রথা। সাবেকি একচালা ডাকের সাজের প্রতিমা, কূলপুরোহিতের কণ্ঠে বিশুদ্ধ চণ্ডীপাঠ, ১০৮ পদ্ম ও মাটির প্রদীপে সন্ধিপূজা, আর নাটমন্দির কাঁপানো ঐতিহ্যবাহী ঢাকের বোলে প্রতিবছর ঘরে ফিরে আসেন ঘরের মেয়ে মা দুর্গা।",
     features: [
       "ঐতিহ্যবাহী সাবেকি একচালা ডাকের সাজের প্রতিমা",
       "সন্ধিপূজায় ১০৮ পদ্ম ও ১০৮ মাটির প্রদীপ নিবেদন",
@@ -617,8 +617,8 @@ export const nativePujoData = {
   ],
   highlights: [
     {
-      title: "১৫০+ বছরের বনেদি ঐতিহ্য (150+ Years Legacy)",
-      desc: "সাবেকি একচালা শোলার ডাকের সাজের প্রতিমা ও বংশপরম্পরায় রক্ষিত বৈদিক পূজা আচার।"
+      title: "১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য (Est. 1997 Legacy)",
+      desc: "সাবেকি একচালা শোলার ডাকের সাজের প্রতিমা ও নিষ্ঠার সাথে রক্ষিত বৈদিক পূজা আচার।"
     },
     {
       title: "সন্ধিপূজা ও ১০৮ পদ্ম নিবেদন (108 Lotuses Sandhi Puja)",
@@ -648,8 +648,8 @@ export const nativePujoData = {
       categoryLabel: "প্রতিমা ও বরণ",
       title: "Mondal Bari Traditional Ekchala Protima",
       bengaliTitle: "সাবেকি একচালা ডাকের সাজে মা দুর্গা",
-      desc: "Sacred divine Darshan with traditional clay craftsmanship, Sholar Daak ornaments, and 150+ years ancestral devotion.",
-      bengaliDesc: "১৮৭০-এর দশক থেকে বংশপরম্পরায় পূজিত সাবেকি একচালা ডাকের সাজের প্রতিমার দিব্য দর্শন।",
+      desc: "Sacred divine Darshan with traditional clay craftsmanship, Sholar Daak ornaments, and ancestral devotion since 1997.",
+      bengaliDesc: "১৯৯৭ সাল থেকে নিষ্ঠার সাথে পূজিত সাবেকি একচালা ডাকের সাজের প্রতিমার দিব্য দর্শন।",
       author: "মন্ডল পরিবার মহাফেজখানা",
       likes: 356,
       src: "/gallery/art_hero_idol.webp"
@@ -1122,7 +1122,7 @@ export const photoRiverRows = [
         category: "protima",
         categoryLabel: "🌸 প্রতিমা দর্শন",
         src: "/gallery/art_hero_idol.webp",
-        desc_bn: "ফুরফুরা মন্ডল পরিবারের ১৫০+ বছরের সাবেকি একচালা প্রতিমার স্বর্ণাভ দিব্য দর্শন।",
+        desc_bn: "ফুরফুরা মন্ডল পরিবারের ১৯৯৭ সাল থেকে পূজিত সাবেকি একচালা প্রতিমার স্বর্ণাভ দিব্য দর্শন।",
         author: "মন্ডল পরিবার মহাফেজখানা",
         likes: 428
       },
@@ -1266,11 +1266,11 @@ export const photoRiverRows = [
       {
         id: "river-301",
         title: "Heritage Natmandir Courtyard",
-        title_bn: "শতাব্দীপ্রাচীন নাটমন্দির প্রাঙ্গণ",
+        title_bn: "ঐতিহ্যবাহী নাটমন্দির প্রাঙ্গণ",
         category: "heritage",
         categoryLabel: "🏛️ ঐতিহ্য ও স্মৃতি",
         src: "/gallery/user_dhunuchi_05.webp",
-        desc_bn: "১৮৭০-এর দশক থেকে সংরক্ষিত মন্ডল বাড়ির স্থাপত্য ও পারিবারিক ইতিহাস।",
+        desc_bn: "১৯৯৭ সাল থেকে সংরক্ষিত মন্ডল বাড়ির পূজার ঐতিহ্য ও পারিবারিক ইতিহাস।",
         author: "মন্ডল পরিবার মহাফেজখানা",
         likes: 334
       },
