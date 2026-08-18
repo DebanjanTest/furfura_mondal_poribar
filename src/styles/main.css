@@ -131,8 +131,10 @@
 
 html, body {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
   background-color: var(--obsidian-deep);
   color: var(--text-primary);
   font-family: var(--font-sans);
@@ -279,53 +281,84 @@ button {
   padding-top: max(8px, env(safe-area-inset-top, 0px));
 }
 
-/* Hero Scroll Down Indicator */
+/* Hero Scroll Down Cue */
 .hero-scroll-indicator {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
   text-decoration: none;
-  margin-bottom: 6.5rem;
+  margin-bottom: 6.2rem;
   cursor: pointer;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: all var(--transition-fast);
   z-index: 15;
   user-select: none;
+  opacity: 0.88;
 }
 
 .hero-scroll-indicator:hover {
-  transform: translateY(3px);
+  opacity: 1;
+  transform: translateY(4px);
 }
 
 .hero-scroll-indicator:active {
   transform: translateY(6px) scale(0.97);
 }
 
-.scroll-badge {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: rgba(255, 235, 200, 0.95);
-  background: rgba(13, 17, 28, 0.78);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 207, 64, 0.38);
-  padding: 0.42rem 1.05rem;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 14px rgba(255, 207, 64, 0.16);
-  letter-spacing: 0.02em;
-  transition: all 0.25s ease;
+.scroll-mouse-icon {
+  width: 20px;
+  height: 32px;
+  border: 1.5px solid rgba(255, 207, 64, 0.6);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+  background: rgba(13, 17, 28, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 207, 64, 0.18);
 }
 
-.hero-scroll-indicator:hover .scroll-badge {
+.scroll-wheel-dot {
+  width: 3.5px;
+  height: 6.5px;
+  background: var(--heritage-gold);
+  border-radius: 2px;
+  animation: mouseWheelScroll 1.6s infinite ease-in-out;
+}
+
+@keyframes mouseWheelScroll {
+  0% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+.scroll-prompt-text {
+  font-family: var(--font-bengali-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 235, 200, 0.9);
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  background: rgba(13, 17, 28, 0.65);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 207, 64, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all var(--transition-fast);
+}
+
+.hero-scroll-indicator:hover .scroll-prompt-text {
   border-color: var(--heritage-gold);
   color: var(--heritage-gold);
-  background: rgba(20, 26, 42, 0.92);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.8), 0 0 22px rgba(255, 207, 64, 0.35);
+  background: rgba(20, 26, 42, 0.9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 14px rgba(255, 207, 64, 0.3);
 }
 
 .scroll-chevron-bounce {
-  font-size: 1.25rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--heritage-gold);
   animation: scrollChevronBounce 1.8s infinite ease-in-out;
@@ -334,7 +367,7 @@ button {
 
 @keyframes scrollChevronBounce {
   0%, 100% { transform: translateY(0); opacity: 0.65; }
-  50% { transform: translateY(6px); opacity: 1; }
+  50% { transform: translateY(4px); opacity: 1; }
 }
 
 /* ==========================================================================
