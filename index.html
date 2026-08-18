@@ -29,8 +29,8 @@
     <link rel="stylesheet" href="/src/styles/main.css" />
 
     <!-- Critical LCP Hero Image Preload with High Fetch Priority -->
-    <link rel="preload" as="image" href="/bg/morning-1920.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp" />
-    <link rel="preload" as="image" href="/bg-mobile/morning-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp" />
+    <link rel="preload" as="image" href="/bg/mondal-bari-hero.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp" />
+    <link rel="preload" as="image" href="/bg-mobile/mondal-bari-hero-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp" />
   </head>
   <body>
     <div id="app" class="app-wrapper">
@@ -40,34 +40,9 @@
            ========================================== -->
       <div class="background-container" id="bg-container">
         <picture>
-          <source media="(max-width: 768px)" srcset="/bg-mobile/morning-mobile.webp" type="image/webp" />
-          <source srcset="/bg/morning-1920.webp" type="image/webp" />
-          <img id="bg-morning" class="bg-layer active" src="/bg/morning-1920.webp" alt="Morning Puja Atmosphere — Mondal Bari Durga Puja" fetchpriority="high" decoding="sync" />
-        </picture>
-        <picture>
-          <source media="(max-width: 768px)" srcset="/bg-mobile/early-morning-mobile.webp" type="image/webp" />
-          <source srcset="/bg/early-morning-1920.webp" type="image/webp" />
-          <img id="bg-early-morning" class="bg-layer" src="/bg/early-morning-1920.webp" alt="Early Morning Puja Atmosphere" loading="lazy" fetchpriority="low" decoding="async" />
-        </picture>
-        <picture>
-          <source media="(max-width: 768px)" srcset="/bg-mobile/afternoon-mobile.webp" type="image/webp" />
-          <source srcset="/bg/afternoon-1920.webp" type="image/webp" />
-          <img id="bg-afternoon" class="bg-layer" src="/bg/afternoon-1920.webp" alt="Afternoon Autumn Atmosphere" loading="lazy" fetchpriority="low" decoding="async" />
-        </picture>
-        <picture>
-          <source media="(max-width: 768px)" srcset="/bg-mobile/evening-mobile.webp" type="image/webp" />
-          <source srcset="/bg/evening-1920.webp" type="image/webp" />
-          <img id="bg-evening" class="bg-layer" src="/bg/evening-1920.webp" alt="Evening Sandhya Aarti Atmosphere" loading="lazy" fetchpriority="low" decoding="async" />
-        </picture>
-        <picture>
-          <source media="(max-width: 768px)" srcset="/bg-mobile/night-mobile.webp" type="image/webp" />
-          <source srcset="/bg/night-1920.webp" type="image/webp" />
-          <img id="bg-night" class="bg-layer" src="/bg/night-1920.webp" alt="Festive Night Atmosphere" loading="lazy" fetchpriority="low" decoding="async" />
-        </picture>
-        <picture>
-          <source media="(max-width: 768px)" srcset="/bg-mobile/midnight-mobile.webp" type="image/webp" />
-          <source srcset="/bg/midnight-1920.webp" type="image/webp" />
-          <img id="bg-midnight" class="bg-layer" src="/bg/midnight-1920.webp" alt="Midnight Serenity Atmosphere" loading="lazy" fetchpriority="low" decoding="async" />
+          <source media="(max-width: 768px)" srcset="/bg-mobile/mondal-bari-hero-mobile.webp" type="image/webp" />
+          <source srcset="/bg/mondal-bari-hero.webp" type="image/webp" />
+          <img id="bg-mondal-hero" class="bg-layer active" src="/bg/mondal-bari-hero.webp" alt="Mondal Bari Durga Puja 2026 Signature Background" fetchpriority="high" decoding="sync" />
         </picture>
 
         <!-- Ambient Cinematic Lighting & Canvas Particle Overlay -->

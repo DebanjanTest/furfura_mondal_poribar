@@ -117,7 +117,7 @@ function updateAtmosphere() {
   const allBgs = document.querySelectorAll('.bg-layer');
   allBgs.forEach((bg) => bg.classList.remove('active'));
 
-  const targetBg = document.getElementById(`bg-${effectiveTime}`);
+  const targetBg = document.getElementById(`bg-${effectiveTime}`) || document.getElementById('bg-mondal-hero') || allBgs[0];
   if (targetBg) {
     targetBg.classList.add('active');
   }
