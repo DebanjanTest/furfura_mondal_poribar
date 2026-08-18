@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initModals();
   initSoundTriggers();
   initPujoInfoAndGallery();
+  initGrandGallery();
   initStoryGenerator();
   initKeyboardShortcuts();
   initParticles();
@@ -236,6 +237,12 @@ function initDynamicIsland() {
     island?.classList.remove('drawer-open');
   });
 
+  document.getElementById('island-quick-gallery')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    island?.classList.remove('drawer-open');
+    document.getElementById('gallery-section')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
   document.getElementById('island-quick-heritage')?.addEventListener('click', (e) => {
     e.stopPropagation();
     openModal('pujo-info-modal');
@@ -255,7 +262,7 @@ function initDynamicIsland() {
 
   // Close island drawer when tapping outside
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('#mobile-dynamic-island-container')) {
+    if (!e.target.closest('#universal-dynamic-island-container')) {
       island?.classList.remove('drawer-open');
     }
   });
@@ -1472,11 +1479,75 @@ function showShankhaHud() {
 }
 
 /* ==========================================================================
-   5. MONDAL BARIR PUJO HERITAGE, SCHEDULE & CATEGORIZED GALLERY
+   5. MONDAL BARIR PUJO HERITAGE, SCHEDULE & GRAND PHOTO ARCHIVE
    ========================================================================== */
 
+const STORAGE_KEYS = {
+  COMMUNITY_PHOTOS: 'mondal_bari_community_photos',
+  PHOTO_LIKES: 'mondal_bari_photo_likes'
+};
+
+let communityPhotos = [];
+let photoLikes = {};
+let currentLightboxIndex = 0;
+let currentLightboxList = [];
+let selectedUploadFiles = [];
+
+function loadStoredGalleryData() {
+  try {
+    const rawPhotos = localStorage.getItem(STORAGE_KEYS.COMMUNITY_PHOTOS);
+    communityPhotos = rawPhotos ? JSON.parse(rawPhotos) : [];
+  } catch (e) {
+    console.warn('Failed to load community photos from localStorage:', e);
+    communityPhotos = [];
+  }
+
+  try {
+    const rawLikes = localStorage.getItem(STORAGE_KEYS.PHOTO_LIKES);
+    photoLikes = rawLikes ? JSON.parse(rawLikes) : {};
+  } catch (e) {
+    console.warn('Failed to load photo likes from localStorage:', e);
+    photoLikes = {};
+  }
+}
+
+function saveCommunityPhotos() {
+  try {
+    localStorage.setItem(STORAGE_KEYS.COMMUNITY_PHOTOS, JSON.stringify(communityPhotos));
+  } catch (e) {
+    console.warn('Failed to save community photos to localStorage:', e);
+  }
+}
+
+function savePhotoLikes() {
+  try {
+    localStorage.setItem(STORAGE_KEYS.PHOTO_LIKES, JSON.stringify(photoLikes));
+  } catch (e) {
+    console.warn('Failed to save photo likes to localStorage:', e);
+  }
+}
+
+function getPhotoLikeCount(photoId, defaultCount = 0) {
+  if (photoLikes[photoId] !== undefined) {
+    return photoLikes[photoId];
+  }
+  return defaultCount;
+}
+
+function incrementPhotoLike(photoId, defaultCount = 0) {
+  const current = getPhotoLikeCount(photoId, defaultCount);
+  photoLikes[photoId] = current + 1;
+  savePhotoLikes();
+  return photoLikes[photoId];
+}
+
+function getAllGalleryPhotos() {
+  const nativeList = nativePujoData.gallery || [];
+  return [...communityPhotos, ...nativeList];
+}
+
 function initPujoInfoAndGallery() {
-  // 1. Render 2026 Schedule Timeline
+  // 1. Render 2026 Schedule Timeline in Modal
   const timelineContainer = document.getElementById('pujo-timeline-list');
   if (timelineContainer && nativePujoData.dates2026) {
     timelineContainer.innerHTML = '';
@@ -1495,7 +1566,7 @@ function initPujoInfoAndGallery() {
     });
   }
 
-  // 2. Render Heritage Highlights
+  // 2. Render Heritage Highlights in Modal
   const highlightsContainer = document.getElementById('pujo-highlights-grid');
   if (highlightsContainer && nativePujoData.highlights) {
     highlightsContainer.innerHTML = '';
@@ -1510,7 +1581,7 @@ function initPujoInfoAndGallery() {
     });
   }
 
-  // 3. Render Gallery Category Filter Tabs
+  // 3. Render Modal Gallery Category Filter Tabs
   const catTabsContainer = document.getElementById('gallery-category-tabs');
   if (catTabsContainer && nativePujoData.galleryCategories) {
     catTabsContainer.innerHTML = '';
@@ -1523,14 +1594,14 @@ function initPujoInfoAndGallery() {
         state.activeGalleryCategory = cat.id;
         document.querySelectorAll('.gallery-cat-btn').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
-        renderGalleryItems();
+        renderModalGalleryItems();
       });
       catTabsContainer.appendChild(btn);
     });
   }
 
-  // 4. Render Gallery Items
-  renderGalleryItems();
+  // 4. Render Modal Gallery Items
+  renderModalGalleryItems();
 
   // Open Mondal Barir Pujo Modal
   document.getElementById('btn-open-pujo-info')?.addEventListener('click', () => {
@@ -1563,7 +1634,6 @@ function initPujoInfoAndGallery() {
           url: window.location.href
         });
       } catch (e) {
-        // Fallback to clipboard
         copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণ লিংক কপি হয়েছে!');
       }
     } else {
@@ -1572,20 +1642,21 @@ function initPujoInfoAndGallery() {
   });
 }
 
-function renderGalleryItems() {
+function renderModalGalleryItems() {
   const grid = document.getElementById('pujo-gallery-grid');
   if (!grid) return;
 
   grid.innerHTML = '';
+  const allPhotos = getAllGalleryPhotos();
   const filtered = state.activeGalleryCategory === 'all'
-    ? nativePujoData.gallery
-    : nativePujoData.gallery.filter((g) => g.category === state.activeGalleryCategory);
+    ? allPhotos
+    : allPhotos.filter((g) => g.category === state.activeGalleryCategory);
 
   filtered.forEach((item) => {
     const card = document.createElement('div');
     card.className = 'gallery-card';
     card.innerHTML = `
-      <img class="gallery-img" src="${item.src}" alt="${item.title}" loading="lazy" />
+      <img class="gallery-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" />
       <div class="gallery-overlay">
         <span class="gallery-tag">${item.categoryLabel || item.category}</span>
         <span class="gallery-title">${item.bengaliTitle || item.title}</span>
@@ -1593,7 +1664,6 @@ function renderGalleryItems() {
     `;
 
     card.addEventListener('click', () => {
-      // Dynamically switch atmospheric lighting
       const vibeMap = {
         'gal-1': 'morning',
         'gal-2': 'evening',
@@ -1611,6 +1681,438 @@ function renderGalleryItems() {
 
     grid.appendChild(card);
   });
+}
+
+/* ==========================================================================
+   GRAND HERITAGE GALLERY SHOWCASE & INTERACTIVE COMMUNITY UPLOADS
+   ========================================================================== */
+
+function initGrandGallery() {
+  loadStoredGalleryData();
+
+  // 1. Scroll-To-Gallery & Jump-To-Top Smooth Navigation
+  const scrollIndicator = document.getElementById('btn-scroll-to-gallery');
+  scrollIndicator?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('gallery-section')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  const jumpTopBtn = document.getElementById('btn-jump-top');
+  jumpTopBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Footer schedule button
+  document.getElementById('btn-footer-open-schedule')?.addEventListener('click', () => {
+    openModal('pujo-info-modal');
+  });
+
+  // 2. Category Filter Chips Bar
+  const categoryChips = document.querySelectorAll('#gallery-main-category-chips .gallery-filter-chip');
+  categoryChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const catId = chip.getAttribute('data-category');
+      state.activeGalleryCategory = catId;
+      categoryChips.forEach((c) => {
+        const isSelected = c === chip;
+        c.classList.toggle('active', isSelected);
+        c.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+      });
+      renderGrandGalleryGrid();
+    });
+  });
+
+  // 3. Upload Widget Toggle
+  const toggleUploadBtn = document.getElementById('btn-toggle-upload');
+  const uploadWidget = document.getElementById('photo-upload-widget');
+  const closeUploadCard = document.getElementById('btn-close-upload-card');
+
+  const setUploadWidgetVisibility = (show) => {
+    if (uploadWidget) {
+      uploadWidget.style.display = show ? 'block' : 'none';
+      toggleUploadBtn?.setAttribute('aria-expanded', show ? 'true' : 'false');
+    }
+  };
+
+  toggleUploadBtn?.addEventListener('click', () => {
+    const isVisible = uploadWidget?.style.display === 'block';
+    setUploadWidgetVisibility(!isVisible);
+  });
+
+  closeUploadCard?.addEventListener('click', () => {
+    setUploadWidgetVisibility(false);
+  });
+
+  // 4. Drag & Drop and File Picker Handling
+  const dropzone = document.getElementById('gallery-dropzone');
+  const fileInput = document.getElementById('gallery-file-input');
+  const browseBtn = document.getElementById('btn-browse-files');
+  const previewsContainer = document.getElementById('dropzone-previews');
+  const idleContent = document.getElementById('dropzone-idle-content');
+
+  browseBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fileInput?.click();
+  });
+
+  dropzone?.addEventListener('click', (e) => {
+    if (!e.target.closest('.preview-remove-btn')) {
+      fileInput?.click();
+    }
+  });
+
+  ['dragenter', 'dragover'].forEach((eventName) => {
+    dropzone?.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add('dragover');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach((eventName) => {
+    dropzone?.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove('dragover');
+    });
+  });
+
+  dropzone?.addEventListener('drop', (e) => {
+    const files = e.dataTransfer?.files;
+    if (files && files.length > 0) {
+      handleSelectedFiles(files);
+    }
+  });
+
+  fileInput?.addEventListener('change', (e) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      handleSelectedFiles(files);
+    }
+  });
+
+  function handleSelectedFiles(files) {
+    Array.from(files).forEach((file) => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        selectedUploadFiles.push({
+          dataUrl: event.target.result,
+          name: file.name
+        });
+        updateDropzonePreviews();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function updateDropzonePreviews() {
+    if (!previewsContainer || !idleContent) return;
+    if (selectedUploadFiles.length === 0) {
+      previewsContainer.style.display = 'none';
+      idleContent.style.display = 'flex';
+      return;
+    }
+
+    idleContent.style.display = 'none';
+    previewsContainer.style.display = 'flex';
+    previewsContainer.innerHTML = '';
+
+    selectedUploadFiles.forEach((item, index) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'preview-thumb-card';
+      thumb.innerHTML = `
+        <img src="${item.dataUrl}" alt="Preview" />
+        <button type="button" class="preview-remove-btn" data-index="${index}" title="মুছে ফেলুন">✕</button>
+      `;
+
+      thumb.querySelector('.preview-remove-btn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectedUploadFiles.splice(index, 1);
+        updateDropzonePreviews();
+      });
+
+      previewsContainer.appendChild(thumb);
+    });
+  }
+
+  // 5. Submit Upload Button
+  const submitUploadBtn = document.getElementById('btn-submit-photo-upload');
+  const captionInput = document.getElementById('upload-caption-input');
+  const authorInput = document.getElementById('upload-author-input');
+  const categorySelect = document.getElementById('upload-category-select');
+  const resetUploadBtn = document.getElementById('btn-clear-upload-form');
+
+  const resetUploadForm = () => {
+    selectedUploadFiles = [];
+    if (fileInput) fileInput.value = '';
+    if (captionInput) captionInput.value = '';
+    if (authorInput) authorInput.value = '';
+    if (categorySelect) categorySelect.value = 'community';
+    updateDropzonePreviews();
+  };
+
+  resetUploadBtn?.addEventListener('click', resetUploadForm);
+
+  submitUploadBtn?.addEventListener('click', () => {
+    if (selectedUploadFiles.length === 0) {
+      alert('অনুগ্রহ করে অন্তত একটি ছবি নির্বাচন করুন!');
+      return;
+    }
+
+    const caption = captionInput?.value.trim() || 'মন্ডল বাড়ির পূজা স্মৃতি';
+    const author = authorInput?.value.trim() || 'ভক্ত ও দর্শনার্থী';
+    const category = categorySelect?.value || 'community';
+
+    const categoryNames = {
+      protima: '🌸 প্রতিমা ও বরণ',
+      aarti: '🔥 ধুনুচি ও আরতি',
+      heritage: '🏛️ ঐতিহ্য ও পরিবার',
+      sharat: '🌾 শরতের আগমনী',
+      community: '📸 ভক্তদের স্মৃতি'
+    };
+
+    selectedUploadFiles.forEach((fileObj) => {
+      const newPhoto = {
+        id: 'user-photo-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+        src: fileObj.dataUrl,
+        title: caption,
+        bengaliTitle: caption,
+        bengaliDesc: `তোলা: ${author} • মন্ডল বাড়ির পুজো স্মৃতি`,
+        category: category,
+        categoryLabel: categoryNames[category] || '📸 ভক্তদের স্মৃতি',
+        author: author,
+        likes: 1,
+        isCommunity: true,
+        timestamp: Date.now()
+      };
+      communityPhotos.unshift(newPhoto);
+    });
+
+    saveCommunityPhotos();
+    resetUploadForm();
+    setUploadWidgetVisibility(false);
+    renderGrandGalleryGrid(true);
+    renderModalGalleryItems();
+  });
+
+  // Initial Grid Render & Lightbox Init
+  renderGrandGalleryGrid();
+  initGalleryLightbox();
+}
+
+function renderGrandGalleryGrid(isNewUpload = false) {
+  const grid = document.getElementById('main-photo-gallery-grid');
+  if (!grid) return;
+
+  const allPhotos = getAllGalleryPhotos();
+
+  // Update Category Badges Counts
+  const counts = {
+    all: allPhotos.length,
+    protima: 0,
+    aarti: 0,
+    heritage: 0,
+    sharat: 0,
+    community: 0
+  };
+
+  allPhotos.forEach((photo) => {
+    if (photo.category && counts[photo.category] !== undefined) {
+      counts[photo.category]++;
+    }
+  });
+
+  document.getElementById('count-cat-all') && (document.getElementById('count-cat-all').textContent = toBengaliNumerals(counts.all));
+  document.getElementById('count-cat-protima') && (document.getElementById('count-cat-protima').textContent = toBengaliNumerals(counts.protima));
+  document.getElementById('count-cat-aarti') && (document.getElementById('count-cat-aarti').textContent = toBengaliNumerals(counts.aarti));
+  document.getElementById('count-cat-heritage') && (document.getElementById('count-cat-heritage').textContent = toBengaliNumerals(counts.heritage));
+  document.getElementById('count-cat-sharat') && (document.getElementById('count-cat-sharat').textContent = toBengaliNumerals(counts.sharat));
+  document.getElementById('count-cat-community') && (document.getElementById('count-cat-community').textContent = toBengaliNumerals(counts.community));
+
+  // Filter List
+  const filtered = state.activeGalleryCategory === 'all'
+    ? allPhotos
+    : allPhotos.filter((p) => p.category === state.activeGalleryCategory);
+
+  currentLightboxList = filtered;
+  grid.innerHTML = '';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: rgba(255,255,255,0.7); font-family: var(--font-bengali-sans);">
+        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">এই ক্যাটাগরিতে এখনও কোনো ছবি নেই।</p>
+        <p style="font-size: 0.85rem; color: var(--heritage-gold);">"স্মৃতি ও ছবি জমা দিন" বাটনে ক্লিক করে আপনিই প্রথম ছবি যুক্ত করুন!</p>
+      </div>
+    `;
+    return;
+  }
+
+  filtered.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.className = `gallery-photo-card ${isNewUpload && index === 0 ? 'newly-added' : ''}`;
+    
+    const likeCount = getPhotoLikeCount(item.id, item.likes || 12);
+    const isLiked = photoLikes[item.id] !== undefined;
+
+    card.innerHTML = `
+      <div class="gallery-card-img-wrap">
+        <img class="gallery-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" />
+        <span class="gallery-card-badge">${item.categoryLabel || item.category}</span>
+        ${item.isCommunity ? '<span class="gallery-card-community-badge">📸 ভক্তের ছবি</span>' : ''}
+      </div>
+      <div class="gallery-card-body">
+        <h4 class="gallery-card-title">${item.bengaliTitle || item.title}</h4>
+        <p class="gallery-card-desc">${item.bengaliDesc || item.title}</p>
+      </div>
+      <div class="gallery-card-footer">
+        <span class="gallery-card-author">👤 ${item.author || 'মন্ডল পরিবার'}</span>
+        <button type="button" class="gallery-like-btn ${isLiked ? 'liked' : ''}" data-photo-id="${item.id}" aria-label="Give Blessing Pranam">
+          <span class="like-heart">❤️</span>
+          <span class="like-num">${toBengaliNumerals(likeCount)}</span>
+          <span>প্রণাম</span>
+        </button>
+      </div>
+    `;
+
+    // Card click -> Opens Lightbox
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('.gallery-like-btn')) {
+        openGalleryLightbox(index);
+      }
+    });
+
+    // Like button click
+    const likeBtn = card.querySelector('.gallery-like-btn');
+    likeBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const updatedCount = incrementPhotoLike(item.id, item.likes || 12);
+      likeBtn.classList.add('liked');
+      const numEl = likeBtn.querySelector('.like-num');
+      if (numEl) numEl.textContent = toBengaliNumerals(updatedCount);
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+function initGalleryLightbox() {
+  const modal = document.getElementById('gallery-lightbox-modal');
+  const closeBtn = document.getElementById('btn-close-lightbox');
+  const prevBtn = document.getElementById('btn-lightbox-prev');
+  const nextBtn = document.getElementById('btn-lightbox-next');
+  const likeBtn = document.getElementById('btn-lightbox-like');
+  const downloadBtn = document.getElementById('btn-lightbox-download');
+  const shareBtn = document.getElementById('btn-lightbox-share');
+
+  closeBtn?.addEventListener('click', () => {
+    closeModal('gallery-lightbox-modal');
+  });
+
+  prevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentLightboxList.length === 0) return;
+    currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxList.length) % currentLightboxList.length;
+    updateLightboxUI();
+  });
+
+  nextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentLightboxList.length === 0) return;
+    currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxList.length;
+    updateLightboxUI();
+  });
+
+  likeBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const item = currentLightboxList[currentLightboxIndex];
+    if (!item) return;
+    incrementPhotoLike(item.id, item.likes || 12);
+    updateLightboxUI();
+    renderGrandGalleryGrid();
+  });
+
+  downloadBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const item = currentLightboxList[currentLightboxIndex];
+    if (!item) return;
+    const a = document.createElement('a');
+    a.href = item.src;
+    a.download = `mondal-barir-pujo-${item.id}.jpg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+
+  shareBtn?.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const item = currentLightboxList[currentLightboxIndex];
+    if (!item) return;
+
+    const shareText = `🌸 মন্ডল বাড়ির পুজো ২০২৬ (১৫০+ বছরের ঐতিহ্য): "${item.bengaliTitle || item.title}"
+📸 @furfura_mondal_poribar • লাইভ ফটো গ্যালারি ও আগমনী রেডিও: ${window.location.href}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: item.bengaliTitle || item.title,
+          text: shareText,
+          url: window.location.href
+        });
+      } catch (err) {
+        copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণ লিংক কপি হয়েছে!');
+      }
+    } else {
+      copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণ লিংক কপি হয়েছে!');
+    }
+  });
+
+  // Keyboard navigation for Lightbox
+  document.addEventListener('keydown', (e) => {
+    if (modal?.classList.contains('active')) {
+      if (e.key === 'ArrowLeft') {
+        prevBtn?.click();
+      } else if (e.key === 'ArrowRight') {
+        nextBtn?.click();
+      } else if (e.key === 'Escape') {
+        closeModal('gallery-lightbox-modal');
+      }
+    }
+  });
+}
+
+function openGalleryLightbox(index) {
+  if (!currentLightboxList || currentLightboxList.length === 0) return;
+  currentLightboxIndex = index;
+  updateLightboxUI();
+  openModal('gallery-lightbox-modal');
+}
+
+function updateLightboxUI() {
+  const item = currentLightboxList[currentLightboxIndex];
+  if (!item) return;
+
+  const imgEl = document.getElementById('lightbox-img');
+  const catEl = document.getElementById('lightbox-category-badge');
+  const authorEl = document.getElementById('lightbox-author-badge');
+  const counterEl = document.getElementById('lightbox-counter-badge');
+  const titleEl = document.getElementById('lightbox-title');
+  const descEl = document.getElementById('lightbox-desc');
+  const likeCountEl = document.getElementById('lightbox-like-count');
+
+  if (imgEl) {
+    imgEl.src = item.src;
+    imgEl.alt = item.bengaliTitle || item.title;
+  }
+  if (catEl) catEl.textContent = item.categoryLabel || item.category;
+  if (authorEl) authorEl.textContent = `👤 ${item.author || 'মন্ডল পরিবার'}`;
+  if (counterEl) counterEl.textContent = `${toBengaliNumerals(currentLightboxIndex + 1)} / ${toBengaliNumerals(currentLightboxList.length)}`;
+  if (titleEl) titleEl.textContent = item.bengaliTitle || item.title;
+  if (descEl) descEl.textContent = item.bengaliDesc || item.title;
+
+  const count = getPhotoLikeCount(item.id, item.likes || 12);
+  if (likeCountEl) likeCountEl.textContent = toBengaliNumerals(count);
 }
 
 /* ==========================================================================

@@ -66,87 +66,9 @@
       </div>
 
       <!-- ==========================================
-           TOP NAVIGATION / CONTROLS HEADER BAR (DESKTOP)
+           UNIVERSAL FLOATING DYNAMIC ISLAND (DESKTOP & MOBILE)
            ========================================== -->
-      <header class="header-bar hide-on-mobile" role="banner">
-        <div class="header-left">
-          <!-- Live Online Indicator -->
-          <div class="glass-pill online-pill" id="online-counter" title="Active Visitors Online" aria-label="Live visitors count">
-            <span class="beacon-dot" aria-hidden="true"></span>
-            <span id="online-count-text">54 online</span>
-          </div>
-
-          <!-- Mondal Barir Pujo Sole Branding Pill -->
-          <button class="glass-pill pujo-tag-pill" id="btn-open-pujo-info" title="মন্ডল বাড়ির পুজো — ঐতিহ্য, নির্ঘণ্ট ও ফটো গ্যালারি">
-            <span class="pill-icon" aria-hidden="true">🪔</span>
-            <span class="brand-text">মন্ডল বাড়ির পুজো</span>
-            <span class="badge-heritage">১৫০+ বছর</span>
-          </button>
-        </div>
-
-        <div class="header-right">
-          <!-- Instagram Story Generator Quick Trigger -->
-          <button class="glass-pill story-nav-pill" id="btn-open-story-gen" title="Generate Aesthetic Instagram Story Card (Key I)">
-            <span class="pill-icon" aria-hidden="true">📸</span>
-            <span>স্টোরি কার্ড</span>
-          </button>
-
-          <!-- Official Instagram Link Pill -->
-          <a href="https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp" target="_blank" rel="noopener noreferrer" class="glass-pill insta-link-pill" title="Follow Furfura Mondal Poribar on Instagram @furfura_mondal_poribar">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-            <span>@furfura_mondal_poribar</span>
-          </a>
-
-          <!-- Interactive Soundboard Quick Triggers (Desktop / Tablet) -->
-          <div class="quick-soundboard-group">
-            <button class="icon-btn" id="btn-quick-shankha" title="Blow Sacred Shankha (শাঁখের ধ্বনি — Key S)" aria-label="Play Shankha Sound">
-              <span aria-hidden="true">🐚</span>
-              <span class="tooltip-kbd">S</span>
-            </button>
-            <button class="icon-btn" id="btn-quick-dhak" title="Play Dhak Drum Studio (ঢাকের বোল — Key D)" aria-label="Play Dhak Beat">
-              <span aria-hidden="true">🥁</span>
-              <span class="tooltip-kbd">D</span>
-            </button>
-            <button class="icon-btn" id="btn-toggle-particles" title="Toggle Falling Shiuli Flowers (শিউলি ফুল — Key F)" aria-label="Toggle Falling Flowers">
-              <span aria-hidden="true">🌸</span>
-              <span class="tooltip-kbd">F</span>
-            </button>
-          </div>
-
-          <!-- Atmosphere Vibe Selector -->
-          <div class="vibe-selector-wrapper">
-            <button class="glass-pill vibe-selector-btn" id="btn-vibe-dropdown" aria-haspopup="true" aria-expanded="false" title="Change Atmosphere Lighting">
-              <span id="current-vibe-icon" aria-hidden="true">🌅</span>
-              <span id="current-vibe-label">Bhor (Dawn)</span>
-              <span class="dropdown-chevron" aria-hidden="true">▾</span>
-            </button>
-            <div class="vibe-dropdown-menu" id="vibe-menu" role="menu">
-              <button class="vibe-item" data-vibe="early-morning" role="menuitem"><span>🌅 ভোর (Early Morning)</span></button>
-              <button class="vibe-item" data-vibe="morning" role="menuitem"><span>☀️ সকাল (Morning)</span></button>
-              <button class="vibe-item" data-vibe="afternoon" role="menuitem"><span>🌤️ দুপুর (Afternoon)</span></button>
-              <button class="vibe-item" data-vibe="evening" role="menuitem"><span>🌆 সন্ধ্যা (Evening)</span></button>
-              <button class="vibe-item" data-vibe="night" role="menuitem"><span>🏮 রাত (Night)</span></button>
-              <button class="vibe-item" data-vibe="midnight" role="menuitem"><span>✨ মধ্যরাত (Midnight)</span></button>
-              <div class="vibe-divider"></div>
-              <button class="vibe-item" data-vibe="auto" role="menuitem"><span>🔄 অটো সিঙ্ক (Sync Clock)</span></button>
-            </div>
-          </div>
-
-          <!-- Desktop Keyboard Shortcuts HUD Trigger -->
-          <button class="glass-pill shortcuts-pill" id="btn-open-shortcuts" title="View Keyboard Shortcuts (Key ?)">
-            <span class="kbd-icon" aria-hidden="true">⌨</span>
-            <span>শর্টকাট</span>
-            <kbd class="mini-kbd">?</kbd>
-          </button>
-        </div>
-      </header>
-
-      <!-- ==========================================
-           MOBILE FLOATING DYNAMIC ISLAND (VIEWPORTS < 768px)
-           ========================================== -->
-      <div class="mobile-dynamic-island-container hide-on-desktop" id="mobile-dynamic-island-container">
+      <div class="universal-dynamic-island-container" id="universal-dynamic-island-container">
         <div class="dynamic-island" id="dynamic-island" role="region" aria-label="Mondal Barir Pujo Dynamic Island">
           
           <!-- Island State A: Default / Idle Pill -->
@@ -222,6 +144,10 @@
                 <span class="island-quick-icon">📸</span>
                 <span class="island-quick-label">স্টোরি কার্ড</span>
               </button>
+              <button class="island-quick-item" id="island-quick-gallery" aria-label="Scroll to Photo Gallery">
+                <span class="island-quick-icon">🖼️</span>
+                <span class="island-quick-label">ফটো গ্যালারি</span>
+              </button>
             </div>
             
             <!-- Atmosphere Quick Selector inside Island -->
@@ -252,76 +178,312 @@
       </div>
 
       <!-- ==========================================
-           MAIN HERO: CALLIGRAPHY & COUNTDOWN SYSTEM
+           HERO VIEWPORT FOLD (100dvh Vertical Viewport)
            ========================================== -->
-      <main class="hero-container" role="main">
-        <!-- Heritage Bengali Title -->
-        <h1 class="hero-title-bengali" id="hero-title">
-          <span class="hero-word-top">পুজো</span>
-          <span class="hero-word-bottom">আসছে</span>
-        </h1>
+      <section class="hero-viewport-section" id="hero-section">
 
-        <!-- Mondal Barir Pujo Sub-Tagline -->
-        <div class="hero-subtag">
-          <span class="subtag-dot">✦</span>
-          <span>মন্ডল বাড়ির পুজো ২০২৬ • ১৫০+ বছরের ঐতিহ্য</span>
-          <span class="subtag-dot">✦</span>
-        </div>
+        <!-- TOP NAVIGATION / CONTROLS HEADER BAR (DESKTOP) -->
+        <header class="header-bar hide-on-mobile" role="banner">
+          <div class="header-left">
+            <!-- Live Online Indicator -->
+            <div class="glass-pill online-pill" id="online-counter" title="Active Visitors Online" aria-label="Live visitors count">
+              <span class="beacon-dot" aria-hidden="true"></span>
+              <span id="online-count-text">54 online</span>
+            </div>
 
-        <!-- High-End 4-Unit Festive Countdown Display -->
-        <div class="festive-countdown-card" id="btn-countdown-details" role="button" tabindex="0" title="Click to inspect Mondal Barir Pujo 2026 Schedule">
-          <div class="countdown-units-grid">
-            <div class="countdown-unit-box">
-              <div class="unit-val-wrap">
-                <span class="unit-val" id="countdown-days-val">--</span>
-              </div>
-              <span class="unit-label">দিন (Days)</span>
+            <!-- Mondal Barir Pujo Sole Branding Pill -->
+            <button class="glass-pill pujo-tag-pill" id="btn-open-pujo-info" title="মন্ডল বাড়ির পুজো — ঐতিহ্য, নির্ঘণ্ট ও ফটো গ্যালারি">
+              <span class="pill-icon" aria-hidden="true">🪔</span>
+              <span class="brand-text">মন্ডল বাড়ির পুজো</span>
+              <span class="badge-heritage">১৫০+ বছর</span>
+            </button>
+          </div>
+
+          <div class="header-right">
+            <!-- Instagram Story Generator Quick Trigger -->
+            <button class="glass-pill story-nav-pill" id="btn-open-story-gen" title="Generate Aesthetic Instagram Story Card (Key I)">
+              <span class="pill-icon" aria-hidden="true">📸</span>
+              <span>স্টোরি কার্ড</span>
+            </button>
+
+            <!-- Official Instagram Link Pill -->
+            <a href="https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp" target="_blank" rel="noopener noreferrer" class="glass-pill insta-link-pill" title="Follow Furfura Mondal Poribar on Instagram @furfura_mondal_poribar">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <span>@furfura_mondal_poribar</span>
+            </a>
+
+            <!-- Interactive Soundboard Quick Triggers (Desktop / Tablet) -->
+            <div class="quick-soundboard-group">
+              <button class="icon-btn" id="btn-quick-shankha" title="Blow Sacred Shankha (শাঁখের ধ্বনি — Key S)" aria-label="Play Shankha Sound">
+                <span aria-hidden="true">🐚</span>
+                <span class="tooltip-kbd">S</span>
+              </button>
+              <button class="icon-btn" id="btn-quick-dhak" title="Play Dhak Drum Studio (ঢাকের বোল — Key D)" aria-label="Play Dhak Beat">
+                <span aria-hidden="true">🥁</span>
+                <span class="tooltip-kbd">D</span>
+              </button>
+              <button class="icon-btn" id="btn-toggle-particles" title="Toggle Falling Shiuli Flowers (শিউলি ফুল — Key F)" aria-label="Toggle Falling Flowers">
+                <span aria-hidden="true">🌸</span>
+                <span class="tooltip-kbd">F</span>
+              </button>
             </div>
-            <div class="countdown-colon">:</div>
-            <div class="countdown-unit-box">
-              <div class="unit-val-wrap">
-                <span class="unit-val" id="countdown-hours-val">--</span>
+
+            <!-- Atmosphere Vibe Selector -->
+            <div class="vibe-selector-wrapper">
+              <button class="glass-pill vibe-selector-btn" id="btn-vibe-dropdown" aria-haspopup="true" aria-expanded="false" title="Change Atmosphere Lighting">
+                <span id="current-vibe-icon" aria-hidden="true">🌅</span>
+                <span id="current-vibe-label">Bhor (Dawn)</span>
+                <span class="dropdown-chevron" aria-hidden="true">▾</span>
+              </button>
+              <div class="vibe-dropdown-menu" id="vibe-menu" role="menu">
+                <button class="vibe-item" data-vibe="early-morning" role="menuitem"><span>🌅 ভোর (Early Morning)</span></button>
+                <button class="vibe-item" data-vibe="morning" role="menuitem"><span>☀️ সকাল (Morning)</span></button>
+                <button class="vibe-item" data-vibe="afternoon" role="menuitem"><span>🌤️ দুপুর (Afternoon)</span></button>
+                <button class="vibe-item" data-vibe="evening" role="menuitem"><span>🌆 সন্ধ্যা (Evening)</span></button>
+                <button class="vibe-item" data-vibe="night" role="menuitem"><span>🏮 রাত (Night)</span></button>
+                <button class="vibe-item" data-vibe="midnight" role="menuitem"><span>✨ মধ্যরাত (Midnight)</span></button>
+                <div class="vibe-divider"></div>
+                <button class="vibe-item" data-vibe="auto" role="menuitem"><span>🔄 অটো সিঙ্ক (Sync Clock)</span></button>
               </div>
-              <span class="unit-label">ঘণ্টা (Hours)</span>
             </div>
-            <div class="countdown-colon">:</div>
-            <div class="countdown-unit-box">
-              <div class="unit-val-wrap">
-                <span class="unit-val" id="countdown-mins-val">--</span>
+
+            <!-- Desktop Keyboard Shortcuts HUD Trigger -->
+            <button class="glass-pill shortcuts-pill" id="btn-open-shortcuts" title="View Keyboard Shortcuts (Key ?)">
+              <span class="kbd-icon" aria-hidden="true">⌨</span>
+              <span>শর্টকাট</span>
+              <kbd class="mini-kbd">?</kbd>
+            </button>
+          </div>
+        </header>
+
+        <!-- MAIN HERO: CALLIGRAPHY & COUNTDOWN SYSTEM -->
+        <main class="hero-container" role="main">
+          <!-- Heritage Bengali Title -->
+          <h1 class="hero-title-bengali" id="hero-title">
+            <span class="hero-word-top">পুজো</span>
+            <span class="hero-word-bottom">আসছে</span>
+          </h1>
+
+          <!-- Mondal Barir Pujo Sub-Tagline -->
+          <div class="hero-subtag">
+            <span class="subtag-dot">✦</span>
+            <span>মন্ডল বাড়ির পুজো ২০২৬ • ১৫০+ বছরের ঐতিহ্য</span>
+            <span class="subtag-dot">✦</span>
+          </div>
+
+          <!-- High-End 4-Unit Festive Countdown Display -->
+          <div class="festive-countdown-card" id="btn-countdown-details" role="button" tabindex="0" title="Click to inspect Mondal Barir Pujo 2026 Schedule">
+            <div class="countdown-units-grid">
+              <div class="countdown-unit-box">
+                <div class="unit-val-wrap">
+                  <span class="unit-val" id="countdown-days-val">--</span>
+                </div>
+                <span class="unit-label">দিন (Days)</span>
               </div>
-              <span class="unit-label">মিনিট (Mins)</span>
+              <div class="countdown-colon">:</div>
+              <div class="countdown-unit-box">
+                <div class="unit-val-wrap">
+                  <span class="unit-val" id="countdown-hours-val">--</span>
+                </div>
+                <span class="unit-label">ঘণ্টা (Hours)</span>
+              </div>
+              <div class="countdown-colon">:</div>
+              <div class="countdown-unit-box">
+                <div class="unit-val-wrap">
+                  <span class="unit-val" id="countdown-mins-val">--</span>
+                </div>
+                <span class="unit-label">মিনিট (Mins)</span>
+              </div>
+              <div class="countdown-colon">:</div>
+              <div class="countdown-unit-box">
+                <div class="unit-val-wrap">
+                  <span class="unit-val" id="countdown-secs-val">--</span>
+                </div>
+                <span class="unit-label">সেকেন্ড (Secs)</span>
+              </div>
             </div>
-            <div class="countdown-colon">:</div>
-            <div class="countdown-unit-box">
-              <div class="unit-val-wrap">
-                <span class="unit-val" id="countdown-secs-val">--</span>
-              </div>
-              <span class="unit-label">সেকেন্ড (Secs)</span>
+            <div class="countdown-footer-badge">
+              <span class="countdown-calendar-icon" aria-hidden="true">🗓️</span>
+              <span id="countdown-sub-label" class="countdown-label-text">মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • নির্ঘণ্ট ও সূচি</span>
+              <span class="countdown-arrow-indicator" aria-hidden="true">›</span>
             </div>
           </div>
-          <div class="countdown-footer-badge">
-            <span class="countdown-calendar-icon" aria-hidden="true">🗓️</span>
-            <span id="countdown-sub-label" class="countdown-label-text">মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • নির্ঘণ্ট ও সূচি</span>
-            <span class="countdown-arrow-indicator" aria-hidden="true">›</span>
+
+          <!-- Floating Sound & Story Action Bar (Mobile & Desktop) -->
+          <div class="floating-sound-triggers">
+            <button class="glass-pill sound-trigger-pill" id="btn-trig-shankha" title="Play Shankha Sound (Key S)">
+              <span class="sound-icon">🐚</span>
+              <span>শাঁখের আওয়াজ</span>
+            </button>
+            <button class="glass-pill sound-trigger-pill" id="btn-trig-dhak" title="Play Dhak Drum Studio (Key D)">
+              <span class="sound-icon">🥁</span>
+              <span>ঢাকের বোল</span>
+            </button>
+            <button class="glass-pill sound-trigger-pill story-sparkle-pill" id="btn-trig-story-gen" title="Generate Instagram Story (Key I)">
+              <span class="sound-icon">📸</span>
+              <span>স্টোরি কার্ড</span>
+            </button>
+          </div>
+        </main>
+
+        <!-- Elegant Animated Scroll Down Indicator -->
+        <a href="#gallery-section" class="hero-scroll-indicator" id="btn-scroll-to-gallery" aria-label="Scroll down to Photo Gallery">
+          <span class="scroll-badge">ঐতিহ্যের ফটো গ্যালারি ও স্মৃতি</span>
+          <span class="scroll-chevron-bounce">↓</span>
+        </a>
+      </section>
+
+      <!-- ==========================================
+           GRAND HERITAGE GALLERY & COMMUNITY PHOTO ARCHIVE SECTION
+           ========================================== -->
+      <section class="grand-gallery-section" id="gallery-section" aria-label="ঐতিহ্যের ফটো গ্যালারি ও উৎসব স্মৃতি">
+        <div class="gallery-section-container">
+          
+          <!-- Grand Gallery Header -->
+          <div class="gallery-section-header">
+            <div class="section-badge-pill">
+              <span class="pill-sparkle">✦</span>
+              <span>১৫০+ বছরের বনেদি ঐতিহ্য ও স্মৃতি</span>
+              <span class="pill-sparkle">✦</span>
+            </div>
+            <h2 class="gallery-section-title">ঐতিহ্যের ফটো গ্যালারি ও উৎসব স্মৃতি</h2>
+            <p class="gallery-section-subtitle">
+              ১৫০+ বছরের বনেদি পুজো স্মৃতি, ঠাকুর বরণ, নাটমন্দির ধুনুচি আরতি ও পারিবারিক উদ্যাপনের দুর্লভ মুহূর্ত।
+            </p>
+          </div>
+
+          <!-- Category Filter Bar & Add Photos Button -->
+          <div class="gallery-filter-bar">
+            <div class="gallery-filter-chips" id="gallery-main-category-chips" role="tablist" aria-label="Photo Category Filters">
+              <button class="gallery-filter-chip active" data-category="all" role="tab" aria-selected="true">
+                <span class="chip-label">সমস্ত ছবি (All)</span>
+                <span class="chip-count" id="count-cat-all">6</span>
+              </button>
+              <button class="gallery-filter-chip" data-category="protima" role="tab" aria-selected="false">
+                <span class="chip-label">🌸 প্রতিমা ও বরণ</span>
+                <span class="chip-count" id="count-cat-protima">1</span>
+              </button>
+              <button class="gallery-filter-chip" data-category="aarti" role="tab" aria-selected="false">
+                <span class="chip-label">🔥 ধুনুচি ও আরতি</span>
+                <span class="chip-count" id="count-cat-aarti">1</span>
+              </button>
+              <button class="gallery-filter-chip" data-category="heritage" role="tab" aria-selected="false">
+                <span class="chip-label">🏛️ ঐতিহ্য ও পরিবার</span>
+                <span class="chip-count" id="count-cat-heritage">2</span>
+              </button>
+              <button class="gallery-filter-chip" data-category="sharat" role="tab" aria-selected="false">
+                <span class="chip-label">🌾 শরতের আগমনী</span>
+                <span class="chip-count" id="count-cat-sharat">2</span>
+              </button>
+              <button class="gallery-filter-chip" data-category="community" role="tab" aria-selected="false">
+                <span class="chip-label">📸 ভক্তদের আপলোড</span>
+                <span class="chip-count" id="count-cat-community">0</span>
+              </button>
+            </div>
+
+            <!-- Add Memory / Upload Toggle Button -->
+            <button class="btn-toggle-upload-widget" id="btn-toggle-upload" aria-expanded="false" aria-controls="photo-upload-widget">
+              <span class="upload-btn-icon">✨</span>
+              <span>স্মৃতি ও ছবি জমা দিন</span>
+              <span class="upload-btn-chevron" id="upload-chevron">▾</span>
+            </button>
+          </div>
+
+          <!-- Interactive Photo Upload & Add Memories Widget ("স্মৃতি ও ছবি জমা দিন") -->
+          <div class="photo-upload-card" id="photo-upload-widget" style="display: none;">
+            <div class="upload-card-header">
+              <div class="upload-header-left">
+                <span class="upload-badge">📸 ভক্ত ও দর্শনার্থী স্মৃতি আর্কাইভ</span>
+                <h3 class="upload-title">আপনার তোলা মন্ডল বাড়ির পূজার ছবি বা স্মৃতি যোগ করুন</h3>
+                <p class="upload-desc">ছবিটি সরাসরি আপনার ব্রাউজারের মেমোরিতে (localStorage) সংরক্ষিত হবে এবং লাইভ ফটো গ্যালারিতে তাৎক্ষণিক দৃশ্যমান হবে।</p>
+              </div>
+              <button class="upload-card-close" id="btn-close-upload-card" aria-label="Close Upload Form">✕</button>
+            </div>
+
+            <div class="upload-form-grid">
+              <!-- Drag & Drop / File Picker Area -->
+              <div class="upload-dropzone" id="gallery-dropzone">
+                <input type="file" id="gallery-file-input" accept="image/*" multiple style="display: none;" />
+                <div class="dropzone-content" id="dropzone-idle-content">
+                  <span class="dropzone-icon">🖼️</span>
+                  <strong class="dropzone-text">ছবি এখানে টেনে এনে ছাড়ুন (Drag & Drop) অথবা ক্লিক করুন</strong>
+                  <span class="dropzone-hint">PNG, JPG, WEBP • একাধিক ছবি সমর্থন করে</span>
+                  <button type="button" class="btn-browse-files" id="btn-browse-files">📁 ডিভাইস থেকে ছবি বাছুন</button>
+                </div>
+                <!-- Preview Strip -->
+                <div class="dropzone-previews" id="dropzone-previews" style="display: none;">
+                  <!-- Dynamic preview thumbnails -->
+                </div>
+              </div>
+
+              <!-- Metadata Fields -->
+              <div class="upload-meta-fields">
+                <div class="input-group">
+                  <label for="upload-caption-input" class="input-label">📝 ছবির বর্ণনা বা শিরোনাম (Caption):</label>
+                  <input type="text" id="upload-caption-input" class="heritage-text-input" placeholder="যেমন: মহাষ্টমীর অঞ্জলি ও সন্ধিপূজার ১০৮ প্রদীপ" />
+                </div>
+
+                <div class="input-row">
+                  <div class="input-group">
+                    <label for="upload-author-input" class="input-label">👤 আপনার নাম / পরিবার:</label>
+                    <input type="text" id="upload-author-input" class="heritage-text-input" placeholder="যেমন: অনির্বাণ মণ্ডল ও পরিবার" />
+                  </div>
+
+                  <div class="input-group">
+                    <label for="upload-category-select" class="input-label">🏷️ ক্যাটাগরি:</label>
+                    <select id="upload-category-select" class="heritage-select-input">
+                      <option value="protima">🌸 প্রতিমা ও বরণ</option>
+                      <option value="aarti">🔥 ধুনুচি ও আরতি</option>
+                      <option value="heritage">🏛️ ঐতিহ্য ও পরিবার</option>
+                      <option value="sharat">🌾 শরতের আগমনী</option>
+                      <option value="community" selected>📸 ভক্তদের স্মৃতি</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="upload-actions-row">
+                  <button type="button" class="btn-submit-upload" id="btn-submit-photo-upload">
+                    <span class="btn-icon">✨</span>
+                    <span>গ্যালারিতে যুক্ত করুন</span>
+                  </button>
+                  <button type="button" class="btn-clear-upload" id="btn-clear-upload-form">
+                    <span>রিসেট</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artisan Photo Cards Grid -->
+          <div class="main-photo-gallery-grid" id="main-photo-gallery-grid">
+            <!-- Dynamically rendered photo cards -->
+          </div>
+
+          <!-- Gallery Section Footer / Jump Bar -->
+          <div class="gallery-section-footer">
+            <div class="footer-left">
+              <a href="#hero-section" class="btn-jump-to-top" id="btn-jump-top">
+                <span class="jump-arrow">↑</span>
+                <span>শীর্ষে যান (কাউন্টডাউন ও রেডিও)</span>
+              </a>
+              <button class="btn-footer-schedule" id="btn-footer-open-schedule">
+                <span>🗓️ সম্পূর্ণ পূজার নির্ঘণ্ট ও সূচি</span>
+              </button>
+            </div>
+            <div class="footer-right">
+              <a href="https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp" target="_blank" rel="noopener noreferrer" class="footer-insta-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <span>@furfura_mondal_poribar</span>
+            </a>
           </div>
         </div>
 
-        <!-- Floating Sound & Story Action Bar (Mobile & Desktop) -->
-        <div class="floating-sound-triggers">
-          <button class="glass-pill sound-trigger-pill" id="btn-trig-shankha" title="Play Shankha Sound (Key S)">
-            <span class="sound-icon">🐚</span>
-            <span>শাঁখের আওয়াজ</span>
-          </button>
-          <button class="glass-pill sound-trigger-pill" id="btn-trig-dhak" title="Play Dhak Drum Studio (Key D)">
-            <span class="sound-icon">🥁</span>
-            <span>ঢাকের বোল</span>
-          </button>
-          <button class="glass-pill sound-trigger-pill story-sparkle-pill" id="btn-trig-story-gen" title="Generate Instagram Story (Key I)">
-            <span class="sound-icon">📸</span>
-            <span>স্টোরি কার্ড</span>
-          </button>
-        </div>
-      </main>
+      </div>
+    </section>
 
       <!-- ==========================================
            BOTTOM DUAL INTERFACE: DESKTOP GLASS DOCK & MOBILE DRAWER
@@ -1117,6 +1279,59 @@
                 <span class="shortcut-action">Close Active Dialog</span>
                 <kbd class="hud-kbd">Esc</kbd>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           FULLSCREEN PHOTO LIGHTBOX MODAL
+           ========================================== -->
+      <div class="modal-backdrop gallery-lightbox-backdrop" id="gallery-lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+        <div class="lightbox-container">
+          <button class="lightbox-close-btn" id="btn-close-lightbox" aria-label="Close Fullscreen View">✕</button>
+
+          <!-- Navigation Arrows -->
+          <button class="lightbox-nav-btn prev-btn" id="btn-lightbox-prev" aria-label="Previous Photo" title="Previous Photo (Left Arrow)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+          </button>
+          <button class="lightbox-nav-btn next-btn" id="btn-lightbox-next" aria-label="Next Photo" title="Next Photo (Right Arrow)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
+
+          <!-- Media Viewport Wrapper -->
+          <div class="lightbox-media-wrapper">
+            <img id="lightbox-img" class="lightbox-img" src="" alt="Mondal Barir Pujo Heritage Photo" />
+          </div>
+
+          <!-- Bottom Details & Actions Bar -->
+          <div class="lightbox-info-bar">
+            <div class="lightbox-info-main">
+              <div class="lightbox-badge-row">
+                <span class="lightbox-category-badge" id="lightbox-category-badge">🌸 প্রতিমা ও বরণ</span>
+                <span class="lightbox-author-badge" id="lightbox-author-badge">মন্ডল পরিবার ঐতিহ্য</span>
+                <span class="lightbox-index-badge" id="lightbox-counter-badge">১ / ৬</span>
+              </div>
+              <h3 class="lightbox-title" id="lightbox-title">সাবেকি একচালা ডাকের সাজে মা দুর্গা</h3>
+              <p class="lightbox-desc" id="lightbox-desc">Sacred divine Darshan with traditional clay craftsmanship.</p>
+            </div>
+
+            <div class="lightbox-actions">
+              <button class="lightbox-like-btn" id="btn-lightbox-like" aria-label="Give Blessing Pranam">
+                <span class="like-heart">❤️</span>
+                <span id="lightbox-like-count">২৫৪</span>
+                <span>প্রণাম</span>
+              </button>
+              <button class="lightbox-action-btn" id="btn-lightbox-download" title="Download Photo to Device">
+                <span>📥 ডাউনলোড</span>
+              </button>
+              <button class="lightbox-action-btn" id="btn-lightbox-share" title="Share Photo on WhatsApp">
+                <span>📤 শেয়ার</span>
+              </button>
             </div>
           </div>
         </div>

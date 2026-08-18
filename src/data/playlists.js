@@ -615,38 +615,48 @@ export const nativePujoData = {
     }
   ],
   galleryCategories: [
-    { id: "all", label: "সমস্ত ছবি (All)" },
-    { id: "protima", label: "প্রতিমা ও মণ্ডপ (Protima)" },
-    { id: "aarti", label: "আরতি ও ধুনুচি (Aarti & Dhunuchi)" },
-    { id: "heritage", label: "ঐতিহ্য ও উৎসব (Heritage)" },
-    { id: "sharat", label: "শরতের আগমনী (Agomoni)" }
+    { id: "all", label: "সমস্ত ছবি (All)", icon: "✨" },
+    { id: "protima", label: "🌸 প্রতিমা ও বরণ", icon: "🌸" },
+    { id: "aarti", label: "🔥 ধুনুচি ও আরতি", icon: "🔥" },
+    { id: "heritage", label: "🏛️ ঐতিহ্য ও পরিবার", icon: "🏛️" },
+    { id: "sharat", label: "🌾 শরতের আগমনী", icon: "🌾" },
+    { id: "community", label: "📸 ভক্তদের আপলোড", icon: "📸" }
   ],
   gallery: [
     {
       id: "gal-1",
       category: "protima",
-      categoryLabel: "প্রতিমা ও মণ্ডপ",
+      categoryLabel: "প্রতিমা ও বরণ",
       title: "Mondal Bari Traditional Ekchala Protima",
       bengaliTitle: "সাবেকি একচালা ডাকের সাজে মা দুর্গা",
-      desc: "Sacred divine Darshan with traditional clay craftsmanship and pure devotion.",
+      desc: "Sacred divine Darshan with traditional clay craftsmanship, Sholar Daak ornaments, and 150+ years ancestral devotion.",
+      bengaliDesc: "১৮৭০-এর দশক থেকে বংশপরম্পরায় পূজিত সাবেকি একচালা ডাকের সাজের প্রতিমার দিব্য দর্শন।",
+      author: "মন্ডল পরিবার মহাফেজখানা",
+      likes: 356,
       src: "/bg/morning-1920.webp"
     },
     {
       id: "gal-2",
       category: "aarti",
-      categoryLabel: "আরতি ও ধুনুচি",
+      categoryLabel: "ধুনুচি ও আরতি",
       title: "Sandhya Aarti & 108 Deepam Illumination",
       bengaliTitle: "সন্ধ্যা আরতি ও ১০৮ প্রদীপ প্রজ্বলন",
-      desc: "Evening lighting illuminating the historic Natmandir courtyard with golden glow.",
+      desc: "Evening aarti lighting illuminating the historic Natmandir courtyard with golden diya glow and sacred incense smoke.",
+      bengaliDesc: "নাটমন্দিরে ধুনুচির ধোঁয়া, মাটির প্রদীপের আলো ও কাঁসর-ঘণ্টার বোলে সন্ধ্যার মহাশক্তি আরতি।",
+      author: "ফুরফুরা মণ্ডল পরিবার",
+      likes: 294,
       src: "/bg/evening-1920.webp"
     },
     {
       id: "gal-3",
       category: "heritage",
-      categoryLabel: "ঐতিহ্য ও উৎসব",
+      categoryLabel: "ঐতিহ্য ও পরিবার",
       title: "Mondal Bari Festive Night Grandeur",
-      bengaliTitle: "মন্ডল বাড়ির উৎসবের আলোকসজ্জা",
-      desc: "Night celebrations with family, relatives, neighbors and well-wishers from everywhere.",
+      bengaliTitle: "মন্ডল বাড়ির উৎসবের আলোকসজ্জা ও মিলনমেলা",
+      desc: "Night celebrations uniting family, relatives, neighbors and devotees under illuminated Bonedi heritage arches.",
+      bengaliDesc: "উৎসবের আলোয় ঝলমলে বনেদি নাটমন্দির প্রাঙ্গণ ও বহু দূর-দূরান্ত থেকে আসা ভক্তদের আন্তরিক মিলনমেলা।",
+      author: "মন্ডল পরিবার সংগ্রহ",
+      likes: 218,
       src: "/bg/night-1920.webp"
     },
     {
@@ -655,7 +665,10 @@ export const nativePujoData = {
       categoryLabel: "শরতের আগমনী",
       title: "Early Morning Mahalaya & Chandi Path",
       bengaliTitle: "ভোরের আগমনী ও চণ্ডীপাঠের সুর",
-      desc: "Reverberating sound of Shankha, Chandi Path, and morning mist welcoming Maa Uma.",
+      desc: "Reverberating sound of sacred Shankha, dawn Chandi Path, and morning mist welcoming Devi Uma.",
+      bengaliDesc: "ভোরের শিশিরভেজা শিউলিতলায় বীরেন্দ্রকৃষ্ণ ভদ্রের চণ্ডীপাঠ ও শঙ্খধ্বনিতে শারদ আবাহন।",
+      author: "ঐতিহ্য স্মৃতি ভাণ্ডার",
+      likes: 275,
       src: "/bg/early-morning-1920.webp"
     },
     {
@@ -664,16 +677,22 @@ export const nativePujoData = {
       categoryLabel: "শরতের আগমনী",
       title: "Autumn Breeze & Kash Phool Vibes",
       bengaliTitle: "শরতের কাশফুল ও নীল আকাশ",
-      desc: "White fluffy clouds under the autumn sky heralding the homecoming festival.",
+      desc: "White fluffy clouds under the autumn azure sky heralding the sacred homecoming festival.",
+      bengaliDesc: "ফুরফুরার মুক্ত মাঠে কাশফুলের দোলা ও শরতের নীল আকাশে মেঘের ভেলা — মা আসছেন ঘরে।",
+      author: "ফুরফুরা মণ্ডল পরিবার",
+      likes: 189,
       src: "/bg/afternoon-1920.webp"
     },
     {
       id: "gal-6",
       category: "heritage",
-      categoryLabel: "ঐতিহ্য ও উৎসব",
+      categoryLabel: "ঐতিহ্য ও পরিবার",
       title: "Midnight Serenity in Mandap Courtyard",
       bengaliTitle: "শান্ত স্নিগ্ধ নাটমন্দির প্রাঙ্গণ",
-      desc: "Sacred silence and starry skies before the dawn Dhak rhythms awaken the house.",
+      desc: "Sacred silence and starry skies before the dawn Dhak rhythms awaken the ancestral household.",
+      bengaliDesc: "নিঝুম রাতের মায়াবী পরিবেশ, ধূপের সুবাস ও শান্ত স্নিগ্ধ পুজো মণ্ডপ।",
+      author: "মন্ডল পরিবার মহাফেজখানা",
+      likes: 242,
       src: "/bg/midnight-1920.webp"
     }
   ]
