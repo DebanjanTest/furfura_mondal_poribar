@@ -9,9 +9,11 @@
     "preview": "vite preview",
     "optimize:images": "node scripts/optimize-images.js"
   },
+  "dependencies": {
+    "vite": "^6.0.0"
+  },
   "devDependencies": {
     "isomorphic-git": "^1.41.4",
-    "sharp": "^0.35.3",
-    "vite": "^6.0.0"
+    "sharp": "^0.35.3"
   }
 }
