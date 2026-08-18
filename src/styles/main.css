@@ -4868,12 +4868,12 @@ button {
   position: relative;
   z-index: 20;
   width: 100%;
-  padding: 4rem 1.5rem 10rem;
+  padding: 5rem 1.5rem 10rem;
   box-sizing: border-box;
   content-visibility: auto;
   contain-intrinsic-size: 1px 900px;
-  scroll-snap-align: none !important;
-  scroll-snap-stop: normal !important;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }
 
 .gallery-section-container {
@@ -6109,19 +6109,18 @@ button {
   position: relative;
   z-index: 12;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: 4.5rem 1.5rem 3.5rem;
+  min-height: auto;
+  padding: 5rem 1.5rem 4rem;
   background: linear-gradient(180deg, rgba(13, 17, 28, 0.88) 0%, rgba(18, 24, 38, 0.96) 50%, rgba(10, 14, 22, 0.95) 100%);
   border-top: 1px solid rgba(255, 207, 64, 0.16);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   content-visibility: auto;
   contain-intrinsic-size: 1px 800px;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   box-sizing: border-box;
 }
 
@@ -6520,9 +6519,15 @@ button {
   }
 
   .onnota-section {
-    min-height: calc(100vh - 56px);
-    min-height: calc(100dvh - 56px);
+    min-height: auto;
     padding: 3rem 1rem 2.5rem;
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+
+  .grand-gallery-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
 
   .desktop-snap-nav {

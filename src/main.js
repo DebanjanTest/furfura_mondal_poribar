@@ -3030,7 +3030,7 @@ function initSectionScrollLocking() {
     if (el) sectionObserver.observe(el);
   });
 
-  // 3. Computer UI: Smooth Section Wheel Transition (Wheel Locking with Gallery Exemption)
+  // 3. Computer UI: Smooth Section Transition (Hero & River Lock, Free Onnota, Initial Gallery Lock + Infinite Scroll)
   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   if (!isTouchDevice) {
@@ -3038,52 +3038,81 @@ function initSectionScrollLocking() {
     let wheelTimeout = null;
 
     window.addEventListener('wheel', (e) => {
+      const heroEl = document.getElementById('hero-section');
+      const riverEl = document.getElementById('photo-river-section');
+      const onnotaEl = document.getElementById('onnota-section');
       const galleryEl = document.getElementById('gallery-section');
-      if (!galleryEl) return;
+
+      if (!heroEl || !riverEl || !onnotaEl || !galleryEl) return;
 
       const galleryRect = galleryEl.getBoundingClientRect();
-      const isInsideGallery = galleryRect.top <= 150 && galleryRect.bottom >= window.innerHeight * 0.25;
+      const onnotaRect = onnotaEl.getBoundingClientRect();
+      const riverRect = riverEl.getBoundingClientRect();
+      const heroRect = heroEl.getBoundingClientRect();
 
-      // If user is inside the Grand Gallery section, allow free continuous vertical scrolling without lock
+      // Case A: Inside Grand Gallery -> Allow free continuous / infinite scrolling
+      // Only intercept if at the very top and scrolling UP
+      const isInsideGallery = galleryRect.top <= 80 && galleryRect.bottom >= 200;
       if (isInsideGallery) {
+        if (galleryRect.top >= -20 && e.deltaY < -40 && !isWheelGliding) {
+          isWheelGliding = true;
+          onnotaEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+        }
         return;
       }
 
-      // Only handle intentional, distinct wheel flicks
-      if (Math.abs(e.deltaY) < 45 || isWheelGliding) return;
-
-      const scrollDirection = e.deltaY > 0 ? 1 : -1;
-      const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
-      const vh = window.innerHeight;
-
-      // Identify current snap index based on scroll position
-      let currentIdx = 0;
-      if (currentScrollTop < vh * 0.6) {
-        currentIdx = 0; // Hero
-      } else if (currentScrollTop < vh * 1.6) {
-        currentIdx = 1; // Photo River
-      } else if (currentScrollTop < vh * 2.6) {
-        currentIdx = 2; // Onnota
-      } else {
-        currentIdx = 3; // Gallery
+      // Case B: Inside Others by Onnota -> Allow free continuous browsing
+      // Only intercept if at top scrolling UP (to River) or at bottom scrolling DOWN (initial lock to Gallery)
+      const isInsideOnnota = onnotaRect.top <= 100 && onnotaRect.bottom >= window.innerHeight * 0.4;
+      if (isInsideOnnota) {
+        // At bottom of Onnota scrolling down -> Initial Lock onto Gallery
+        if (onnotaRect.bottom <= window.innerHeight + 80 && e.deltaY > 35 && !isWheelGliding) {
+          isWheelGliding = true;
+          galleryEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 700);
+        }
+        // At top of Onnota scrolling up -> Snap to Photo River
+        else if (onnotaRect.top >= -30 && e.deltaY < -35 && !isWheelGliding) {
+          isWheelGliding = true;
+          riverEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 700);
+        }
+        return;
       }
 
-      const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentIdx + scrollDirection));
-      if (nextIdx !== currentIdx) {
-        const targetSec = document.getElementById(snapSections[nextIdx].id);
-        if (targetSec) {
+      // Case C: Hero & Photo River single-fold transitions
+      if (Math.abs(e.deltaY) < 40 || isWheelGliding) return;
+
+      if (heroRect.top >= -100 && heroRect.bottom >= window.innerHeight * 0.5) {
+        // At Hero
+        if (e.deltaY > 0) {
           isWheelGliding = true;
-          targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          riverEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
           clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => {
-            isWheelGliding = false;
-          }, 600);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+        }
+      } else if (riverRect.top <= 100 && riverRect.bottom >= window.innerHeight * 0.5) {
+        // At Photo River
+        if (e.deltaY > 0) {
+          isWheelGliding = true;
+          onnotaEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+        } else if (e.deltaY < 0) {
+          isWheelGliding = true;
+          heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
         }
       }
     }, { passive: true });
   }
 
-  // 4. Keyboard Page Navigation (ArrowDown, ArrowUp, PageDown, PageUp)
+  // 4. Keyboard Page Navigation (PageDown, PageUp)
   window.addEventListener('keydown', (e) => {
     if (['input', 'textarea', 'select'].includes(document.activeElement?.tagName?.toLowerCase())) return;
 
@@ -3095,7 +3124,7 @@ function initSectionScrollLocking() {
       let currentIdx = 0;
       if (currentScrollTop < vh * 0.6) currentIdx = 0;
       else if (currentScrollTop < vh * 1.6) currentIdx = 1;
-      else if (currentScrollTop < vh * 2.6) currentIdx = 2;
+      else if (currentScrollTop < vh * 2.8) currentIdx = 2;
       else currentIdx = 3;
 
       const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentIdx + direction));
