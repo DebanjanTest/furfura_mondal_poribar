@@ -785,7 +785,6 @@ function initSoundTriggers() {
 
   document.getElementById('btn-quick-shankha')?.addEventListener('click', triggerShankha);
   document.getElementById('btn-trig-shankha')?.addEventListener('click', triggerShankha);
-  document.getElementById('bar-quick-shankha')?.addEventListener('click', triggerShankha);
   document.getElementById('mobile-nav-shankha')?.addEventListener('click', triggerShankha);
 
   // Dhak Studio Modal Openers
@@ -795,7 +794,6 @@ function initSoundTriggers() {
 
   document.getElementById('btn-quick-dhak')?.addEventListener('click', openDhakModal);
   document.getElementById('btn-trig-dhak')?.addEventListener('click', openDhakModal);
-  document.getElementById('bar-quick-dhak')?.addEventListener('click', openDhakModal);
   document.getElementById('mobile-nav-dhak')?.addEventListener('click', openDhakModal);
 
   // Quick Kashor Trigger
@@ -1691,14 +1689,6 @@ function initPujoInfoAndGallery() {
   });
   document.getElementById('mobile-nav-pujo')?.addEventListener('click', () => {
     openModal('pujo-info-modal');
-  });
-
-  // Executive Festive Bar modal openers
-  document.getElementById('bar-btn-pujo-info')?.addEventListener('click', () => {
-    openModal('pujo-info-modal');
-  });
-  document.getElementById('bar-quick-radio')?.addEventListener('click', () => {
-    openModal('playlists-modal');
   });
 
   // Open Story Modal from Pujo Modal
