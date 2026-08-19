@@ -6590,21 +6590,19 @@ button {
 
 .welcome-modal-card {
   position: relative;
-  width: min(94vw, 540px);
-  max-height: calc(100dvh - max(2.5rem, env(safe-area-inset-bottom, 0px) + 2rem));
-  max-height: calc(100svh - max(2.5rem, env(safe-area-inset-bottom, 0px) + 2rem));
-  background: linear-gradient(180deg, rgba(20, 26, 40, 0.97) 0%, rgba(13, 17, 28, 0.99) 100%);
-  border: 1.5px solid rgba(255, 207, 64, 0.42);
-  border-radius: var(--radius-xl);
-  padding: 1.85rem 1.85rem 1.65rem;
+  width: min(92vw, 380px);
+  max-width: 380px;
+  background: rgba(14, 18, 28, 0.88);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  border: 1.5px solid rgba(255, 207, 64, 0.4);
+  border-radius: 24px;
+  padding: 1.5rem 1.35rem 1.35rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: stretch;
   box-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 207, 64, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  animation: welcomeModalEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  animation: welcomeModalEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   box-sizing: border-box;
   margin: auto;
 }
@@ -6612,7 +6610,7 @@ button {
 @keyframes welcomeModalEnter {
   from {
     opacity: 0;
-    transform: scale(0.92) translateY(18px);
+    transform: scale(0.94) translateY(14px);
   }
   to {
     opacity: 1;
@@ -6620,57 +6618,12 @@ button {
   }
 }
 
-.welcome-header-decor {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 0.65rem;
-}
-
-.welcome-diya-icon {
-  font-size: 2.5rem;
-  filter: drop-shadow(0 0 20px #ffcf40);
-  animation: beaconPulse 2s infinite alternate;
-}
-
-.welcome-badge-pill {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--heritage-gold);
-  background: rgba(255, 207, 64, 0.15);
-  border: 1px solid rgba(255, 207, 64, 0.35);
-  padding: 0.22rem 0.85rem;
-  border-radius: var(--radius-pill);
-  letter-spacing: 0.04em;
-}
-
-.welcome-title {
-  font-family: var(--font-bengali-sans);
-  font-size: clamp(1.35rem, 3vw, 1.75rem);
-  font-weight: 800;
-  color: #ffffff;
-  margin-bottom: 0.35rem;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
-}
-
-.welcome-subtitle {
-  font-family: var(--font-bengali-sans);
-  font-size: clamp(0.78rem, 1.5vw, 0.9rem);
-  color: var(--text-secondary);
-  line-height: 1.5;
-  max-width: 440px;
-  margin-bottom: 1.25rem;
-}
-
 .welcome-options-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.15rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.35rem;
   text-align: left;
 }
 
@@ -6682,50 +6635,38 @@ button {
 
 .welcome-group-label {
   font-family: var(--font-bengali-sans);
-  font-size: 0.8125rem;
+  font-size: 0.84375rem;
   font-weight: 700;
-  color: rgba(255, 235, 200, 0.95);
+  color: var(--heritage-gold);
   letter-spacing: 0.02em;
 }
 
 .welcome-choice-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
   width: 100%;
-}
-
-.welcome-choice-sound {
-  grid-template-columns: 1fr;
 }
 
 .welcome-choice-btn {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.8rem 1rem;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1.5px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
   color: #ffffff;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  text-align: left;
+  box-sizing: border-box;
 }
 
-.welcome-choice-lang-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1rem;
-}
-
-.welcome-choice-lang-btn .choice-text {
+.welcome-choice-btn .choice-text,
+.welcome-choice-btn .choice-main-text {
   font-family: var(--font-bengali-sans);
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: #ffffff;
   letter-spacing: 0.01em;
@@ -6738,37 +6679,12 @@ button {
 }
 
 .welcome-choice-btn.active {
-  background: linear-gradient(135deg, rgba(255, 207, 64, 0.18), rgba(211, 47, 47, 0.14));
+  background: linear-gradient(135deg, rgba(255, 207, 64, 0.22), rgba(211, 47, 47, 0.18));
   border-color: var(--heritage-gold);
-  box-shadow: 0 0 16px rgba(255, 207, 64, 0.22);
+  box-shadow: 0 0 16px rgba(255, 207, 64, 0.25);
 }
 
-.choice-icon {
-  font-size: 1.35rem;
-  flex-shrink: 0;
-}
-
-.choice-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  flex: 1;
-}
-
-.choice-main-text {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.choice-sub-text {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.6875rem;
-  color: var(--text-secondary);
-}
-
-.choice-check {
+.welcome-choice-btn .choice-check {
   font-size: 0.875rem;
   font-weight: 800;
   color: var(--heritage-gold);
@@ -6785,26 +6701,27 @@ button {
 /* Enter Website Button */
 .welcome-enter-btn {
   width: 100%;
+  min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.65rem;
-  padding: 0.95rem 1.5rem;
-  background: linear-gradient(135deg, #d32f2f, #ff6b35 50%, #ffcf40);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 0.85rem 1.5rem;
+  background: linear-gradient(135deg, var(--heritage-gold), #d97706);
+  border: none;
   border-radius: var(--radius-pill);
-  color: #ffffff;
+  color: #070a12;
   font-family: var(--font-bengali-sans);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(211, 47, 47, 0.5), 0 0 20px rgba(255, 207, 64, 0.3);
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 6px 24px var(--heritage-gold-glow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .welcome-enter-btn:hover {
-  transform: translateY(-2.5px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(211, 47, 47, 0.65), 0 0 30px rgba(255, 207, 64, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--heritage-gold-glow);
+  color: #000000;
 }
 
 .welcome-enter-btn:active {
@@ -6813,28 +6730,15 @@ button {
 
 @media (max-width: 540px) {
   .welcome-modal-overlay {
-    padding: max(0.5rem, env(safe-area-inset-top, 0px)) 0.5rem max(1.75rem, env(safe-area-inset-bottom, 0px) + 1.25rem) 0.5rem;
+    padding: max(0.5rem, env(safe-area-inset-top, 0px)) 0.75rem max(1.5rem, env(safe-area-inset-bottom, 0px) + 1rem) 0.75rem;
     align-items: center;
   }
 
   .welcome-modal-card {
-    padding: 1.35rem 1.15rem max(1.4rem, env(safe-area-inset-bottom, 0px) + 0.6rem);
+    padding: 1.25rem 1rem 1.15rem;
     width: 100%;
-    max-height: calc(100dvh - max(1.5rem, env(safe-area-inset-bottom, 0px) + 1rem));
-    border-radius: 22px;
-  }
-
-  .welcome-diya-icon {
-    font-size: 2.15rem;
-  }
-
-  .welcome-title {
-    font-size: 1.25rem;
-  }
-
-  .welcome-subtitle {
-    font-size: 0.78rem;
-    margin-bottom: 0.95rem;
+    max-width: 360px;
+    border-radius: 20px;
   }
 
   .welcome-options-container {
@@ -6843,12 +6747,18 @@ button {
   }
 
   .welcome-choice-btn {
-    padding: 0.65rem 0.85rem;
+    padding: 0.7rem 0.85rem;
+  }
+
+  .welcome-choice-btn .choice-text,
+  .welcome-choice-btn .choice-main-text {
+    font-size: 0.8125rem;
   }
 
   .welcome-enter-btn {
-    padding: 0.85rem 1.25rem;
-    font-size: 0.95rem;
+    min-height: 46px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
   }
 }
 

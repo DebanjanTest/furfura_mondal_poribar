@@ -66,14 +66,11 @@ export const translations = {
     "audio_dhak_label": "সাবেকি ঢাকের আওয়াজ",
 
     // Welcome Onboarding Modal
-    "welcome_badge": "🪔 শারদ অভিবাদন",
-    "welcome_title": "মন্ডল বাড়ির পুজোয় আপনাকে স্বাগত",
-    "welcome_subtitle": "ফুরফুরা মণ্ডল পরিবারের ১৯৯৭ সাল থেকে অনুষ্ঠিত ঐতিহ্যবাহী শারদোৎসবের ডিজিটাল প্রাঙ্গণে প্রবেশ করুন",
-    "welcome_lang_label": "🌐 আপনার পছন্দের ভাষা নির্বাচন করুন (Select Language)",
-    "welcome_sound_label": "🎶 আবহ সঙ্গীত ও ঢাকের আওয়াজ (Ambient Sound & Dhak)",
-    "welcome_sound_yes": "🔊 হ্যাঁ, আবহ সঙ্গীত ও ঢাকের আওয়াজ চালান (Play Ambient Sound)",
-    "welcome_sound_no": "🔇 শব্দহীন রাখুন (Keep Muted)",
-    "welcome_btn_enter": "প্রবেশ করুন (Enter Mondal Bari) 🪔"
+    "welcome_lang_label": "ভাষা (Language)",
+    "welcome_sound_label": "শব্দ (Sound)",
+    "welcome_sound_yes": "শব্দসহ (With Sound)",
+    "welcome_sound_no": "শব্দহীন (Without Sound)",
+    "welcome_btn_enter": "প্রবেশ করুন"
   },
   en: {
     // Brand & Island
@@ -139,14 +136,11 @@ export const translations = {
     "audio_dhak_label": "Traditional Dhak Rhythms",
 
     // Welcome Onboarding Modal
-    "welcome_badge": "🪔 Festive Greetings",
-    "welcome_title": "Welcome to Mondal Barir Pujo",
-    "welcome_subtitle": "Enter the traditional Durga Puja digital celebration of the Furfura Mondal Family, celebrated since 1997",
-    "welcome_lang_label": "🌐 Select Your Preferred Language",
-    "welcome_sound_label": "🎶 Background Ambient Sound & Dhak Rhythms",
-    "welcome_sound_yes": "🔊 Yes, Play Background Ambient & Dhak (Smooth Low Volume)",
-    "welcome_sound_no": "🔇 Keep Muted / Silent",
-    "welcome_btn_enter": "Enter Mondal Bari 🪔"
+    "welcome_lang_label": "Language",
+    "welcome_sound_label": "Sound",
+    "welcome_sound_yes": "With Sound",
+    "welcome_sound_no": "Without Sound",
+    "welcome_btn_enter": "Enter"
   }
 };
 

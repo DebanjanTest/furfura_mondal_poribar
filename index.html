@@ -1589,53 +1589,36 @@
       </div>
 
       <!-- ==========================================
-           WELCOME ONBOARDING PREFERENCE GATE MODAL
+           WELCOME ONBOARDING PREFERENCE GATE MODAL (MINIMAL)
            ========================================== -->
-      <div class="welcome-modal-overlay" id="welcome-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="welcome-modal-title">
+      <div class="welcome-modal-overlay" id="welcome-modal-overlay" role="dialog" aria-modal="true" aria-label="Language and Sound Preferences">
         <div class="welcome-modal-card">
-          <!-- Traditional Emblem Decor -->
-          <div class="welcome-header-decor">
-            <span class="welcome-diya-icon">🪔</span>
-            <span class="welcome-badge-pill" data-i18n="welcome_badge">🪔 শারদ অভিবাদন</span>
-          </div>
-
-          <h2 class="welcome-title" id="welcome-modal-title" data-i18n="welcome_title">মন্ডল বাড়ির পুজোয় আপনাকে স্বাগত</h2>
-          <p class="welcome-subtitle" data-i18n="welcome_subtitle">ফুরফুরা মণ্ডল পরিবারের ১৯৯৭ সাল থেকে অনুষ্ঠিত ঐতিহ্যবাহী শারদোৎসবের ডিজিটাল প্রাঙ্গণে প্রবেশ করুন</p>
-
           <div class="welcome-options-container">
             <!-- 1. Language Preference Selection -->
             <div class="welcome-option-group">
-              <label class="welcome-group-label" data-i18n="welcome_lang_label">🌐 আপনার পছন্দের ভাষা নির্বাচন করুন (Select Language)</label>
+              <label class="welcome-group-label" data-i18n="welcome_lang_label">ভাষা / Language</label>
               <div class="welcome-choice-grid welcome-choice-lang">
                 <button type="button" class="welcome-choice-btn welcome-choice-lang-btn active" id="welcome-lang-bn" data-lang="bn">
-                  <span class="choice-text">বাংলা (Bengali)</span>
+                  <span class="choice-text">বাংলা</span>
                   <span class="choice-check">✓</span>
                 </button>
                 <button type="button" class="welcome-choice-btn welcome-choice-lang-btn" id="welcome-lang-en" data-lang="en">
-                  <span class="choice-text">English (ইংরেজি)</span>
+                  <span class="choice-text">English</span>
                   <span class="choice-check">✓</span>
                 </button>
               </div>
             </div>
 
-            <!-- 2. Ambient Audio & Dhak Preference Selection -->
+            <!-- 2. Ambient Audio & Sound Selection -->
             <div class="welcome-option-group">
-              <label class="welcome-group-label" data-i18n="welcome_sound_label">🎶 আবহ সঙ্গীত ও ঢাকের আওয়াজ (Ambient Sound & Dhak)</label>
+              <label class="welcome-group-label" data-i18n="welcome_sound_label">শব্দ / Sound</label>
               <div class="welcome-choice-grid welcome-choice-sound">
                 <button type="button" class="welcome-choice-btn active" id="welcome-sound-yes" data-sound="yes">
-                  <span class="choice-icon">🥁</span>
-                  <div class="choice-details">
-                    <span class="choice-main-text" data-i18n="welcome_sound_yes">🔊 হ্যাঁ, আবহ সঙ্গীত ও ঢাক চালান</span>
-                    <span class="choice-sub-text">মৃদু ও স্নিগ্ধ শব্দে স্বয়ংক্রিয়ভাবে বাজবে</span>
-                  </div>
+                  <span class="choice-main-text" data-i18n="welcome_sound_yes">শব্দসহ (With Sound)</span>
                   <span class="choice-check">✓</span>
                 </button>
                 <button type="button" class="welcome-choice-btn" id="welcome-sound-no" data-sound="no">
-                  <span class="choice-icon">🔇</span>
-                  <div class="choice-details">
-                    <span class="choice-main-text" data-i18n="welcome_sound_no">🔇 শব্দহীন রাখুন</span>
-                    <span class="choice-sub-text">পরবর্তীতে যেকোনো সময় চালু করতে পারেন</span>
-                  </div>
+                  <span class="choice-main-text" data-i18n="welcome_sound_no">শব্দহীন (Without Sound)</span>
                   <span class="choice-check">✓</span>
                 </button>
               </div>
@@ -1644,8 +1627,7 @@
 
           <!-- Enter Site Button -->
           <button type="button" class="welcome-enter-btn" id="btn-welcome-enter">
-            <span class="enter-btn-text" data-i18n="welcome_btn_enter">প্রবেশ করুন (Enter Mondal Bari) 🪔</span>
-            <span class="enter-btn-sparkle">✨</span>
+            <span class="enter-btn-text" data-i18n="welcome_btn_enter">প্রবেশ করুন</span>
           </button>
         </div>
       </div>
