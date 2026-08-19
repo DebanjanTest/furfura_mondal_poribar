@@ -545,18 +545,18 @@ export const playlists = {
 };
 
 export const nativePujoData = {
-  pujoName: "মন্ডল বাড়ির পুজো / Furfura Mondal Poribar",
-  bengaliName: "মন্ডল বাড়ির পুজো (ফুরফুরা মণ্ডল পরিবার)",
+  pujoName: "মণ্ডল বাড়ির পুজো / Furfura Mondal Poribar",
+  bengaliName: "মণ্ডল বাড়ির পুজো (ফুরফুরা মণ্ডল পরিবার)",
   englishName: "Furfura Mondal Poribar Pujo",
   tagline: "Celebrating 30th Year of Heritage & Devotion (Est. 1997)",
   bengaliTagline: "১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য, সাবেকি রীতিনীতি ও আন্তরিক মিলনোৎসব",
   instagramHandle: "@furfura_mondal_poribar",
   instagramUrl: "https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp",
-  location: "Furfura Mondal Poribar Natmandir, Dankuni / Hooghly, Bengal",
+  location: "Furfura Mondal Poribar Natmandir, Furfura, Kazipada, Hooghly, Bengal",
   history: {
-    title: "মন্ডল বাড়ির পুজোর ঐতিহ্য ও ইতিহাস",
+    title: "মণ্ডল বাড়ির পুজোর ঐতিহ্য ও ইতিহাস",
     subtitle: "30th Year of Heritage & Ancestral Devotion • Est. 1997",
-    desc: "মন্ডল বাড়ির পুজো শুধুমাত্র একটি উৎসব নয়, এটি আমাদের পারিবারিক ভালোবাসা, শিকড় ও সনাতন সংস্কৃতির অমলিন মেলবন্ধন। ১৯৯৭ সাল থেকে নিরবচ্ছিন্নভাবে উদযাপিত হয়ে আসা এই পুজোয় আজও সংরক্ষিত রয়েছে নিষ্ঠাপূর্ণ সাবেকি প্রথা। সাবেকি একচালা ডাকের সাজের প্রতিমা, কূলপুরোহিতের কণ্ঠে বিশুদ্ধ চণ্ডীপাঠ, ১০৮ পদ্ম ও মাটির প্রদীপে সন্ধিপূজা, আর নাটমন্দির কাঁপানো ঐতিহ্যবাহী ঢাকের বোলে প্রতিবছর ঘরে ফিরে আসেন ঘরের মেয়ে মা দুর্গা।",
+    desc: "মণ্ডল বাড়ির পুজো শুধুমাত্র একটি উৎসব নয়, এটি আমাদের পারিবারিক ভালোবাসা, শিকড় ও সনাতন সংস্কৃতির অমলিন মেলবন্ধন। ১৯৯৭ সাল থেকে নিরবচ্ছিন্নভাবে উদযাপিত হয়ে আসা এই পুজোয় আজও সংরক্ষিত রয়েছে নিষ্ঠাপূর্ণ সাবেকি প্রথা। সাবেকি একচালা ডাকের সাজের প্রতিমা, কূলপুরোহিতের কণ্ঠে বিশুদ্ধ চণ্ডীপাঠ, ১০৮ পদ্ম ও মাটির প্রদীপে সন্ধিপূজা, আর নাটমন্দির কাঁপানো ঐতিহ্যবাহী ঢাকের বোলে প্রতিবছর ঘরে ফিরে আসেন ঘরের মেয়ে মা দুর্গা।",
     features: [
       "ঐতিহ্যবাহী সাবেকি একচালা ডাকের সাজের প্রতিমা",
       "সন্ধিপূজায় ১০৮ পদ্ম ও ১০৮ মাটির প্রদীপ নিবেদন",
@@ -572,7 +572,8 @@ export const nativePujoData = {
       englishDay: "Mahalaya",
       date: "১০ অক্টোবর ২০২৬ (শনিবার)",
       englishDate: "10 October 2026 (Saturday)",
-      rituals: "ভোর ৪:৩০ মহালয়া চণ্ডীপাঠ, তর্পণ ও দেবী আবাহন"
+      rituals: "ভোর ৪:৩০ মহালয়া চণ্ডীপাঠ, তর্পণ ও দেবী আবাহন",
+      englishRituals: "4:30 AM Dawn Chandi Path, Tarpan & Devi Invocation"
     },
     {
       id: "sasthi",
@@ -580,7 +581,8 @@ export const nativePujoData = {
       englishDay: "Maha Shasthi",
       date: "১৬ অক্টোবর ২০২৬ (শুক্রবার)",
       englishDate: "16 October 2026 (Friday)",
-      rituals: "দেবী বোধন, আমন্ত্রণ, অধিবাস ও সান্ধ্য আরতি"
+      rituals: "দেবী বোধন, আমন্ত্রণ, অধিবাস ও সান্ধ্য আরতি",
+      englishRituals: "Devi Bodhon, Amantran, Adhibas & Evening Aarti"
     },
     {
       id: "saptami",
@@ -588,7 +590,8 @@ export const nativePujoData = {
       englishDay: "Maha Saptami",
       date: "১৭ অক্টোবর ২০২৬ (শনিবার)",
       englishDate: "17 October 2026 (Saturday)",
-      rituals: "নবপত্রিকা (কলাবউ) স্নান ও প্রবেশ, সপ্তমী বিহিত পূজা ও অঞ্জলি"
+      rituals: "নবপত্রিকা (কলাবউ) স্নান ও প্রবেশ, সপ্তমী বিহিত পূজা ও অঞ্জলি",
+      englishRituals: "Nabapatrika (Kola Bou) Bathing & Natmandir Entry, Saptami Puja & Anjali"
     },
     {
       id: "astami",
@@ -596,7 +599,8 @@ export const nativePujoData = {
       englishDay: "Maha Ashtami & Sandhi Puja",
       date: "১৮ অক্টোবর ২০২৬ (রবিবার)",
       englishDate: "18 October 2026 (Sunday)",
-      rituals: "মহাষ্টমী পুষ্পাঞ্জলি, কুমারী পূজা ও ১০৮ পদ্ম-প্রদীপে সন্ধিপূজা"
+      rituals: "মহাষ্টমী পুষ্পাঞ্জলি, কুমারী পূজা ও ১০৮ পদ্ম-প্রদীপে সন্ধিপূজা",
+      englishRituals: "Maha Ashtami Pushpanjali, Kumari Puja & 108 Lotuses Sandhi Puja"
     },
     {
       id: "navami",
@@ -604,7 +608,8 @@ export const nativePujoData = {
       englishDay: "Maha Nabami & Dhunuchi Dance",
       date: "১৯ অক্টোবর ২০২৬ (সোমবার)",
       englishDate: "19 October 2026 (Monday)",
-      rituals: "নবমী হোমযজ্ঞ, মহাপ্রসাদ অন্নভোগ বিতরণ ও সান্ধ্য ধুনুচি নৃত্য"
+      rituals: "নবমী হোমযজ্ঞ, মহাপ্রসাদ অন্নভোগ বিতরণ ও সান্ধ্য ধুনুচি নৃত্য",
+      englishRituals: "Nabami Homa Fire Ritual, Mahaprasad Feast Distribution & Evening Dhunuchi Dance"
     },
     {
       id: "dashami",
@@ -612,25 +617,34 @@ export const nativePujoData = {
       englishDay: "Bijoya Dashami & Sindoor Khela",
       date: "২০ অক্টোবর ২০২৬ (মঙ্গলবার)",
       englishDate: "20 October 2026 (Tuesday)",
-      rituals: "অপরাজিতা পূজা, দেবী বরণ, সিঁদুর খেলা, মিষ্টিমুখ ও শান্তিজল"
+      rituals: "অপরাজিতা পূজা, দেবী বরণ, সিঁদুর খেলা, মিষ্টিমুখ ও শান্তিজল",
+      englishRituals: "Aparajita Puja, Devi Baran, Sindoor Khela & Shantijal Blessings"
     }
   ],
   highlights: [
     {
       title: "১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য (Est. 1997 Legacy)",
-      desc: "সাবেকি একচালা শোলার ডাকের সাজের প্রতিমা ও নিষ্ঠার সাথে রক্ষিত বৈদিক পূজা আচার।"
+      englishTitle: "Ancestral Legacy since 1997",
+      desc: "সাবেকি একচালা শোলার ডাকের সাজের প্রতিমা ও নিষ্ঠার সাথে রক্ষিত বৈদিক পূজা আচার।",
+      englishDesc: "Traditional Ekchala Sholar Daker Saaj idol and sacred Vedic rituals preserved with utmost reverence."
     },
     {
       title: "সন্ধিপূজা ও ১০৮ পদ্ম নিবেদন (108 Lotuses Sandhi Puja)",
-      desc: "অষ্টমী-নবমীর সন্ধিক্ষণে ১০৮ মাটির প্রদীপ ও নীলপদ্মে দেবী চামুণ্ডার মহাশক্তি আরাধনা।"
+      englishTitle: "108 Lotuses Sandhi Puja",
+      desc: "অষ্টমী-নবমীর সন্ধিক্ষণে ১০৮ মাটির প্রদীপ ও নীলপদ্মে দেবী চামুণ্ডার মহাশক্তি আরাধনা।",
+      englishDesc: "Grand worship of Devi Chamunda at the cusp of Ashtami-Navami with 108 earthen lamps and sacred blue lotuses."
     },
     {
       title: "মহাপ্রসাদ ও অন্নভোগ বিতরণ (Mahaprasad Bhog)",
-      desc: "ঘিয়ে ভাজা লুচি, ভোগের খিচুড়ি, লাবড়া, চাটনি, পায়েশ ও নারকেল নাড়ুর সার্বজনীন বিতরণ।"
+      englishTitle: "Universal Mahaprasad Feast",
+      desc: "ঘিয়ে ভাজা লুচি, ভোগের খিচুড়ি, লাবড়া, চাটনি, পায়েশ ও নারকেল নাড়ুর সার্বজনীন বিতরণ।",
+      englishDesc: "Ghee-fried Luchi, Bhog Khichuri, Labra, Chutney, Payesh and handmade Narkel Naru for all devotees."
     },
     {
       title: "ধুনুচি নাচ ও ঢাকের যুগলবন্দী (Dhunuchi Naach & Dhak)",
-      desc: "নবমীর সন্ধ্যায় কাঁসর-ঘণ্টার তালে ধুনুচি আরতি ও সাবেকি ঢাকের তাকডুম তাকডুম লড়াই।"
+      englishTitle: "Dhunuchi Dance & Master Dhak",
+      desc: "নবমীর সন্ধ্যায় কাঁসর-ঘণ্টার তালে ধুনুচি আরতি ও সাবেকি ঢাকের তাকডুম তাকডুম লড়াই।",
+      englishDesc: "High-energy evening Aarti with fragrant coconut husk incense, brass gongs, and twin-stick Dhak rhythm duels."
     }
   ],
   galleryCategories: [
@@ -1387,7 +1401,7 @@ export const onnotaCreations = [
   {
     id: "on-04",
     title: "Nostalgia of Autumn: Forgotten Puja Days",
-    title_bn: "শিউলির গন্ধে নস্টালজিয়া — পুজোর ফেলে আসা দিন",
+    title_bn: "শিউলির গন্ধে শারদ স্মৃতি — পুজোর ফেলে আসা দিন",
     category: "literature",
     categoryLabel: "সাহিত্য ও স্মৃতিচারণ",
     src: "/onnota/art_dawn_mahalaya.webp",

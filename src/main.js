@@ -4,10 +4,11 @@ import { bgAmbience } from './audio/backgroundAmbience.js';
 import { audioEngine, dhakSequencer, TRADITIONAL_BOLS } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
-import { getLanguage, setLanguage, t, applyTranslations } from './utils/i18n.js';
+import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations } from './utils/i18n.js';
 
 // Application State
 const state = {
+  lang: 'bn', // Current active UI language ('bn' or 'en')
   activeVibe: 'auto', // 'auto' or 'early-morning', 'morning', etc.
   currentVibeTime: 'early-morning',
   currentPlaylistKey: 'durgaPuja',
@@ -62,9 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Stored Language Preference
   try {
-    const savedLang = localStorage.getItem('mondal_pujo_lang') || 'bn';
+    const savedLang = getSavedLanguage();
+    state.lang = savedLang;
     setLanguage(savedLang);
   } catch (e) {
+    state.lang = 'bn';
     setLanguage('bn');
   }
 
@@ -2983,22 +2986,44 @@ function initWelcomeModal() {
   let selectedLang = getLanguage() || 'bn';
   let selectedSound = 'yes';
 
-  // Language choice buttons
-  const updateLangChoices = (lang) => {
+  // Sync initial state of welcome modal buttons to current language
+  const syncWelcomeLangButtons = (lang) => {
     selectedLang = lang;
-    langBnBtn?.classList.toggle('active', lang === 'bn');
-    langEnBtn?.classList.toggle('active', lang === 'en');
-    setLanguage(lang);
+    const allWelcomeLangBtns = welcomeOverlay.querySelectorAll('.welcome-choice-lang-btn, .welcome-choice-btn[data-lang], #welcome-lang-bn, #welcome-lang-en');
+    allWelcomeLangBtns.forEach((btn) => {
+      const btnLang = btn.getAttribute('data-lang');
+      const isActive = btnLang === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
   };
 
-  langBnBtn?.addEventListener('click', () => updateLangChoices('bn'));
-  langEnBtn?.addEventListener('click', () => updateLangChoices('en'));
+  syncWelcomeLangButtons(selectedLang);
+
+  // Language choice buttons
+  const handleLangChoice = (lang) => {
+    selectedLang = lang;
+    state.lang = lang;
+    setLanguage(lang);
+    syncWelcomeLangButtons(lang);
+  };
+
+  // Bind click/touch on welcome language buttons
+  welcomeOverlay.querySelectorAll('.welcome-choice-lang-btn, .welcome-choice-btn[data-lang], #welcome-lang-bn, #welcome-lang-en').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const lang = btn.getAttribute('data-lang');
+      if (lang) handleLangChoice(lang);
+    });
+  });
 
   // Sound choice buttons
   const updateSoundChoices = (sound) => {
     selectedSound = sound;
     soundYesBtn?.classList.toggle('active', sound === 'yes');
+    soundYesBtn?.setAttribute('aria-pressed', sound === 'yes' ? 'true' : 'false');
     soundNoBtn?.classList.toggle('active', sound === 'no');
+    soundNoBtn?.setAttribute('aria-pressed', sound === 'no' ? 'true' : 'false');
   };
 
   soundYesBtn?.addEventListener('click', () => updateSoundChoices('yes'));
@@ -3010,7 +3035,8 @@ function initWelcomeModal() {
     e?.stopPropagation?.();
 
     try {
-      // 1. Save language
+      // 1. Save and apply chosen language
+      state.lang = selectedLang;
       setLanguage(selectedLang);
 
       // 2. Handle audio based on user choice
@@ -3056,46 +3082,150 @@ function initWelcomeModal() {
 }
 
 function initLanguageSwitcher() {
-  // Desktop header language toggle
-  const desktopToggle = document.getElementById('btn-toggle-lang');
-  const desktopLabel = document.getElementById('lang-current-label');
+  const syncAllLanguageUI = (lang) => {
+    state.lang = lang;
 
-  const updateHeaderLabel = (lang) => {
+    // 1. Desktop & Dynamic Island header labels
+    const desktopLabel = document.getElementById('lang-current-label');
     if (desktopLabel) {
       desktopLabel.textContent = lang === 'bn' ? 'বাংলা' : 'English';
     }
-    const islandBn = document.getElementById('island-lang-bn');
-    const islandEn = document.getElementById('island-lang-en');
-    islandBn?.classList.toggle('active', lang === 'bn');
-    islandEn?.classList.toggle('active', lang === 'en');
+
+    const activeToggle = document.getElementById('btn-toggle-lang-active');
+    if (activeToggle) {
+      activeToggle.setAttribute('aria-label', `Change Language (Current: ${lang === 'bn' ? 'বাংলা' : 'English'})`);
+    }
+
+    const mainToggle = document.getElementById('btn-toggle-lang');
+    if (mainToggle) {
+      mainToggle.setAttribute('aria-label', `Toggle Language (Current: ${lang === 'bn' ? 'বাংলা' : 'English'})`);
+    }
+
+    // 2. Dynamic Island language chips
+    document.querySelectorAll('.island-lang-section .island-vibe-chip[data-lang], #island-lang-bn, #island-lang-en').forEach((chip) => {
+      const chipLang = chip.getAttribute('data-lang');
+      const isActive = chipLang === lang;
+      chip.classList.toggle('active', isActive);
+      chip.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    // 3. Welcome modal language buttons
+    document.querySelectorAll('.welcome-choice-lang-btn, .welcome-choice-btn[data-lang], #welcome-lang-bn, #welcome-lang-en').forEach((btn) => {
+      const btnLang = btn.getAttribute('data-lang');
+      const isActive = btnLang === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    // 4. Header buttons & aliases (#header-lang-btn, #lang-switch-btn, .header-lang-btn, .lang-switch-btn, [data-lang-btn])
+    document.querySelectorAll('#header-lang-btn, #lang-switch-btn, .header-lang-btn, .lang-switch-btn, [data-lang-btn]').forEach((btn) => {
+      const btnLang = btn.getAttribute('data-lang');
+      if (btnLang) {
+        const isActive = btnLang === lang;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      } else {
+        const labelEl = btn.querySelector('.lang-btn-label, .btn-label, span');
+        if (labelEl) {
+          labelEl.textContent = lang === 'bn' ? 'বাংলা' : 'English';
+        }
+        btn.setAttribute('aria-label', `Change Language (Current: ${lang === 'bn' ? 'বাংলা' : 'English'})`);
+      }
+    });
+
+    // 5. Update Attendance text if rendered
+    const attendanceBtn = document.getElementById('btn-confirm-attendance');
+    const attendanceText = document.getElementById('attendance-btn-text');
+    if (attendanceBtn && attendanceText) {
+      const isConfirmed = attendanceBtn.classList.contains('confirmed');
+      attendanceText.textContent = isConfirmed
+        ? (t('invitation_confirmed') || 'প্রণাম ও শুভেচ্ছা গৃহীত হয়েছে')
+        : (t('invitation_confirm') || 'প্রণাম ও শারদ শুভেচ্ছা');
+    }
   };
 
-  desktopToggle?.addEventListener('click', (e) => {
-    e.stopPropagation();
+  const toggleLanguage = () => {
     const nextLang = getLanguage() === 'bn' ? 'en' : 'bn';
+    state.lang = nextLang;
     setLanguage(nextLang);
-    updateHeaderLabel(nextLang);
+    syncAllLanguageUI(nextLang);
+  };
+
+  const selectLanguage = (lang) => {
+    state.lang = lang;
+    setLanguage(lang);
+    syncAllLanguageUI(lang);
+  };
+
+  // Dynamic Island / Header Toggles
+  document.getElementById('btn-toggle-lang')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleLanguage();
   });
 
   document.getElementById('btn-toggle-lang-active')?.addEventListener('click', (e) => {
     e.stopPropagation();
-    const nextLang = getLanguage() === 'bn' ? 'en' : 'bn';
-    setLanguage(nextLang);
-    updateHeaderLabel(nextLang);
+    toggleLanguage();
   });
 
-  // Dynamic Island language buttons
-  document.getElementById('island-lang-bn')?.addEventListener('click', () => {
-    setLanguage('bn');
-    updateHeaderLabel('bn');
+  // Header language button aliases
+  document.getElementById('header-lang-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleLanguage();
   });
 
-  document.getElementById('island-lang-en')?.addEventListener('click', () => {
-    setLanguage('en');
-    updateHeaderLabel('en');
+  document.getElementById('lang-switch-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleLanguage();
   });
 
-  updateHeaderLabel(getLanguage());
+  document.querySelectorAll('.header-lang-btn, .lang-switch-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetLang = btn.getAttribute('data-lang');
+      if (targetLang) {
+        selectLanguage(targetLang);
+      } else {
+        toggleLanguage();
+      }
+    });
+  });
+
+  // Dynamic Island Language Chips
+  document.getElementById('island-lang-bn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    selectLanguage('bn');
+  });
+
+  document.getElementById('island-lang-en')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    selectLanguage('en');
+  });
+
+  // Generic data-lang chips / buttons
+  document.querySelectorAll('.island-vibe-chips [data-lang], [data-lang-btn]').forEach((chip) => {
+    chip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const lang = chip.getAttribute('data-lang');
+      if (lang) selectLanguage(lang);
+    });
+  });
+
+  // Listen to global language change event
+  window.addEventListener('pujo_language_changed', (e) => {
+    const lang = e.detail?.lang || getLanguage();
+    syncAllLanguageUI(lang);
+    // Refresh dynamic views
+    if (typeof renderPlaylistTracks === 'function') {
+      renderPlaylistTracks(state.activeTab);
+    }
+    if (typeof updatePlayerUI === 'function') {
+      updatePlayerUI(getCurrentTrack());
+    }
+  });
+
+  // Initial Sync
+  syncAllLanguageUI(getLanguage());
 }
 
 function copyTextToClipboard(text, btnElement, successMsg) {
@@ -3151,10 +3281,10 @@ function initInvitationSection() {
       id: 'formal-invitation-letterhead',
       src: '/invitation/invitation.jpg',
       title: 'শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণলিপি',
-      bengaliTitle: 'শ্রীশ্রী দুর্গাপূজার আমন্ত্রণ — ফুরফুরা মণ্ডল পরিবার',
+      bengaliTitle: 'শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণ — ফুরফুরা মণ্ডল পরিবার',
       categoryLabel: 'সানন্দ আমন্ত্রণপত্র',
-      author: 'ফুরফুরা মণ্ডল পরিবার, ফুরফুরা, কাজীপাডা, হুগলী',
-      bengaliDesc: 'সমাগত দুর্গাপূজায় আমাদের ফুরাফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্তকে সবান্ধব উপস্থিত হয়ে মাতৃপূজা বেদীতে অর্ঘ্য নিবেদনের আহ্বান জানাই। সপ্তমী সন্ধ্যায় বিচিত্রানুষ্ঠান ও নবমী সন্ধ্যায় ধনুচী নাচ।',
+      author: 'ফুরফুরা মণ্ডল পরিবার, ফুরফুরা, কাজীপাড়া, হুগলী',
+      bengaliDesc: 'সমাগত দুর্গাপূজায় আমাদের ফুরফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্ত ও সুধীজনকে সবান্ধব উপস্থিত হয়ে মাতৃপূজা বেদীতে পুষ্পাঞ্জলি ও অর্ঘ্য নিবেদনের সানন্দ আহ্বান জানাই। সপ্তমী সন্ধ্যায় বিচিত্রানুষ্ঠান ও নবমী সন্ধ্যায় ঐতিহ্যবাহী ধুনুচি নাচ ও ঢাকের লড়াই।',
       likes: 540
     };
 
@@ -3168,14 +3298,14 @@ function initInvitationSection() {
     e.preventDefault();
     const shareText = `শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণ
 
-ফুরফুরা মণ্ডল পরিবার (ফুরফুরা, কাজীপাডা, হুগলী)
-১৯৯৭ সাল থেকে অনুষ্ঠিত ঐতিহ্যবাহী শারদোৎসব ২০২৬
+ফুরফুরা মণ্ডল পরিবার (ফুরফুরা, কাজীপাড়া, হুগলী)
+১৯৯৭ সাল থেকে অনুষ্ঠিত সাবেকি শারদোৎসব ২০২৬
 
 সুধী,
-সমাগত দুর্গাপূজায় আমাদের ফুরাফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্তকে সবান্ধব উপস্থিত হয়ে মাতৃপূজা বেদীতে অর্ঘ্য নিবেদনের আন্তরিক আহ্বান জানাই।
+সমাগত দুর্গাপূজায় আমাদের ফুরফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্ত ও সুধীজনকে সবান্ধব উপস্থিত হয়ে মাতৃপূজা বেদীতে পুষ্পাঞ্জলি ও অর্ঘ্য নিবেদনের সানন্দ আহ্বান জানাই।
 
 মহা সপ্তমী সন্ধ্যা: বিচিত্রানুষ্ঠান ও আনন্দমেলা
-মহা নবমী সন্ধ্যা: নাটমন্দিরে ঐতিহ্যবাহী ধুনুচি নাচ ও ঢাকের লড়াই
+মহা নবমী সন্ধ্যা: নাটমন্দিরে ঐতিহ্যবাহী ধুনুচি নাচ ও সাবেকি ঢাকের লড়াই
 
 পূজামণ্ডপ অবস্থান ও দিকনির্দেশনা: https://maps.app.goo.gl/YXcU7gT92CLx1XkbA
 ডিজিটাল আমন্ত্রণপত্র ও লাইভ আগমনী রেডিও: ${window.location.href}
@@ -3184,7 +3314,7 @@ Instagram: @furfura_mondal_poribar`;
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'শ্রীশ্রী দুর্গাপূজার আমন্ত্রণ — ফুরফুরা মণ্ডল পরিবার',
+          title: 'শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণ — ফুরফুরা মণ্ডল পরিবার',
           text: shareText,
           url: window.location.href
         });
@@ -3193,7 +3323,7 @@ Instagram: @furfura_mondal_poribar`;
     }
 
     if (typeof copyTextToClipboard === 'function') {
-      copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণবার্তা কপি হয়েছে');
+      copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণবার্তা কপি হয়েছে!');
     }
   });
 
@@ -3201,7 +3331,7 @@ Instagram: @furfura_mondal_poribar`;
   const savedAttendance = localStorage.getItem('mondal_bari_invite_confirmed');
   if (savedAttendance === 'true' && attendanceBtn && attendanceText) {
     attendanceBtn.classList.add('confirmed');
-    attendanceText.textContent = t('invitation_confirmed') || 'প্রণাম গৃহীত হয়েছে';
+    attendanceText.textContent = t('invitation_confirmed') || 'প্রণাম ও শুভেচ্ছা গৃহীত হয়েছে';
   }
 
   attendanceBtn?.addEventListener('click', () => {
@@ -3210,7 +3340,7 @@ Instagram: @furfura_mondal_poribar`;
       attendanceBtn.classList.add('confirmed');
       localStorage.setItem('mondal_bari_invite_confirmed', 'true');
       if (attendanceText) {
-        attendanceText.textContent = t('invitation_confirmed') || 'প্রণাম গৃহীত হয়েছে';
+        attendanceText.textContent = t('invitation_confirmed') || 'প্রণাম ও শুভেচ্ছা গৃহীত হয়েছে';
       }
       if (typeof audioEngine?.playDiyaLight === 'function') {
         audioEngine.playDiyaLight();
@@ -3219,7 +3349,7 @@ Instagram: @furfura_mondal_poribar`;
       attendanceBtn.classList.remove('confirmed');
       localStorage.removeItem('mondal_bari_invite_confirmed');
       if (attendanceText) {
-        attendanceText.textContent = t('invitation_confirm') || 'প্রণাম ও শুভেচ্ছা';
+        attendanceText.textContent = t('invitation_confirm') || 'প্রণাম ও শারদ শুভেচ্ছা';
       }
     }
   });
