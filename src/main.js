@@ -3206,7 +3206,7 @@ function initInvitationSection() {
     }
 
     if (typeof copyTextToClipboard === 'function') {
-      copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণবার্তা কপি হয়েছে!');
+      copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণবার্তা কপি হয়েছে');
     }
   });
 
@@ -3214,7 +3214,7 @@ function initInvitationSection() {
   const savedAttendance = localStorage.getItem('mondal_bari_invite_confirmed');
   if (savedAttendance === 'true' && attendanceBtn && attendanceText) {
     attendanceBtn.classList.add('confirmed');
-    attendanceText.textContent = t('invitation_confirmed') || '✅ আপনার সাদর উপস্থিতির প্রণাম গৃহীত হলো!';
+    attendanceText.textContent = t('invitation_confirmed') || 'প্রণাম গৃহীত হয়েছে';
   }
 
   attendanceBtn?.addEventListener('click', () => {
@@ -3223,7 +3223,7 @@ function initInvitationSection() {
       attendanceBtn.classList.add('confirmed');
       localStorage.setItem('mondal_bari_invite_confirmed', 'true');
       if (attendanceText) {
-        attendanceText.textContent = t('invitation_confirmed') || '✅ আপনার সাদর উপস্থিতির প্রণাম গৃহীত হলো!';
+        attendanceText.textContent = t('invitation_confirmed') || 'প্রণাম গৃহীত হয়েছে';
       }
       if (typeof audioEngine?.playDiyaLight === 'function') {
         audioEngine.playDiyaLight();
@@ -3232,7 +3232,7 @@ function initInvitationSection() {
       attendanceBtn.classList.remove('confirmed');
       localStorage.removeItem('mondal_bari_invite_confirmed');
       if (attendanceText) {
-        attendanceText.textContent = t('invitation_confirm') || 'উপস্থিত থাকার শুভেচ্ছা জানান (Send Pronam)';
+        attendanceText.textContent = t('invitation_confirm') || 'প্রণাম ও শুভেচ্ছা';
       }
     }
   });

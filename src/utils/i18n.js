@@ -24,13 +24,13 @@ export const translations = {
     "hero_scroll_hint": "নিচে স্ক্রোল করে উৎসব পরিক্রমা শুরু করুন",
 
     // Invitation Section
-    "invitation_badge": "📜 সানন্দ আমন্ত্রণলিপি",
-    "invitation_title": "ফুরফুরা মণ্ডল পরিবারের শারদ আমন্ত্রণ",
-    "invitation_subtitle": "ফুরফুরা, কাজীপাডা, হুগলী • সমাগত দুর্গাপূজায় আমাদের ফুরাফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্তকে সবান্ধব উপস্থিতি ও অর্ঘ্য নিবেদনের আন্তরিক আহ্বান",
-    "invitation_download": "আমন্ত্রণপত্র ডাউনলোড",
-    "invitation_share": "নিমন্ত্রণ জানান (Share)",
-    "invitation_confirm": "উপস্থিত থাকার শুভেচ্ছা জানান (Send Pronam)",
-    "invitation_confirmed": "✅ আপনার সাদর উপস্থিতির প্রণাম গৃহীত হলো!",
+    "invitation_badge": "শারদ আমন্ত্রণ",
+    "invitation_title": "শ্রীশ্রী দুর্গাপূজার আমন্ত্রণ",
+    "invitation_subtitle": "ফুরফুরা মণ্ডল পরিবার • ফুরফুরা, কাজীপাডা, হুগলী",
+    "invitation_download": "ডাউনলোড",
+    "invitation_share": "নিমন্ত্রণ পাঠান",
+    "invitation_confirm": "প্রণাম ও শুভেচ্ছা",
+    "invitation_confirmed": "প্রণাম গৃহীত হয়েছে",
 
     // Photo River
     "river_title": "ঐতিহ্যের নদী — উৎসবের জীবন্ত মুহূর্তমালা",
@@ -97,13 +97,13 @@ export const translations = {
     "hero_scroll_hint": "Scroll down to begin your festive walkthrough",
 
     // Invitation Section
-    "invitation_badge": "📜 Formal Invitation",
-    "invitation_title": "Festive Invitation from Furfura Mondal Family",
-    "invitation_subtitle": "Furfura, Kazipada, Hooghly • Warmly welcoming all devotees and well-wishers to offer worship and celebrate Durga Puja",
-    "invitation_download": "Download Letterhead",
-    "invitation_share": "Share Invitation",
-    "invitation_confirm": "Confirm Presence (Send Pronam)",
-    "invitation_confirmed": "✅ Your Pronam & Presence has been recorded!",
+    "invitation_badge": "Puja Invitation",
+    "invitation_title": "Sri Sri Durga Puja Invitation",
+    "invitation_subtitle": "Furfura Mondal Poribar • Furfura, Kazipada, Hooghly",
+    "invitation_download": "Download",
+    "invitation_share": "Share",
+    "invitation_confirm": "Send Pronam",
+    "invitation_confirmed": "Pronam Recorded",
 
     // Photo River
     "river_title": "River of Memories — Living Moments of Pujo",
