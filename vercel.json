@@ -23,7 +23,7 @@
       ]
     },
     {
-      "source": "/(bg|bg-mobile)/(.*)",
+      "source": "/(bg|bg-mobile|invitation|music)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
