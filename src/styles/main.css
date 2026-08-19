@@ -134,8 +134,7 @@ html {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
+  scroll-behavior: auto; /* Powered by custom Ponytail ease-in RAF engine */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -283,8 +282,6 @@ button {
   box-sizing: border-box;
   padding-top: clamp(4.5rem, 8vh, 6.25rem);
   padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 /* Hero Scroll Down Cue */
@@ -4871,8 +4868,6 @@ button {
   box-sizing: border-box;
   content-visibility: auto;
   contain-intrinsic-size: 1px 900px;
-  scroll-snap-align: start;
-  scroll-snap-stop: normal;
 }
 
 .gallery-section-container {
@@ -5841,8 +5836,6 @@ button {
   overflow: hidden;
   content-visibility: auto;
   contain-intrinsic-size: 1px 700px;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6500,12 +6493,8 @@ button {
   transform: translateX(0);
 }
 
-/* Mobile Ergonomics for Scroll Snap */
+/* Mobile Ergonomics */
 @media (max-width: 768px) {
-  .app-wrapper {
-    scroll-snap-type: y proximity;
-  }
-
   .photo-river-section {
     min-height: calc(100vh - 56px);
     min-height: calc(100dvh - 56px);
@@ -6515,18 +6504,25 @@ button {
   .onnota-section {
     min-height: auto;
     padding: 3rem 1rem 2.5rem;
-    scroll-snap-align: none !important;
-    scroll-snap-stop: normal !important;
   }
 
   .grand-gallery-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    padding: 3.5rem 1rem 6rem;
   }
 
   .desktop-snap-nav {
     display: none !important;
   }
+}
+
+/* Ponytail Subtle Ease-In Sectional Motion */
+.hero-viewport-section,
+.invitation-section,
+.photo-river-section,
+.onnota-section,
+.grand-gallery-section {
+  will-change: transform, opacity;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ==========================================================================

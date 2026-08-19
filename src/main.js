@@ -284,7 +284,7 @@ function initDynamicIsland() {
   document.getElementById('island-quick-gallery')?.addEventListener('click', (e) => {
     e.stopPropagation();
     island?.classList.remove('drawer-open');
-    document.getElementById('gallery-section')?.scrollIntoView({ behavior: 'smooth' });
+    smoothScrollToSection('gallery-section', 620);
   });
 
   document.getElementById('island-quick-heritage')?.addEventListener('click', (e) => {
@@ -1854,13 +1854,13 @@ function initGrandGallery() {
   const scrollIndicator = document.getElementById('btn-scroll-to-gallery');
   scrollIndicator?.addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('photo-river-section')?.scrollIntoView({ behavior: 'smooth' });
+    smoothScrollToSection('photo-river-section', 620);
   });
 
   const jumpTopBtn = document.getElementById('btn-jump-top');
   jumpTopBtn?.addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' });
+    smoothScrollToSection('hero-section', 620);
   });
 
   // Footer schedule button
@@ -2181,7 +2181,7 @@ function initOnnotaSection() {
 
   document.getElementById('btn-onnota-jump-top')?.addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('hero-section')?.scrollIntoView({ behavior: 'smooth' });
+    smoothScrollToSection('hero-section', 620);
   });
 
   document.getElementById('btn-onnota-open-schedule')?.addEventListener('click', () => {
@@ -3236,8 +3236,78 @@ Instagram: @furfura_mondal_poribar`;
 }
 
 /* ==========================================================================
-   9. SECTION SCROLL SNAP & ACCESSIBLE GESTURE CONTROLLER
+   9. PONYTAIL EASE-IN SMOOTH SCROLL ENGINE & SECTIONAL NAVIGATION
    ========================================================================== */
+
+let activeScrollAnimId = null;
+let isProgrammaticScrolling = false;
+
+/**
+ * High-performance smooth scrolling with a subtle, silky ease-in / ease-in-out curve
+ * Starts with gentle ease-in acceleration, glides fluidly, softly eases out at arrival.
+ * @param {number} targetY - Destination scrollTop in pixels
+ * @param {number} duration - Animation duration in ms (default: 600ms)
+ * @param {Function} onComplete - Callback executed when scroll finishes
+ */
+export function smoothScrollToTarget(targetY, duration = 600, onComplete = null) {
+  if (activeScrollAnimId) {
+    cancelAnimationFrame(activeScrollAnimId);
+    activeScrollAnimId = null;
+  }
+
+  const startY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const clampedTargetY = Math.max(0, Math.min(targetY, maxScroll));
+  const distance = clampedTargetY - startY;
+
+  if (Math.abs(distance) < 3) {
+    window.scrollTo(0, clampedTargetY);
+    if (onComplete) onComplete();
+    return;
+  }
+
+  isProgrammaticScrolling = true;
+
+  // Ponytail Custom Subtle Ease-In Curve:
+  // Gentle initial acceleration, silky gliding velocity, smooth landing
+  const easeInOutCubic = (t) => {
+    return t < 0.5
+      ? 4 * t * t * t
+      : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  };
+
+  const startTime = performance.now();
+
+  function step(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easedProgress = easeInOutCubic(progress);
+
+    window.scrollTo(0, startY + distance * easedProgress);
+
+    if (progress < 1) {
+      activeScrollAnimId = requestAnimationFrame(step);
+    } else {
+      window.scrollTo(0, clampedTargetY);
+      activeScrollAnimId = null;
+      isProgrammaticScrolling = false;
+      if (onComplete) onComplete();
+    }
+  }
+
+  activeScrollAnimId = requestAnimationFrame(step);
+}
+
+/**
+ * Scroll smoothly to a specific DOM element or selector with subtle ease-in motion
+ */
+export function smoothScrollToSection(elementOrId, duration = 620, offset = 0, onComplete = null) {
+  const el = typeof elementOrId === 'string' ? document.getElementById(elementOrId) : elementOrId;
+  if (!el) return;
+  const rect = el.getBoundingClientRect();
+  const targetY = rect.top + (window.pageYOffset || document.documentElement.scrollTop || 0) + offset;
+  smoothScrollToTarget(targetY, duration, onComplete);
+}
 
 function initSectionScrollLocking() {
   const snapNavDots = document.querySelectorAll('.snap-nav-dot');
@@ -3250,19 +3320,42 @@ function initSectionScrollLocking() {
     { id: 'gallery-section', name: 'Gallery' } // Free-scrolling exemption
   ];
 
+  // Global cancel on manual user touch / mouse interaction
+  const cancelScrollAnim = () => {
+    if (activeScrollAnimId) {
+      cancelAnimationFrame(activeScrollAnimId);
+      activeScrollAnimId = null;
+      isProgrammaticScrolling = false;
+    }
+  };
+
+  window.addEventListener('touchstart', cancelScrollAnim, { passive: true });
+  window.addEventListener('mousedown', cancelScrollAnim, { passive: true });
+
   // 1. Navigation Dots Click Handlers
   snapNavDots.forEach((dot) => {
     dot.addEventListener('click', (e) => {
       e.preventDefault();
       const targetId = dot.getAttribute('data-target');
+      smoothScrollToSection(targetId, 620);
+    });
+  });
+
+  // 2. Intercept All In-Page Anchor Links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#' || href === '#!') return;
+      const targetId = href.substring(1);
       const targetEl = document.getElementById(targetId);
       if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        e.preventDefault();
+        smoothScrollToSection(targetEl, 620);
       }
     });
   });
 
-  // 2. IntersectionObserver to update active navigation dots
+  // 3. IntersectionObserver to update active navigation dots
   const observerOptions = {
     root: null,
     threshold: 0.25
@@ -3286,14 +3379,26 @@ function initSectionScrollLocking() {
     if (el) sectionObserver.observe(el);
   });
 
-  // 3. Computer UI: Smooth Section Transition (Hero, Invitation & River Lock, Free Onnota, Initial Gallery Lock + Infinite Scroll)
+  // 4. Computer UI: Smooth Ease-In Section Transition on Mouse Wheel
   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   if (!isTouchDevice) {
     let isWheelGliding = false;
     let wheelTimeout = null;
 
+    const triggerSectionGlide = (targetEl) => {
+      if (!targetEl || isWheelGliding) return;
+      isWheelGliding = true;
+      smoothScrollToSection(targetEl, 620, 0, () => {
+        isWheelGliding = false;
+      });
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+    };
+
     window.addEventListener('wheel', (e) => {
+      if (isProgrammaticScrolling || isWheelGliding) return;
+
       const heroEl = document.getElementById('hero-section');
       const inviteEl = document.getElementById('invitation-section');
       const riverEl = document.getElementById('photo-river-section');
@@ -3308,87 +3413,63 @@ function initSectionScrollLocking() {
       const inviteRect = inviteEl.getBoundingClientRect();
       const heroRect = heroEl.getBoundingClientRect();
 
-      // Case A: Inside Grand Gallery -> Allow free continuous / infinite scrolling
+      // Case A: Inside Grand Gallery -> Allow free continuous scrolling
       const isInsideGallery = galleryRect.top <= 80 && galleryRect.bottom >= 200;
       if (isInsideGallery) {
-        if (galleryRect.top >= -20 && e.deltaY < -40 && !isWheelGliding) {
-          isWheelGliding = true;
-          onnotaEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+        if (galleryRect.top >= -20 && e.deltaY < -35 && !isWheelGliding) {
+          triggerSectionGlide(onnotaEl);
         }
         return;
       }
 
-      // Case B: Inside Others by Onnota -> Allow free continuous browsing
+      // Case B: Inside Others by Onnota -> Allow free browsing
       const isInsideOnnota = onnotaRect.top <= 100 && onnotaRect.bottom >= window.innerHeight * 0.4;
       if (isInsideOnnota) {
-        // At bottom of Onnota scrolling down -> Initial Lock onto Gallery
+        // At bottom of Onnota scrolling down -> Glide onto Gallery
         if (onnotaRect.bottom <= window.innerHeight + 80 && e.deltaY > 35 && !isWheelGliding) {
-          isWheelGliding = true;
-          galleryEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 700);
+          triggerSectionGlide(galleryEl);
         }
-        // At top of Onnota scrolling up -> Snap to Photo River
+        // At top of Onnota scrolling up -> Glide to Photo River
         else if (onnotaRect.top >= -30 && e.deltaY < -35 && !isWheelGliding) {
-          isWheelGliding = true;
-          riverEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 700);
+          triggerSectionGlide(riverEl);
         }
         return;
       }
 
-      // Case C: Inside Formal Invitation Section -> Allow free reading of the entire letterhead and transcript!
+      // Case C: Inside Formal Invitation Section -> Allow reading
       const isInsideInvite = inviteRect.top <= 100 && inviteRect.bottom >= window.innerHeight * 0.35;
       if (isInsideInvite) {
         // At bottom of Invitation scrolling down -> Glide to Photo River
         if (inviteRect.bottom <= window.innerHeight + 75 && e.deltaY > 35 && !isWheelGliding) {
-          isWheelGliding = true;
-          riverEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+          triggerSectionGlide(riverEl);
         }
         // At top of Invitation scrolling up -> Glide to Hero
         else if (inviteRect.top >= -30 && e.deltaY < -35 && !isWheelGliding) {
-          isWheelGliding = true;
-          heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+          triggerSectionGlide(heroEl);
         }
         return;
       }
 
       // Case D: Hero & Photo River single-fold transitions
-      if (Math.abs(e.deltaY) < 40 || isWheelGliding) return;
+      if (Math.abs(e.deltaY) < 35 || isWheelGliding) return;
 
       if (heroRect.top >= -100 && heroRect.bottom >= window.innerHeight * 0.5) {
         // At Hero -> Glide down to Invitation
         if (e.deltaY > 0) {
-          isWheelGliding = true;
-          inviteEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+          triggerSectionGlide(inviteEl);
         }
       } else if (riverRect.top <= 100 && riverRect.bottom >= window.innerHeight * 0.5) {
         // At Photo River
         if (e.deltaY > 0) {
-          isWheelGliding = true;
-          onnotaEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+          triggerSectionGlide(onnotaEl);
         } else if (e.deltaY < 0) {
-          isWheelGliding = true;
-          inviteEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+          triggerSectionGlide(inviteEl);
         }
       }
     }, { passive: true });
   }
 
-  // 4. Keyboard Page Navigation (PageDown, PageUp)
+  // 5. Keyboard Page Navigation (PageDown, PageUp)
   window.addEventListener('keydown', (e) => {
     if (['input', 'textarea', 'select'].includes(document.activeElement?.tagName?.toLowerCase())) return;
 
@@ -3408,7 +3489,7 @@ function initSectionScrollLocking() {
       const targetSec = document.getElementById(snapSections[nextIdx].id);
       if (targetSec) {
         e.preventDefault();
-        targetSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        smoothScrollToSection(targetSec, 620);
       }
     }
   });
