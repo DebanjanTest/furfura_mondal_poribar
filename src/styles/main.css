@@ -7176,13 +7176,13 @@ button {
   gap: clamp(0.85rem, 2vh, 1.35rem);
   width: 100%;
   max-width: 1240px;
-  background: radial-gradient(ellipse at center, rgba(255, 207, 64, 0.1) 0%, rgba(14, 18, 28, 0.92) 75%);
-  backdrop-filter: blur(32px) saturate(180%);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
-  border: 1.5px solid rgba(255, 207, 64, 0.45);
+  background: rgba(14, 18, 28, 0.42);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 207, 64, 0.35);
   border-radius: var(--radius-lg);
   padding: clamp(1rem, 2.5vh, 2rem) clamp(1rem, 3vw, 2.5rem);
-  box-shadow: 0 28px 70px -12px rgba(0, 0, 0, 0.95), 0 0 45px -5px rgba(255, 207, 64, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px -5px rgba(255, 207, 64, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   box-sizing: border-box;
 }
 
@@ -7193,9 +7193,8 @@ button {
   max-height: clamp(400px, 68vh, 660px);
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 207, 64, 0.22);
-  border: 2px solid rgba(255, 207, 64, 0.6);
-  background: #140b08;
+  background: transparent;
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -7205,8 +7204,6 @@ button {
 
 .invitation-frame:hover {
   transform: scale(1.015);
-  border-color: var(--heritage-gold);
-  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.95), 0 0 40px var(--heritage-gold-glow);
 }
 
 .invitation-frame picture {
@@ -7215,6 +7212,7 @@ button {
   justify-content: center;
   width: 100%;
   height: 100%;
+  background: transparent;
 }
 
 .invitation-hero-img {
@@ -7224,31 +7222,36 @@ button {
   display: block;
   aspect-ratio: 905/1280;
   object-fit: contain;
-  transition: transform 0.4s ease;
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 207, 64, 0.18);
+  border: 1.5px solid rgba(255, 207, 64, 0.45);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .invitation-frame:hover .invitation-hero-img {
   transform: scale(1.02);
+  border-color: var(--heritage-gold);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.7), 0 0 35px var(--heritage-gold-glow);
 }
 
 .invitation-zoom-badge {
   position: absolute;
   bottom: 0.85rem;
   right: 0.85rem;
-  background: rgba(8, 12, 22, 0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 207, 64, 0.55);
+  background: rgba(8, 12, 22, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 207, 64, 0.45);
   border-radius: var(--radius-pill);
-  padding: 0.4rem 0.95rem;
+  padding: 0.35rem 0.85rem;
   font-family: var(--font-bengali-sans);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--heritage-gold);
   font-weight: 700;
   display: inline-flex;
   align-items: center;
   pointer-events: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 /* Action Toolbar */
