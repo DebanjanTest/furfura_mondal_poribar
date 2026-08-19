@@ -3,7 +3,7 @@
 export const playlists = {
   durgaPuja: {
     key: "durgaPuja",
-    label: "সেরা পুজো ও আগমনী গান (Agomoni Classics)",
+    label: "সেরা পুজো ও আগমনী গান",
     pillLabel: "PUJA RADIO",
     description: "শারদোৎসবের শ্রেষ্ঠ ও জনপ্রিয় আগমনী গান, মহিষাসুরমর্দিনী ও সাবেকি পুজোর চিরসবুজ সুরমালা।",
     sourceType: "youtube",
@@ -261,7 +261,7 @@ export const playlists = {
 
   ogMahalaya: {
     key: "ogMahalaya",
-    label: "মহালয়া ও চণ্ডীপাঠ (Mahalaya Special)",
+    label: "মহালয়া ও চণ্ডীপাঠ",
     pillLabel: "MAHALAYA BROADCAST",
     description: "বীরেন্দ্রকৃষ্ণ ভদ্রের উদাত্ত কণ্ঠের অমর মহিষাসুরমর্দিনী — সম্পূর্ণ সম্প্রচার ও ৬টি প্রধান পবিত্র অধ্যায়।",
     sourceType: "youtube",
@@ -406,38 +406,38 @@ export const playlists = {
 
   mahalayaSongs: {
     key: "mahalayaSongs",
-    label: "মহিষাসুরমর্দিনী গান (19 Songs)",
+    label: "মহিষাসুরমর্দিনী গান",
     pillLabel: "MAHALAYA SONGS",
     description: "বীরেন্দ্রকৃষ্ণ ভদ্র ও পঙ্কজ মল্লিকের মহিষাসুরমর্দিনীর ১৯টি গান ও স্তোত্রের নিখুঁত তালিকা।",
     sourceType: "youtube",
     youtubeVideoId: "LOlyrK53QM4",
     tracksAreDistinctVideos: false,
     tracks: [
-      { id: "ms-001", num: "01", title: "যা চণ্ডী (Ya Chandi)", title_bn: "যা চণ্ডী মধুকৈটভাদিদৈত্যদলনী", title_en: "Ya Chandi", artist: "Mahalaya Choir", videoId: "LOlyrK53QM4", start: 4, end: 103, duration: 99, durationLabel: "1:39", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-002", num: "02", title: "সিংহস্থা শশীশেখরা (Simhastha Sashisekhara)", title_bn: "সিংহস্থা শশীশেখরা", title_en: "Simhastha Sashisekhara", artist: "Birendra Krishna Bhadra", videoId: "LOlyrK53QM4", start: 103, end: 159, duration: 56, durationLabel: "0:56", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-003", num: "03", title: "বাজলো তোমার আলোর বেণু (Bajlo Tomar)", title_bn: "বাজলো তোমার আলোর বেণু", title_en: "Bajlo Tomar Aalor Benu With Narration", artist: "Supriti Ghosh & Birendra K. Bhadra", videoId: "LOlyrK53QM4", start: 159, end: 421, duration: 262, durationLabel: "4:22", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-004", num: "04", title: "জাগো দুর্গা দশপ্রহরণধারিণী (Jago Durga)", title_bn: "জাগো দুর্গা দশপ্রহরণধারিণী", title_en: "Jago Durga Dashapraharanadharinee", artist: "Dwijen Mukherjee & Chorus", videoId: "LOlyrK53QM4", start: 421, end: 528, duration: 107, durationLabel: "1:47", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-005", num: "05", title: "ওগো আমার আগমনী-আলো (Ogo Amar Agamani)", title_bn: "ওগো আমার আগমনী-আলো", title_en: "Ogo Amar Agamani-alo", artist: "Shipra Basu / Mahalaya Stotram", videoId: "LOlyrK53QM4", start: 528, end: 727, duration: 199, durationLabel: "3:19", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-006", num: "06", title: "তব অচিন্ত্য রূপ-চরিত-মহিমা (Tabo Achintya)", title_bn: "তব অচিন্ত্য রূপ-চরিত-মহিমা", title_en: "Tabo Achintya Rupa-charita-mahima", artist: "Mahalaya Chandipath", videoId: "LOlyrK53QM4", start: 727, end: 966, duration: 239, durationLabel: "3:59", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-007", num: "07", title: "অহং রুদ্রো বেদমন্ত্র (Aham Rudrebhih)", title_bn: "অহং রুদ্রো বেদমন্ত্র", title_en: "Aham Rudrebhirvasubhischara", artist: "Vedic Chants Ensemble", videoId: "LOlyrK53QM4", start: 966, end: 1207, duration: 241, durationLabel: "4:01", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-008", num: "08", title: "অখিল-বিমানে তব জয়-গানে (Akhila-bimane)", title_bn: "অখিল-বিমানে তব জয়-গানে", title_en: "Akhila-bimane Taba Jaya-gane", artist: "Krishna Dasgupta / Vocal", videoId: "LOlyrK53QM4", start: 1207, end: 1451, duration: 244, durationLabel: "4:04", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-009", num: "09", title: "জয়ন্তী মঙ্গলা কালী স্তোত্র (Jayanti Mangala)", title_bn: "জয়ন্তী মঙ্গলা কালী স্তোত্র", title_en: "Jayanti Mangala Kali Stotram", artist: "Devi Stuti Ensemble", videoId: "LOlyrK53QM4", start: 1451, end: 1483, duration: 32, durationLabel: "0:32", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-010", num: "10", title: "শুভ্র শঙ্খ-রবে (Subhra Sankho-rabe)", title_bn: "শুভ্র শঙ্খ-রবে", title_en: "Subhra Sankho-rabe", artist: "Mahalaya Chorus", videoId: "LOlyrK53QM4", start: 1483, end: 1653, duration: 170, durationLabel: "2:50", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-011", num: "11", title: "জটাজূট সমাযুক্তাম (Jatajutasamayuktam)", title_bn: "জটাজূট সমাযুক্তামার্ধেন্দুকৃতশেখরাম", title_en: "Jatajutasamayuktamardhendukrita-sekharam", artist: "Birendra Krishna Bhadra", videoId: "LOlyrK53QM4", start: 1653, end: 1920, duration: 267, durationLabel: "4:27", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-012", num: "12", title: "নমো চণ্ডী, নমো চণ্ডী (Namo Chandi)", title_bn: "নমো চণ্ডী, নমো চণ্ডী", title_en: "Namo Chandi, Namo Chandi", artist: "Aarti & Devotional Chants", videoId: "LOlyrK53QM4", start: 1920, end: 2105, duration: 185, durationLabel: "3:05", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-013", num: "13", title: "মা গো তব বীণে সঙ্গীত (Ma Go Tabu Beene)", title_bn: "মা গো তব বীণে সঙ্গীত", title_en: "Ma Go Tabu Beene Sangeeta", artist: "Shyamal Mitra", videoId: "LOlyrK53QM4", start: 2105, end: 2318, duration: 213, durationLabel: "3:33", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-014", num: "14", title: "বিমানে বিমানে (Bimane Bimane)", title_bn: "বিমানে বিমানে", title_en: "Bimane Bimane", artist: "Mahalaya Chorus", videoId: "LOlyrK53QM4", start: 2318, end: 2499, duration: 181, durationLabel: "3:01", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-015", num: "15", title: "জয় জয় জাপ্যজয়ে (Jaya Jaya Japyajaye)", title_bn: "জয় জয় জাপ্যজয়ে", title_en: "Jaya Jaya Japyajaye", artist: "All India Radio Chorus", videoId: "LOlyrK53QM4", start: 2499, end: 2651, duration: 152, durationLabel: "2:32", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-016", num: "16", title: "হে চিন্ময়ী (He Chinmoyi)", title_bn: "হে চিন্ময়ী", title_en: "He Chinmoyi", artist: "Tarun Banerjee", videoId: "LOlyrK53QM4", start: 2651, end: 2827, duration: 176, durationLabel: "2:56", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-017", num: "17", title: "অমল-কিরণে ত্রিভুবন-মনোহরিণী (Amala-kirane)", title_bn: "অমল-কিরণে ত্রিভুবন-মনোহরিণী", title_en: "Amala-kirane Tribhubana-manoharini", artist: "Pankaj Kumar Mullick", videoId: "LOlyrK53QM4", start: 2827, end: 3072, duration: 245, durationLabel: "4:05", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-018", num: "18", title: "জয়ন্তী মঙ্গলা কালী (Jayanti Mangala - Pankaj)", title_bn: "জয়ন্তী মঙ্গলা কালী — পঙ্কজ মল্লিক", title_en: "Jayanti Mangala Kali — Classic", artist: "Pankaj Kumar Mullick", videoId: "LOlyrK53QM4", start: 3072, end: 3491, duration: 419, durationLabel: "6:59", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" },
-      { id: "ms-019", num: "19", title: "শান্তি দিলে ভরি (Santi Dile Bhari - Concluding)", title_bn: "শান্তি দিলে ভরি সমাপ্তি শ্লোক", title_en: "Santi Dile Bhari — Concluding Chant", artist: "Birendra Krishna Bhadra & Choir", videoId: "LOlyrK53QM4", start: 3491, end: 5240, duration: 1749, durationLabel: "29:09", cover: "https://img.youtube.com/vi/LOlyrK53QM4/hqdefault.jpg" }
+      { id: "ms-001", num: "01", title: "যা চণ্ডী", title_bn: "যা চণ্ডী মধুকৈটভাদিদৈত্যদলনী", title_en: "Ya Chandi", artist: "Mahalaya Choir", videoId: "LOlyrK53QM4", start: 4, end: 103, duration: 99, durationLabel: "1:39", cover: "https:" },
+      { id: "ms-002", num: "02", title: "সিংহস্থা শশীশেখরা", title_bn: "সিংহস্থা শশীশেখরা", title_en: "Simhastha Sashisekhara", artist: "Birendra Krishna Bhadra", videoId: "LOlyrK53QM4", start: 103, end: 159, duration: 56, durationLabel: "0:56", cover: "https:" },
+      { id: "ms-003", num: "03", title: "বাজলো তোমার আলোর বেণু", title_bn: "বাজলো তোমার আলোর বেণু", title_en: "Bajlo Tomar Aalor Benu With Narration", artist: "Supriti Ghosh & Birendra K. Bhadra", videoId: "LOlyrK53QM4", start: 159, end: 421, duration: 262, durationLabel: "4:22", cover: "https:" },
+      { id: "ms-004", num: "04", title: "জাগো দুর্গা দশপ্রহরণধারিণী", title_bn: "জাগো দুর্গা দশপ্রহরণধারিণী", title_en: "Jago Durga Dashapraharanadharinee", artist: "Dwijen Mukherjee & Chorus", videoId: "LOlyrK53QM4", start: 421, end: 528, duration: 107, durationLabel: "1:47", cover: "https:" },
+      { id: "ms-005", num: "05", title: "ওগো আমার আগমনী-আলো", title_bn: "ওগো আমার আগমনী-আলো", title_en: "Ogo Amar Agamani-alo", artist: "Shipra Basu", videoId: "LOlyrK53QM4", start: 528, end: 727, duration: 199, durationLabel: "3:19", cover: "https:" },
+      { id: "ms-006", num: "06", title: "তব অচিন্ত্য রূপ-চরিত-মহিমা", title_bn: "তব অচিন্ত্য রূপ-চরিত-মহিমা", title_en: "Tabo Achintya Rupa-charita-mahima", artist: "Mahalaya Chandipath", videoId: "LOlyrK53QM4", start: 727, end: 966, duration: 239, durationLabel: "3:59", cover: "https:" },
+      { id: "ms-007", num: "07", title: "অহং রুদ্রো বেদমন্ত্র", title_bn: "অহং রুদ্রো বেদমন্ত্র", title_en: "Aham Rudrebhirvasubhischara", artist: "Vedic Chants Ensemble", videoId: "LOlyrK53QM4", start: 966, end: 1207, duration: 241, durationLabel: "4:01", cover: "https:" },
+      { id: "ms-008", num: "08", title: "অখিল-বিমানে তব জয়-গানে", title_bn: "অখিল-বিমানে তব জয়-গানে", title_en: "Akhila-bimane Taba Jaya-gane", artist: "Krishna Dasgupta", videoId: "LOlyrK53QM4", start: 1207, end: 1451, duration: 244, durationLabel: "4:04", cover: "https:" },
+      { id: "ms-009", num: "09", title: "জয়ন্তী মঙ্গলা কালী স্তোত্র", title_bn: "জয়ন্তী মঙ্গলা কালী স্তোত্র", title_en: "Jayanti Mangala Kali Stotram", artist: "Devi Stuti Ensemble", videoId: "LOlyrK53QM4", start: 1451, end: 1483, duration: 32, durationLabel: "0:32", cover: "https:" },
+      { id: "ms-010", num: "10", title: "শুভ্র শঙ্খ-রবে", title_bn: "শুভ্র শঙ্খ-রবে", title_en: "Subhra Sankho-rabe", artist: "Mahalaya Chorus", videoId: "LOlyrK53QM4", start: 1483, end: 1653, duration: 170, durationLabel: "2:50", cover: "https:" },
+      { id: "ms-011", num: "11", title: "জটাজূট সমাযুক্তাম", title_bn: "জটাজূট সমাযুক্তামার্ধেন্দুকৃতশেখরাম", title_en: "Jatajutasamayuktamardhendukrita-sekharam", artist: "Birendra Krishna Bhadra", videoId: "LOlyrK53QM4", start: 1653, end: 1920, duration: 267, durationLabel: "4:27", cover: "https:" },
+      { id: "ms-012", num: "12", title: "নমো চণ্ডী, নমো চণ্ডী", title_bn: "নমো চণ্ডী, নমো চণ্ডী", title_en: "Namo Chandi, Namo Chandi", artist: "Aarti & Devotional Chants", videoId: "LOlyrK53QM4", start: 1920, end: 2105, duration: 185, durationLabel: "3:05", cover: "https:" },
+      { id: "ms-013", num: "13", title: "মা গো তব বীণে সঙ্গীত", title_bn: "মা গো তব বীণে সঙ্গীত", title_en: "Ma Go Tabu Beene Sangeeta", artist: "Shyamal Mitra", videoId: "LOlyrK53QM4", start: 2105, end: 2318, duration: 213, durationLabel: "3:33", cover: "https:" },
+      { id: "ms-014", num: "14", title: "বিমানে বিমানে", title_bn: "বিমানে বিমানে", title_en: "Bimane Bimane", artist: "Mahalaya Chorus", videoId: "LOlyrK53QM4", start: 2318, end: 2499, duration: 181, durationLabel: "3:01", cover: "https:" },
+      { id: "ms-015", num: "15", title: "জয় জয় জাপ্যজয়ে", title_bn: "জয় জয় জাপ্যজয়ে", title_en: "Jaya Jaya Japyajaye", artist: "All India Radio Chorus", videoId: "LOlyrK53QM4", start: 2499, end: 2651, duration: 152, durationLabel: "2:32", cover: "https:" },
+      { id: "ms-016", num: "16", title: "হে চিন্ময়ী", title_bn: "হে চিন্ময়ী", title_en: "He Chinmoyi", artist: "Tarun Banerjee", videoId: "LOlyrK53QM4", start: 2651, end: 2827, duration: 176, durationLabel: "2:56", cover: "https:" },
+      { id: "ms-017", num: "17", title: "অমল-কিরণে ত্রিভুবন-মনোহরিণী", title_bn: "অমল-কিরণে ত্রিভুবন-মনোহরিণী", title_en: "Amala-kirane Tribhubana-manoharini", artist: "Pankaj Kumar Mullick", videoId: "LOlyrK53QM4", start: 2827, end: 3072, duration: 245, durationLabel: "4:05", cover: "https:" },
+      { id: "ms-018", num: "18", title: "জয়ন্তী মঙ্গলা কালী", title_bn: "জয়ন্তী মঙ্গলা কালী — পঙ্কজ মল্লিক", title_en: "Jayanti Mangala Kali — Classic", artist: "Pankaj Kumar Mullick", videoId: "LOlyrK53QM4", start: 3072, end: 3491, duration: 419, durationLabel: "6:59", cover: "https:" },
+      { id: "ms-019", num: "19", title: "শান্তি দিলে ভরি", title_bn: "শান্তি দিলে ভরি সমাপ্তি শ্লোক", title_en: "Santi Dile Bhari — Concluding Chant", artist: "Birendra Krishna Bhadra & Choir", videoId: "LOlyrK53QM4", start: 3491, end: 5240, duration: 1749, durationLabel: "29:09", cover: "https:" }
     ]
   },
 
   dhakVibes: {
     key: "dhakVibes",
-    label: "ঢাকের বাজনা (Authentic Dhak Beats)",
+    label: "ঢাকের বাজনা",
     pillLabel: "DHAK BEATS",
     description: "মন্ডল বাড়ির নাটমন্দির ও বাংলার সাবেকি এক কাঠি-দুক কাঠির শ্রেষ্ঠ ঢাকের বোল।",
     sourceType: "youtube",
@@ -545,7 +545,7 @@ export const playlists = {
 };
 
 export const nativePujoData = {
-  pujoName: "মণ্ডল বাড়ির পুজো / Furfura Mondal Poribar",
+  pujoName: "মণ্ডল বাড়ির পুজো",
   bengaliName: "মণ্ডল বাড়ির পুজো (ফুরফুরা মণ্ডল পরিবার)",
   englishName: "Furfura Mondal Poribar Pujo",
   tagline: "Celebrating 30th Year of Heritage & Devotion (Est. 1997)",
@@ -568,7 +568,7 @@ export const nativePujoData = {
   dates2026: [
     {
       id: "mahalaya",
-      bengaliDay: "মহালয়া (Mahalaya)",
+      bengaliDay: "মহালয়া",
       englishDay: "Mahalaya",
       date: "১০ অক্টোবর ২০২৬ (শনিবার)",
       englishDate: "10 October 2026 (Saturday)",
@@ -577,7 +577,7 @@ export const nativePujoData = {
     },
     {
       id: "sasthi",
-      bengaliDay: "মহা ষষ্ঠী (Maha Shasthi)",
+      bengaliDay: "মহা ষষ্ঠী",
       englishDay: "Maha Shasthi",
       date: "১৬ অক্টোবর ২০২৬ (শুক্রবার)",
       englishDate: "16 October 2026 (Friday)",
@@ -586,7 +586,7 @@ export const nativePujoData = {
     },
     {
       id: "saptami",
-      bengaliDay: "মহা সপ্তমী (Maha Saptami)",
+      bengaliDay: "মহা সপ্তমী",
       englishDay: "Maha Saptami",
       date: "১৭ অক্টোবর ২০২৬ (শনিবার)",
       englishDate: "17 October 2026 (Saturday)",
@@ -595,7 +595,7 @@ export const nativePujoData = {
     },
     {
       id: "astami",
-      bengaliDay: "মহা অষ্টমী ও সন্ধিপূজা (Maha Ashtami)",
+      bengaliDay: "মহা অষ্টমী ও সন্ধিপূজা",
       englishDay: "Maha Ashtami & Sandhi Puja",
       date: "১৮ অক্টোবর ২০২৬ (রবিবার)",
       englishDate: "18 October 2026 (Sunday)",
@@ -604,7 +604,7 @@ export const nativePujoData = {
     },
     {
       id: "navami",
-      bengaliDay: "মহা নবমী ও ধুনুচি নাচ (Maha Nabami)",
+      bengaliDay: "মহা নবমী ও ধুনুচি নাচ",
       englishDay: "Maha Nabami & Dhunuchi Dance",
       date: "১৯ অক্টোবর ২০২৬ (সোমবার)",
       englishDate: "19 October 2026 (Monday)",
@@ -613,7 +613,7 @@ export const nativePujoData = {
     },
     {
       id: "dashami",
-      bengaliDay: "বিজয়া দশমী ও সিঁদুর খেলা (Bijoya Dashami)",
+      bengaliDay: "বিজয়া দশমী ও সিঁদুর খেলা",
       englishDay: "Bijoya Dashami & Sindoor Khela",
       date: "২০ অক্টোবর ২০২৬ (মঙ্গলবার)",
       englishDate: "20 October 2026 (Tuesday)",
@@ -623,25 +623,25 @@ export const nativePujoData = {
   ],
   highlights: [
     {
-      title: "১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য (Est. 1997 Legacy)",
+      title: "১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য",
       englishTitle: "Ancestral Legacy since 1997",
       desc: "সাবেকি একচালা শোলার ডাকের সাজের প্রতিমা ও নিষ্ঠার সাথে রক্ষিত বৈদিক পূজা আচার।",
       englishDesc: "Traditional Ekchala Sholar Daker Saaj idol and sacred Vedic rituals preserved with utmost reverence."
     },
     {
-      title: "সন্ধিপূজা ও ১০৮ পদ্ম নিবেদন (108 Lotuses Sandhi Puja)",
+      title: "সন্ধিপূজা ও ১০৮ পদ্ম নিবেদন",
       englishTitle: "108 Lotuses Sandhi Puja",
       desc: "অষ্টমী-নবমীর সন্ধিক্ষণে ১০৮ মাটির প্রদীপ ও নীলপদ্মে দেবী চামুণ্ডার মহাশক্তি আরাধনা।",
       englishDesc: "Grand worship of Devi Chamunda at the cusp of Ashtami-Navami with 108 earthen lamps and sacred blue lotuses."
     },
     {
-      title: "মহাপ্রসাদ ও অন্নভোগ বিতরণ (Mahaprasad Bhog)",
+      title: "মহাপ্রসাদ ও অন্নভোগ বিতরণ",
       englishTitle: "Universal Mahaprasad Feast",
       desc: "ঘিয়ে ভাজা লুচি, ভোগের খিচুড়ি, লাবড়া, চাটনি, পায়েশ ও নারকেল নাড়ুর সার্বজনীন বিতরণ।",
       englishDesc: "Ghee-fried Luchi, Bhog Khichuri, Labra, Chutney, Payesh and handmade Narkel Naru for all devotees."
     },
     {
-      title: "ধুনুচি নাচ ও ঢাকের যুগলবন্দী (Dhunuchi Naach & Dhak)",
+      title: "ধুনুচি নাচ ও ঢাকের যুগলবন্দী",
       englishTitle: "Dhunuchi Dance & Master Dhak",
       desc: "নবমীর সন্ধ্যায় কাঁসর-ঘণ্টার তালে ধুনুচি আরতি ও সাবেকি ঢাকের তাকডুম তাকডুম লড়াই।",
       englishDesc: "High-energy evening Aarti with fragrant coconut husk incense, brass gongs, and twin-stick Dhak rhythm duels."
@@ -758,7 +758,7 @@ export const authenticLiveDhakParts = [
     tempoBpm: 112,
     taal: "Processional Driving Kaharwa",
     style: "procession_swing",
-    styleLabel: "শোভাযাত্রার বোল (Procession)",
+    styleLabel: "শোভাযাত্রার বোল",
     videoId: "8EA8JrDMZbM",
     cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
     description: "Processional driving swing with heavy bass pulses. Stately forward momentum traditionally played during sacred Ratha Yatra and temple deity processions.",
@@ -780,7 +780,7 @@ export const authenticLiveDhakParts = [
     tempoBpm: 92,
     taal: "Traditional Agomoni 8-Matra Devotional",
     style: "ak_kathi",
-    styleLabel: "এক কাঠি বরণ (Ak-Kathi)",
+    styleLabel: "এক কাঠি বরণ",
     videoId: "8EA8JrDMZbM",
     cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
     description: "Reverent Ak-kathi welcoming beat for Mother Durga's arrival at the Natmandir. Resonant single-hand bass resonance with disciplined bamboo stick punctuation.",
@@ -802,7 +802,7 @@ export const authenticLiveDhakParts = [
     tempoBpm: 124,
     taal: "Dhunuchi Kaharwa Drut Polyrhythm",
     style: "duk_kathi",
-    styleLabel: "দুক কাঠি আরতি (Duk-Kathi)",
+    styleLabel: "দুক কাঠি আরতি",
     videoId: "8EA8JrDMZbM",
     cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
     description: "High-energy syncopated polyrhythms with Dhuno smoke and Kanshor. Twin bamboo sticks create blistering rolls locking with evening incense dancers.",
@@ -825,7 +825,7 @@ export const authenticLiveDhakParts = [
     tempoClimaxBpm: 144,
     taal: "Sandhi Chhanda Accelerando Roll",
     style: "accelerando",
-    styleLabel: "মহোৎসব চরম লয় (Climax Roll)",
+    styleLabel: "মহোৎসব চরম লয়",
     videoId: "8EA8JrDMZbM",
     cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
     description: "Thunderous rolling accelerando and dramatic drum rolls played as 108 clay lamps and blue lotuses are offered to Devi Chamunda.",
@@ -847,7 +847,7 @@ export const authenticLiveDhakParts = [
     tempoBpm: 120,
     taal: "Bisarjan Shobhajatra Emotional Swing",
     style: "bisarjan_swing",
-    styleLabel: "বিসর্জন দোল (Farewell Swing)",
+    styleLabel: "বিসর্জন দোল",
     videoId: "8EA8JrDMZbM",
     cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
     description: "Fast, joyous yet emotional farewell groove for Maa Durga's immersion procession to the holy Ganges. Deep syncopation with infectious festival bounce.",
@@ -869,7 +869,7 @@ export const authenticLiveDhakParts = [
     tempoBpm: 138,
     taal: "Virtuoso Solo Jugalbandi Teental",
     style: "jugalbandi_solo",
-    styleLabel: "যুগলবন্দী একক (Master Solo)",
+    styleLabel: "যুগলবন্দী একক",
     videoId: "8EA8JrDMZbM",
     cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
     description: "Virtuosic solo showing wrist damping, ghost notes, and lightning-fast bamboo stick snaps. A masterclass in authentic Bengali Dhak mastery.",
@@ -888,7 +888,7 @@ export const TRADITIONAL_BOLS = [
     title_en: "1. Rot / Ratha Yatra Procession Bol",
     tempoBpm: 112,
     style: "procession_swing",
-    styleLabel: "Procession Swing (শোভাযাত্রার বোল)",
+    styleLabel: "শোভাযাত্রার বোল", styleLabelEnglish: "Procession Swing",
     taal: "Processional Driving Kaharwa (8-Matra Swing)",
     timeSignature: "4/4",
     swingFactor: 0.14,
@@ -928,7 +928,7 @@ export const TRADITIONAL_BOLS = [
     title_en: "2. Agomoni & Boron Invocation Bol",
     tempoBpm: 92,
     style: "ak_kathi",
-    styleLabel: "Ak-Kathi (এক কাঠি বরণ)",
+    styleLabel: "এক কাঠি বরণ", styleLabelEnglish: "Ak-Kathi",
     taal: "Traditional Agomoni 8-Matra Devotional",
     timeSignature: "4/4",
     swingFactor: 0.08,
@@ -968,7 +968,7 @@ export const TRADITIONAL_BOLS = [
     title_en: "3. Sandhya Aarti & Dhunuchi Dance Bol",
     tempoBpm: 124,
     style: "duk_kathi",
-    styleLabel: "Duk-Kathi (দুক কাঠি আরতি)",
+    styleLabel: "দুক কাঠি আরতি", styleLabelEnglish: "Duk-Kathi",
     taal: "Dhunuchi Kaharwa Drut Polyrhythm",
     timeSignature: "4/4",
     swingFactor: 0.16,
@@ -1009,7 +1009,7 @@ export const TRADITIONAL_BOLS = [
     tempoBpm: 128,
     tempoClimaxBpm: 144,
     style: "accelerando",
-    styleLabel: "Accelerando (মহোৎসব চরম লয়)",
+    styleLabel: "মহোৎসব চরম লয়", styleLabelEnglish: "Accelerando",
     taal: "Sandhi Chhanda 16-Matra Accelerating Teental",
     timeSignature: "4/4",
     swingFactor: 0.12,
@@ -1049,7 +1049,7 @@ export const TRADITIONAL_BOLS = [
     title_en: "5. Bishorjan / Bisarjan Procession Bol",
     tempoBpm: 120,
     style: "bisarjan_swing",
-    styleLabel: "Bisarjan Swing (বিসর্জন দোল)",
+    styleLabel: "বিসর্জন দোল", styleLabelEnglish: "Bisarjan Swing",
     taal: "Bisarjan Shobhajatra 8-Matra Syncopated Swing",
     timeSignature: "4/4",
     swingFactor: 0.20,
@@ -1089,7 +1089,7 @@ export const TRADITIONAL_BOLS = [
     title_en: "6. Ak-Kathi & Duk-Kathi Master Solo Bol",
     tempoBpm: 138,
     style: "jugalbandi_solo",
-    styleLabel: "Jugalbandi Solo (যুগলবন্দী একক)",
+    styleLabel: "যুগলবন্দী একক", styleLabelEnglish: "Jugalbandi Solo",
     taal: "Virtuoso Solo Jugalbandi Teental",
     timeSignature: "4/4",
     swingFactor: 0.10,
@@ -1365,7 +1365,7 @@ export const onnotaCreations = [
     src: "/onnota/art_hero_idol.webp",
     desc_bn: "জলরং ও ডিজিটাল ক্যানভাসে মা দুর্গার মহিষাসুরমর্দিনী রূপের পটচিত্র শৈলীর অলঙ্করণ।",
     desc_en: "Digital gouache and folk Patachitra fusion depicting Devi Durga's cosmic power.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "শরৎ ২০২৬",
     likes: 215,
     tag: "ডিজিটাল আর্ট"
@@ -1379,7 +1379,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_01.webp",
     desc_bn: "সন্ধ্যা আরতির সময় ধুনোর মেঘ ও প্রদীপের আলোর জাদুকরী ফ্রেম।",
     desc_en: "Twilight reflections and sacred evening aarti lamps inside the heritage Natmandir.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "অক্টোবর ২০২৬",
     likes: 284,
     tag: "উৎসব ফটো"
@@ -1393,7 +1393,7 @@ export const onnotaCreations = [
     src: "/onnota/user_alpona.webp",
     desc_bn: "শালুক, পদ্ম ও দেবী চরণের নিখুঁত হাতের টানে আঁকা মন্ডল বাড়ির সাবেকি পিটুলি আলপনা।",
     desc_en: "Authentic handmade sacred floor art using rice flour paste with lotus flourishes.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "মহাষষ্ঠী ২০২৬",
     likes: 398,
     tag: "ঐতিহ্য আলপনা"
@@ -1407,7 +1407,7 @@ export const onnotaCreations = [
     src: "/onnota/art_dawn_mahalaya.webp",
     desc_bn: "ভোরের রেডিওতে মহালয়ার সুর, নতুন জামার গন্ধ ও শৈশবের পুজোর আন্তরিক স্মৃতিচারণ।",
     desc_en: "An evocative prose memoir reminiscing early morning AIR broadcasts and ancestral warmth.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "শরৎ সংকলন ২০২৬",
     likes: 165,
     tag: "স্মৃতি গদ্য"
@@ -1421,7 +1421,7 @@ export const onnotaCreations = [
     src: "/onnota/art_night_grandeur.webp",
     desc_bn: "অ্যাক্রিলিক ক্যানভাসে ফুটে ওঠা মায়ের করুণাময়ী ত্রিনয়ন ও স্বর্ণাভ মুকুটের আভা।",
     desc_en: "Acrylic study focusing on the divine third eye radiating maternal benevolence.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "সেপ্টেম্বর ২০২৬",
     likes: 242,
     tag: "ক্যানভাস আর্ট"
@@ -1435,7 +1435,7 @@ export const onnotaCreations = [
     src: "/onnota/art_afternoon_kash.webp",
     desc_bn: "ফুরফুরার দিগন্তজোড়া কাশবনে বাতাসের ঢেউ ও শুভ্র মেঘমালার শারদ অভিবাদন।",
     desc_en: "Dancing white Kash plumes framed against dramatic autumn cloudscapes.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "শরৎ ২০২৬",
     likes: 198,
     tag: "প্রকৃতি চিত্র"
@@ -1449,7 +1449,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_04.webp",
     desc_bn: "কূলপুরোহিতের পঞ্চপ্রদীপ ঘূর্ণন ও সমবেত ভক্তবৃন্দের পুষ্পাঞ্জলি নিবেদন।",
     desc_en: "Sacred brass lamps rotating in rhythmic circles during the grand evening stuti.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "মহাষ্টমী ২০২৬",
     likes: 326,
     tag: "উৎসব ফটো"
@@ -1463,7 +1463,7 @@ export const onnotaCreations = [
     src: "/onnota/art_dawn_mahalaya.webp",
     desc_bn: "\"মেঘের কোলে রোদ হেসেছে, বাদল গেছে টুটি... কৈলাস থেকে ঘরের মেয়ে ফিরছে মায়ের কুটির।\"",
     desc_en: "A poetic Bengali ode capturing the bittersweet emotions of daughter Uma's arrival.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "মহালয়া ২০২৬",
     likes: 310,
     tag: "শারদ কবিতা"
@@ -1477,7 +1477,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_03.webp",
     desc_bn: "ধুনোর লালচে অঙ্গার ও ঢাকের উত্তাল তালে নাটমন্দিরে ধুনুচি নাচের আবেগঘন মুহূর্ত।",
     desc_en: "Authentic photographic capture of master dhunuchi dancers in ecstatic motion.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "মহানবমী ২০২৬",
     likes: 474,
     tag: "উৎসব ফটো"
@@ -1491,7 +1491,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_05.webp",
     desc_bn: "মন্ডল পরিবারের প্রাঙ্গণে ধুনুচি নাচ ও পরিবারের আন্তরিক উপস্থিতি।",
     desc_en: "Devotees and family gathered together during high-energy evening arati.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "বিজয়া ২০২৬",
     likes: 352,
     tag: "উৎসব ফটো"
@@ -1505,7 +1505,7 @@ export const onnotaCreations = [
     src: "/onnota/art_heritage_emblem.webp",
     desc_bn: "বনেদি প্রতিমার জন্য তৈরি সূক্ষ্ম শোলার মুকুট, কদম ফুল ও ময়ূরপঙ্খী চালচিত্র।",
     desc_en: "Ancestral heritage craftsmanship sculpted purely out of aquatic shola reed.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "মহাসপ্তমী ২০২৬",
     likes: 189,
     tag: "শোলার কাজ"
@@ -1519,7 +1519,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_06.webp",
     desc_bn: "ঢাকের চামড়ার প্রতিটি কম্পনে ধুনুচি হাতে দেবীকে প্রণতি জানানো ভক্তের নিখাদ ভক্তি।",
     desc_en: "Poignant final salute to Maa Durga before immersion with glowing incense embers.",
-    author: "অন্যতা (Onnota)",
+    author: "অন্যতা", authorEnglish: "Onnota",
     date: "শরৎ ২০২৬",
     likes: 360,
     tag: "উৎসব ফটো"

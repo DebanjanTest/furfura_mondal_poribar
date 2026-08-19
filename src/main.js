@@ -842,10 +842,10 @@ function initDhakStudio() {
       btnEngineYt?.classList.remove('active');
       btnEngineYt?.setAttribute('aria-checked', 'false');
 
-      if (tabEngineIndicator) tabEngineIndicator.textContent = 'PURE ENGINE';
-      if (liveEngineStatusText) liveEngineStatusText.textContent = 'PURE STUDIO LOOP ENGINE';
+      if (tabEngineIndicator) tabEngineIndicator.textContent = lang === 'bn' ? 'খাঁটি ইঞ্জিন' : 'PURE ENGINE';
+      if (liveEngineStatusText) liveEngineStatusText.textContent = lang === 'bn' ? 'সাবেকি খাঁটি স্টুডিও লুপ ইঞ্জিন' : 'PURE STUDIO LOOP ENGINE';
       if (seamlessLoopStatusPill) {
-        seamlessLoopStatusPill.innerHTML = '<span>সিমলেস লুপ সক্রিয় (Gapless)</span>';
+        seamlessLoopStatusPill.innerHTML = lang === 'bn' ? '<span>অবিরাম লুপ সক্রিয়</span>' : '<span>Gapless Loop Active</span>';
       }
 
       // If YouTube was playing, pause it and transfer playback to Pure Sequencer
@@ -859,10 +859,10 @@ function initDhakStudio() {
       btnEnginePure?.classList.remove('active');
       btnEnginePure?.setAttribute('aria-checked', 'false');
 
-      if (tabEngineIndicator) tabEngineIndicator.textContent = 'YT STREAM';
-      if (liveEngineStatusText) liveEngineStatusText.textContent = 'YOUTUBE ORIGINAL STREAM (8EA8JrDMZbM)';
+      if (tabEngineIndicator) tabEngineIndicator.textContent = lang === 'bn' ? 'রেকর্ড বাদন' : 'YT STREAM';
+      if (liveEngineStatusText) liveEngineStatusText.textContent = lang === 'bn' ? 'ইউটিউব মূল রেকর্ডকৃত বাদন' : 'YOUTUBE ORIGINAL STREAM';
       if (seamlessLoopStatusPill) {
-        seamlessLoopStatusPill.innerHTML = '<span>ইউটিউব ফিল্ড স্ট্রিম লুপ</span>';
+        seamlessLoopStatusPill.innerHTML = lang === 'bn' ? '<span>ইউটিউব ফিল্ড স্ট্রিম লুপ</span>' : '<span>YouTube Stream Loop</span>';
       }
 
       // If Pure Sequencer was playing, stop it and transfer playback to YouTube
@@ -962,7 +962,7 @@ function initDhakStudio() {
       const stepIndex = Math.floor((val / 100) * 16) % 16;
       dhakSequencer.currentStep = stepIndex;
       const curTimeEl = document.getElementById('live-dhak-current-time');
-      if (curTimeEl) curTimeEl.textContent = `Step: ${stepIndex + 1}/16`;
+      if (curTimeEl) curTimeEl.textContent = lang === 'bn' ? `মাত্রা: ${formatNumber(stepIndex + 1, 'bn')}/১৬` : `Step: ${stepIndex + 1}/16`;
     } else if (part) {
       const partDur = part.duration || (part.end - part.start);
       const targetSec = (val / 100) * partDur;
@@ -988,7 +988,7 @@ function initDhakStudio() {
     if (state.dhakEngineMode === 'pure') {
       const curTimeEl = document.getElementById('live-dhak-current-time');
       const scrubber = document.getElementById('dhak-live-scrubber');
-      if (curTimeEl) curTimeEl.textContent = `Step: ${ev.step + 1}/${ev.totalSteps}`;
+      if (curTimeEl) curTimeEl.textContent = lang === 'bn' ? `মাত্রা: ${formatNumber(ev.step + 1, 'bn')}/${formatNumber(ev.totalSteps, 'bn')}` : `Step: ${ev.step + 1}/${ev.totalSteps}`;
       if (scrubber) scrubber.value = ((ev.step + 1) / ev.totalSteps) * 100;
     }
 
@@ -1004,7 +1004,7 @@ function initDhakStudio() {
 
     const activeStepLabel = document.getElementById('dhak-active-step-label');
     if (activeStepLabel) {
-      activeStepLabel.textContent = `Step: ${ev.step + 1} / ${ev.totalSteps}`;
+      activeStepLabel.textContent = lang === 'bn' ? `মাত্রা: ${formatNumber(ev.step + 1, 'bn')} / ${formatNumber(ev.totalSteps, 'bn')}` : `Step: ${ev.step + 1} / ${ev.totalSteps}`;
     }
 
     // Drum Pad Flashes
@@ -1025,7 +1025,7 @@ function initDhakStudio() {
     const pulseRing = document.getElementById('loop-pulse-ring');
 
     if (barCounterEl) {
-      barCounterEl.textContent = `BAR ${barCount}`;
+      barCounterEl.textContent = lang === 'bn' ? `আবর্তন ${formatNumber(barCount, 'bn')}` : `BAR ${barCount}`;
     }
 
     if (pulseRing) {
@@ -1045,7 +1045,7 @@ function initDhakStudio() {
     const bpmSlider = document.getElementById('dhak-bpm-slider');
     const bpmVal = document.getElementById('dhak-bpm-val');
     if (bpmSlider) bpmSlider.value = Math.round(newBpm);
-    if (bpmVal) bpmVal.textContent = `${Math.round(newBpm)} BPM`;
+    if (bpmVal) bpmVal.textContent = lang === 'bn' ? `${formatNumber(Math.round(newBpm), 'bn')} লয়` : `${Math.round(newBpm)} BPM`;
   };
 
   // -------------------------------------------------------------
@@ -1076,7 +1076,7 @@ function renderLiveDhakParts() {
 
     const partNumLabel = lang === 'bn' ? `পর্ব ${part.bengaliNum || formatNumber(index + 1, 'bn')}` : `Part ${index + 1}`;
     const mainTitle = lang === 'bn' ? part.title_bn : part.title_en;
-    const subTitle = lang === 'bn' ? part.title_en : part.title_bn;
+    const subTitle = lang === 'bn' ? (part.subtitle_bn || '') : (part.title_bn || '');
     const partDesc = lang === 'bn' ? (part.bengaliDesc || part.description) : (part.description || part.bengaliDesc);
     const playBtnText = isCurrent && state.isLiveDhakPlaying ? (lang === 'bn' ? 'চলছে' : 'Playing') : (lang === 'bn' ? 'বাজান' : 'Play');
 
@@ -1085,7 +1085,7 @@ function renderLiveDhakParts() {
         <span class="live-part-num-badge">${partNumLabel}</span>
         <div class="live-part-meta-pills">
           <span class="live-part-time-pill">${part.durationLabel || '0:18'}</span>
-          <span class="live-part-bpm-pill">${part.tempoBpm} BPM</span>
+          <span class="live-part-bpm-pill">${lang === 'bn' ? `${formatNumber(part.tempoBpm, 'bn')} লয়` : `${part.tempoBpm} BPM`}</span>
         </div>
       </div>
 
@@ -1195,16 +1195,12 @@ function updateLiveDhakBanner(part) {
       : `${part.partNumber}. ${part.title_en}`;
   }
   if (subEl) {
-    subEl.textContent = lang === 'bn'
-      ? `${part.subtitle_bn} • ${part.title_en}`
-      : `${part.title_en} • ${part.subtitle_bn}`;
+    subEl.textContent = lang === 'bn' ? `${part.subtitle_bn}` : `${part.title_en}`; // Pure language
   }
   if (badgeEl) {
-    badgeEl.textContent = lang === 'bn'
-      ? `পর্ব ${part.num || '০১'}/০৬ • ${part.tempoBpm} BPM • ${part.styleLabel}`
-      : `Part ${part.partNumber}/06 • ${part.tempoBpm} BPM • ${part.styleLabel}`;
+    badgeEl.textContent = lang === 'bn' ? `পর্ব ${part.bengaliNum || formatNumber(part.partNumber, 'bn')}/০৬ • ${formatNumber(part.tempoBpm, 'bn')} লয় • ${part.styleLabel}` : `Part ${part.partNumber}/06 • ${part.tempoBpm} BPM • ${part.styleLabelEnglish || part.styleLabel}`;
   }
-  if (totalEl) totalEl.textContent = `${part.durationLabel || '0:18'} Loop`;
+  if (totalEl) totalEl.textContent = lang === 'bn' ? `${formatNumber(part.durationLabel || '০:১৮', 'bn')} লুপ` : `${part.durationLabel || '0:18'} Loop`;
 }
 
 function updateLiveDhakPlayState(isPlaying) {
@@ -1219,12 +1215,12 @@ function updateLiveDhakPlayState(isPlaying) {
   if (isPlaying) {
     playBtn?.classList.add('is-playing');
     if (playIcon) playIcon.textContent = '⏸';
-    if (playLabel) playLabel.textContent = lang === 'bn' ? 'থামান (Pause)' : 'Pause Loop';
+    if (playLabel) playLabel.textContent = lang === 'bn' ? 'থামান' : 'Pause Loop';
     masterEq?.classList.add('playing');
   } else {
     playBtn?.classList.remove('is-playing');
     if (playIcon) playIcon.textContent = '▶';
-    if (playLabel) playLabel.textContent = lang === 'bn' ? 'লুপ বাজান (Play Loop)' : 'Play Loop';
+    if (playLabel) playLabel.textContent = lang === 'bn' ? 'লুপ বাজান' : 'Play Loop';
     masterEq?.classList.remove('playing');
   }
 
@@ -1294,13 +1290,13 @@ function initSoundBoosterControls() {
 
     // Update sliders and text labels
     if (bassSlider) bassSlider.value = state.soundBooster.bassBoostDb;
-    if (bassVal) bassVal.textContent = `+${state.soundBooster.bassBoostDb} dB`;
+    if (bassVal) bassVal.textContent = lang === 'bn' ? `+${formatNumber(state.soundBooster.bassBoostDb, 'bn')} ডেসিবেল` : `+${state.soundBooster.bassBoostDb} dB`;
 
     if (snapSlider) snapSlider.value = state.soundBooster.snapBoostDb;
-    if (snapVal) snapVal.textContent = `+${state.soundBooster.snapBoostDb} dB`;
+    if (snapVal) snapVal.textContent = lang === 'bn' ? `+${formatNumber(state.soundBooster.snapBoostDb, 'bn')} ডেসিবেল` : `+${state.soundBooster.snapBoostDb} dB`;
 
     if (masterSlider) masterSlider.value = state.soundBooster.masterPercent;
-    if (masterVal) masterVal.textContent = `${state.soundBooster.masterPercent}%`;
+    if (masterVal) masterVal.textContent = `${formatNumber(state.soundBooster.masterPercent, lang)}%`;
   };
 
   // Preset Handlers
@@ -1438,7 +1434,7 @@ function initSynthDrumStudioControls() {
     if (romanPhrase) romanPhrase.textContent = bol.romanizedBol;
     if (descText) descText.textContent = bol.description;
     if (bpmSlider) bpmSlider.value = bol.tempoBpm;
-    if (bpmVal) bpmVal.textContent = `${bol.tempoBpm} BPM`;
+    if (bpmVal) bpmVal.textContent = lang === 'bn' ? `${formatNumber(bol.tempoBpm, 'bn')} লয়` : `${bol.tempoBpm} BPM`;
 
     if (bol.style) {
       styleButtons.forEach((b) => {
@@ -1483,7 +1479,7 @@ function initSynthDrumStudioControls() {
     }
 
     if (activeStepLabel) {
-      activeStepLabel.textContent = `Step: ${ev.step + 1} / ${ev.totalSteps}`;
+      activeStepLabel.textContent = lang === 'bn' ? `মাত্রা: ${formatNumber(ev.step + 1, 'bn')} / ${formatNumber(ev.totalSteps, 'bn')}` : `Step: ${ev.step + 1} / ${ev.totalSteps}`;
     }
 
     if (ev.stroke === 'DHA') flashPad('pad-dha');
@@ -1500,7 +1496,7 @@ function initSynthDrumStudioControls() {
   // Sequencer BPM Change
   dhakSequencer.onBpmChangeCallback = (newBpm) => {
     if (bpmSlider) bpmSlider.value = Math.round(newBpm);
-    if (bpmVal) bpmVal.textContent = `${Math.round(newBpm)} BPM`;
+    if (bpmVal) bpmVal.textContent = lang === 'bn' ? `${formatNumber(Math.round(newBpm), 'bn')} লয়` : `${Math.round(newBpm)} BPM`;
   };
 
   // 6 Physical Drum Pads Triggers
@@ -1515,7 +1511,7 @@ function initSynthDrumStudioControls() {
   bpmSlider?.addEventListener('input', (e) => {
     const val = Number(e.target.value);
     dhakSequencer.setBpm(val);
-    if (bpmVal) bpmVal.textContent = `${val} BPM`;
+    if (bpmVal) bpmVal.textContent = lang === 'bn' ? `${formatNumber(val, 'bn')} লয়` : `${val} BPM`;
   });
 
   // Tap Tempo
@@ -1536,7 +1532,7 @@ function initSynthDrumStudioControls() {
 
       dhakSequencer.setBpm(clampedBpm);
       if (bpmSlider) bpmSlider.value = clampedBpm;
-      if (bpmVal) bpmVal.textContent = `${clampedBpm} BPM`;
+      if (bpmVal) bpmVal.textContent = lang === 'bn' ? `${formatNumber(clampedBpm, 'bn')} লয়` : `${clampedBpm} BPM`;
     }
   });
 
@@ -1567,13 +1563,13 @@ function initSynthDrumStudioControls() {
     if (isPlaying) {
       playBtn?.classList.add('loop-active');
       if (playIcon) playIcon.textContent = '⏹';
-      if (playText) playText.textContent = 'বোল বন্ধ করুন (Stop Bol)';
+      if (playText) playText.textContent = lang === 'bn' ? 'বোল বন্ধ করুন' : 'Stop Bol';
     } else {
       playBtn?.classList.remove('loop-active');
       if (playIcon) playIcon.textContent = '▶';
-      if (playText) playText.textContent = 'বোল বাজানো শুরু করুন (Play Bol)';
+      if (playText) playText.textContent = lang === 'bn' ? 'বোল বাজানো শুরু করুন' : 'Play Bol';
       stepGrid?.querySelectorAll('.step-tile').forEach((t) => t.classList.remove('active-step'));
-      if (activeStepLabel) activeStepLabel.textContent = 'Step: -- / 16';
+      if (activeStepLabel) activeStepLabel.textContent = lang === 'bn' ? 'মাত্রা: -- / ১৬' : 'Step: -- / 16';
     }
   });
 
@@ -2792,7 +2788,7 @@ function renderStoryCanvas() {
     ctx.fillStyle = currentTheme.gold;
     ctx.font = '800 52px "Poppins", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(`${formatNumber(cd.days, lang)} ${lang === 'bn' ? 'DAYS TO GO' : 'DAYS TO GO'}`, centerX, countBoxY + 62);
+    ctx.fillText(`${formatNumber(cd.days, lang)} ${lang === 'bn' ? 'দিন বাকি' : 'DAYS TO GO'}`, centerX, countBoxY + 62);
 
     ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
     ctx.font = '500 26px "Noto Sans Bengali", "Poppins", sans-serif';
@@ -2934,11 +2930,11 @@ function initKeyboardShortcuts() {
         if (isPlaying) {
           playBtn?.classList.add('loop-active');
           if (playIcon) playIcon.textContent = '⏹';
-          if (playText) playText.textContent = 'বোল বন্ধ করুন (Stop Bol)';
+          if (playText) playText.textContent = lang === 'bn' ? 'বোল বন্ধ করুন' : 'Stop Bol';
         } else {
           playBtn?.classList.remove('loop-active');
           if (playIcon) playIcon.textContent = '▶';
-          if (playText) playText.textContent = 'বোল বাজানো শুরু করুন (Play Bol)';
+          if (playText) playText.textContent = lang === 'bn' ? 'বোল বাজানো শুরু করুন' : 'Play Bol';
           document.querySelectorAll('.step-tile').forEach((t) => t.classList.remove('active-step'));
         }
       } else {
@@ -3043,9 +3039,9 @@ function initModals() {
 
     playBtn?.classList.remove('loop-active');
     if (playIcon) playIcon.textContent = '▶';
-    if (playText) playText.textContent = 'বোল বাজানো শুরু করুন (Play Bol)';
+    if (playText) playText.textContent = lang === 'bn' ? 'বোল বাজানো শুরু করুন' : 'Play Bol';
     document.querySelectorAll('.step-tile').forEach((t) => t.classList.remove('active-step'));
-    if (activeStepLabel) activeStepLabel.textContent = 'Step: -- / 16';
+    if (activeStepLabel) activeStepLabel.textContent = lang === 'bn' ? 'মাত্রা: -- / ১৬' : 'Step: -- / 16';
   };
 
   // Dhak close with stopping audio sequencer
