@@ -111,7 +111,7 @@ export class AudioEngine {
   }
 
   // =========================================================================
-  // 1. 🥁 DHA (Open Bass Shell Resonance - Multi-layered Acoustic Modeling)
+  // 1. DHA (Open Bass Shell Resonance - Multi-layered Acoustic Modeling)
   // Layer 1: Sub punch sine sweep (110Hz -> 52Hz)
   // Layer 2: Jackfruit wood cavity (82Hz Q=4.5 bandpass + warm wave shaper)
   // Layer 3: Modal hide harmonics (74Hz, 148Hz, 222Hz, 310Hz)
@@ -216,7 +216,7 @@ export class AudioEngine {
   }
 
   // =========================================================================
-  // 2. 🥢 DYANG (High-Tension Bamboo Stick Snap - Kanchi Strike)
+  // 2. DYANG (High-Tension Bamboo Stick Snap - Kanchi Strike)
   // Pitch drop: 380Hz -> 310Hz over 20ms
   // Bamboo transient crack: 2400Hz bandpass burst, 7ms
   // Peaking filter: 2100Hz +8.5dB
@@ -301,7 +301,7 @@ export class AudioEngine {
   }
 
   // =========================================================================
-  // 3. 🥢 TA (Open Bamboo Stick Rim Strike)
+  // 3. TA (Open Bamboo Stick Rim Strike)
   // Crisp resonant edge click, bright overtone ring
   // =========================================================================
   playTa(velocity = 1.0, time = null) {
@@ -330,30 +330,25 @@ export class AudioEngine {
     hpFilter.connect(peakFilter);
     peakFilter.connect(this.bassBoostNode);
 
-    const osc1 = ctx.createOscillator();
-    const osc1Gain = ctx.createGain();
-    osc1.type = 'triangle';
-    osc1.frequency.setValueAtTime(405 + humanJitter, t);
-    osc1.frequency.exponentialRampToValueAtTime(330 + humanJitter, t + 0.015);
-    osc1Gain.gain.setValueAtTime(0.92 * safeVel, t);
-    osc1Gain.gain.exponentialRampToValueAtTime(0.001, t + 0.17);
+    const harmonics = [
+      { freq: 330, gain: 0.92, decay: 0.17, type: 'triangle' },
+      { freq: 790, gain: 0.58, decay: 0.11, type: 'sine' }
+    ];
 
-    osc1.connect(osc1Gain);
-    osc1Gain.connect(strikeBus);
-    osc1.start(t);
-    osc1.stop(t + 0.18);
+    harmonics.forEach(({ freq, gain: hGain, decay, type }) => {
+      const osc = ctx.createOscillator();
+      const oscGain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq + humanJitter + 75, t);
+      osc.frequency.exponentialRampToValueAtTime(freq + humanJitter, t + 0.015);
+      oscGain.gain.setValueAtTime(hGain * safeVel, t);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, t + decay);
 
-    const osc2 = ctx.createOscillator();
-    const osc2Gain = ctx.createGain();
-    osc2.type = 'sine';
-    osc2.frequency.setValueAtTime(790 + humanJitter, t);
-    osc2Gain.gain.setValueAtTime(0.58 * safeVel, t);
-    osc2Gain.gain.exponentialRampToValueAtTime(0.001, t + 0.11);
-
-    osc2.connect(osc2Gain);
-    osc2Gain.connect(strikeBus);
-    osc2.start(t);
-    osc2.stop(t + 0.12);
+      osc.connect(oscGain);
+      oscGain.connect(strikeBus);
+      osc.start(t);
+      osc.stop(t + decay + 0.01);
+    });
 
     const noiseBuf = this.createNoiseBuffer(0.018);
     const noiseSource = ctx.createBufferSource();
@@ -377,7 +372,7 @@ export class AudioEngine {
   }
 
   // =========================================================================
-  // 4. 🤏 KUT (Damped / Ghost Stroke - Finger/Palm Heel Mute)
+  // 4. KUT (Damped / Ghost Stroke - Finger/Palm Heel Mute)
   // =========================================================================
   playKut(velocity = 1.0, time = null) {
     this.init();
@@ -438,7 +433,7 @@ export class AudioEngine {
   }
 
   // =========================================================================
-  // 5. ⚡ GURGUR (Rapid Double-Stick Alternating Micro-Roll)
+  // 5. GURGUR (Rapid Double-Stick Alternating Micro-Roll)
   // =========================================================================
   playGurgur(velocity = 1.0, hits = 6, time = null) {
     this.init();
@@ -462,59 +457,66 @@ export class AudioEngine {
   }
 
   // =========================================================================
-  // 6. 🔔 KANSOR GHONTA (Dual-Frequency Bell-Metal Plate)
+  // 6. KANSOR GHONTA (Dual-Frequency Bell-Metal Plate)
   // Primary 1468Hz + Secondary 2936Hz, FM shimmer at 734Hz, 2.4s decay
   // =========================================================================
   playKansor(velocity = 1.0, type = 'CLANG_HIGH', time = null) {
     this.init();
     const ctx = this.ctx;
     const t = time !== null ? time : ctx.currentTime;
-    const safeVel = Math.max(0.1, Math.min(1.3, velocity));
-    const isHigh = type === 'CLANG_HIGH';
+    const safeVel = Math.max(0.1, Math.min(1.2, velocity));
 
-    const decaySec = isHigh ? 2.5 : 1.9;
     const masterKansorGain = ctx.createGain();
     masterKansorGain.gain.setValueAtTime(0.001, t);
-    masterKansorGain.gain.linearRampToValueAtTime(0.55 * safeVel, t + 0.0012);
-    masterKansorGain.gain.exponentialRampToValueAtTime(0.0001, t + decaySec);
+    masterKansorGain.gain.linearRampToValueAtTime(0.92 * safeVel, t + 0.0006);
+    masterKansorGain.gain.exponentialRampToValueAtTime(0.0001, t + 2.4);
 
-    const sparkleFilter = ctx.createBiquadFilter();
-    sparkleFilter.type = 'highshelf';
-    sparkleFilter.frequency.setValueAtTime(5000, t);
-    sparkleFilter.gain.setValueAtTime(5.0, t);
+    const highpass = ctx.createBiquadFilter();
+    highpass.type = 'highpass';
+    highpass.frequency.setValueAtTime(480, t);
 
-    masterKansorGain.connect(sparkleFilter);
-    sparkleFilter.connect(this.bassBoostNode);
+    const bellReverb = ctx.createBiquadFilter();
+    bellReverb.type = 'peaking';
+    bellReverb.frequency.setValueAtTime(1468, t);
+    bellReverb.Q.setValueAtTime(12.0, t);
+    bellReverb.gain.setValueAtTime(6.0, t);
 
-    const modes = [
-      { freq: 1468, gain: 0.92, decay: decaySec },
-      { freq: 2936, gain: 0.68, decay: decaySec * 0.85 },
-      { freq: 4380, gain: 0.38, decay: decaySec * 0.6 },
-      { freq: 6120, gain: 0.25, decay: decaySec * 0.4 }
-    ];
+    masterKansorGain.connect(highpass);
+    highpass.connect(bellReverb);
+    bellReverb.connect(this.masterGainNode);
 
-    const fmMod = ctx.createOscillator();
-    const fmGain = ctx.createGain();
-    fmMod.frequency.setValueAtTime(734, t);
-    fmGain.gain.setValueAtTime(190 * safeVel, t);
-    fmGain.gain.exponentialRampToValueAtTime(5, t + 1.2);
-    fmMod.connect(fmGain);
-    fmMod.start(t);
-    fmMod.stop(t + decaySec);
+    const kansorPartials = type === 'CLANG_HIGH'
+      ? [
+          { freq: 1468, gain: 0.95, decay: 2.3, type: 'sine' },
+          { freq: 2936, gain: 0.72, decay: 1.8, type: 'sine' },
+          { freq: 4404, gain: 0.44, decay: 1.1, type: 'sine' },
+          { freq: 5872, gain: 0.28, decay: 0.7, type: 'sine' },
+          { freq: 734,  gain: 0.38, decay: 2.1, type: 'triangle' }
+        ]
+      : [
+          { freq: 980,  gain: 0.95, decay: 2.6, type: 'sine' },
+          { freq: 1960, gain: 0.68, decay: 2.0, type: 'sine' },
+          { freq: 2940, gain: 0.42, decay: 1.3, type: 'sine' },
+          { freq: 490,  gain: 0.45, decay: 2.4, type: 'triangle' }
+        ];
 
-    modes.forEach(({ freq, gain: mGain, decay }, idx) => {
+    kansorPartials.forEach(({ freq, gain: pGain, decay, type: pType }) => {
       const osc = ctx.createOscillator();
       const oscGain = ctx.createGain();
+      osc.type = pType;
 
-      osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-      const beatOffset = (idx % 2 === 0 ? 1 : -1) * 3.8;
-      osc.frequency.setValueAtTime(freq + beatOffset, t);
+      const mod = ctx.createOscillator();
+      const modGain = ctx.createGain();
+      mod.type = 'sine';
+      mod.frequency.setValueAtTime(6.2, t);
+      modGain.gain.setValueAtTime(3.8, t);
+      mod.connect(modGain);
+      modGain.connect(osc.frequency);
+      mod.start(t);
+      mod.stop(t + decay + 0.05);
 
-      if (idx === 0 || idx === 1) {
-        fmGain.connect(osc.frequency);
-      }
-
-      oscGain.gain.setValueAtTime(mGain * safeVel, t);
+      osc.frequency.setValueAtTime(freq, t);
+      oscGain.gain.setValueAtTime(pGain * safeVel, t);
       oscGain.gain.exponentialRampToValueAtTime(0.0001, t + decay);
 
       osc.connect(oscGain);
@@ -524,17 +526,18 @@ export class AudioEngine {
       osc.stop(t + decay + 0.05);
     });
 
-    const noiseBuf = this.createNoiseBuffer(0.012);
+    const noiseBuf = this.createNoiseBuffer(0.015);
     const noiseSource = ctx.createBufferSource();
     noiseSource.buffer = noiseBuf;
 
     const noiseFilter = ctx.createBiquadFilter();
-    noiseFilter.type = 'highpass';
-    noiseFilter.frequency.setValueAtTime(3200, t);
+    noiseFilter.type = 'bandpass';
+    noiseFilter.frequency.setValueAtTime(3600, t);
+    noiseFilter.Q.setValueAtTime(3.5, t);
 
     const noiseGain = ctx.createGain();
-    noiseGain.gain.setValueAtTime(0.55 * safeVel, t);
-    noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.006);
+    noiseGain.gain.setValueAtTime(0.68 * safeVel, t);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.008);
 
     noiseSource.connect(noiseFilter);
     noiseFilter.connect(noiseGain);
@@ -545,7 +548,7 @@ export class AudioEngine {
   }
 
   // =========================================================================
-  // 7. 🐚 SHANKHA (Rich 432Hz Sacred Conch Shell Synthesizer)
+  // 7. SHANKHA (Rich 432Hz Sacred Conch Shell Synthesizer)
   // 4.8Hz natural lip vibrato (22 cents), 5 harmonics, formants at 880Hz & 1740Hz
   // =========================================================================
   playShankha(durationSec = 2.8, time = null) {

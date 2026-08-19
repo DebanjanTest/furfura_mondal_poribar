@@ -14,7 +14,7 @@ export const translations = {
     "photo_story": "ফটো স্টোরি",
 
     // Hero Section
-    "hero_badge": "⚜️ ফুরফুরা মণ্ডল পরিবার — ঐতিহ্যবাহী শারদোৎসব ২০২৬",
+    "hero_badge": "ফুরফুরা মণ্ডল পরিবার — ঐতিহ্যবাহী শারদোৎসব ২০২৬",
     "hero_countdown_title": "মা দুর্গার আগমন বার্তা ও ক্ষণগণনা",
     "hero_days": "দিন",
     "hero_hours": "ঘণ্টা",
@@ -38,26 +38,26 @@ export const translations = {
     "river_hint": "কার্ডে ক্লিক করে বিস্তারিত জানুন",
 
     // Others by Onnota
-    "onnota_badge": "✨ অন্যান্য সৃষ্টি",
+    "onnota_badge": "অন্যান্য সৃষ্টি",
     "onnota_title": "অন্যান্য সৃষ্টি — অন্যতা (Onnota)",
     "onnota_subtitle": "শারদ সাহিত্যের নস্টালজিয়া, আলোকচিত্র, সাবেকি আলপনা ও ডিজিটাল ক্যানভাস",
     "onnota_filter_all": "সমস্ত সৃষ্টি",
-    "onnota_filter_art": "🎨 চিত্রশিল্প",
-    "onnota_filter_photography": "📷 আলোকচিত্র",
-    "onnota_filter_crafts": "🪔 হস্তশিল্প ও আলপনা",
-    "onnota_filter_literature": "📜 সাহিত্য ও স্মৃতিচারণ",
+    "onnota_filter_art": "চিত্রশিল্প",
+    "onnota_filter_photography": "আলোকচিত্র",
+    "onnota_filter_crafts": "হস্তশিল্প ও আলপনা",
+    "onnota_filter_literature": "সাহিত্য ও স্মৃতিচারণ",
 
     // Heritage Gallery
-    "gallery_badge": "🏛️ ঐতিহ্যবাহী মহাফেজখানা",
+    "gallery_badge": "ঐতিহ্যবাহী মহাফেজখানা",
     "gallery_title": "ঐতিহ্য ফটো গ্যালারি ও উৎসব স্মৃতি",
     "gallery_subtitle": "১৯৯৭ সাল থেকে সংরক্ষিত মন্ডল বাড়ির সাবেকি প্রতিমা দর্শন, সন্ধিপূজা ও পারিবারিক উৎসবের ঐতিহাসিক অ্যালবাম",
     "gallery_filter_all": "সমস্ত ছবি",
-    "gallery_filter_protima": "🌸 প্রতিমা দর্শন",
-    "gallery_filter_aarti": "🔥 ধুনুচি ও আরতি",
-    "gallery_filter_heritage": "🏛️ ঐতিহ্য ও পরিবার",
-    "gallery_filter_sharat": "🌾 শরতের আগমনী",
-    "gallery_filter_crafts": "🪔 হস্তশিল্প ও আলপনা",
-    "gallery_btn_upload": "📸 আপনার স্মৃতি যুক্ত করুন",
+    "gallery_filter_protima": "প্রতিমা দর্শন",
+    "gallery_filter_aarti": "ধুনুচি ও আরতি",
+    "gallery_filter_heritage": "ঐতিহ্য ও পরিবার",
+    "gallery_filter_sharat": "শরতের আগমনী",
+    "gallery_filter_crafts": "হস্তশিল্প ও আলপনা",
+    "gallery_btn_upload": "আপনার স্মৃতি যুক্ত করুন",
 
     // Audio Bar & Dynamic Island
     "audio_now_playing": "বর্তমানে বাজছে",
@@ -84,7 +84,7 @@ export const translations = {
     "photo_story": "Photo Story",
 
     // Hero Section
-    "hero_badge": "⚜️ Furfura Mondal Poribar — Ancestral Durga Puja 2026",
+    "hero_badge": "Furfura Mondal Poribar — Ancestral Durga Puja 2026",
     "hero_countdown_title": "Devi Durga's Arrival Live Countdown",
     "hero_days": "Days",
     "hero_hours": "Hours",
@@ -108,26 +108,26 @@ export const translations = {
     "river_hint": "Click any card to inspect full details",
 
     // Others by Onnota
-    "onnota_badge": "✨ Creative Showcase",
+    "onnota_badge": "Creative Showcase",
     "onnota_title": "Others by Onnota (অন্যতা)",
     "onnota_subtitle": "A curated anthology of Bengali festive prose, photographic landscapes, handcrafted Alpana, and fine art",
     "onnota_filter_all": "All Works",
-    "onnota_filter_art": "🎨 Fine Art",
-    "onnota_filter_photography": "📷 Photography",
-    "onnota_filter_crafts": "🪔 Crafts & Alpana",
-    "onnota_filter_literature": "📜 Prose & Memoirs",
+    "onnota_filter_art": "Fine Art",
+    "onnota_filter_photography": "Photography",
+    "onnota_filter_crafts": "Crafts & Alpana",
+    "onnota_filter_literature": "Prose & Memoirs",
 
     // Heritage Gallery
-    "gallery_badge": "🏛️ Ancestral Archives",
+    "gallery_badge": "Ancestral Archives",
     "gallery_title": "Heritage Photo Gallery & Festive Memories",
     "gallery_subtitle": "Preserved photographic chronicle of Mondal Bari traditional idol darshan, Sandhi Puja, and family homecoming since 1997",
     "gallery_filter_all": "All Photos",
-    "gallery_filter_protima": "🌸 Divine Darshan",
-    "gallery_filter_aarti": "🔥 Dhunuchi & Aarti",
-    "gallery_filter_heritage": "🏛️ Heritage & Family",
-    "gallery_filter_sharat": "🌾 Autumn Vibes",
-    "gallery_filter_crafts": "🪔 Crafts & Alpana",
-    "gallery_btn_upload": "📸 Add Your Memories",
+    "gallery_filter_protima": "Divine Darshan",
+    "gallery_filter_aarti": "Dhunuchi & Aarti",
+    "gallery_filter_heritage": "Heritage & Family",
+    "gallery_filter_sharat": "Autumn Vibes",
+    "gallery_filter_crafts": "Crafts & Alpana",
+    "gallery_btn_upload": "Add Your Memories",
 
     // Audio Bar & Dynamic Island
     "audio_now_playing": "Now Playing",

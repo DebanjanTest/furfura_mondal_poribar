@@ -153,12 +153,12 @@ function updateAtmosphere() {
 
   // Dropdown Label & Icon
   const vibeLabels = {
-    'early-morning': { icon: '🌅', label: 'Bhor (Dawn)' },
-    'morning': { icon: '☀️', label: 'Sokal (Morning)' },
-    'afternoon': { icon: '🌤️', label: 'Dupur (Afternoon)' },
-    'evening': { icon: '🌆', label: 'Sandhya (Aarti)' },
-    'night': { icon: '🏮', label: 'Raat (Night)' },
-    'midnight': { icon: '✨', label: 'Modhyoraat (Midnight)' }
+    'early-morning': { icon: '', label: 'Bhor (Dawn)' },
+    'morning': { icon: '', label: 'Sokal (Morning)' },
+    'afternoon': { icon: '', label: 'Dupur (Afternoon)' },
+    'evening': { icon: '', label: 'Sandhya (Aarti)' },
+    'night': { icon: '', label: 'Raat (Night)' },
+    'midnight': { icon: '', label: 'Modhyoraat (Midnight)' }
   };
 
   const currentInfo = vibeLabels[effectiveTime] || vibeLabels['morning'];
@@ -329,7 +329,7 @@ function updateDynamicIslandState() {
     if (activeState) activeState.style.display = 'flex';
     if (islandIconPlay) islandIconPlay.style.display = 'none';
     if (islandIconPause) islandIconPause.style.display = 'block';
-    if (islandPlayingIcon) islandPlayingIcon.textContent = '🥁';
+    if (islandPlayingIcon) islandPlayingIcon.textContent = '';
 
     const part = authenticLiveDhakParts[state.currentLiveDhakIndex];
     if (islandTrackTitle) islandTrackTitle.textContent = part?.title_bn || 'খাঁটি ঢাকের বোল';
@@ -340,7 +340,7 @@ function updateDynamicIslandState() {
     if (activeState) activeState.style.display = 'flex';
     if (islandIconPlay) islandIconPlay.style.display = 'none';
     if (islandIconPause) islandIconPause.style.display = 'block';
-    if (islandPlayingIcon) islandPlayingIcon.textContent = '🎵';
+    if (islandPlayingIcon) islandPlayingIcon.textContent = '';
 
     const track = getCurrentTrack();
     if (islandTrackTitle) islandTrackTitle.textContent = track?.title || 'Dugga Elo';
@@ -827,10 +827,10 @@ function initDhakStudio() {
       btnEngineYt?.classList.remove('active');
       btnEngineYt?.setAttribute('aria-checked', 'false');
 
-      if (tabEngineIndicator) tabEngineIndicator.textContent = '⚡ PURE ENGINE';
+      if (tabEngineIndicator) tabEngineIndicator.textContent = 'PURE ENGINE';
       if (liveEngineStatusText) liveEngineStatusText.textContent = 'PURE STUDIO LOOP ENGINE';
       if (seamlessLoopStatusPill) {
-        seamlessLoopStatusPill.innerHTML = '<span class="loop-icon-mini">🔁</span><span>সিমলেস লুপ সক্রিয় (Gapless)</span>';
+        seamlessLoopStatusPill.innerHTML = '<span>সিমলেস লুপ সক্রিয় (Gapless)</span>';
       }
 
       // If YouTube was playing, pause it and transfer playback to Pure Sequencer
@@ -844,10 +844,10 @@ function initDhakStudio() {
       btnEnginePure?.classList.remove('active');
       btnEnginePure?.setAttribute('aria-checked', 'false');
 
-      if (tabEngineIndicator) tabEngineIndicator.textContent = '📻 YT STREAM';
+      if (tabEngineIndicator) tabEngineIndicator.textContent = 'YT STREAM';
       if (liveEngineStatusText) liveEngineStatusText.textContent = 'YOUTUBE ORIGINAL STREAM (8EA8JrDMZbM)';
       if (seamlessLoopStatusPill) {
-        seamlessLoopStatusPill.innerHTML = '<span class="loop-icon-mini">📻</span><span>ইউটিউব ফিল্ড স্ট্রিম লুপ</span>';
+        seamlessLoopStatusPill.innerHTML = '<span>ইউটিউব ফিল্ড স্ট্রিম লুপ</span>';
       }
 
       // If Pure Sequencer was playing, stop it and transfer playback to YouTube
@@ -1062,8 +1062,8 @@ function renderLiveDhakParts() {
       <div class="live-part-card-top">
         <span class="live-part-num-badge">পর্ব ${part.bengaliNum || index + 1}</span>
         <div class="live-part-meta-pills">
-          <span class="live-part-time-pill">⏱️ ${part.durationLabel || '0:18'}</span>
-          <span class="live-part-bpm-pill">⚡ ${part.tempoBpm} BPM</span>
+          <span class="live-part-time-pill">${part.durationLabel || '0:18'}</span>
+          <span class="live-part-bpm-pill">${part.tempoBpm} BPM</span>
         </div>
       </div>
 
@@ -1073,7 +1073,7 @@ function renderLiveDhakParts() {
       </div>
 
       <p class="live-part-desc">${part.bengaliDesc || part.description}</p>
-      <div class="live-part-acoustic">🔊 ${part.acousticDetails}</div>
+      <div class="live-part-acoustic">${part.acousticDetails}</div>
 
       <div class="live-part-footer">
         <button class="live-part-play-btn" data-index="${index}">
@@ -1331,11 +1331,11 @@ function initSynthDrumStudioControls() {
 
   // Stroke Icons Map
   const strokeIcons = {
-    'DHA': '🥁',
-    'DYANG': '🥢',
-    'TA': '🥢',
-    'KUT': '🤏',
-    'GUR_GUR': '⚡',
+    'DHA': 'DHA',
+    'DYANG': 'DYG',
+    'TA': 'TA',
+    'KUT': 'KUT',
+    'GUR_GUR': 'GUR',
     'NONE': '—'
   };
 
@@ -1366,7 +1366,7 @@ function initSynthDrumStudioControls() {
 
       tile.innerHTML = `
         <span class="step-idx">${bengNumbers[stepItem.step] || stepItem.step + 1}</span>
-        <span class="step-stroke-icon">${strokeIcons[stepItem.stroke] || '🥁'}</span>
+        <span class="step-stroke-icon">${strokeIcons[stepItem.stroke] || '—'}</span>
         <span class="step-phonetic">${stepItem.phonetic || '-'}</span>
         ${stepItem.kansor && stepItem.kansor !== 'NONE' ? '<span class="step-kansor-dot" title="Kanshor"></span>' : ''}
       `;
@@ -1711,10 +1711,10 @@ function initPujoInfoAndGallery() {
   // Share Puja Invitation (WhatsApp / Web Share API)
   const shareBtn = document.getElementById('btn-share-website');
   shareBtn?.addEventListener('click', async () => {
-    const shareText = `🌸 পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য ও মিলনমেলা।
-🗓️ মহালয়া: ১০ অক্টোবর | মহাষ্টমী ও সন্ধিপূজা: ১৮ অক্টোবর ২০২৬
-✨ লাইভ কাউন্টডাউন ও আগমনী রেডিও: ${window.location.href}
-📸 Instagram: @furfura_mondal_poribar (${nativePujoData.instagramUrl})`;
+    const shareText = `পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য ও মিলনমেলা।
+মহালয়া: ১০ অক্টোবর | মহাষ্টমী ও সন্ধিপূজা: ১৮ অক্টোবর ২০২৬
+লাইভ কাউন্টডাউন ও আগমনী রেডিও: ${window.location.href}
+Instagram: @furfura_mondal_poribar (${nativePujoData.instagramUrl})`;
 
     if (navigator.share) {
       try {
@@ -1724,10 +1724,10 @@ function initPujoInfoAndGallery() {
           url: window.location.href
         });
       } catch (e) {
-        copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণ লিংক কপি হয়েছে!');
+        copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণ লিংক কপি হয়েছে!');
       }
     } else {
-      copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণ লিংক কপি হয়েছে!');
+      copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণ লিংক কপি হয়েছে!');
     }
   });
 }
@@ -1818,12 +1818,11 @@ function createRiverCardElement(item) {
     <img class="river-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" decoding="async" />
     <div class="river-card-overlay">
       <div class="river-card-top">
-        <span class="river-category-pill">${item.categoryLabel || '🌸 দর্শন'}</span>
-        <span class="river-zoom-badge" aria-hidden="true">🔍</span>
+        <span class="river-category-pill">${item.categoryLabel || 'দর্শন'}</span>
       </div>
       <div class="river-card-bottom">
         <h4 class="river-card-title">${item.bengaliTitle || item.title}</h4>
-        <span class="river-card-likes">❤️ <span class="like-val">${toBengaliNumerals(likeCount)}</span> প্রণাম</span>
+        <span class="river-card-likes"><span class="like-val">${toBengaliNumerals(likeCount)}</span> প্রণাম</span>
       </div>
     </div>
   `;
@@ -2027,11 +2026,11 @@ function initGrandGallery() {
     const category = categorySelect?.value || 'community';
 
     const categoryNames = {
-      protima: '🌸 প্রতিমা ও বরণ',
-      aarti: '🔥 ধুনুচি ও আরতি',
-      heritage: '🏛️ ঐতিহ্য ও পরিবার',
-      sharat: '🌾 শরতের আগমনী',
-      community: '📸 ভক্তদের স্মৃতি'
+      protima: 'প্রতিমা দর্শন',
+      aarti: 'ধুনুচি ও আরতি',
+      heritage: 'ঐতিহ্য ও পরিবার',
+      sharat: 'শরতের আগমনী',
+      community: 'ভক্তদের স্মৃতি'
     };
 
     selectedUploadFiles.forEach((fileObj) => {
@@ -2042,7 +2041,7 @@ function initGrandGallery() {
         bengaliTitle: caption,
         bengaliDesc: `তোলা: ${author} • মন্ডল বাড়ির পুজো স্মৃতি`,
         category: category,
-        categoryLabel: categoryNames[category] || '📸 ভক্তদের স্মৃতি',
+        categoryLabel: categoryNames[category] || 'ভক্তদের স্মৃতি',
         author: author,
         likes: 1,
         isCommunity: true,
@@ -2121,16 +2120,15 @@ function renderGrandGalleryGrid(isNewUpload = false) {
       <div class="gallery-card-img-wrap">
         <img class="gallery-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" decoding="async" />
         <span class="gallery-card-badge">${item.categoryLabel || item.category}</span>
-        ${item.isCommunity ? '<span class="gallery-card-community-badge">📸 ভক্তের ছবি</span>' : ''}
+        ${item.isCommunity ? '<span class="gallery-card-community-badge">ভক্তের ছবি</span>' : ''}
       </div>
       <div class="gallery-card-body">
         <h4 class="gallery-card-title">${item.bengaliTitle || item.title}</h4>
         <p class="gallery-card-desc">${item.bengaliDesc || item.title}</p>
       </div>
       <div class="gallery-card-footer">
-        <span class="gallery-card-author">👤 ${item.author || 'মন্ডল পরিবার'}</span>
+        <span class="gallery-card-author">${item.author || 'মন্ডল পরিবার'}</span>
         <button type="button" class="gallery-like-btn ${isLiked ? 'liked' : ''}" data-photo-id="${item.id}" aria-label="Give Blessing Pranam">
-          <span class="like-heart">❤️</span>
           <span class="like-num">${toBengaliNumerals(likeCount)}</span>
           <span>প্রণাম</span>
         </button>
@@ -2260,11 +2258,10 @@ function renderOnnotaGrid() {
       </div>
       <div class="onnota-card-footer">
         <div class="onnota-card-meta">
-          <span class="onnota-card-author">👤 ${item.author || 'অন্যতা'}</span>
-          <span class="onnota-card-date">🗓️ ${item.date || 'শরৎ ২০২৬'}</span>
+          <span class="onnota-card-author">${item.author || 'অন্যতা'}</span>
+          <span class="onnota-card-date">${item.date || 'শরৎ ২০২৬'}</span>
         </div>
         <button type="button" class="onnota-like-btn ${isLiked ? 'liked' : ''}" data-item-id="${item.id}" aria-label="Give Pranam Blessing">
-          <span class="like-heart">❤️</span>
           <span class="like-num">${toBengaliNumerals(likeCount)}</span>
           <span>প্রণাম</span>
         </button>
@@ -2352,8 +2349,8 @@ function initGalleryLightbox() {
     const item = currentLightboxList[currentLightboxIndex];
     if (!item) return;
 
-    const shareText = `🌸 মন্ডল বাড়ির পুজো ২০২৬ (১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য): "${item.bengaliTitle || item.title}"
-📸 @furfura_mondal_poribar • লাইভ ফটো গ্যালারি ও আগমনী রেডিও: ${window.location.href}`;
+    const shareText = `মন্ডল বাড়ির পুজো ২০২৬ (১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য): "${item.bengaliTitle || item.title}"
+@furfura_mondal_poribar • লাইভ ফটো গ্যালারি ও আগমনী রেডিও: ${window.location.href}`;
 
     if (navigator.share) {
       try {
@@ -2363,10 +2360,10 @@ function initGalleryLightbox() {
           url: window.location.href
         });
       } catch (err) {
-        copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণ লিংক কপি হয়েছে!');
+        copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণ লিংক কপি হয়েছে!');
       }
     } else {
-      copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণ লিংক কপি হয়েছে!');
+      copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণ লিংক কপি হয়েছে!');
     }
   });
 
@@ -2413,7 +2410,7 @@ function updateLightboxUI() {
     imgEl.alt = item.bengaliTitle || item.title;
   }
   if (catEl) catEl.textContent = item.categoryLabel || item.category;
-  if (authorEl) authorEl.textContent = `👤 ${item.author || 'মন্ডল পরিবার'}${item.date ? ` • ${item.date}` : ''}`;
+  if (authorEl) authorEl.textContent = `${item.author || 'মন্ডল পরিবার'}${item.date ? ` • ${item.date}` : ''}`;
   if (counterEl) counterEl.textContent = `${toBengaliNumerals(currentLightboxIndex + 1)} / ${toBengaliNumerals(currentLightboxList.length)}`;
   if (titleEl) titleEl.textContent = item.bengaliTitle || item.title;
   if (descEl) descEl.textContent = item.bengaliDesc || item.desc_bn || item.desc || item.title;
@@ -2490,7 +2487,7 @@ function initStoryGenerator() {
     const shareBtn = document.getElementById('btn-share-story-native');
     if (!canvas) return;
 
-    const shareText = `🌸 পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondal Poribar) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য। Follow @furfura_mondal_poribar ${nativePujoData.instagramUrl}`;
+    const shareText = `পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondal Poribar) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য। Follow @furfura_mondal_poribar ${nativePujoData.instagramUrl}`;
 
     if (navigator.share && canvas.toBlob) {
       canvas.toBlob(async (blob) => {
@@ -2510,11 +2507,11 @@ function initStoryGenerator() {
             url: window.location.href
           });
         } catch (err) {
-          copyTextToClipboard(shareText, shareBtn, '✅ লিংক ও ক্যাপশন কপি হয়েছে!');
+          copyTextToClipboard(shareText, shareBtn, 'লিংক ও ক্যাপশন কপি হয়েছে!');
         }
       });
     } else {
-      copyTextToClipboard(shareText, shareBtn, '✅ লিংক ও ক্যাপশন কপি হয়েছে!');
+      copyTextToClipboard(shareText, shareBtn, 'লিংক ও ক্যাপশন কপি হয়েছে!');
     }
   });
 
@@ -2522,20 +2519,20 @@ function initStoryGenerator() {
   document.getElementById('btn-copy-story-caption')?.addEventListener('click', () => {
     const copyBtn = document.getElementById('btn-copy-story-caption');
     const cd = getCountdown();
-    const caption = `🌸 মা আসছেন ঘরে! 
+    const caption = `মা আসছেন ঘরে! 
 
 মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondal Poribar Pujo)
-📍 Furfura Mondal Poribar Natmandir, Dankuni / Hooghly, Bengal
-⏳ আর মাত্র ${cd.days} দিন বাকি (Maha Shasthi: 16 Oct 2026)
+নাটমন্দির, ফুরফুরা, হুগলী, পশ্চিমবঙ্গ
+আর মাত্র ${cd.days} দিন বাকি (Maha Shasthi: 16 Oct 2026)
 
-✨ ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য, সাবেকি একচালা ডাকের সাজ, ১০৮ পদ্মে সন্ধিপূজা ও ধুনুচি নাচ।
-🎵 আগমনী রেডিও ও লাইভ কাউন্টডাউন দেখুন: ${window.location.href}
+১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য, সাবেকি একচালা ডাকের সাজ, ১০৮ পদ্মে সন্ধিপূজা ও ধুনুচি নাচ।
+আগমনী রেডিও ও লাইভ কাউন্টডাউন দেখুন: ${window.location.href}
 
-📸 Follow on Instagram: @furfura_mondal_poribar
-🔗 ${nativePujoData.instagramUrl}
+Follow on Instagram: @furfura_mondal_poribar
+${nativePujoData.instagramUrl}
 #FurfuraMondalPoribar #MondalBarirPujo #মন্ডলবাড়িরপুজো #DurgaPuja2026 #PujoAsche #MondalBariRadio #Agomoni #KolkataDurgaPuja #BonediBariPujo #Dankuni #Hooghly`;
 
-    copyTextToClipboard(caption, copyBtn, '✅ সম্পূর্ণ ক্যাপশন ও হ্যাশট্যাগ কপি হয়েছে!');
+    copyTextToClipboard(caption, copyBtn, 'সম্পূর্ণ ক্যাপশন ও হ্যাশট্যাগ কপি হয়েছে!');
   });
 }
 
@@ -2627,7 +2624,7 @@ function renderStoryCanvas() {
   ctx.fillStyle = '#ffffff';
   ctx.font = '600 24px "Noto Sans Bengali", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('🪔 মন্ডল বাড়ির পুজো • ১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য', width / 2, 138);
+  ctx.fillText('মন্ডল বাড়ির পুজো • ১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য', width / 2, 138);
   ctx.restore();
 
   // 6. Central Sacred Maa Durga Iconography / Mandala
@@ -2645,16 +2642,16 @@ function renderStoryCanvas() {
   ctx.arc(centerX, centerY, 220, 0, Math.PI * 2);
   ctx.fill();
 
-  // Sacred Third Eye (ত্রিনয়ন) & Lotus Icon
+  // Sacred Third Eye (ত্রিনয়ন) / Shloka
   ctx.fillStyle = currentTheme.gold;
-  ctx.font = '120px serif';
+  ctx.font = '700 44px "Noto Sans Bengali", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('🔱', centerX, centerY + 20);
+  ctx.fillText('॥ শ্রীশ্রীদুর্গোৎসব ॥', centerX, centerY + 20);
 
   // Subtitle Sacred Shloka
   ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
   ctx.font = '500 28px "Noto Sans Bengali", sans-serif';
-  ctx.fillText('যা দেবী সর্বভূতেষু মাতৃরূপেণ সংস্থিতা', centerX, centerY + 130);
+  ctx.fillText('যা দেবী সর্বভূতেষু মাতৃরূপেণ সংস্থিতা', centerX, centerY + 90);
   ctx.restore();
 
   // 7. Bengali Display Headline (পুজো আসছে / শুভ শারদীয়া)
@@ -2700,7 +2697,7 @@ function renderStoryCanvas() {
     ctx.fillStyle = currentTheme.gold;
     ctx.font = '800 52px "Poppins", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(`⏳ ${cd.days} DAYS TO GO`, centerX, countBoxY + 62);
+    ctx.fillText(`${cd.days} DAYS TO GO`, centerX, countBoxY + 62);
 
     ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
     ctx.font = '500 26px "Noto Sans Bengali", sans-serif';
@@ -2723,7 +2720,7 @@ function renderStoryCanvas() {
     ctx.fillStyle = currentTheme.gold;
     ctx.font = '700 24px "Noto Sans Bengali", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('✦ পূজার নির্ঘণ্ট ২০২৬ ✦', centerX, schedBoxY + 45);
+    ctx.fillText('পূজার নির্ঘণ্ট ২০২৬', centerX, schedBoxY + 45);
 
     const scheduleLines = [
       { day: 'মহালয়া', date: '১০ অক্টোবর (ভোর ৪:৩০ চণ্ডীপাঠ)' },
@@ -2778,7 +2775,7 @@ function renderStoryCanvas() {
     ctx.fillStyle = '#ffffff';
     ctx.font = '700 24px "Poppins", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('📸 @furfura_mondal_poribar', centerX, handleY + 6);
+    ctx.fillText('@furfura_mondal_poribar', centerX, handleY + 6);
   }
   ctx.restore();
 }
@@ -3165,7 +3162,7 @@ function initInvitationSection() {
       src: '/invitation/invitation.jpg',
       title: 'শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণলিপি',
       bengaliTitle: 'শ্রীশ্রী দুর্গাপূজার আমন্ত্রণ — ফুরফুরা মণ্ডল পরিবার',
-      categoryLabel: '📜 সানন্দ আমন্ত্রণপত্র',
+      categoryLabel: 'সানন্দ আমন্ত্রণপত্র',
       author: 'ফুরফুরা মণ্ডল পরিবার, ফুরফুরা, কাজীপাডা, হুগলী',
       bengaliDesc: 'সমাগত দুর্গাপূজায় আমাদের ফুরাফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্তকে সবান্ধব উপস্থিত হয়ে মাতৃপূজা বেদীতে অর্ঘ্য নিবেদনের আহ্বান জানাই। সপ্তমী সন্ধ্যায় বিচিত্রানুষ্ঠান ও নবমী সন্ধ্যায় ধনুচী নাচ।',
       likes: 540
@@ -3179,7 +3176,7 @@ function initInvitationSection() {
   // 2. Share Invitation via WhatsApp / Web Share API
   shareBtn?.addEventListener('click', async (e) => {
     e.preventDefault();
-    const shareText = `🪔 শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণ
+    const shareText = `শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণ
 
 ফুরফুরা মণ্ডল পরিবার (ফুরফুরা, কাজীপাডা, হুগলী)
 ১৯৯৭ সাল থেকে অনুষ্ঠিত ঐতিহ্যবাহী শারদোৎসব ২০২৬
@@ -3187,12 +3184,12 @@ function initInvitationSection() {
 সুধী,
 সমাগত দুর্গাপূজায় আমাদের ফুরাফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্তকে সবান্ধব উপস্থিত হয়ে মাতৃপূজা বেদীতে অর্ঘ্য নিবেদনের আন্তরিক আহ্বান জানাই।
 
-🌸 মহা সপ্তমী সন্ধ্যা: বিচিত্রানুষ্ঠান ও আনন্দমেলা
-🔥 মহা নবমী সন্ধ্যা: নাটমন্দিরে ঐতিহ্যবাহী ধুনুচি নাচ ও ঢাকের লড়াই
+মহা সপ্তমী সন্ধ্যা: বিচিত্রানুষ্ঠান ও আনন্দমেলা
+মহা নবমী সন্ধ্যা: নাটমন্দিরে ঐতিহ্যবাহী ধুনুচি নাচ ও ঢাকের লড়াই
 
-📍 পূজামণ্ডপ অবস্থান ও দিকনির্দেশনা: https://maps.app.goo.gl/YXcU7gT92CLx1XkbA
-🌐 ডিজিটাল আমন্ত্রণপত্র ও লাইভ আগমনী রেডিও: ${window.location.href}
-📸 Instagram: @furfura_mondal_poribar`;
+পূজামণ্ডপ অবস্থান ও দিকনির্দেশনা: https://maps.app.goo.gl/YXcU7gT92CLx1XkbA
+ডিজিটাল আমন্ত্রণপত্র ও লাইভ আগমনী রেডিও: ${window.location.href}
+Instagram: @furfura_mondal_poribar`;
 
     if (navigator.share) {
       try {
