@@ -3343,7 +3343,27 @@ function initSectionScrollLocking() {
         return;
       }
 
-      // Case C: Single-fold transitions for Hero, Invitation & Photo River
+      // Case C: Inside Formal Invitation Section -> Allow free reading of the entire letterhead and transcript!
+      const isInsideInvite = inviteRect.top <= 100 && inviteRect.bottom >= window.innerHeight * 0.35;
+      if (isInsideInvite) {
+        // At bottom of Invitation scrolling down -> Glide to Photo River
+        if (inviteRect.bottom <= window.innerHeight + 75 && e.deltaY > 35 && !isWheelGliding) {
+          isWheelGliding = true;
+          riverEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+        }
+        // At top of Invitation scrolling up -> Glide to Hero
+        else if (inviteRect.top >= -30 && e.deltaY < -35 && !isWheelGliding) {
+          isWheelGliding = true;
+          heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+        }
+        return;
+      }
+
+      // Case D: Hero & Photo River single-fold transitions
       if (Math.abs(e.deltaY) < 40 || isWheelGliding) return;
 
       if (heroRect.top >= -100 && heroRect.bottom >= window.innerHeight * 0.5) {
@@ -3351,19 +3371,6 @@ function initSectionScrollLocking() {
         if (e.deltaY > 0) {
           isWheelGliding = true;
           inviteEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
-        }
-      } else if (inviteRect.top <= 100 && inviteRect.bottom >= window.innerHeight * 0.5) {
-        // At Invitation
-        if (e.deltaY > 0) {
-          isWheelGliding = true;
-          riverEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          clearTimeout(wheelTimeout);
-          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
-        } else if (e.deltaY < 0) {
-          isWheelGliding = true;
-          heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
           clearTimeout(wheelTimeout);
           wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
         }
