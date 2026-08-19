@@ -23,6 +23,15 @@ export const translations = {
     "hero_quote": "“বাজে বাজে বাজে রম্য বীণা... শারদ আকাশে আগমনীর সুর।”",
     "hero_scroll_hint": "নিচে স্ক্রোল করে উৎসব পরিক্রমা শুরু করুন",
 
+    // Invitation Section
+    "invitation_badge": "📜 সানন্দ আমন্ত্রণলিপি",
+    "invitation_title": "ফুরফুরা মণ্ডল পরিবারের শারদ আমন্ত্রণ",
+    "invitation_subtitle": "ফুরফুরা, কাজীপাডা, হুগলী • সমাগত দুর্গাপূজায় আমাদের ফুরাফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্তকে সবান্ধব উপস্থিতি ও অর্ঘ্য নিবেদনের আন্তরিক আহ্বান",
+    "invitation_download": "আমন্ত্রণপত্র ডাউনলোড",
+    "invitation_share": "নিমন্ত্রণ জানান (Share)",
+    "invitation_confirm": "উপস্থিত থাকার শুভেচ্ছা জানান (Send Pronam)",
+    "invitation_confirmed": "✅ আপনার সাদর উপস্থিতির প্রণাম গৃহীত হলো!",
+
     // Photo River
     "river_title": "ঐতিহ্যের নদী — উৎসবের জীবন্ত মুহূর্তমালা",
     "river_subtitle": "মন্ডল বাড়ির পুজো প্রাঙ্গণ, ধুনুচি নৃত্য, ঢাকের তাল ও শারদ স্মৃতির চলমান আলোকচিত্র নদী",
@@ -86,6 +95,15 @@ export const translations = {
     "hero_seconds": "Secs",
     "hero_quote": "\"The resonance of sacred drums and mantras herald the homecoming of Maa Durga.\"",
     "hero_scroll_hint": "Scroll down to begin your festive walkthrough",
+
+    // Invitation Section
+    "invitation_badge": "📜 Formal Invitation",
+    "invitation_title": "Festive Invitation from Furfura Mondal Family",
+    "invitation_subtitle": "Furfura, Kazipada, Hooghly • Warmly welcoming all devotees and well-wishers to offer worship and celebrate Durga Puja",
+    "invitation_download": "Download Letterhead",
+    "invitation_share": "Share Invitation",
+    "invitation_confirm": "Confirm Presence (Send Pronam)",
+    "invitation_confirmed": "✅ Your Pronam & Presence has been recorded!",
 
     // Photo River
     "river_title": "River of Memories — Living Moments of Pujo",

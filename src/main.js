@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLanguageSwitcher();
   initSoundTriggers();
   initPujoInfoAndGallery();
+  initInvitationSection();
   initPhotoRiver();
   initGrandGallery();
   initOnnotaSection();
@@ -3148,6 +3149,96 @@ function initParticles() {
 }
 
 /* ==========================================================================
+   8.5. FORMAL INVITATION SECTION CONTROLLER
+   ========================================================================== */
+
+function initInvitationSection() {
+  const imageViewer = document.getElementById('invitation-image-viewer');
+  const shareBtn = document.getElementById('btn-share-invitation');
+  const attendanceBtn = document.getElementById('btn-confirm-attendance');
+  const attendanceText = document.getElementById('attendance-btn-text');
+
+  // 1. Fullscreen Lightbox View on Image / Card Click
+  imageViewer?.addEventListener('click', () => {
+    const invitationItem = {
+      id: 'formal-invitation-letterhead',
+      src: '/invitation/invitation.jpg',
+      title: 'শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণলিপি',
+      bengaliTitle: 'শ্রীশ্রী দুর্গাপূজার আমন্ত্রণ — ফুরফুরা মণ্ডল পরিবার',
+      categoryLabel: '📜 সানন্দ আমন্ত্রণপত্র',
+      author: 'ফুরফুরা মণ্ডল পরিবার, ফুরফুরা, কাজীপাডা, হুগলী',
+      bengaliDesc: 'সমাগত দুর্গাপূজায় আমাদের ফুরাফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্তকে সবান্ধব উপস্থিত হয়ে মাতৃপূজা বেদীতে অর্ঘ্য নিবেদনের আহ্বান জানাই। সপ্তমী সন্ধ্যায় বিচিত্রানুষ্ঠান ও নবমী সন্ধ্যায় ধনুচী নাচ।',
+      likes: 540
+    };
+
+    if (typeof openGalleryLightbox === 'function') {
+      openGalleryLightbox(0, [invitationItem]);
+    }
+  });
+
+  // 2. Share Invitation via WhatsApp / Web Share API
+  shareBtn?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const shareText = `🪔 শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণ
+
+ফুরফুরা মণ্ডল পরিবার (ফুরফুরা, কাজীপাডা, হুগলী)
+১৯৯৭ সাল থেকে অনুষ্ঠিত ঐতিহ্যবাহী শারদোৎসব ২০২৬
+
+সুধী,
+সমাগত দুর্গাপূজায় আমাদের ফুরাফুরাস্থিত দুর্গাপূজা মণ্ডপে সকল মাতৃভক্তকে সবান্ধব উপস্থিত হয়ে মাতৃপূজা বেদীতে অর্ঘ্য নিবেদনের আন্তরিক আহ্বান জানাই।
+
+🌸 মহা সপ্তমী সন্ধ্যা: বিচিত্রানুষ্ঠান ও আনন্দমেলা
+🔥 মহা নবমী সন্ধ্যা: নাটমন্দিরে ঐতিহ্যবাহী ধুনুচি নাচ ও ঢাকের লড়াই
+
+📍 পূজামণ্ডপ অবস্থান ও দিকনির্দেশনা: https://maps.app.goo.gl/YXcU7gT92CLx1XkbA
+🌐 ডিজিটাল আমন্ত্রণপত্র ও লাইভ আগমনী রেডিও: ${window.location.href}
+📸 Instagram: @furfura_mondal_poribar`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'শ্রীশ্রী দুর্গাপূজার আমন্ত্রণ — ফুরফুরা মণ্ডল পরিবার',
+          text: shareText,
+          url: window.location.href
+        });
+        return;
+      } catch (_) {}
+    }
+
+    if (typeof copyTextToClipboard === 'function') {
+      copyTextToClipboard(shareText, shareBtn, '✅ নিমন্ত্রণবার্তা কপি হয়েছে!');
+    }
+  });
+
+  // 3. Confirm Attendance / Blessing Counter
+  const savedAttendance = localStorage.getItem('mondal_bari_invite_confirmed');
+  if (savedAttendance === 'true' && attendanceBtn && attendanceText) {
+    attendanceBtn.classList.add('confirmed');
+    attendanceText.textContent = t('invitation_confirmed') || '✅ আপনার সাদর উপস্থিতির প্রণাম গৃহীত হলো!';
+  }
+
+  attendanceBtn?.addEventListener('click', () => {
+    const isConfirmed = attendanceBtn.classList.contains('confirmed');
+    if (!isConfirmed) {
+      attendanceBtn.classList.add('confirmed');
+      localStorage.setItem('mondal_bari_invite_confirmed', 'true');
+      if (attendanceText) {
+        attendanceText.textContent = t('invitation_confirmed') || '✅ আপনার সাদর উপস্থিতির প্রণাম গৃহীত হলো!';
+      }
+      if (typeof audioEngine?.playDiyaLight === 'function') {
+        audioEngine.playDiyaLight();
+      }
+    } else {
+      attendanceBtn.classList.remove('confirmed');
+      localStorage.removeItem('mondal_bari_invite_confirmed');
+      if (attendanceText) {
+        attendanceText.textContent = t('invitation_confirm') || 'উপস্থিত থাকার শুভেচ্ছা জানান (Send Pronam)';
+      }
+    }
+  });
+}
+
+/* ==========================================================================
    9. SECTION SCROLL SNAP & ACCESSIBLE GESTURE CONTROLLER
    ========================================================================== */
 
@@ -3156,6 +3247,7 @@ function initSectionScrollLocking() {
   
   const snapSections = [
     { id: 'hero-section', name: 'Hero' },
+    { id: 'invitation-section', name: 'Invitation' },
     { id: 'photo-river-section', name: 'Photo River' },
     { id: 'onnota-section', name: 'Onnota' },
     { id: 'gallery-section', name: 'Gallery' } // Free-scrolling exemption
@@ -3176,7 +3268,7 @@ function initSectionScrollLocking() {
   // 2. IntersectionObserver to update active navigation dots
   const observerOptions = {
     root: null,
-    threshold: 0.3
+    threshold: 0.25
   };
 
   const sectionObserver = new IntersectionObserver((entries) => {
@@ -3197,7 +3289,7 @@ function initSectionScrollLocking() {
     if (el) sectionObserver.observe(el);
   });
 
-  // 3. Computer UI: Smooth Section Transition (Hero & River Lock, Free Onnota, Initial Gallery Lock + Infinite Scroll)
+  // 3. Computer UI: Smooth Section Transition (Hero, Invitation & River Lock, Free Onnota, Initial Gallery Lock + Infinite Scroll)
   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   if (!isTouchDevice) {
@@ -3206,19 +3298,20 @@ function initSectionScrollLocking() {
 
     window.addEventListener('wheel', (e) => {
       const heroEl = document.getElementById('hero-section');
+      const inviteEl = document.getElementById('invitation-section');
       const riverEl = document.getElementById('photo-river-section');
       const onnotaEl = document.getElementById('onnota-section');
       const galleryEl = document.getElementById('gallery-section');
 
-      if (!heroEl || !riverEl || !onnotaEl || !galleryEl) return;
+      if (!heroEl || !inviteEl || !riverEl || !onnotaEl || !galleryEl) return;
 
       const galleryRect = galleryEl.getBoundingClientRect();
       const onnotaRect = onnotaEl.getBoundingClientRect();
       const riverRect = riverEl.getBoundingClientRect();
+      const inviteRect = inviteEl.getBoundingClientRect();
       const heroRect = heroEl.getBoundingClientRect();
 
       // Case A: Inside Grand Gallery -> Allow free continuous / infinite scrolling
-      // Only intercept if at the very top and scrolling UP
       const isInsideGallery = galleryRect.top <= 80 && galleryRect.bottom >= 200;
       if (isInsideGallery) {
         if (galleryRect.top >= -20 && e.deltaY < -40 && !isWheelGliding) {
@@ -3231,7 +3324,6 @@ function initSectionScrollLocking() {
       }
 
       // Case B: Inside Others by Onnota -> Allow free continuous browsing
-      // Only intercept if at top scrolling UP (to River) or at bottom scrolling DOWN (initial lock to Gallery)
       const isInsideOnnota = onnotaRect.top <= 100 && onnotaRect.bottom >= window.innerHeight * 0.4;
       if (isInsideOnnota) {
         // At bottom of Onnota scrolling down -> Initial Lock onto Gallery
@@ -3251,14 +3343,27 @@ function initSectionScrollLocking() {
         return;
       }
 
-      // Case C: Hero & Photo River single-fold transitions
+      // Case C: Single-fold transitions for Hero, Invitation & Photo River
       if (Math.abs(e.deltaY) < 40 || isWheelGliding) return;
 
       if (heroRect.top >= -100 && heroRect.bottom >= window.innerHeight * 0.5) {
-        // At Hero
+        // At Hero -> Glide down to Invitation
+        if (e.deltaY > 0) {
+          isWheelGliding = true;
+          inviteEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+        }
+      } else if (inviteRect.top <= 100 && inviteRect.bottom >= window.innerHeight * 0.5) {
+        // At Invitation
         if (e.deltaY > 0) {
           isWheelGliding = true;
           riverEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          clearTimeout(wheelTimeout);
+          wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
+        } else if (e.deltaY < 0) {
+          isWheelGliding = true;
+          heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
           clearTimeout(wheelTimeout);
           wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
         }
@@ -3271,7 +3376,7 @@ function initSectionScrollLocking() {
           wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
         } else if (e.deltaY < 0) {
           isWheelGliding = true;
-          heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          inviteEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
           clearTimeout(wheelTimeout);
           wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
         }
@@ -3290,9 +3395,10 @@ function initSectionScrollLocking() {
 
       let currentIdx = 0;
       if (currentScrollTop < vh * 0.6) currentIdx = 0;
-      else if (currentScrollTop < vh * 1.6) currentIdx = 1;
-      else if (currentScrollTop < vh * 2.8) currentIdx = 2;
-      else currentIdx = 3;
+      else if (currentScrollTop < vh * 1.5) currentIdx = 1;
+      else if (currentScrollTop < vh * 2.5) currentIdx = 2;
+      else if (currentScrollTop < vh * 3.6) currentIdx = 3;
+      else currentIdx = 4;
 
       const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentIdx + direction));
       const targetSec = document.getElementById(snapSections[nextIdx].id);
