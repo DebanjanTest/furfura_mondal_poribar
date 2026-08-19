@@ -3519,7 +3519,7 @@ export function smoothScrollToTarget(targetY, duration = 620, onComplete = null)
 
   const startY = window.pageYOffset || document.documentElement.scrollTop || 0;
   const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  const clampedTargetY = Math.max(0, Math.min(targetY, maxScroll));
+  const clampedTargetY = Math.max(0, Math.min(Math.round(targetY), maxScroll));
   const distance = clampedTargetY - startY;
 
   if (Math.abs(distance) < 2) {
@@ -3530,8 +3530,8 @@ export function smoothScrollToTarget(targetY, duration = 620, onComplete = null)
 
   isProgrammaticScrolling = true;
 
-  // Ponytail Custom Subtle Ease-In-Out Curve (cubic-bezier):
-  // Gentle initial acceleration, silky gliding velocity, smooth soft landing
+  // Ponytail Custom Subtle Ease-In-Out Curve (cubic):
+  // Gentle initial acceleration, silky gliding velocity, smooth landing
   const easeInOutCubic = (t) => {
     return t < 0.5
       ? 4 * t * t * t
@@ -3545,7 +3545,7 @@ export function smoothScrollToTarget(targetY, duration = 620, onComplete = null)
     const progress = Math.min(elapsed / duration, 1);
     const easedProgress = easeInOutCubic(progress);
 
-    window.scrollTo(0, startY + distance * easedProgress);
+    window.scrollTo(0, Math.round(startY + distance * easedProgress));
 
     if (progress < 1) {
       activeScrollAnimId = requestAnimationFrame(step);
@@ -3567,7 +3567,8 @@ export function smoothScrollToSection(elementOrId, duration = 620, offset = 0, o
   const el = typeof elementOrId === 'string' ? document.getElementById(elementOrId) : elementOrId;
   if (!el) return;
   const rect = el.getBoundingClientRect();
-  const targetY = rect.top + (window.pageYOffset || document.documentElement.scrollTop || 0) + offset;
+  const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const targetY = rect.top + currentScroll + offset;
   smoothScrollToTarget(targetY, duration, onComplete);
 }
 
@@ -3643,13 +3644,13 @@ function initSectionScrollLocking() {
       clearTimeout(glideCooldown);
       glideCooldown = setTimeout(() => {
         isGliding = false;
-      }, 150);
+      }, 120);
     });
 
     clearTimeout(glideCooldown);
     glideCooldown = setTimeout(() => {
       isGliding = false;
-    }, 800);
+    }, 750);
   }
 
   // 1. Navigation Dots Click Handlers (Side Panel Jump)
@@ -3680,6 +3681,21 @@ function initSectionScrollLocking() {
     });
   });
 
+  // Helper to determine the active section index based on current scroll position
+  function getCurrentSectionIndex() {
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const vh = window.innerHeight;
+    const probeY = scrollY + vh * 0.4;
+
+    for (let i = snapSections.length - 1; i >= 0; i--) {
+      const secEl = document.getElementById(snapSections[i].id);
+      if (secEl && probeY >= secEl.offsetTop) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
   // 3. Sectional Wheel Controller with Lock-in and General Scrolling
   window.addEventListener('wheel', (e) => {
     // If currently animating/gliding, block new wheel inputs to preserve the lock
@@ -3691,6 +3707,13 @@ function initSectionScrollLocking() {
     // Only apply on desktop / laptop viewports
     if (window.innerWidth <= 768) return;
 
+    const deltaThreshold = 15;
+    if (Math.abs(e.deltaY) < deltaThreshold) return;
+
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const vh = window.innerHeight;
+    const currentIdx = getCurrentSectionIndex();
+
     const heroEl = document.getElementById('hero-section');
     const inviteEl = document.getElementById('invitation-section');
     const riverEl = document.getElementById('photo-river-section');
@@ -3699,20 +3722,8 @@ function initSectionScrollLocking() {
 
     if (!heroEl || !inviteEl || !riverEl || !onnotaEl || !galleryEl) return;
 
-    const heroRect = heroEl.getBoundingClientRect();
-    const inviteRect = inviteEl.getBoundingClientRect();
-    const riverRect = riverEl.getBoundingClientRect();
-    const onnotaRect = onnotaEl.getBoundingClientRect();
-    const galleryRect = galleryEl.getBoundingClientRect();
-
-    const deltaThreshold = 18;
-    if (Math.abs(e.deltaY) < deltaThreshold) return;
-
-    const vh = window.innerHeight;
-
-    // 1. HERO SECTION (1-viewport)
-    // When inside Hero, scrolling down locks into Invitation
-    if (heroRect.top >= -50 && heroRect.bottom >= vh * 0.5) {
+    // SECTION 0: HERO (1 Viewport)
+    if (currentIdx === 0) {
       if (e.deltaY > 0) {
         e.preventDefault();
         lockToSection(inviteEl);
@@ -3720,19 +3731,19 @@ function initSectionScrollLocking() {
       }
     }
 
-    // 2. INVITATION SECTION
-    // When inside Invitation:
-    // - If at the top of Invitation (top >= -10) and user scrolls UP -> lock to Hero
-    // - If at the bottom of Invitation (bottom <= vh + 15) and user scrolls DOWN -> lock to Photo River
-    // - Otherwise, allow natural general scrolling inside Invitation!
-    const isInsideInvite = inviteRect.top <= 10 && inviteRect.bottom >= vh * 0.2;
-    if (isInsideInvite) {
-      if (e.deltaY < 0 && inviteRect.top >= -8) {
+    // SECTION 1: FORMAL INVITATION
+    else if (currentIdx === 1) {
+      const inviteTop = inviteEl.offsetTop;
+      const inviteHeight = inviteEl.offsetHeight;
+      const atTop = scrollY <= inviteTop + 20;
+      const atBottom = scrollY + vh >= inviteTop + inviteHeight - 25;
+
+      if (e.deltaY < 0 && atTop) {
         e.preventDefault();
         lockToSection(heroEl);
         return;
       }
-      if (e.deltaY > 0 && inviteRect.bottom <= vh + 15) {
+      if (e.deltaY > 0 && atBottom) {
         e.preventDefault();
         lockToSection(riverEl);
         return;
@@ -3741,12 +3752,8 @@ function initSectionScrollLocking() {
       return;
     }
 
-    // 3. PHOTO RIVER SECTION (1-viewport)
-    // When inside Photo River:
-    // - Scrolling UP locks to Invitation
-    // - Scrolling DOWN locks to Onnota
-    const isInsideRiver = riverRect.top <= 20 && riverRect.bottom >= vh * 0.4;
-    if (isInsideRiver) {
+    // SECTION 2: PHOTO RIVER (1 Viewport)
+    else if (currentIdx === 2) {
       if (e.deltaY > 0) {
         e.preventDefault();
         lockToSection(onnotaEl);
@@ -3759,19 +3766,19 @@ function initSectionScrollLocking() {
       }
     }
 
-    // 4. OTHERS BY ONNOTA SECTION
-    // When inside Onnota:
-    // - If at the top of Onnota (top >= -10) and user scrolls UP -> lock to Photo River
-    // - If at the bottom of Onnota (bottom <= vh + 20) and user scrolls DOWN -> lock to Grand Gallery
-    // - Otherwise, allow natural general scrolling through Onnota cards!
-    const isInsideOnnota = onnotaRect.top <= 15 && onnotaRect.bottom >= vh * 0.2;
-    if (isInsideOnnota) {
-      if (e.deltaY < 0 && onnotaRect.top >= -10) {
+    // SECTION 3: OTHERS BY ONNOTA
+    else if (currentIdx === 3) {
+      const onnotaTop = onnotaEl.offsetTop;
+      const onnotaHeight = onnotaEl.offsetHeight;
+      const atTop = scrollY <= onnotaTop + 20;
+      const atBottom = scrollY + vh >= onnotaTop + onnotaHeight - 30;
+
+      if (e.deltaY < 0 && atTop) {
         e.preventDefault();
         lockToSection(riverEl);
         return;
       }
-      if (e.deltaY > 0 && onnotaRect.bottom <= vh + 20) {
+      if (e.deltaY > 0 && atBottom) {
         e.preventDefault();
         lockToSection(galleryEl);
         return;
@@ -3780,13 +3787,12 @@ function initSectionScrollLocking() {
       return;
     }
 
-    // 5. GRAND HERITAGE GALLERY SECTION
-    // When inside Gallery:
-    // - If at the top of Gallery (top >= -10) and user scrolls UP -> lock back to Onnota
-    // - Otherwise, full continuous general scrolling through all photos!
-    const isInsideGallery = galleryRect.top <= 20;
-    if (isInsideGallery) {
-      if (e.deltaY < 0 && galleryRect.top >= -8) {
+    // SECTION 4: GRAND HERITAGE GALLERY
+    else if (currentIdx === 4) {
+      const galleryTop = galleryEl.offsetTop;
+      const atTop = scrollY <= galleryTop + 20;
+
+      if (e.deltaY < 0 && atTop) {
         e.preventDefault();
         lockToSection(onnotaEl);
         return;
@@ -3801,17 +3807,8 @@ function initSectionScrollLocking() {
     if (['input', 'textarea', 'select'].includes(document.activeElement?.tagName?.toLowerCase())) return;
 
     if (e.key === 'PageDown' || e.key === 'PageUp') {
-      const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
-      const vh = window.innerHeight;
+      const currentIdx = getCurrentSectionIndex();
       const direction = e.key === 'PageDown' ? 1 : -1;
-
-      let currentIdx = 0;
-      if (currentScrollTop < vh * 0.6) currentIdx = 0;
-      else if (currentScrollTop < vh * 1.5) currentIdx = 1;
-      else if (currentScrollTop < vh * 2.5) currentIdx = 2;
-      else if (currentScrollTop < vh * 3.6) currentIdx = 3;
-      else currentIdx = 4;
-
       const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentIdx + direction));
       const targetSec = document.getElementById(snapSections[nextIdx].id);
       if (targetSec) {
