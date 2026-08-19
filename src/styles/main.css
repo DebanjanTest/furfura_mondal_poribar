@@ -4561,8 +4561,7 @@ button {
   width: 100%;
   padding: 5rem 1.5rem 10rem;
   box-sizing: border-box;
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 900px;
+  /* content-visibility: visible; */
 }
 
 .gallery-section-container {
@@ -5529,9 +5528,8 @@ button {
   padding: 4.5rem 0 3.5rem;
   background: linear-gradient(180deg, rgba(7, 10, 18, 0.4) 0%, rgba(13, 17, 28, 0.85) 50%, rgba(7, 10, 18, 0.6) 100%);
   overflow: hidden;
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 700px;
-  display: flex;
+  /* content-visibility: visible; */
+display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
@@ -5796,9 +5794,8 @@ button {
   background: linear-gradient(180deg, rgba(13, 17, 28, 0.88) 0%, rgba(18, 24, 38, 0.96) 50%, rgba(10, 14, 22, 0.95) 100%);
   border-top: 1px solid rgba(255, 207, 64, 0.16);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 800px;
-  scroll-snap-align: none !important;
+  /* content-visibility: visible; */
+scroll-snap-align: none !important;
   scroll-snap-stop: normal !important;
   display: flex;
   flex-direction: column;

@@ -3498,7 +3498,7 @@ Instagram: @furfura_mondal_poribar`;
 }
 
 /* ==========================================================================
-   9. PONYTAIL EASE-IN SMOOTH SCROLL ENGINE & SECTIONAL LOCKING
+   9. PONYTAIL EASE-IN SMOOTH SCROLL ENGINE & PC SECTIONAL LOCKING
    ========================================================================== */
 
 let activeScrollAnimId = null;
@@ -3508,10 +3508,10 @@ let isProgrammaticScrolling = false;
  * High-performance smooth scrolling with a subtle, silky ease-in / ease-in-out curve
  * Starts with gentle ease-in acceleration, glides fluidly, softly eases out at arrival.
  * @param {number} targetY - Destination scrollTop in pixels
- * @param {number} duration - Animation duration in ms (default: 620ms)
+ * @param {number} duration - Animation duration in ms (default: 580ms)
  * @param {Function} onComplete - Callback executed when scroll finishes
  */
-export function smoothScrollToTarget(targetY, duration = 620, onComplete = null) {
+export function smoothScrollToTarget(targetY, duration = 580, onComplete = null) {
   if (activeScrollAnimId) {
     cancelAnimationFrame(activeScrollAnimId);
     activeScrollAnimId = null;
@@ -3530,7 +3530,7 @@ export function smoothScrollToTarget(targetY, duration = 620, onComplete = null)
 
   isProgrammaticScrolling = true;
 
-  // Ponytail Custom Subtle Ease-In-Out Curve (cubic):
+  // Ponytail Custom Subtle Ease-In-Out Curve (cubic-bezier):
   // Gentle initial acceleration, silky gliding velocity, smooth landing
   const easeInOutCubic = (t) => {
     return t < 0.5
@@ -3563,7 +3563,7 @@ export function smoothScrollToTarget(targetY, duration = 620, onComplete = null)
 /**
  * Scroll smoothly to a specific DOM element or selector with subtle ease-in motion
  */
-export function smoothScrollToSection(elementOrId, duration = 620, offset = 0, onComplete = null) {
+export function smoothScrollToSection(elementOrId, duration = 580, offset = 0, onComplete = null) {
   const el = typeof elementOrId === 'string' ? document.getElementById(elementOrId) : elementOrId;
   if (!el) return;
   const rect = el.getBoundingClientRect();
@@ -3640,17 +3640,21 @@ function initSectionScrollLocking() {
     const targetId = el.id;
     if (targetId) setActiveDot(targetId);
 
-    smoothScrollToSection(el, 620, 0, () => {
+    const rect = el.getBoundingClientRect();
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const targetY = rect.top + currentScroll;
+
+    smoothScrollToTarget(targetY, 580, () => {
       clearTimeout(glideCooldown);
       glideCooldown = setTimeout(() => {
         isGliding = false;
-      }, 120);
+      }, 100);
     });
 
     clearTimeout(glideCooldown);
     glideCooldown = setTimeout(() => {
       isGliding = false;
-    }, 750);
+    }, 700);
   }
 
   // 1. Navigation Dots Click Handlers (Side Panel Jump)
@@ -3666,7 +3670,7 @@ function initSectionScrollLocking() {
     });
   });
 
-  // 2. Intercept In-Page Anchor Links
+  // 2. Intercept In-Page Anchor Links (Scroll down button, Next chapter buttons, etc.)
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
@@ -3681,38 +3685,22 @@ function initSectionScrollLocking() {
     });
   });
 
-  // Helper to determine the active section index based on current scroll position
-  function getCurrentSectionIndex() {
-    const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-    const vh = window.innerHeight;
-    const probeY = scrollY + vh * 0.4;
-
-    for (let i = snapSections.length - 1; i >= 0; i--) {
-      const secEl = document.getElementById(snapSections[i].id);
-      if (secEl && probeY >= secEl.offsetTop) {
-        return i;
-      }
-    }
-    return 0;
-  }
-
-  // 3. Sectional Wheel Controller with Lock-in and General Scrolling
+  // 3. Desktop Single-Scroll Sectional Locking & In-Section General Scrolling
   window.addEventListener('wheel', (e) => {
-    // If currently animating/gliding, block new wheel inputs to preserve the lock
+    // Only apply on desktop / PC viewports (> 768px)
+    if (window.innerWidth <= 768) return;
+
+    // If currently gliding or animating, consume wheel event to lock the landing
     if (isProgrammaticScrolling || isGliding) {
       e.preventDefault();
       return;
     }
-
-    // Only apply on desktop / laptop viewports
-    if (window.innerWidth <= 768) return;
 
     const deltaThreshold = 15;
     if (Math.abs(e.deltaY) < deltaThreshold) return;
 
     const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
     const vh = window.innerHeight;
-    const currentIdx = getCurrentSectionIndex();
 
     const heroEl = document.getElementById('hero-section');
     const inviteEl = document.getElementById('invitation-section');
@@ -3722,8 +3710,16 @@ function initSectionScrollLocking() {
 
     if (!heroEl || !inviteEl || !riverEl || !onnotaEl || !galleryEl) return;
 
-    // SECTION 0: HERO (1 Viewport)
-    if (currentIdx === 0) {
+    const heroTop = heroEl.offsetTop;
+    const inviteTop = inviteEl.offsetTop;
+    const inviteHeight = inviteEl.offsetHeight;
+    const riverTop = riverEl.offsetTop;
+    const onnotaTop = onnotaEl.offsetTop;
+    const onnotaHeight = onnotaEl.offsetHeight;
+    const galleryTop = galleryEl.offsetTop;
+
+    // SECTION 0: COUNTDOWN / HERO SECTION (Single scroll takes to Invitation)
+    if (scrollY < inviteTop - 30) {
       if (e.deltaY > 0) {
         e.preventDefault();
         lockToSection(inviteEl);
@@ -3731,11 +3727,9 @@ function initSectionScrollLocking() {
       }
     }
 
-    // SECTION 1: FORMAL INVITATION
-    else if (currentIdx === 1) {
-      const inviteTop = inviteEl.offsetTop;
-      const inviteHeight = inviteEl.offsetHeight;
-      const atTop = scrollY <= inviteTop + 20;
+    // SECTION 1: FORMAL INVITATION SECTION (Longer section -> scroll within, at end single scroll to Photo River)
+    else if (scrollY >= inviteTop - 30 && scrollY < riverTop - 30) {
+      const atTop = scrollY <= inviteTop + 15;
       const atBottom = scrollY + vh >= inviteTop + inviteHeight - 25;
 
       if (e.deltaY < 0 && atTop) {
@@ -3748,12 +3742,12 @@ function initSectionScrollLocking() {
         lockToSection(riverEl);
         return;
       }
-      // Inside section -> natural general scrolling
+      // Continue normal scrolling inside Invitation
       return;
     }
 
-    // SECTION 2: PHOTO RIVER (1 Viewport)
-    else if (currentIdx === 2) {
+    // SECTION 2: PHOTO RIVER SECTION (Single scroll takes to Onnota / Invitation)
+    else if (scrollY >= riverTop - 30 && scrollY < onnotaTop - 30) {
       if (e.deltaY > 0) {
         e.preventDefault();
         lockToSection(onnotaEl);
@@ -3766,11 +3760,9 @@ function initSectionScrollLocking() {
       }
     }
 
-    // SECTION 3: OTHERS BY ONNOTA
-    else if (currentIdx === 3) {
-      const onnotaTop = onnotaEl.offsetTop;
-      const onnotaHeight = onnotaEl.offsetHeight;
-      const atTop = scrollY <= onnotaTop + 20;
+    // SECTION 3: OTHERS BY ONNOTA (Scroll within cards, at end single scroll to Grand Gallery)
+    else if (scrollY >= onnotaTop - 30 && scrollY < galleryTop - 30) {
+      const atTop = scrollY <= onnotaTop + 15;
       const atBottom = scrollY + vh >= onnotaTop + onnotaHeight - 30;
 
       if (e.deltaY < 0 && atTop) {
@@ -3783,21 +3775,20 @@ function initSectionScrollLocking() {
         lockToSection(galleryEl);
         return;
       }
-      // Inside section -> natural general scrolling
+      // Continue normal scrolling inside Onnota
       return;
     }
 
-    // SECTION 4: GRAND HERITAGE GALLERY
-    else if (currentIdx === 4) {
-      const galleryTop = galleryEl.offsetTop;
-      const atTop = scrollY <= galleryTop + 20;
+    // SECTION 4: GRAND HERITAGE GALLERY (Continuous general scrolling)
+    else if (scrollY >= galleryTop - 30) {
+      const atTop = scrollY <= galleryTop + 15;
 
       if (e.deltaY < 0 && atTop) {
         e.preventDefault();
         lockToSection(onnotaEl);
         return;
       }
-      // Inside gallery -> full general scrolling
+      // Continue full general scrolling inside Gallery
       return;
     }
   }, { passive: false });
@@ -3807,7 +3798,19 @@ function initSectionScrollLocking() {
     if (['input', 'textarea', 'select'].includes(document.activeElement?.tagName?.toLowerCase())) return;
 
     if (e.key === 'PageDown' || e.key === 'PageUp') {
-      const currentIdx = getCurrentSectionIndex();
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const vh = window.innerHeight;
+      const probeY = scrollY + vh * 0.4;
+      let currentIdx = 0;
+
+      for (let i = snapSections.length - 1; i >= 0; i--) {
+        const secEl = document.getElementById(snapSections[i].id);
+        if (secEl && probeY >= secEl.offsetTop) {
+          currentIdx = i;
+          break;
+        }
+      }
+
       const direction = e.key === 'PageDown' ? 1 : -1;
       const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentIdx + direction));
       const targetSec = document.getElementById(snapSections[nextIdx].id);
