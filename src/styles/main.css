@@ -6113,7 +6113,8 @@ button {
   right: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 90;
+  z-index: 150;
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
   gap: 0.85rem;

@@ -3508,10 +3508,10 @@ let isProgrammaticScrolling = false;
  * High-performance smooth scrolling with a subtle, silky ease-in / ease-in-out curve
  * Starts with gentle ease-in acceleration, glides fluidly, softly eases out at arrival.
  * @param {number} targetY - Destination scrollTop in pixels
- * @param {number} duration - Animation duration in ms (default: 600ms)
+ * @param {number} duration - Animation duration in ms (default: 620ms)
  * @param {Function} onComplete - Callback executed when scroll finishes
  */
-export function smoothScrollToTarget(targetY, duration = 600, onComplete = null) {
+export function smoothScrollToTarget(targetY, duration = 620, onComplete = null) {
   if (activeScrollAnimId) {
     cancelAnimationFrame(activeScrollAnimId);
     activeScrollAnimId = null;
@@ -3522,7 +3522,7 @@ export function smoothScrollToTarget(targetY, duration = 600, onComplete = null)
   const clampedTargetY = Math.max(0, Math.min(targetY, maxScroll));
   const distance = clampedTargetY - startY;
 
-  if (Math.abs(distance) < 3) {
+  if (Math.abs(distance) < 2) {
     window.scrollTo(0, clampedTargetY);
     if (onComplete) onComplete();
     return;
@@ -3530,8 +3530,8 @@ export function smoothScrollToTarget(targetY, duration = 600, onComplete = null)
 
   isProgrammaticScrolling = true;
 
-  // Ponytail Custom Subtle Ease-In Curve:
-  // Gentle initial acceleration, silky gliding velocity, smooth landing
+  // Ponytail Custom Subtle Ease-In-Out Curve (cubic-bezier):
+  // Gentle initial acceleration, silky gliding velocity, soft landing
   const easeInOutCubic = (t) => {
     return t < 0.5
       ? 4 * t * t * t
@@ -3579,31 +3579,69 @@ function initSectionScrollLocking() {
     { id: 'invitation-section', name: 'Invitation' },
     { id: 'photo-river-section', name: 'Photo River' },
     { id: 'onnota-section', name: 'Onnota' },
-    { id: 'gallery-section', name: 'Gallery' } // Free-scrolling exemption
+    { id: 'gallery-section', name: 'Gallery' }
   ];
 
-  // Global cancel on manual user touch / mouse interaction
-  const cancelScrollAnim = () => {
-    if (activeScrollAnimId) {
-      cancelAnimationFrame(activeScrollAnimId);
-      activeScrollAnimId = null;
-      isProgrammaticScrolling = false;
+  // Helper to update active dot
+  const setActiveDot = (activeId) => {
+    snapNavDots.forEach((dot) => {
+      const isMatch = dot.getAttribute('data-target') === activeId;
+      dot.classList.toggle('active', isMatch);
+      dot.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+    });
+  };
+
+  // High-precision scroll tracking for side panel indication
+  let isTicking = false;
+  const updateActiveSectionOnScroll = () => {
+    if (!isTicking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const vh = window.innerHeight;
+        const totalHeight = document.documentElement.scrollHeight;
+        const probeY = scrollY + vh * 0.42;
+
+        let currentActiveId = 'hero-section';
+
+        if (scrollY + vh >= totalHeight - 80) {
+          currentActiveId = 'gallery-section';
+        } else {
+          for (let i = snapSections.length - 1; i >= 0; i--) {
+            const secEl = document.getElementById(snapSections[i].id);
+            if (secEl) {
+              const top = secEl.offsetTop;
+              if (probeY >= top - 20) {
+                currentActiveId = snapSections[i].id;
+                break;
+              }
+            }
+          }
+        }
+
+        setActiveDot(currentActiveId);
+        isTicking = false;
+      });
+      isTicking = true;
     }
   };
 
-  window.addEventListener('touchstart', cancelScrollAnim, { passive: true });
-  window.addEventListener('mousedown', cancelScrollAnim, { passive: true });
+  window.addEventListener('scroll', updateActiveSectionOnScroll, { passive: true });
+  updateActiveSectionOnScroll();
 
   // 1. Navigation Dots Click Handlers
   snapNavDots.forEach((dot) => {
     dot.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const targetId = dot.getAttribute('data-target');
-      smoothScrollToSection(targetId, 620);
+      if (targetId) {
+        setActiveDot(targetId);
+        smoothScrollToSection(targetId, 620);
+      }
     });
   });
 
-  // 2. Intercept All In-Page Anchor Links
+  // 2. Intercept All In-Page Anchor Links (e.g. scroll down button, next chapter buttons)
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
@@ -3612,126 +3650,105 @@ function initSectionScrollLocking() {
       const targetEl = document.getElementById(targetId);
       if (targetEl) {
         e.preventDefault();
+        setActiveDot(targetId);
         smoothScrollToSection(targetEl, 620);
       }
     });
   });
 
-  // 3. IntersectionObserver to update active navigation dots
-  const observerOptions = {
-    root: null,
-    threshold: 0.25
+  // 3. Sectional Scrolling & Subtle Ease-In Wheel Navigation on Desktop/Laptop
+  let isWheelGliding = false;
+  let wheelTimeout = null;
+
+  const triggerSectionGlide = (targetEl) => {
+    if (!targetEl || isWheelGliding || isProgrammaticScrolling) return;
+    isWheelGliding = true;
+    const targetId = targetEl.id;
+    if (targetId) setActiveDot(targetId);
+    
+    smoothScrollToSection(targetEl, 620, 0, () => {
+      setTimeout(() => { isWheelGliding = false; }, 120);
+    });
+    
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 750);
   };
 
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const activeId = entry.target.id;
-        snapNavDots.forEach((dot) => {
-          const isMatch = dot.getAttribute('data-target') === activeId;
-          dot.classList.toggle('active', isMatch);
-          dot.setAttribute('aria-selected', isMatch ? 'true' : 'false');
-        });
+  window.addEventListener('wheel', (e) => {
+    if (isProgrammaticScrolling || isWheelGliding) return;
+    if (window.innerWidth <= 768) return; // Allow natural mobile touch scrolling
+
+    const heroEl = document.getElementById('hero-section');
+    const inviteEl = document.getElementById('invitation-section');
+    const riverEl = document.getElementById('photo-river-section');
+    const onnotaEl = document.getElementById('onnota-section');
+    const galleryEl = document.getElementById('gallery-section');
+
+    if (!heroEl || !inviteEl || !riverEl || !onnotaEl || !galleryEl) return;
+
+    const galleryRect = galleryEl.getBoundingClientRect();
+    const onnotaRect = onnotaEl.getBoundingClientRect();
+    const riverRect = riverEl.getBoundingClientRect();
+    const inviteRect = inviteEl.getBoundingClientRect();
+    const heroRect = heroEl.getBoundingClientRect();
+
+    const deltaThreshold = 25;
+
+    // Case A: Inside Grand Gallery -> Allow free continuous internal scrolling
+    const isInsideGallery = galleryRect.top <= 60 && galleryRect.bottom >= 150;
+    if (isInsideGallery) {
+      // If at very top of gallery and scrolling UP -> glide to Onnota
+      if (galleryRect.top >= -15 && e.deltaY < -deltaThreshold) {
+        triggerSectionGlide(onnotaEl);
       }
-    });
-  }, observerOptions);
+      return;
+    }
 
-  snapSections.forEach(({ id }) => {
-    const el = document.getElementById(id);
-    if (el) sectionObserver.observe(el);
-  });
-
-  // 4. Computer UI: Smooth Ease-In Section Transition on Mouse Wheel
-  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-  if (!isTouchDevice) {
-    let isWheelGliding = false;
-    let wheelTimeout = null;
-
-    const triggerSectionGlide = (targetEl) => {
-      if (!targetEl || isWheelGliding) return;
-      isWheelGliding = true;
-      smoothScrollToSection(targetEl, 620, 0, () => {
-        isWheelGliding = false;
-      });
-      clearTimeout(wheelTimeout);
-      wheelTimeout = setTimeout(() => { isWheelGliding = false; }, 650);
-    };
-
-    window.addEventListener('wheel', (e) => {
-      if (isProgrammaticScrolling || isWheelGliding) return;
-
-      const heroEl = document.getElementById('hero-section');
-      const inviteEl = document.getElementById('invitation-section');
-      const riverEl = document.getElementById('photo-river-section');
-      const onnotaEl = document.getElementById('onnota-section');
-      const galleryEl = document.getElementById('gallery-section');
-
-      if (!heroEl || !inviteEl || !riverEl || !onnotaEl || !galleryEl) return;
-
-      const galleryRect = galleryEl.getBoundingClientRect();
-      const onnotaRect = onnotaEl.getBoundingClientRect();
-      const riverRect = riverEl.getBoundingClientRect();
-      const inviteRect = inviteEl.getBoundingClientRect();
-      const heroRect = heroEl.getBoundingClientRect();
-
-      // Case A: Inside Grand Gallery -> Allow free continuous scrolling
-      const isInsideGallery = galleryRect.top <= 80 && galleryRect.bottom >= 200;
-      if (isInsideGallery) {
-        if (galleryRect.top >= -20 && e.deltaY < -35 && !isWheelGliding) {
-          triggerSectionGlide(onnotaEl);
-        }
-        return;
+    // Case B: Inside Others by Onnota -> Allow browsing cards
+    const isInsideOnnota = onnotaRect.top <= 80 && onnotaRect.bottom >= window.innerHeight * 0.35;
+    if (isInsideOnnota) {
+      // At bottom of Onnota scrolling DOWN -> glide to Gallery
+      if (onnotaRect.bottom <= window.innerHeight + 60 && e.deltaY > deltaThreshold) {
+        triggerSectionGlide(galleryEl);
       }
-
-      // Case B: Inside Others by Onnota -> Allow free browsing
-      const isInsideOnnota = onnotaRect.top <= 100 && onnotaRect.bottom >= window.innerHeight * 0.4;
-      if (isInsideOnnota) {
-        // At bottom of Onnota scrolling down -> Glide onto Gallery
-        if (onnotaRect.bottom <= window.innerHeight + 80 && e.deltaY > 35 && !isWheelGliding) {
-          triggerSectionGlide(galleryEl);
-        }
-        // At top of Onnota scrolling up -> Glide to Photo River
-        else if (onnotaRect.top >= -30 && e.deltaY < -35 && !isWheelGliding) {
-          triggerSectionGlide(riverEl);
-        }
-        return;
+      // At top of Onnota scrolling UP -> glide to Photo River
+      else if (onnotaRect.top >= -25 && e.deltaY < -deltaThreshold) {
+        triggerSectionGlide(riverEl);
       }
+      return;
+    }
 
-      // Case C: Inside Formal Invitation Section -> Allow reading
-      const isInsideInvite = inviteRect.top <= 100 && inviteRect.bottom >= window.innerHeight * 0.35;
-      if (isInsideInvite) {
-        // At bottom of Invitation scrolling down -> Glide to Photo River
-        if (inviteRect.bottom <= window.innerHeight + 75 && e.deltaY > 35 && !isWheelGliding) {
-          triggerSectionGlide(riverEl);
-        }
-        // At top of Invitation scrolling up -> Glide to Hero
-        else if (inviteRect.top >= -30 && e.deltaY < -35 && !isWheelGliding) {
-          triggerSectionGlide(heroEl);
-        }
-        return;
+    // Case C: Inside Formal Invitation Section
+    const isInsideInvite = inviteRect.top <= 80 && inviteRect.bottom >= window.innerHeight * 0.35;
+    if (isInsideInvite) {
+      // At bottom of Invitation scrolling DOWN -> glide to Photo River
+      if (inviteRect.bottom <= window.innerHeight + 60 && e.deltaY > deltaThreshold) {
+        triggerSectionGlide(riverEl);
       }
-
-      // Case D: Hero & Photo River single-fold transitions
-      if (Math.abs(e.deltaY) < 35 || isWheelGliding) return;
-
-      if (heroRect.top >= -100 && heroRect.bottom >= window.innerHeight * 0.5) {
-        // At Hero -> Glide down to Invitation
-        if (e.deltaY > 0) {
-          triggerSectionGlide(inviteEl);
-        }
-      } else if (riverRect.top <= 100 && riverRect.bottom >= window.innerHeight * 0.5) {
-        // At Photo River
-        if (e.deltaY > 0) {
-          triggerSectionGlide(onnotaEl);
-        } else if (e.deltaY < 0) {
-          triggerSectionGlide(inviteEl);
-        }
+      // At top of Invitation scrolling UP -> glide to Hero
+      else if (inviteRect.top >= -25 && e.deltaY < -deltaThreshold) {
+        triggerSectionGlide(heroEl);
       }
-    }, { passive: true });
-  }
+      return;
+    }
 
-  // 5. Keyboard Page Navigation (PageDown, PageUp)
+    // Case D: Hero & Photo River single-fold transitions
+    if (Math.abs(e.deltaY) < deltaThreshold) return;
+
+    if (heroRect.top >= -80 && heroRect.bottom >= window.innerHeight * 0.4) {
+      if (e.deltaY > 0) {
+        triggerSectionGlide(inviteEl);
+      }
+    } else if (riverRect.top <= 80 && riverRect.bottom >= window.innerHeight * 0.4) {
+      if (e.deltaY > 0) {
+        triggerSectionGlide(onnotaEl);
+      } else if (e.deltaY < 0) {
+        triggerSectionGlide(inviteEl);
+      }
+    }
+  }, { passive: true });
+
+  // 4. Keyboard Page Navigation (PageDown, PageUp)
   window.addEventListener('keydown', (e) => {
     if (['input', 'textarea', 'select'].includes(document.activeElement?.tagName?.toLowerCase())) return;
 
@@ -3751,10 +3768,9 @@ function initSectionScrollLocking() {
       const targetSec = document.getElementById(snapSections[nextIdx].id);
       if (targetSec) {
         e.preventDefault();
+        setActiveDot(snapSections[nextIdx].id);
         smoothScrollToSection(targetSec, 620);
       }
     }
   });
 }
-
-
