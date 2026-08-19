@@ -4,7 +4,7 @@ import { bgAmbience } from './audio/backgroundAmbience.js';
 import { audioEngine, dhakSequencer, TRADITIONAL_BOLS } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
-import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations } from './utils/i18n.js';
+import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations, formatNumber } from './utils/i18n.js';
 
 // Application State
 const state = {
@@ -155,13 +155,14 @@ function updateAtmosphere() {
   }
 
   // Dropdown Label & Icon
+  const lang = getLanguage();
   const vibeLabels = {
-    'early-morning': { icon: '', label: 'Bhor (Dawn)' },
-    'morning': { icon: '', label: 'Sokal (Morning)' },
-    'afternoon': { icon: '', label: 'Dupur (Afternoon)' },
-    'evening': { icon: '', label: 'Sandhya (Aarti)' },
-    'night': { icon: '', label: 'Raat (Night)' },
-    'midnight': { icon: '', label: 'Modhyoraat (Midnight)' }
+    'early-morning': { icon: '', label: lang === 'bn' ? 'ভোর (Dawn)' : 'Dawn (Bhor)' },
+    'morning': { icon: '', label: lang === 'bn' ? 'সকাল (Morning)' : 'Morning (Sokal)' },
+    'afternoon': { icon: '', label: lang === 'bn' ? 'দুপুর (Afternoon)' : 'Afternoon (Dupur)' },
+    'evening': { icon: '', label: lang === 'bn' ? 'সন্ধ্যা (Aarti)' : 'Evening (Sandhya)' },
+    'night': { icon: '', label: lang === 'bn' ? 'রাত (Night)' : 'Night (Raat)' },
+    'midnight': { icon: '', label: lang === 'bn' ? 'মধ্যরাত (Midnight)' : 'Midnight (Modhyoraat)' }
   };
 
   const currentInfo = vibeLabels[effectiveTime] || vibeLabels['morning'];
@@ -170,7 +171,8 @@ function updateAtmosphere() {
 
   if (iconEl) iconEl.textContent = currentInfo.icon;
   if (labelEl) {
-    labelEl.textContent = state.activeVibe === 'auto' ? `${currentInfo.label} (Auto)` : currentInfo.label;
+    const autoSuffix = lang === 'bn' ? ' (স্বয়ংক্রিয়)' : ' (Auto)';
+    labelEl.textContent = state.activeVibe === 'auto' ? `${currentInfo.label}${autoSuffix}` : currentInfo.label;
   }
 
   // Active state on dropdown items
@@ -326,6 +328,7 @@ function updateDynamicIslandState() {
   const islandArtistName = document.getElementById('island-artist-name');
   const islandArtImg = document.getElementById('island-art-img');
   const islandPlayingIcon = document.getElementById('island-playing-icon');
+  const lang = getLanguage();
 
   if (state.isLiveDhakPlaying) {
     if (idleState) idleState.style.display = 'none';
@@ -335,8 +338,8 @@ function updateDynamicIslandState() {
     if (islandPlayingIcon) islandPlayingIcon.textContent = '';
 
     const part = authenticLiveDhakParts[state.currentLiveDhakIndex];
-    if (islandTrackTitle) islandTrackTitle.textContent = part?.title_bn || 'খাঁটি ঢাকের বোল';
-    if (islandArtistName) islandArtistName.textContent = 'ঢাকের ৬টি পর্ব ও লুপ';
+    if (islandTrackTitle) islandTrackTitle.textContent = (lang === 'bn' ? part?.title_bn : part?.title_en) || (lang === 'bn' ? 'খাঁটি ঢাকের বোল' : 'Authentic Dhak Beats');
+    if (islandArtistName) islandArtistName.textContent = lang === 'bn' ? 'ঢাকের ৬টি পর্ব ও লুপ' : '6 Authentic Dhak Parts & Loops';
     if (islandArtImg) islandArtImg.src = '/favicon.png';
   } else if (state.isAudioPlaying) {
     if (idleState) idleState.style.display = 'none';
@@ -346,8 +349,8 @@ function updateDynamicIslandState() {
     if (islandPlayingIcon) islandPlayingIcon.textContent = '';
 
     const track = getCurrentTrack();
-    if (islandTrackTitle) islandTrackTitle.textContent = track?.title || 'Dugga Elo';
-    if (islandArtistName) islandArtistName.textContent = track?.artist || 'মন্ডল বাড়ি রেডিও';
+    if (islandTrackTitle) islandTrackTitle.textContent = (lang === 'bn' ? (track?.title_bn || track?.title) : (track?.title || track?.title_bn)) || 'Dugga Elo';
+    if (islandArtistName) islandArtistName.textContent = track?.artist || (lang === 'bn' ? 'মন্ডল বাড়ি রেডিও' : 'Mondal Bari Radio');
     if (islandArtImg) islandArtImg.src = track?.cover || '/favicon.png';
   } else {
     if (idleState) idleState.style.display = 'flex';
@@ -364,6 +367,7 @@ function updateDynamicIslandState() {
 function initCountdown() {
   function tick() {
     const cd = getCountdown();
+    const lang = getLanguage();
     const daysEl = document.getElementById('countdown-days-val');
     const hoursEl = document.getElementById('countdown-hours-val');
     const minsEl = document.getElementById('countdown-mins-val');
@@ -371,19 +375,24 @@ function initCountdown() {
     const labelEl = document.getElementById('countdown-sub-label');
 
     if (daysEl) {
-      daysEl.textContent = cd.days;
+      daysEl.textContent = formatNumber(cd.days, lang);
     }
     if (hoursEl) {
-      hoursEl.textContent = cd.hours < 10 ? `0${cd.hours}` : cd.hours;
+      const hStr = cd.hours < 10 ? `0${cd.hours}` : String(cd.hours);
+      hoursEl.textContent = formatNumber(hStr, lang);
     }
     if (minsEl) {
-      minsEl.textContent = cd.minutes < 10 ? `0${cd.minutes}` : cd.minutes;
+      const mStr = cd.minutes < 10 ? `0${cd.minutes}` : String(cd.minutes);
+      minsEl.textContent = formatNumber(mStr, lang);
     }
     if (secsEl) {
-      secsEl.textContent = cd.seconds < 10 ? `0${cd.seconds}` : cd.seconds;
+      const sStr = cd.seconds < 10 ? `0${cd.seconds}` : String(cd.seconds);
+      secsEl.textContent = formatNumber(sStr, lang);
     }
     if (labelEl) {
-      labelEl.textContent = `মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • নির্ঘণ্ট ও সূচি`;
+      labelEl.textContent = lang === 'bn' 
+        ? 'মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • নির্ঘণ্ট ও সূচি'
+        : 'Maha Sasthi: 16 October 2026 • Full Schedule';
     }
   }
 
@@ -404,11 +413,14 @@ function initOnlineCounter() {
     // Subtle realistic organic fluctuation (+/- 2)
     const change = Math.floor(Math.random() * 5) - 2;
     state.onlineCount = Math.max(42, Math.min(94, state.onlineCount + change));
+    const lang = getLanguage();
     if (countText) {
-      countText.textContent = `${state.onlineCount} online`;
+      countText.textContent = lang === 'bn' 
+        ? `${formatNumber(state.onlineCount, 'bn')} জন ভক্ত অনলাইনে`
+        : `${state.onlineCount} devotees online`;
     }
     if (islandCountText) {
-      islandCountText.textContent = `${state.onlineCount}`;
+      islandCountText.textContent = `${formatNumber(state.onlineCount, lang)}`;
     }
   }, 4500);
 }
@@ -615,7 +627,8 @@ function getCurrentTrack() {
 function updatePlayerUI(track) {
   if (!track) return;
 
-  const displayTitle = track.title_bn || track.title || 'দুগ্গা এলো';
+  const lang = getLanguage();
+  const displayTitle = lang === 'bn' ? (track.title_bn || track.title || 'দুগ্গা এলো') : (track.title || track.title_bn || 'Dugga Elo');
   const displayArtist = `${track.artist || 'Agomoni'}${track.composer ? ` • ${track.composer}` : ''}`;
   const displayCover = track.cover || '/favicon.png';
   const displayDuration = track.durationLabel || '3:30';
@@ -725,6 +738,7 @@ function renderPlaylistTracks(playlistKey) {
   const container = document.getElementById('track-list-container');
   const descEl = document.getElementById('playlist-tab-desc');
   const pData = playlists[playlistKey];
+  const lang = getLanguage();
 
   if (!pData || !container) return;
 
@@ -737,8 +751,8 @@ function renderPlaylistTracks(playlistKey) {
     row.className = `track-row ${isCurrentPlaying ? 'active' : ''}`;
     row.setAttribute('data-track-index', index);
 
-    const numLabel = track.num || (index + 1 < 10 ? `0${index + 1}` : `${index + 1}`);
-    const rowTitle = track.title_bn || track.title;
+    const numLabel = formatNumber(index + 1 < 10 ? `0${index + 1}` : `${index + 1}`, lang);
+    const rowTitle = lang === 'bn' ? (track.title_bn || track.title) : (track.title || track.title_bn);
     const rowArtist = `${track.artist || 'Traditional'}${track.composer ? ` • ${track.composer}` : ''}`;
 
     row.innerHTML = `
@@ -1052,6 +1066,7 @@ function renderLiveDhakParts() {
   const grid = document.getElementById('live-dhak-parts-grid');
   if (!grid) return;
   grid.innerHTML = '';
+  const lang = getLanguage();
 
   authenticLiveDhakParts.forEach((part, index) => {
     const isCurrent = state.currentLiveDhakIndex === index;
@@ -1059,9 +1074,15 @@ function renderLiveDhakParts() {
     card.className = `live-part-card ${isCurrent ? 'active-part' : ''}`;
     card.setAttribute('data-part-index', index);
 
+    const partNumLabel = lang === 'bn' ? `পর্ব ${part.bengaliNum || formatNumber(index + 1, 'bn')}` : `Part ${index + 1}`;
+    const mainTitle = lang === 'bn' ? part.title_bn : part.title_en;
+    const subTitle = lang === 'bn' ? part.title_en : part.title_bn;
+    const partDesc = lang === 'bn' ? (part.bengaliDesc || part.description) : (part.description || part.bengaliDesc);
+    const playBtnText = isCurrent && state.isLiveDhakPlaying ? (lang === 'bn' ? 'চলছে' : 'Playing') : (lang === 'bn' ? 'বাজান' : 'Play');
+
     card.innerHTML = `
       <div class="live-part-card-top">
-        <span class="live-part-num-badge">পর্ব ${part.bengaliNum || index + 1}</span>
+        <span class="live-part-num-badge">${partNumLabel}</span>
         <div class="live-part-meta-pills">
           <span class="live-part-time-pill">${part.durationLabel || '0:18'}</span>
           <span class="live-part-bpm-pill">${part.tempoBpm} BPM</span>
@@ -1069,17 +1090,17 @@ function renderLiveDhakParts() {
       </div>
 
       <div class="live-part-title-group">
-        <h4 class="live-part-bengali-title">${part.title_bn}</h4>
-        <span class="live-part-english-title">${part.title_en}</span>
+        <h4 class="live-part-bengali-title">${mainTitle}</h4>
+        <span class="live-part-english-title">${subTitle}</span>
       </div>
 
-      <p class="live-part-desc">${part.bengaliDesc || part.description}</p>
+      <p class="live-part-desc">${partDesc}</p>
       <div class="live-part-acoustic">${part.acousticDetails}</div>
 
       <div class="live-part-footer">
         <button class="live-part-play-btn" data-index="${index}">
           <span class="part-btn-icon">${isCurrent && state.isLiveDhakPlaying ? '⏹' : '▶'}</span>
-          <span class="part-btn-text">${isCurrent && state.isLiveDhakPlaying ? 'চলছে (Playing)' : 'বাজান (Play)'}</span>
+          <span class="part-btn-text">${playBtnText}</span>
         </button>
 
         <div class="live-card-eq-bars ${isCurrent && state.isLiveDhakPlaying ? 'playing' : ''}">
@@ -1162,19 +1183,33 @@ function playLivePart(index) {
 
 function updateLiveDhakBanner(part) {
   if (!part) return;
+  const lang = getLanguage();
   const titleEl = document.getElementById('live-dhak-banner-title');
   const subEl = document.getElementById('live-dhak-banner-subtitle');
   const badgeEl = document.getElementById('live-dhak-segment-badge');
   const totalEl = document.getElementById('live-dhak-total-time');
 
-  if (titleEl) titleEl.textContent = `${part.bengaliNum || part.partNumber}. ${part.title_bn}`;
-  if (subEl) subEl.textContent = `${part.subtitle_bn} • ${part.title_en}`;
-  if (badgeEl) badgeEl.textContent = `পর্ব ${part.num || '০১'}/০৬ • ${part.tempoBpm} BPM • ${part.styleLabel}`;
+  if (titleEl) {
+    titleEl.textContent = lang === 'bn' 
+      ? `${part.bengaliNum || formatNumber(part.partNumber, 'bn')}. ${part.title_bn}`
+      : `${part.partNumber}. ${part.title_en}`;
+  }
+  if (subEl) {
+    subEl.textContent = lang === 'bn'
+      ? `${part.subtitle_bn} • ${part.title_en}`
+      : `${part.title_en} • ${part.subtitle_bn}`;
+  }
+  if (badgeEl) {
+    badgeEl.textContent = lang === 'bn'
+      ? `পর্ব ${part.num || '০১'}/০৬ • ${part.tempoBpm} BPM • ${part.styleLabel}`
+      : `Part ${part.partNumber}/06 • ${part.tempoBpm} BPM • ${part.styleLabel}`;
+  }
   if (totalEl) totalEl.textContent = `${part.durationLabel || '0:18'} Loop`;
 }
 
 function updateLiveDhakPlayState(isPlaying) {
   state.isLiveDhakPlaying = isPlaying;
+  const lang = getLanguage();
 
   const playBtn = document.getElementById('btn-live-play-pause');
   const playIcon = document.getElementById('live-play-icon');
@@ -1184,12 +1219,12 @@ function updateLiveDhakPlayState(isPlaying) {
   if (isPlaying) {
     playBtn?.classList.add('is-playing');
     if (playIcon) playIcon.textContent = '⏸';
-    if (playLabel) playLabel.textContent = 'থামান (Pause)';
+    if (playLabel) playLabel.textContent = lang === 'bn' ? 'থামান (Pause)' : 'Pause Loop';
     masterEq?.classList.add('playing');
   } else {
     playBtn?.classList.remove('is-playing');
     if (playIcon) playIcon.textContent = '▶';
-    if (playLabel) playLabel.textContent = 'লুপ বাজান (Play Loop)';
+    if (playLabel) playLabel.textContent = lang === 'bn' ? 'লুপ বাজান (Play Loop)' : 'Play Loop';
     masterEq?.classList.remove('playing');
   }
 
@@ -1198,6 +1233,7 @@ function updateLiveDhakPlayState(isPlaying) {
 }
 
 function highlightLivePartCard(activeIndex) {
+  const lang = getLanguage();
   const cards = document.querySelectorAll('.live-part-card');
   cards.forEach((card, idx) => {
     const isCurrent = idx === activeIndex;
@@ -1209,11 +1245,11 @@ function highlightLivePartCard(activeIndex) {
 
     if (isCurrent && state.isLiveDhakPlaying) {
       if (btnIcon) btnIcon.textContent = '⏸';
-      if (btnText) btnText.textContent = 'চলছে (Playing)';
+      if (btnText) btnText.textContent = lang === 'bn' ? 'চলছে' : 'Playing';
       eqBars?.classList.add('playing');
     } else {
       if (btnIcon) btnIcon.textContent = '▶';
-      if (btnText) btnText.textContent = 'বাজান (Play)';
+      if (btnText) btnText.textContent = lang === 'bn' ? 'বাজান' : 'Play';
       eqBars?.classList.remove('playing');
     }
   });
@@ -1365,8 +1401,9 @@ function initSynthDrumStudioControls() {
       tile.className = `step-tile ${stepItem.stroke !== 'NONE' ? 'has-stroke' : ''} ${stepItem.accent ? 'accent-stroke' : ''}`;
       tile.setAttribute('data-step', stepItem.step);
 
+      const lang = getLanguage();
       tile.innerHTML = `
-        <span class="step-idx">${bengNumbers[stepItem.step] || stepItem.step + 1}</span>
+        <span class="step-idx">${lang === 'bn' ? (bengNumbers[stepItem.step] || stepItem.step + 1) : stepItem.step + 1}</span>
         <span class="step-stroke-icon">${strokeIcons[stepItem.stroke] || '—'}</span>
         <span class="step-phonetic">${stepItem.phonetic || '-'}</span>
         ${stepItem.kansor && stepItem.kansor !== 'NONE' ? '<span class="step-kansor-dot" title="Kanshor"></span>' : ''}
@@ -1389,8 +1426,13 @@ function initSynthDrumStudioControls() {
 
   const updateBolUI = (bol) => {
     if (!bol) return;
+    const lang = getLanguage();
     if (taalBadge) taalBadge.textContent = bol.taal || 'Traditional';
-    if (timeBadge) timeBadge.textContent = `${bol.timeSignature || '4/4'} • ${bol.barLengthSteps || 16} মাত্রা`;
+    if (timeBadge) {
+      timeBadge.textContent = lang === 'bn' 
+        ? `${bol.timeSignature || '4/4'} • ${formatNumber(bol.barLengthSteps || 16, 'bn')} মাত্রা`
+        : `${bol.timeSignature || '4/4'} • ${bol.barLengthSteps || 16} Matra`;
+    }
     if (styleBadge) styleBadge.textContent = bol.styleLabel || bol.style;
     if (vocalPhrase) vocalPhrase.textContent = bol.vocalPhoneticBol;
     if (romanPhrase) romanPhrase.textContent = bol.romanizedBol;
@@ -1630,61 +1672,7 @@ function getAllGalleryPhotos() {
 }
 
 function initPujoInfoAndGallery() {
-  // 1. Render 2026 Schedule Timeline in Modal
-  const timelineContainer = document.getElementById('pujo-timeline-list');
-  if (timelineContainer && nativePujoData.dates2026) {
-    timelineContainer.innerHTML = '';
-    nativePujoData.dates2026.forEach((item) => {
-      const isSpecial = item.id === 'astami' || item.id === 'navami';
-      const el = document.createElement('div');
-      el.className = `timeline-item ${isSpecial ? 'highlight-item' : ''}`;
-      el.innerHTML = `
-        <div class="timeline-left">
-          <span class="timeline-day">${item.bengaliDay}</span>
-          <span class="timeline-note">${item.rituals}</span>
-        </div>
-        <span class="timeline-date">${item.date}</span>
-      `;
-      timelineContainer.appendChild(el);
-    });
-  }
-
-  // 2. Render Heritage Highlights in Modal
-  const highlightsContainer = document.getElementById('pujo-highlights-grid');
-  if (highlightsContainer && nativePujoData.highlights) {
-    highlightsContainer.innerHTML = '';
-    nativePujoData.highlights.forEach((h) => {
-      const card = document.createElement('div');
-      card.className = 'highlight-card';
-      card.innerHTML = `
-        <div class="highlight-card-title">${h.title}</div>
-        <div class="highlight-card-desc">${h.desc}</div>
-      `;
-      highlightsContainer.appendChild(card);
-    });
-  }
-
-  // 3. Render Modal Gallery Category Filter Tabs
-  const catTabsContainer = document.getElementById('gallery-category-tabs');
-  if (catTabsContainer && nativePujoData.galleryCategories) {
-    catTabsContainer.innerHTML = '';
-    nativePujoData.galleryCategories.forEach((cat) => {
-      const btn = document.createElement('button');
-      btn.className = `gallery-cat-btn ${cat.id === state.activeGalleryCategory ? 'active' : ''}`;
-      btn.setAttribute('data-category', cat.id);
-      btn.textContent = cat.label;
-      btn.addEventListener('click', () => {
-        state.activeGalleryCategory = cat.id;
-        document.querySelectorAll('.gallery-cat-btn').forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderModalGalleryItems();
-      });
-      catTabsContainer.appendChild(btn);
-    });
-  }
-
-  // 4. Render Modal Gallery Items
-  renderModalGalleryItems();
+  renderPujoModalContent();
 
   // Open Mondal Barir Pujo Modal
   document.getElementById('btn-open-pujo-info')?.addEventListener('click', () => {
@@ -1704,30 +1692,100 @@ function initPujoInfoAndGallery() {
   // Share Puja Invitation (WhatsApp / Web Share API)
   const shareBtn = document.getElementById('btn-share-website');
   shareBtn?.addEventListener('click', async () => {
-    const shareText = `পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য ও মিলনমেলা।
+    const lang = getLanguage();
+    const shareText = lang === 'bn' 
+      ? `পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য ও মিলনমেলা।
 মহালয়া: ১০ অক্টোবর | মহাষ্টমী ও সন্ধিপূজা: ১৮ অক্টোবর ২০২৬
 লাইভ কাউন্টডাউন ও আগমনী রেডিও: ${window.location.href}
+Instagram: @furfura_mondal_poribar (${nativePujoData.instagramUrl})`
+      : `Durga Puja 2026! Mondal Barir Pujo (Furfura Mondal Poribar) • Heritage since 1997.
+Mahalaya: 10 October | Maha Ashtami & Sandhi Puja: 18 October 2026
+Live Countdown & Festive Radio: ${window.location.href}
 Instagram: @furfura_mondal_poribar (${nativePujoData.instagramUrl})`;
 
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'মন্ডল বাড়ির পুজো ২০২৬ — পুজো আসছে',
+          title: lang === 'bn' ? 'মন্ডল বাড়ির পুজো ২০২৬ — পুজো আসছে' : 'Mondal Barir Pujo 2026 — Festive Portal',
           text: shareText,
           url: window.location.href
         });
       } catch (e) {
-        copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণ লিংক কপি হয়েছে!');
+        copyTextToClipboard(shareText, shareBtn, lang === 'bn' ? 'নিমন্ত্রণ লিংক কপি হয়েছে!' : 'Invitation link copied!');
       }
     } else {
-      copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণ লিংক কপি হয়েছে!');
+      copyTextToClipboard(shareText, shareBtn, lang === 'bn' ? 'নিমন্ত্রণ লিংক কপি হয়েছে!' : 'Invitation link copied!');
     }
   });
+}
+
+function renderPujoModalContent() {
+  const lang = getLanguage();
+  // 1. Render 2026 Schedule Timeline in Modal
+  const timelineContainer = document.getElementById('pujo-timeline-list');
+  if (timelineContainer && nativePujoData.dates2026) {
+    timelineContainer.innerHTML = '';
+    nativePujoData.dates2026.forEach((item) => {
+      const isSpecial = item.id === 'astami' || item.id === 'navami';
+      const dayText = lang === 'bn' ? item.bengaliDay : (item.englishDay || item.bengaliDay);
+      const ritualText = lang === 'bn' ? item.rituals : (item.englishRituals || item.rituals);
+      const el = document.createElement('div');
+      el.className = `timeline-item ${isSpecial ? 'highlight-item' : ''}`;
+      el.innerHTML = `
+        <div class="timeline-left">
+          <span class="timeline-day">${dayText}</span>
+          <span class="timeline-note">${ritualText}</span>
+        </div>
+        <span class="timeline-date">${item.date}</span>
+      `;
+      timelineContainer.appendChild(el);
+    });
+  }
+
+  // 2. Render Heritage Highlights in Modal
+  const highlightsContainer = document.getElementById('pujo-highlights-grid');
+  if (highlightsContainer && nativePujoData.highlights) {
+    highlightsContainer.innerHTML = '';
+    nativePujoData.highlights.forEach((h) => {
+      const titleText = lang === 'bn' ? h.title : (h.englishTitle || h.title);
+      const descText = lang === 'bn' ? h.desc : (h.englishDesc || h.desc);
+      const card = document.createElement('div');
+      card.className = 'highlight-card';
+      card.innerHTML = `
+        <div class="highlight-card-title">${titleText}</div>
+        <div class="highlight-card-desc">${descText}</div>
+      `;
+      highlightsContainer.appendChild(card);
+    });
+  }
+
+  // 3. Render Modal Gallery Category Filter Tabs
+  const catTabsContainer = document.getElementById('gallery-category-tabs');
+  if (catTabsContainer && nativePujoData.galleryCategories) {
+    catTabsContainer.innerHTML = '';
+    nativePujoData.galleryCategories.forEach((cat) => {
+      const btn = document.createElement('button');
+      btn.className = `gallery-cat-btn ${cat.id === state.activeGalleryCategory ? 'active' : ''}`;
+      btn.setAttribute('data-category', cat.id);
+      btn.textContent = lang === 'bn' ? cat.label : (cat.englishLabel || cat.label);
+      btn.addEventListener('click', () => {
+        state.activeGalleryCategory = cat.id;
+        document.querySelectorAll('.gallery-cat-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderModalGalleryItems();
+      });
+      catTabsContainer.appendChild(btn);
+    });
+  }
+
+  // 4. Render Modal Gallery Items
+  renderModalGalleryItems();
 }
 
 function renderModalGalleryItems() {
   const grid = document.getElementById('pujo-gallery-grid');
   if (!grid) return;
+  const lang = getLanguage();
 
   grid.innerHTML = '';
   const allPhotos = getAllGalleryPhotos();
@@ -1738,11 +1796,14 @@ function renderModalGalleryItems() {
   filtered.forEach((item) => {
     const card = document.createElement('div');
     card.className = 'gallery-card';
+    const title = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
+    const category = lang === 'bn' ? (item.categoryLabel || item.category) : (item.categoryEnglish || item.categoryLabel || item.category);
+
     card.innerHTML = `
-      <img class="gallery-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" />
+      <img class="gallery-img" src="${item.src}" alt="${title}" loading="lazy" />
       <div class="gallery-overlay">
-        <span class="gallery-tag">${item.categoryLabel || item.category}</span>
-        <span class="gallery-title">${item.bengaliTitle || item.title}</span>
+        <span class="gallery-tag">${category}</span>
+        <span class="gallery-title">${title}</span>
       </div>
     `;
 
@@ -1803,19 +1864,24 @@ function createRiverCardElement(item) {
   card.className = 'river-card';
   card.setAttribute('role', 'button');
   card.setAttribute('tabindex', '0');
-  card.setAttribute('aria-label', item.bengaliTitle || item.title);
+
+  const lang = getLanguage();
+  const title = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
+  const category = lang === 'bn' ? (item.categoryLabel || 'দর্শন') : (item.categoryEnglish || item.categoryLabel || 'Darshan');
+  const pranamLabel = lang === 'bn' ? 'প্রণাম' : 'Pranam';
+  card.setAttribute('aria-label', title);
 
   const likeCount = getPhotoLikeCount(item.id, item.likes || 18);
 
   card.innerHTML = `
-    <img class="river-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" decoding="async" />
+    <img class="river-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" />
     <div class="river-card-overlay">
       <div class="river-card-top">
-        <span class="river-category-pill">${item.categoryLabel || 'দর্শন'}</span>
+        <span class="river-category-pill">${category}</span>
       </div>
       <div class="river-card-bottom">
-        <h4 class="river-card-title">${item.bengaliTitle || item.title}</h4>
-        <span class="river-card-likes"><span class="like-val">${toBengaliNumerals(likeCount)}</span> প্রণাম</span>
+        <h4 class="river-card-title">${title}</h4>
+        <span class="river-card-likes"><span class="like-val">${formatNumber(likeCount, lang)}</span> ${pranamLabel}</span>
       </div>
     </div>
   `;
@@ -2059,6 +2125,7 @@ function renderGrandGalleryGrid(isNewUpload = false) {
   const grid = document.getElementById('main-photo-gallery-grid');
   if (!grid) return;
 
+  const lang = getLanguage();
   const allPhotos = getAllGalleryPhotos();
 
   // Update Category Badges Counts
@@ -2077,12 +2144,12 @@ function renderGrandGalleryGrid(isNewUpload = false) {
     }
   });
 
-  document.getElementById('count-cat-all') && (document.getElementById('count-cat-all').textContent = toBengaliNumerals(counts.all));
-  document.getElementById('count-cat-protima') && (document.getElementById('count-cat-protima').textContent = toBengaliNumerals(counts.protima));
-  document.getElementById('count-cat-aarti') && (document.getElementById('count-cat-aarti').textContent = toBengaliNumerals(counts.aarti));
-  document.getElementById('count-cat-heritage') && (document.getElementById('count-cat-heritage').textContent = toBengaliNumerals(counts.heritage));
-  document.getElementById('count-cat-sharat') && (document.getElementById('count-cat-sharat').textContent = toBengaliNumerals(counts.sharat));
-  document.getElementById('count-cat-community') && (document.getElementById('count-cat-community').textContent = toBengaliNumerals(counts.community));
+  document.getElementById('count-cat-all') && (document.getElementById('count-cat-all').textContent = formatNumber(counts.all, lang));
+  document.getElementById('count-cat-protima') && (document.getElementById('count-cat-protima').textContent = formatNumber(counts.protima, lang));
+  document.getElementById('count-cat-aarti') && (document.getElementById('count-cat-aarti').textContent = formatNumber(counts.aarti, lang));
+  document.getElementById('count-cat-heritage') && (document.getElementById('count-cat-heritage').textContent = formatNumber(counts.heritage, lang));
+  document.getElementById('count-cat-sharat') && (document.getElementById('count-cat-sharat').textContent = formatNumber(counts.sharat, lang));
+  document.getElementById('count-cat-community') && (document.getElementById('count-cat-community').textContent = formatNumber(counts.community, lang));
 
   // Filter List
   const filtered = state.activeGalleryCategory === 'all'
@@ -2095,8 +2162,8 @@ function renderGrandGalleryGrid(isNewUpload = false) {
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: rgba(255,255,255,0.7); font-family: var(--font-bengali-sans);">
-        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">এই ক্যাটাগরিতে এখনও কোনো ছবি নেই।</p>
-        <p style="font-size: 0.85rem; color: var(--heritage-gold);">"স্মৃতি ও ছবি জমা দিন" বাটনে ক্লিক করে আপনিই প্রথম ছবি যুক্ত করুন!</p>
+        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">${lang === 'bn' ? 'এই ক্যাটাগরিতে এখনও কোনো ছবি নেই।' : 'No photos available in this category yet.'}</p>
+        <p style="font-size: 0.85rem; color: var(--heritage-gold);">${lang === 'bn' ? '"স্মৃতি ও ছবি জমা দিন" বাটনে ক্লিক করে আপনিই প্রথম ছবি যুক্ত করুন!' : 'Click "Add Memories / Upload" to add the first photograph!'}</p>
       </div>
     `;
     return;
@@ -2108,22 +2175,28 @@ function renderGrandGalleryGrid(isNewUpload = false) {
     
     const likeCount = getPhotoLikeCount(item.id, item.likes || 12);
     const isLiked = photoLikes[item.id] !== undefined;
+    const title = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
+    const desc = lang === 'bn' ? (item.bengaliDesc || item.title) : (item.englishDesc || item.description || item.title);
+    const category = lang === 'bn' ? (item.categoryLabel || item.category) : (item.categoryEnglish || item.categoryLabel || item.category);
+    const author = lang === 'bn' ? (item.author || 'মন্ডল পরিবার') : (item.authorEnglish || item.author || 'Mondal Family');
+    const pranamLabel = lang === 'bn' ? 'প্রণাম' : 'Pranam';
+    const communityLabel = lang === 'bn' ? 'ভক্তের ছবি' : 'Community';
 
     card.innerHTML = `
       <div class="gallery-card-img-wrap">
-        <img class="gallery-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" decoding="async" />
-        <span class="gallery-card-badge">${item.categoryLabel || item.category}</span>
-        ${item.isCommunity ? '<span class="gallery-card-community-badge">ভক্তের ছবি</span>' : ''}
+        <img class="gallery-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" />
+        <span class="gallery-card-badge">${category}</span>
+        ${item.isCommunity ? `<span class="gallery-card-community-badge">${communityLabel}</span>` : ''}
       </div>
       <div class="gallery-card-body">
-        <h4 class="gallery-card-title">${item.bengaliTitle || item.title}</h4>
-        <p class="gallery-card-desc">${item.bengaliDesc || item.title}</p>
+        <h4 class="gallery-card-title">${title}</h4>
+        <p class="gallery-card-desc">${desc}</p>
       </div>
       <div class="gallery-card-footer">
-        <span class="gallery-card-author">${item.author || 'মন্ডল পরিবার'}</span>
+        <span class="gallery-card-author">${author}</span>
         <button type="button" class="gallery-like-btn ${isLiked ? 'liked' : ''}" data-photo-id="${item.id}" aria-label="Give Blessing Pranam">
-          <span class="like-num">${toBengaliNumerals(likeCount)}</span>
-          <span>প্রণাম</span>
+          <span class="like-num">${formatNumber(likeCount, lang)}</span>
+          <span>${pranamLabel}</span>
         </button>
       </div>
     `;
@@ -2142,7 +2215,7 @@ function renderGrandGalleryGrid(isNewUpload = false) {
       const updatedCount = incrementPhotoLike(item.id, item.likes || 12);
       likeBtn.classList.add('liked');
       const numEl = likeBtn.querySelector('.like-num');
-      if (numEl) numEl.textContent = toBengaliNumerals(updatedCount);
+      if (numEl) numEl.textContent = formatNumber(updatedCount, lang);
     });
 
     grid.appendChild(card);
@@ -2183,6 +2256,7 @@ function initOnnotaSection() {
 }
 
 function updateOnnotaCategoryCounts() {
+  const lang = getLanguage();
   const counts = {
     all: onnotaCreations.length,
     art: 0,
@@ -2203,17 +2277,18 @@ function updateOnnotaCategoryCounts() {
   const countCrafts = document.getElementById('onnota-count-crafts');
   const countLit = document.getElementById('onnota-count-literature');
 
-  if (countAll) countAll.textContent = toBengaliNumerals(counts.all);
-  if (countArt) countArt.textContent = toBengaliNumerals(counts.art);
-  if (countPhoto) countPhoto.textContent = toBengaliNumerals(counts.photography);
-  if (countCrafts) countCrafts.textContent = toBengaliNumerals(counts.crafts);
-  if (countLit) countLit.textContent = toBengaliNumerals(counts.literature);
+  if (countAll) countAll.textContent = formatNumber(counts.all, lang);
+  if (countArt) countArt.textContent = formatNumber(counts.art, lang);
+  if (countPhoto) countPhoto.textContent = formatNumber(counts.photography, lang);
+  if (countCrafts) countCrafts.textContent = formatNumber(counts.crafts, lang);
+  if (countLit) countLit.textContent = formatNumber(counts.literature, lang);
 }
 
 function renderOnnotaGrid() {
   const grid = document.getElementById('onnota-cards-grid');
   if (!grid) return;
 
+  const lang = getLanguage();
   const currentCat = state.activeOnnotaCategory || 'all';
   const filtered = currentCat === 'all'
     ? onnotaCreations
@@ -2224,7 +2299,7 @@ function renderOnnotaGrid() {
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: rgba(255,255,255,0.7); font-family: var(--font-bengali-sans);">
-        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">এই বিভাগে এখনও কোনো সৃষ্টি যুক্ত হয়নি।</p>
+        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">${lang === 'bn' ? 'এই বিভাগে এখনও কোনো সৃষ্টি যুক্ত হয়নি।' : 'No creations available in this category yet.'}</p>
       </div>
     `;
     return;
@@ -2238,25 +2313,31 @@ function renderOnnotaGrid() {
 
     const likeCount = getPhotoLikeCount(item.id, item.likes || 25);
     const isLiked = photoLikes[item.id] !== undefined;
+    const title = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
+    const desc = lang === 'bn' ? (item.desc_bn || item.desc_en || '') : (item.desc_en || item.desc_bn || '');
+    const category = lang === 'bn' ? (item.categoryLabel || item.category) : (item.categoryEnglish || item.categoryLabel || item.category);
+    const author = lang === 'bn' ? (item.author || 'অন্যতা') : (item.authorEnglish || item.author || 'Onnota');
+    const date = lang === 'bn' ? (item.date || 'শরৎ ২০২৬') : (item.dateEnglish || 'Autumn 2026');
+    const pranamLabel = lang === 'bn' ? 'প্রণাম' : 'Pranam';
 
     card.innerHTML = `
       <div class="onnota-card-img-wrap">
-        <img class="onnota-card-img" src="${item.src}" alt="${item.bengaliTitle || item.title}" loading="lazy" decoding="async" />
-        <span class="onnota-card-badge">${item.categoryLabel || item.category}</span>
+        <img class="onnota-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" />
+        <span class="onnota-card-badge">${category}</span>
         ${item.tag ? `<span class="onnota-card-tag">${item.tag}</span>` : ''}
       </div>
       <div class="onnota-card-body">
-        <h3 class="onnota-card-title">${item.bengaliTitle || item.title}</h3>
-        <p class="onnota-card-desc">${item.desc_bn || item.desc_en || ''}</p>
+        <h3 class="onnota-card-title">${title}</h3>
+        <p class="onnota-card-desc">${desc}</p>
       </div>
       <div class="onnota-card-footer">
         <div class="onnota-card-meta">
-          <span class="onnota-card-author">${item.author || 'অন্যতা'}</span>
-          <span class="onnota-card-date">${item.date || 'শরৎ ২০২৬'}</span>
+          <span class="onnota-card-author">${author}</span>
+          <span class="onnota-card-date">${date}</span>
         </div>
         <button type="button" class="onnota-like-btn ${isLiked ? 'liked' : ''}" data-item-id="${item.id}" aria-label="Give Pranam Blessing">
-          <span class="like-num">${toBengaliNumerals(likeCount)}</span>
-          <span>প্রণাম</span>
+          <span class="like-num">${formatNumber(likeCount, lang)}</span>
+          <span>${pranamLabel}</span>
         </button>
       </div>
     `;
@@ -2280,7 +2361,7 @@ function renderOnnotaGrid() {
       const updatedCount = incrementPhotoLike(item.id, item.likes || 25);
       likeBtn.classList.add('liked');
       const numEl = likeBtn.querySelector('.like-num');
-      if (numEl) numEl.textContent = toBengaliNumerals(updatedCount);
+      if (numEl) numEl.textContent = formatNumber(updatedCount, lang);
     });
 
     grid.appendChild(card);
@@ -2342,21 +2423,26 @@ function initGalleryLightbox() {
     const item = currentLightboxList[currentLightboxIndex];
     if (!item) return;
 
-    const shareText = `মন্ডল বাড়ির পুজো ২০২৬ (১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য): "${item.bengaliTitle || item.title}"
-@furfura_mondal_poribar • লাইভ ফটো গ্যালারি ও আগমনী রেডিও: ${window.location.href}`;
+    const lang = getLanguage();
+    const shareTitle = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
+    const shareText = lang === 'bn' 
+      ? `মন্ডল বাড়ির পুজো ২০২৬ (১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য): "${shareTitle}"
+@furfura_mondal_poribar • লাইভ ফটো গ্যালারি ও আগমনী রেডিও: ${window.location.href}`
+      : `Mondal Barir Pujo 2026 (Heritage since 1997): "${shareTitle}"
+@furfura_mondal_poribar • Live Photo Gallery & Festive Radio: ${window.location.href}`;
 
     if (navigator.share) {
       try {
         await navigator.share({
-          title: item.bengaliTitle || item.title,
+          title: shareTitle,
           text: shareText,
           url: window.location.href
         });
       } catch (err) {
-        copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণ লিংক কপি হয়েছে!');
+        copyTextToClipboard(shareText, shareBtn, lang === 'bn' ? 'নিমন্ত্রণ লিংক কপি হয়েছে!' : 'Link copied!');
       }
     } else {
-      copyTextToClipboard(shareText, shareBtn, 'নিমন্ত্রণ লিংক কপি হয়েছে!');
+      copyTextToClipboard(shareText, shareBtn, lang === 'bn' ? 'নিমন্ত্রণ লিংক কপি হয়েছে!' : 'Link copied!');
     }
   });
 
@@ -2390,6 +2476,7 @@ function updateLightboxUI() {
   const item = currentLightboxList[currentLightboxIndex];
   if (!item) return;
 
+  const lang = getLanguage();
   const imgEl = document.getElementById('lightbox-img');
   const catEl = document.getElementById('lightbox-category-badge');
   const authorEl = document.getElementById('lightbox-author-badge');
@@ -2398,18 +2485,24 @@ function updateLightboxUI() {
   const descEl = document.getElementById('lightbox-desc');
   const likeCountEl = document.getElementById('lightbox-like-count');
 
+  const title = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
+  const desc = lang === 'bn' ? (item.bengaliDesc || item.desc_bn || item.desc || item.title) : (item.englishDesc || item.desc_en || item.description || item.desc || item.title);
+  const category = lang === 'bn' ? (item.categoryLabel || item.category) : (item.categoryEnglish || item.categoryLabel || item.category);
+  const author = lang === 'bn' ? (item.author || 'মন্ডল পরিবার') : (item.authorEnglish || item.author || 'Mondal Family');
+  const date = lang === 'bn' ? (item.date || '') : (item.dateEnglish || item.date || '');
+
   if (imgEl) {
     imgEl.src = item.src;
-    imgEl.alt = item.bengaliTitle || item.title;
+    imgEl.alt = title;
   }
-  if (catEl) catEl.textContent = item.categoryLabel || item.category;
-  if (authorEl) authorEl.textContent = `${item.author || 'মন্ডল পরিবার'}${item.date ? ` • ${item.date}` : ''}`;
-  if (counterEl) counterEl.textContent = `${toBengaliNumerals(currentLightboxIndex + 1)} / ${toBengaliNumerals(currentLightboxList.length)}`;
-  if (titleEl) titleEl.textContent = item.bengaliTitle || item.title;
-  if (descEl) descEl.textContent = item.bengaliDesc || item.desc_bn || item.desc || item.title;
+  if (catEl) catEl.textContent = category;
+  if (authorEl) authorEl.textContent = `${author}${date ? ` • ${date}` : ''}`;
+  if (counterEl) counterEl.textContent = `${formatNumber(currentLightboxIndex + 1, lang)} / ${formatNumber(currentLightboxList.length, lang)}`;
+  if (titleEl) titleEl.textContent = title;
+  if (descEl) descEl.textContent = desc;
 
   const count = getPhotoLikeCount(item.id, item.likes || 12);
-  if (likeCountEl) likeCountEl.textContent = toBengaliNumerals(count);
+  if (likeCountEl) likeCountEl.textContent = formatNumber(count, lang);
 }
 
 /* ==========================================================================
@@ -2536,6 +2629,7 @@ function renderStoryCanvas() {
   const width = canvas.width;  // 1080
   const height = canvas.height; // 1920
 
+  const lang = getLanguage();
   const theme = state.storyGen.theme || 'early-morning';
   const cd = getCountdown();
 
@@ -2608,16 +2702,16 @@ function renderStoryCanvas() {
   ctx.save();
   ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
   ctx.beginPath();
-  roundRect(ctx, width / 2 - 290, 100, 580, 60, 30);
+  roundRect(ctx, width / 2 - 310, 100, 620, 60, 30);
   ctx.fill();
   ctx.strokeStyle = currentTheme.gold;
   ctx.lineWidth = 1.5;
   ctx.stroke();
 
   ctx.fillStyle = '#ffffff';
-  ctx.font = '600 24px "Noto Sans Bengali", sans-serif';
+  ctx.font = '600 24px "Noto Sans Bengali", "Poppins", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('মন্ডল বাড়ির পুজো • ১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য', width / 2, 138);
+  ctx.fillText(lang === 'bn' ? 'মন্ডল বাড়ির পুজো • ১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য' : 'Mondal Barir Pujo • Heritage Since 1997', width / 2, 138);
   ctx.restore();
 
   // 6. Central Sacred Maa Durga Iconography / Mandala
@@ -2637,25 +2731,33 @@ function renderStoryCanvas() {
 
   // Sacred Third Eye (ত্রিনয়ন) / Shloka
   ctx.fillStyle = currentTheme.gold;
-  ctx.font = '700 44px "Noto Sans Bengali", sans-serif';
+  ctx.font = '700 44px "Noto Sans Bengali", "Cinzel Decorative", serif';
   ctx.textAlign = 'center';
-  ctx.fillText('॥ শ্রীশ্রীদুর্গোৎসব ॥', centerX, centerY + 20);
+  ctx.fillText(lang === 'bn' ? '॥ শ্রীশ্রীদুর্গোৎসব ॥' : '॥ SRI SRI DURGOTSAV ॥', centerX, centerY + 20);
 
   // Subtitle Sacred Shloka
   ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-  ctx.font = '500 28px "Noto Sans Bengali", sans-serif';
-  ctx.fillText('যা দেবী সর্বভূতেষু মাতৃরূপেণ সংস্থিতা', centerX, centerY + 90);
+  ctx.font = '500 28px "Noto Sans Bengali", "Poppins", sans-serif';
+  ctx.fillText(lang === 'bn' ? 'যা দেবী সর্বভূতেষু মাতৃরূপেণ সংস্থিতা' : 'Ya Devi Sarva Bhuteshu Matri Rupena Samsthita', centerX, centerY + 90);
   ctx.restore();
 
-  // 7. Bengali Display Headline (পুজো আসছে / শুভ শারদীয়া)
+  // 7. Bengali / English Display Headline
   ctx.save();
   ctx.textAlign = 'center';
 
   const headlinesMap = {
-    'pujo-asche': { top: 'পুজো', bot: 'আসছে', full: 'মন্ডল বাড়ির পুজো ২০২৬' },
-    'subho-saradiya': { top: 'শুভ', bot: 'শারদীয়া', full: 'মন্ডল বাড়ির দুর্গাপূজা' },
-    'maa-aschen': { top: 'মা আসছেন', bot: 'ঘরে', full: '১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য ও আনন্দ' },
-    'sandhi-puja': { top: '১০৮ পদ্মে', bot: 'সন্ধিপূজা', full: 'মহামিলনোৎসবে সপরিবারে আমন্ত্রণ' }
+    'pujo-asche': lang === 'bn' 
+      ? { top: 'পুজো', bot: 'আসছে', full: 'মন্ডল বাড়ির পুজো ২০২৬' }
+      : { top: 'PUJO', bot: 'ASCHE', full: 'Mondal Barir Pujo 2026' },
+    'subho-saradiya': lang === 'bn'
+      ? { top: 'শুভ', bot: 'শারদীয়া', full: 'মন্ডল বাড়ির দুর্গাপূজা' }
+      : { top: 'SUBHO', bot: 'SARADIYA', full: 'Mondal Bari Durga Puja' },
+    'maa-aschen': lang === 'bn'
+      ? { top: 'মা আসছেন', bot: 'ঘরে', full: '১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য ও আনন্দ' }
+      : { top: 'MAA', bot: 'ASCHEN', full: 'Heritage & Celebrations Since 1997' },
+    'sandhi-puja': lang === 'bn'
+      ? { top: '১০৮ পদ্মে', bot: 'সন্ধিপূজা', full: 'মহামিলনোৎসবে সপরিবারে আমন্ত্রণ' }
+      : { top: '108 DIYAS', bot: 'SANDHI PUJA', full: 'Warm Welcome with Family & Friends' }
   };
 
   const selectedHead = headlinesMap[state.storyGen.headline] || headlinesMap['pujo-asche'];
@@ -2664,14 +2766,14 @@ function renderStoryCanvas() {
   ctx.fillStyle = currentTheme.gold;
   ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
   ctx.shadowBlur = 24;
-  ctx.font = '900 130px "Galada", "Noto Sans Bengali", cursive';
+  ctx.font = '900 130px "Galada", "Cinzel Decorative", "Noto Sans Bengali", cursive';
   ctx.fillText(selectedHead.top, centerX, 760);
   ctx.fillText(selectedHead.bot, centerX, 910);
   ctx.shadowBlur = 0;
 
   // Sub headline
   ctx.fillStyle = '#ffffff';
-  ctx.font = '600 36px "Hind Siliguri", "Noto Sans Bengali", sans-serif';
+  ctx.font = '600 36px "Hind Siliguri", "Noto Sans Bengali", "Poppins", sans-serif';
   ctx.fillText(selectedHead.full, centerX, 980);
   ctx.restore();
 
@@ -2690,11 +2792,11 @@ function renderStoryCanvas() {
     ctx.fillStyle = currentTheme.gold;
     ctx.font = '800 52px "Poppins", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(`${cd.days} DAYS TO GO`, centerX, countBoxY + 62);
+    ctx.fillText(`${formatNumber(cd.days, lang)} ${lang === 'bn' ? 'DAYS TO GO' : 'DAYS TO GO'}`, centerX, countBoxY + 62);
 
     ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-    ctx.font = '500 26px "Noto Sans Bengali", sans-serif';
-    ctx.fillText('মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ (শুক্রবার)', centerX, countBoxY + 104);
+    ctx.font = '500 26px "Noto Sans Bengali", "Poppins", sans-serif';
+    ctx.fillText(lang === 'bn' ? 'মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ (শুক্রবার)' : 'Maha Sasthi: 16 October 2026 (Friday)', centerX, countBoxY + 104);
     ctx.restore();
   }
 
@@ -2711,20 +2813,27 @@ function renderStoryCanvas() {
     ctx.stroke();
 
     ctx.fillStyle = currentTheme.gold;
-    ctx.font = '700 24px "Noto Sans Bengali", sans-serif';
+    ctx.font = '700 24px "Noto Sans Bengali", "Poppins", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('পূজার নির্ঘণ্ট ২০২৬', centerX, schedBoxY + 45);
+    ctx.fillText(lang === 'bn' ? 'পূজার নির্ঘণ্ট ২০২৬' : 'Durga Puja 2026 Schedule', centerX, schedBoxY + 45);
 
-    const scheduleLines = [
+    const scheduleLines = lang === 'bn' ? [
       { day: 'মহালয়া', date: '১০ অক্টোবর (ভোর ৪:৩০ চণ্ডীপাঠ)' },
       { day: 'মহা ষষ্ঠী', date: '১৬ অক্টোবর (বোধন ও আমন্ত্রণ)' },
       { day: 'মহা সপ্তমী', date: '১৭ অক্টোবর (নবপত্রিকা প্রবেশ)' },
       { day: 'মহা অষ্টমী', date: '১৮ অক্টোবর (১০৮ পদ্ম ও প্রদীপে সন্ধিপূজা)' },
       { day: 'মহা নবমী', date: '১৯ অক্টোবর (মহাপ্রসাদ ও ধুনুচি নাচ)' },
       { day: 'বিজয়া দশমী', date: '২০ অক্টোবর (সিঁদুর খেলা ও শান্তিজল)' }
+    ] : [
+      { day: 'Mahalaya', date: '10 October (4:30 AM Chandi Path)' },
+      { day: 'Maha Sasthi', date: '16 October (Bodhon & Welcome)' },
+      { day: 'Maha Saptami', date: '17 October (Nabapatrika Pravesh)' },
+      { day: 'Maha Ashtami', date: '18 October (108 Lotuses Sandhi Puja)' },
+      { day: 'Maha Navami', date: '19 October (Mahaprasad & Dhunuchi)' },
+      { day: 'Bijoya Dashami', date: '20 October (Sindoor Khela & Blessings)' }
     ];
 
-    ctx.font = '500 21px "Noto Sans Bengali", sans-serif';
+    ctx.font = '500 21px "Noto Sans Bengali", "Poppins", sans-serif';
     scheduleLines.forEach((s, idx) => {
       const y = schedBoxY + 82 + idx * 34;
       ctx.textAlign = 'left';
@@ -3215,12 +3324,49 @@ function initLanguageSwitcher() {
   window.addEventListener('pujo_language_changed', (e) => {
     const lang = e.detail?.lang || getLanguage();
     syncAllLanguageUI(lang);
-    // Refresh dynamic views
+    
+    // Refresh all dynamic views & components
+    if (typeof updateAtmosphere === 'function') {
+      updateAtmosphere();
+    }
+    if (typeof updateDynamicIslandState === 'function') {
+      updateDynamicIslandState();
+    }
     if (typeof renderPlaylistTracks === 'function') {
       renderPlaylistTracks(state.activeTab);
     }
     if (typeof updatePlayerUI === 'function') {
       updatePlayerUI(getCurrentTrack());
+    }
+    if (typeof renderLiveDhakParts === 'function') {
+      renderLiveDhakParts();
+    }
+    if (typeof updateLiveDhakBanner === 'function') {
+      updateLiveDhakBanner(authenticLiveDhakParts[state.currentLiveDhakIndex]);
+    }
+    if (typeof updateLiveDhakPlayState === 'function') {
+      updateLiveDhakPlayState(state.isLiveDhakPlaying);
+    }
+    if (typeof renderPujoModalContent === 'function') {
+      renderPujoModalContent();
+    }
+    if (typeof initPhotoRiver === 'function') {
+      initPhotoRiver();
+    }
+    if (typeof renderGrandGalleryGrid === 'function') {
+      renderGrandGalleryGrid();
+    }
+    if (typeof updateOnnotaCategoryCounts === 'function') {
+      updateOnnotaCategoryCounts();
+    }
+    if (typeof renderOnnotaGrid === 'function') {
+      renderOnnotaGrid();
+    }
+    if (typeof updateLightboxUI === 'function') {
+      updateLightboxUI();
+    }
+    if (typeof renderStoryCanvas === 'function') {
+      renderStoryCanvas();
     }
   });
 

@@ -1080,16 +1080,16 @@
                 <!-- Live Transport & Loop Controls -->
                 <div class="live-transport-row">
                   <div class="live-transport-buttons">
-                    <button class="live-ctrl-btn" id="btn-live-prev-part" title="Previous Part (1-Tap Seamless Transition)" aria-label="Previous Part">
+                    <button class="live-ctrl-btn" id="btn-live-prev-part" data-i18n-title="dhak_prev_title" data-i18n-aria-label="dhak_prev_aria" title="Previous Part (1-Tap Seamless Transition)" aria-label="Previous Part">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
                       </svg>
                     </button>
-                    <button class="live-ctrl-btn play-master" id="btn-live-play-pause" title="Play / Pause Seamless Dhak Loop" aria-label="Play Live Dhak">
+                    <button class="live-ctrl-btn play-master" id="btn-live-play-pause" data-i18n-title="dhak_play_loop_title" data-i18n-aria-label="dhak_play_loop_title" title="Play / Pause Seamless Dhak Loop" aria-label="Play Live Dhak">
                       <span id="live-play-icon">▶</span>
-                      <span id="live-play-label">লুপ বাজান (Play Loop)</span>
+                      <span id="live-play-label" data-i18n="dhak_play_loop">লুপ বাজান (Play Loop)</span>
                     </button>
-                    <button class="live-ctrl-btn" id="btn-live-next-part" title="Next Part (1-Tap Seamless Transition)" aria-label="Next Part">
+                    <button class="live-ctrl-btn" id="btn-live-next-part" data-i18n-title="dhak_next_title" data-i18n-aria-label="dhak_next_aria" title="Next Part (1-Tap Seamless Transition)" aria-label="Next Part">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
                       </svg>
@@ -1098,19 +1098,19 @@
 
                   <!-- Quick Accompany Triggers -->
                   <div class="live-quick-triggers">
-                    <button class="mini-trigger-btn" id="btn-live-shankha" title="Blow Sacred Shankha (শাঁখ)">
-                      <span>শাঁখ</span>
+                    <button class="mini-trigger-btn" id="btn-live-shankha" data-i18n-title="dhak_trig_shankha_title" title="Blow Sacred Shankha (শাঁখ)">
+                      <span data-i18n="dhak_trig_shankha">শাঁখ</span>
                     </button>
-                    <button class="mini-trigger-btn" id="btn-live-kashor" title="Strike Bell-Metal Gong (কাঁসর)">
-                      <span>কাঁসর</span>
+                    <button class="mini-trigger-btn" id="btn-live-kashor" data-i18n-title="dhak_trig_kashor_title" title="Strike Bell-Metal Gong (কাঁসর)">
+                      <span data-i18n="dhak_trig_kashor">কাঁসর</span>
                     </button>
                   </div>
 
                   <!-- Seamless Continuous Loop Toggle -->
-                  <label class="live-loop-toggle" title="Toggle continuous seamless looping without interruption">
+                  <label class="live-loop-toggle" data-i18n-title="dhak_chk_loop_title" title="Toggle continuous seamless looping without interruption">
                     <input type="checkbox" id="chk-live-dhak-loop" checked />
                     <span class="loop-toggle-track"></span>
-                    <span class="loop-toggle-label">অবিরাম লুপ (Seamless Loop)</span>
+                    <span class="loop-toggle-label" data-i18n="dhak_chk_loop">অবিরাম লুপ (Seamless Loop)</span>
                   </label>
                 </div>
               </div>
@@ -1120,26 +1120,26 @@
                 <div class="booster-header">
                   <div class="booster-title-group">
                     <div>
-                      <h4 class="booster-title">স্টুডিও সাউন্ড বুস্টার ও ইকুয়ালাইজার (STUDIO EQ & BOOSTER)</h4>
-                      <span class="booster-sub">Enhanced low-frequency punch, crisp stick snap & master volume gain</span>
+                      <h4 class="booster-title" data-i18n="booster_title">স্টুডিও সাউন্ড বুস্টার ও ইকুয়ালাইজার (STUDIO EQ & BOOSTER)</h4>
+                      <span class="booster-sub" data-i18n="booster_sub">Enhanced low-frequency punch, crisp stick snap & master volume gain</span>
                     </div>
                   </div>
-                  <span class="booster-badge-active" id="booster-status-pill">BOOST ACTIVE</span>
+                  <span class="booster-badge-active" id="booster-status-pill" data-i18n="booster_status_active">BOOST ACTIVE</span>
                 </div>
 
                 <!-- Booster Quick Preset Pills -->
                 <div class="booster-presets-row">
-                  <button class="booster-preset-btn" data-preset="flat">স্ট্যান্ডার্ড (Flat)</button>
-                  <button class="booster-preset-btn active" data-preset="bass-heavy">বেস বুস্ট (+6dB)</button>
-                  <button class="booster-preset-btn" data-preset="crisp-snap">কঞ্চি স্ন্যাপ (+4dB)</button>
-                  <button class="booster-preset-btn" data-preset="festival-loud">মহোৎসব লাউডনেস (150%)</button>
+                  <button class="booster-preset-btn" data-preset="flat" data-i18n="booster_preset_flat">স্ট্যান্ডার্ড (Flat)</button>
+                  <button class="booster-preset-btn active" data-preset="bass-heavy" data-i18n="booster_preset_bass">বেস বুস্ট (+6dB)</button>
+                  <button class="booster-preset-btn" data-preset="crisp-snap" data-i18n="booster_preset_snap">কঞ্চি স্ন্যাপ (+4dB)</button>
+                  <button class="booster-preset-btn" data-preset="festival-loud" data-i18n="booster_preset_loud">মহোৎসব লাউডনেস (150%)</button>
                 </div>
 
                 <!-- Sliders Grid -->
                 <div class="booster-sliders-grid">
                   <div class="booster-slider-item">
                     <div class="booster-slider-label-row">
-                      <span class="booster-slider-name">গভীর বেস বুস্ট (Barrel Bass 80Hz):</span>
+                      <span class="booster-slider-name" data-i18n="booster_bass_name">গভীর বেস বুস্ট (Barrel Bass 80Hz):</span>
                       <span class="booster-slider-val" id="booster-bass-val">+6 dB</span>
                     </div>
                     <input type="range" class="dhak-range-input" id="booster-bass-slider" min="0" max="12" value="6" step="1" aria-label="Bass Boost Gain" />
@@ -1147,7 +1147,7 @@
 
                   <div class="booster-slider-item">
                     <div class="booster-slider-label-row">
-                      <span class="booster-slider-name">কঞ্চি কাঠি স্ন্যাপ (Stick Snap 2.4kHz):</span>
+                      <span class="booster-slider-name" data-i18n="booster_snap_name">কঞ্চি কাঠি স্ন্যাপ (Stick Snap 2.4kHz):</span>
                       <span class="booster-slider-val" id="booster-snap-val">+4 dB</span>
                     </div>
                     <input type="range" class="dhak-range-input" id="booster-snap-slider" min="0" max="8" value="4" step="1" aria-label="Snap Boost Gain" />
@@ -1155,7 +1155,7 @@
 
                   <div class="booster-slider-item">
                     <div class="booster-slider-label-row">
-                      <span class="booster-slider-name">মাস্টার গেইন ভলিউম (Master Loudness):</span>
+                      <span class="booster-slider-name" data-i18n="booster_master_name">মাস্টার গেইন ভলিউম (Master Loudness):</span>
                       <span class="booster-slider-val" id="booster-master-val">120%</span>
                     </div>
                     <input type="range" class="dhak-range-input" id="booster-master-slider" min="50" max="150" value="120" step="5" aria-label="Master Volume Gain" />
@@ -1166,8 +1166,8 @@
               <!-- 6 Categorized Live Dhak Part Selector Cards Grid -->
               <div class="live-parts-section">
                 <div class="live-parts-header">
-                  <span class="dhak-section-label">খাঁটি ঢাকের ৬টি সাবেকি পর্ব (6 AUTHENTIC MASTER PARTS):</span>
-                  <span class="live-parts-hint">১-ট্যাপে সরাসরি সুইচ ও নিরবচ্ছিন্ন লুপ করুন (Zero Latency)</span>
+                  <span class="dhak-section-label" data-i18n="dhak_parts_header">খাঁটি ঢাকের ৬টি সাবেকি পর্ব (6 AUTHENTIC MASTER PARTS):</span>
+                  <span class="live-parts-hint" data-i18n="dhak_parts_hint">১-ট্যাপে সরাসরি সুইচ ও নিরবচ্ছিন্ন লুপ করুন (Zero Latency)</span>
                 </div>
 
                 <div class="live-parts-grid" id="live-dhak-parts-grid">
@@ -1184,18 +1184,18 @@
               
               <!-- 1. Playing Style Mode Selector -->
               <div class="dhak-mode-selector-wrap">
-                <span class="dhak-section-label">বোল বাজনার শৈলী (Playing Style):</span>
+                <span class="dhak-section-label" data-i18n="dhak_style_label">বোল বাজনার শৈলী (Playing Style):</span>
                 <div class="dhak-mode-pills" id="dhak-style-modes" role="radiogroup" aria-label="Dhak Style Modes">
                   <button class="dhak-mode-btn" data-mode="ak_kathi" role="radio" aria-checked="false">
-                    <span class="mode-title">এক কাঠি</span>
+                    <span class="mode-title" data-i18n="dhak_style_ak">এক কাঠি</span>
                     <span class="mode-sub">Ak-Kathi</span>
                   </button>
                   <button class="dhak-mode-btn active" data-mode="duk_kathi" role="radio" aria-checked="true">
-                    <span class="mode-title">দুক কাঠি</span>
+                    <span class="mode-title" data-i18n="dhak_style_duk">দুক কাঠি</span>
                     <span class="mode-sub">Duk-Kathi</span>
                   </button>
                   <button class="dhak-mode-btn" data-mode="dankuni_hooghly_heritage" role="radio" aria-checked="false">
-                    <span class="mode-title">ডানকুনী ঘরানা</span>
+                    <span class="mode-title" data-i18n="dhak_style_dankuni">ডানকুনী ঘরানা</span>
                     <span class="mode-sub">Dankuni Heritage</span>
                   </button>
                 </div>
@@ -1204,16 +1204,16 @@
               <!-- 2. Traditional Bol Selector & Card Details -->
               <div class="dhak-bol-selector-wrap">
                 <div class="dhak-bol-select-header">
-                  <label for="dhak-bol-select" class="dhak-section-label">ঐতিহ্যবাহী পূজার বোল (Traditional Puja Bol):</label>
-                  <span class="dhak-bol-count-badge" id="dhak-bol-count">৬টি সাবেকি বোল</span>
+                  <label for="dhak-bol-select" class="dhak-section-label" data-i18n="dhak_bol_label">ঐতিহ্যবাহী পূজার বোল (Traditional Puja Bol):</label>
+                  <span class="dhak-bol-count-badge" id="dhak-bol-count" data-i18n="dhak_bol_count">৬টি সাবেকি বোল</span>
                 </div>
                 <select class="dhak-select-input" id="dhak-bol-select" aria-label="Select Puja Bol">
-                  <option value="1">১. রথের বাজনা ("ড্যাং তাং ড্যাং তাং | ধা ধা গুড়গুড় ধা")</option>
-                  <option value="2">২. আগমনী ও বরণ বাজনা ("ড্যাং ড্যাং ড্যাংকা ড্যাং, মা আসছেন ঘরে")</option>
-                  <option value="3" selected>৩. সন্ধ্যা আরতি ও ধুনুচি নৃত্য ("তাক দুমা দুম তাক দুমা দুম, ঝম ঝমাকা ঝম")</option>
-                  <option value="4">৪. সন্ধিপূজা ও ১০৮ প্রদীপ মহোৎসব ("কড়াতাং কড়াতাং গুড় গুড় ধা")</option>
-                  <option value="5">৫. বিসর্জন ও বিজয়া শোভাযাত্রা ("বলো দুর্গা মাইকি জয়! আসছে বছর আবার হবে")</option>
-                  <option value="6">৬. এক কাঠি ও দুক কাঠি যুগলবন্দী ("ধাগে তেটে তাক তাং, কড়াতাং কড়াতাং ধা")</option>
+                  <option value="1" data-i18n="bol_opt_1">১. রথের বাজনা ("ড্যাং তাং ড্যাং তাং | ধা ধা গুড়গুড় ধা")</option>
+                  <option value="2" data-i18n="bol_opt_2">২. আগমনী ও বরণ বাজনা ("ড্যাং ড্যাং ড্যাংকা ড্যাং, মা আসছেন ঘরে")</option>
+                  <option value="3" selected data-i18n="bol_opt_3">৩. সন্ধ্যা আরতি ও ধুনুচি নৃত্য ("তাক দুমা দুম তাক দুমা দুম, ঝম ঝমাকা ঝম")</option>
+                  <option value="4" data-i18n="bol_opt_4">৪. সন্ধিপূজা ও ১০৮ প্রদীপ মহোৎসব ("কড়াতাং কড়াতাং গুড় গুড় ধা")</option>
+                  <option value="5" data-i18n="bol_opt_5">৫. বিসর্জন ও বিজয়া শোভাযাত্রা ("বলো দুর্গা মাইকি জয়! আসছে বছর আবার হবে")</option>
+                  <option value="6" data-i18n="bol_opt_6">৬. এক কাঠি ও দুক কাঠি যুগলবন্দী ("ধাগে তেটে তাক তাং, কড়াতাং কড়াতাং ধা")</option>
                 </select>
 
                 <!-- Bol Metadata Banner -->
@@ -1238,7 +1238,7 @@
               <!-- 3. Live 16-Step Rhythmic Visualizer Grid -->
               <div class="dhak-visualizer-section">
                 <div class="dhak-vis-header">
-                  <span class="dhak-section-label">লাইভ ১৬-মাত্রা ট্র্যাকার (Live 16-Step Visualizer Grid):</span>
+                  <span class="dhak-section-label" data-i18n="dhak_vis_label">লাইভ ১৬-মাত্রা ট্র্যাকার (Live 16-Step Visualizer Grid):</span>
                   <span class="dhak-active-step-badge" id="dhak-active-step-label">Step: -- / 16</span>
                 </div>
                 <div class="dhak-step-grid" id="dhak-step-grid" aria-label="16-Step Beat Grid">
@@ -1249,38 +1249,38 @@
               <!-- 4. 6 Physical Drum Pads -->
               <div class="dhak-pads-section">
                 <div class="dhak-pads-header">
-                  <span class="dhak-section-label">ঢাকের খাঁটি ধ্বনি প্যাড (6 Physical Drum & Bell Pads):</span>
-                  <span class="dhak-kbd-hint">কীবোর্ড [1 to 6] প্রেস করুন</span>
+                  <span class="dhak-section-label" data-i18n="dhak_pads_label">ঢাকের খাঁটি ধ্বনি প্যাড (6 Physical Drum & Bell Pads):</span>
+                  <span class="dhak-kbd-hint" data-i18n="dhak_pads_kbd_hint">কীবোর্ড [1 to 6] প্রেস করুন</span>
                 </div>
                 <div class="dhak-pad-container">
                   <button class="drum-pad" id="pad-dha" data-key="1" aria-label="Dha Bass Pad">
-                    <strong class="drum-pad-label">ধা (Dha)</strong>
-                    <span class="drum-pad-sub">খোলা বেস (Bass)</span>
+                    <strong class="drum-pad-label" data-i18n="pad_dha_label">ধা (Dha)</strong>
+                    <span class="drum-pad-sub" data-i18n="pad_dha_sub">খোলা বেস (Bass)</span>
                     <span class="drum-pad-key">Key 1</span>
                   </button>
                   <button class="drum-pad" id="pad-dyang" data-key="2" aria-label="Dyang Bamboo Snap Pad">
-                    <strong class="drum-pad-label">ড্যাং (Dyang)</strong>
-                    <span class="drum-pad-sub">কঞ্চি কাঠি (Snap)</span>
+                    <strong class="drum-pad-label" data-i18n="pad_dyang_label">ড্যাং (Dyang)</strong>
+                    <span class="drum-pad-sub" data-i18n="pad_dyang_sub">কঞ্চি কাঠি (Snap)</span>
                     <span class="drum-pad-key">Key 2</span>
                   </button>
                   <button class="drum-pad" id="pad-ta" data-key="3" aria-label="Ta Rim Slap Pad">
-                    <strong class="drum-pad-label">তা (Ta)</strong>
-                    <span class="drum-pad-sub">খোলা চাট্টি (Rim)</span>
+                    <strong class="drum-pad-label" data-i18n="pad_ta_label">তা (Ta)</strong>
+                    <span class="drum-pad-sub" data-i18n="pad_ta_sub">খোলা চাট্টি (Rim)</span>
                     <span class="drum-pad-key">Key 3</span>
                   </button>
                   <button class="drum-pad" id="pad-kut" data-key="4" aria-label="Kut Ghost Mute Pad">
-                    <strong class="drum-pad-label">কুট (Kut)</strong>
-                    <span class="drum-pad-sub">মিউটেড খটকা (Mute)</span>
+                    <strong class="drum-pad-label" data-i18n="pad_kut_label">কুট (Kut)</strong>
+                    <span class="drum-pad-sub" data-i18n="pad_kut_sub">মিউটেড খটকা (Mute)</span>
                     <span class="drum-pad-key">Key 4</span>
                   </button>
                   <button class="drum-pad" id="pad-gurgur" data-key="5" aria-label="Gurgur Roll Pad">
-                    <strong class="drum-pad-label">গুড়গুড় (Roll)</strong>
-                    <span class="drum-pad-sub">দুই কাঠির রুল</span>
+                    <strong class="drum-pad-label" data-i18n="pad_gurgur_label">গুড়গুড় (Roll)</strong>
+                    <span class="drum-pad-sub" data-i18n="pad_gurgur_sub">দুই কাঠির রুল</span>
                     <span class="drum-pad-key">Key 5</span>
                   </button>
                   <button class="drum-pad" id="pad-kashor" data-key="6" aria-label="Kanshor Bell Pad">
-                    <strong class="drum-pad-label">কাঁসর (Kanshor)</strong>
-                    <span class="drum-pad-sub">কাঁসার ঘণ্টা (Gong)</span>
+                    <strong class="drum-pad-label" data-i18n="pad_kashor_label">কাঁসর (Kanshor)</strong>
+                    <span class="drum-pad-sub" data-i18n="pad_kashor_sub">কাঁসার ঘণ্টা (Gong)</span>
                     <span class="drum-pad-key">Key 6</span>
                   </button>
                 </div>
@@ -1292,7 +1292,7 @@
                   <!-- Tempo Slider -->
                   <div class="dhak-slider-group">
                     <div class="dhak-slider-meta">
-                      <span class="ctrl-sub-label">গতি / লয় (Tempo BPM):</span>
+                      <span class="ctrl-sub-label" data-i18n="dhak_tempo_label">গতি / লয় (Tempo BPM):</span>
                       <span class="dhak-val-badge" id="dhak-bpm-val">124 BPM</span>
                     </div>
                     <input type="range" class="dhak-range-input" id="dhak-bpm-slider" min="60" max="180" value="124" aria-label="Dhak Tempo BPM" />
@@ -1300,7 +1300,7 @@
 
                   <!-- Tap Tempo Button -->
                   <button class="dhak-tap-tempo-btn" id="btn-tap-tempo" title="Click rhythmically to set tempo">
-                    <span>ট্যাপ টেম্পো</span>
+                    <span data-i18n="btn_tap_tempo">ট্যাপ টেম্পো</span>
                   </button>
                 </div>
 
@@ -1308,7 +1308,7 @@
                   <!-- Volume Slider -->
                   <div class="dhak-slider-group vol-group">
                     <div class="dhak-slider-meta">
-                      <span class="ctrl-sub-label">সাউন্ড ভলিউম (Volume):</span>
+                      <span class="ctrl-sub-label" data-i18n="dhak_vol_label">সাউন্ড ভলিউম (Volume):</span>
                       <span class="dhak-val-badge" id="dhak-vol-val">100%</span>
                     </div>
                     <input type="range" class="dhak-range-input" id="dhak-vol-slider" min="0" max="100" value="100" aria-label="Dhak Sequencer Volume" />
@@ -1318,7 +1318,7 @@
                   <label class="dhak-toggle-switch">
                     <input type="checkbox" id="chk-dhak-accelerando" />
                     <span class="toggle-track"></span>
-                    <span class="toggle-label">দ্রুতলয় বৃদ্ধি (Accelerando)</span>
+                    <span class="toggle-label" data-i18n="dhak_accelerando">দ্রুতলয় বৃদ্ধি (Accelerando)</span>
                   </label>
                 </div>
 
@@ -1326,13 +1326,13 @@
                 <div class="dhak-actions-grid">
                   <button class="rhythm-loop-btn main-play-btn" id="btn-loop-dhak-rhythm">
                     <span class="loop-icon" id="dhak-play-icon">▶</span>
-                    <span id="dhak-play-text">বোল বাজানো শুরু করুন (Play Bol)</span>
+                    <span id="dhak-play-text" data-i18n="dhak_btn_play_bol">বোল বাজানো শুরু করুন (Play Bol)</span>
                   </button>
-                  <button class="dhak-quick-btn" id="btn-dhak-shankha" title="Blow Conch Shell">
-                    <span>শাঁখ</span>
+                  <button class="dhak-quick-btn" id="btn-dhak-shankha" data-i18n-title="dhak_trig_shankha_title" title="Blow Conch Shell">
+                    <span data-i18n="dhak_trig_shankha">শাঁখ</span>
                   </button>
-                  <button class="dhak-quick-btn" id="btn-dhak-kashor" title="Strike Bell-Metal Gong">
-                    <span>কাঁসর</span>
+                  <button class="dhak-quick-btn" id="btn-dhak-kashor" data-i18n-title="dhak_trig_kashor_title" title="Strike Bell-Metal Gong">
+                    <span data-i18n="dhak_trig_kashor">কাঁসর</span>
                   </button>
                 </div>
               </div>
@@ -1350,8 +1350,8 @@
         <div class="modal-card shortcuts-card">
           <div class="modal-header">
             <div class="modal-title-wrap">
-              <span class="modal-subtitle">POWER USER CONTROLS</span>
-              <h2 class="modal-title" id="shortcuts-modal-title">KEYBOARD SHORTCUTS HUD</h2>
+              <span class="modal-subtitle" data-i18n="shortcuts_sub">POWER USER CONTROLS</span>
+              <h2 class="modal-title" id="shortcuts-modal-title" data-i18n="shortcuts_title">KEYBOARD SHORTCUTS HUD</h2>
             </div>
             <button class="close-btn" id="btn-close-shortcuts" aria-label="Close Shortcuts">✕</button>
           </div>
@@ -1359,63 +1359,63 @@
           <div class="shortcuts-content">
             <div class="shortcuts-grid">
               <div class="shortcut-item">
-                <span class="shortcut-action">Play / Pause Radio</span>
+                <span class="shortcut-action" data-i18n="sc_play_pause">Play / Pause Radio</span>
                 <kbd class="hud-kbd">Space</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Next Track</span>
+                <span class="shortcut-action" data-i18n="sc_next_track">Next Track</span>
                 <kbd class="hud-kbd">➔ / N</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Previous Track</span>
+                <span class="shortcut-action" data-i18n="sc_prev_track">Previous Track</span>
                 <kbd class="hud-kbd">⬅ / P</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Dhak Studio Modal</span>
+                <span class="shortcut-action" data-i18n="sc_dhak_studio">Dhak Studio Modal</span>
                 <kbd class="hud-kbd">D</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Blow Sacred Shankha (শাঁখ)</span>
+                <span class="shortcut-action" data-i18n="sc_shankha">Blow Sacred Shankha (শাঁখ)</span>
                 <kbd class="hud-kbd">S</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Dhak Bass (১. ধা)</span>
+                <span class="shortcut-action" data-i18n="sc_pad_1">Dhak Bass (১. ধা)</span>
                 <kbd class="hud-kbd">1</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Dhak Bamboo Snap (২. ড্যাং)</span>
+                <span class="shortcut-action" data-i18n="sc_pad_2">Dhak Bamboo Snap (২. ড্যাং)</span>
                 <kbd class="hud-kbd">2</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Dhak Rim Slap (৩. তা)</span>
+                <span class="shortcut-action" data-i18n="sc_pad_3">Dhak Rim Slap (৩. তা)</span>
                 <kbd class="hud-kbd">3</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Dhak Ghost Mute (৪. কুট)</span>
+                <span class="shortcut-action" data-i18n="sc_pad_4">Dhak Ghost Mute (৪. কুট)</span>
                 <kbd class="hud-kbd">4</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Dhak Micro-Roll (৫. গুড়গুড়)</span>
+                <span class="shortcut-action" data-i18n="sc_pad_5">Dhak Micro-Roll (৫. গুড়গুড়)</span>
                 <kbd class="hud-kbd">5</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Kanshor Bell (৬. কাঁসর)</span>
+                <span class="shortcut-action" data-i18n="sc_pad_6">Kanshor Bell (৬. কাঁসর)</span>
                 <kbd class="hud-kbd">6</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Instagram Story Generator</span>
+                <span class="shortcut-action" data-i18n="sc_story_gen">Instagram Story Generator</span>
                 <kbd class="hud-kbd">I</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Toggle Falling Flowers</span>
+                <span class="shortcut-action" data-i18n="sc_flowers">Toggle Falling Flowers</span>
                 <kbd class="hud-kbd">F</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Mondal Barir Pujo Info</span>
+                <span class="shortcut-action" data-i18n="sc_pujo_info">Mondal Barir Pujo Info</span>
                 <kbd class="hud-kbd">M</kbd>
               </div>
               <div class="shortcut-item">
-                <span class="shortcut-action">Close Active Dialog</span>
+                <span class="shortcut-action" data-i18n="sc_close">Close Active Dialog</span>
                 <kbd class="hud-kbd">Esc</kbd>
               </div>
             </div>
@@ -1426,17 +1426,17 @@
       <!-- ==========================================
            FULLSCREEN PHOTO LIGHTBOX MODAL
            ========================================== -->
-      <div class="modal-backdrop gallery-lightbox-backdrop" id="gallery-lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+      <div class="modal-backdrop gallery-lightbox-backdrop" id="gallery-lightbox-modal" role="dialog" aria-modal="true" data-i18n-aria-label="lightbox_aria" aria-label="Photo Lightbox">
         <div class="lightbox-container">
-          <button class="lightbox-close-btn" id="btn-close-lightbox" aria-label="Close Fullscreen View">✕</button>
+          <button class="lightbox-close-btn" id="btn-close-lightbox" data-i18n-aria-label="lightbox_close" aria-label="Close Fullscreen View">✕</button>
 
           <!-- Navigation Arrows -->
-          <button class="lightbox-nav-btn prev-btn" id="btn-lightbox-prev" aria-label="Previous Photo" title="Previous Photo (Left Arrow)">
+          <button class="lightbox-nav-btn prev-btn" id="btn-lightbox-prev" data-i18n-aria-label="lightbox_prev" data-i18n-title="lightbox_prev" aria-label="Previous Photo" title="Previous Photo (Left Arrow)">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
             </svg>
           </button>
-          <button class="lightbox-nav-btn next-btn" id="btn-lightbox-next" aria-label="Next Photo" title="Next Photo (Right Arrow)">
+          <button class="lightbox-nav-btn next-btn" id="btn-lightbox-next" data-i18n-aria-label="lightbox_next" data-i18n-title="lightbox_next" aria-label="Next Photo" title="Next Photo (Right Arrow)">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
             </svg>
@@ -1462,13 +1462,13 @@
             <div class="lightbox-actions">
               <button class="lightbox-like-btn" id="btn-lightbox-like" aria-label="Give Blessing Pranam">
                 <span id="lightbox-like-count">২৫৪</span>
-                <span>প্রণাম</span>
+                <span data-i18n="lightbox_pranam">প্রণাম</span>
               </button>
-              <button class="lightbox-action-btn" id="btn-lightbox-download" title="Download Photo to Device">
-                <span>ডাউনলোড</span>
+              <button class="lightbox-action-btn" id="btn-lightbox-download" data-i18n-title="lightbox_download_title" title="Download Photo to Device">
+                <span data-i18n="lightbox_download">ডাউনলোড</span>
               </button>
-              <button class="lightbox-action-btn" id="btn-lightbox-share" title="Share Photo on WhatsApp">
-                <span>শেয়ার</span>
+              <button class="lightbox-action-btn" id="btn-lightbox-share" data-i18n-title="lightbox_share_title" title="Share Photo on WhatsApp">
+                <span data-i18n="lightbox_share">শেয়ার</span>
               </button>
             </div>
           </div>
@@ -1526,7 +1526,7 @@
         <div class="wave-ring"></div>
         <div class="wave-ring"></div>
         <div class="wave-ring"></div>
-        <div class="shankha-blessing-text">শুভ শারদীয়া • শঙ্খধ্বনি</div>
+        <div class="shankha-blessing-text" data-i18n="shankha_hud_blessing">শুভ শারদীয়া • শঙ্খধ্বনি</div>
       </div>
 
     </div>

@@ -3,7 +3,6 @@
 
 export const translations = {
   bn: {
-    // Brand & Dynamic Island
     "brand_title": "মণ্ডল বাড়ির পুজো",
     "brand_heritage_badge": "১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য",
     "live_visitors": "লাইভ দর্শনার্থী ও ভক্তবৃন্দ",
@@ -29,8 +28,6 @@ export const translations = {
     "vibe_auto": "অটো",
     "island_heritage_title": "মণ্ডল বাড়ির পুজো ও নির্ঘণ্ট",
     "island_heritage_desc": "১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য, সম্পূর্ণ পূজার সূচি ও সাবেকি ফটো গ্যালারি",
-
-    // Hero Section
     "hero_title_top": "পুজো",
     "hero_title_bottom": "আসছে",
     "hero_subtag": "মণ্ডল বাড়ির পুজো ২০২৬ • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ৩০তম বর্ষ",
@@ -44,8 +41,6 @@ export const translations = {
     "hero_quote": "“আশ্বিনের শারদপ্রাতে বেজে উঠেছে আলোক মঞ্জীর... শারদ আকাশে বাজে আগমনীর সুর।”",
     "hero_scroll_hint": "স্ক্রোল করে সাবেকি উৎসব পরিক্রমা দর্শন করুন",
     "countdown_label_text": "মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • পূজার নির্ঘণ্ট ও সূচি",
-
-    // Formal Invitation Section
     "invitation_badge": "সানন্দ আমন্ত্রণ",
     "invitation_title": "শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণ",
     "invitation_subtitle": "ফুরফুরা মণ্ডল পরিবার • ফুরফুরা, কাজীপাড়া, হুগলী",
@@ -55,15 +50,11 @@ export const translations = {
     "invitation_confirmed": "প্রণাম ও শুভেচ্ছা গৃহীত হয়েছে",
     "invitation_zoom_badge": "পূর্ণাঙ্গ রূপ দর্শন করুন",
     "invitation_next_section": "পরবর্তী অধ্যায়: দৃষ্টিসুখ — উৎসব ও স্মৃতিধারা",
-
-    // Photo River
     "photo_river_badge": "দৃষ্টিসুখ • উৎসব ও স্মৃতিধারা",
     "river_badge": "দৃষ্টিসুখ • উৎসব ও স্মৃতিধারা",
     "river_title": "দৃষ্টিসুখ — উৎসব ও স্মৃতিধারা (Photo River)",
     "river_subtitle": "মণ্ডল বাড়ির নাটমন্দির প্রাঙ্গণ, ধুনুচি নৃত্য, ঢাকের তাল ও শারদ স্মৃতির অবিরাম চলমান আলোকচিত্র ধারা",
     "river_hint": "যেকোনো ছবিতে স্পর্শ করে পূর্ণাঙ্গ রূপ দর্শন করুন • মাউস হোভারে অ্যানিমেশন স্থির হবে",
-
-    // Others by Onnota
     "onnota_badge": "বিশেষ প্রদর্শনী • অন্যতা",
     "onnota_badge_title": "বিশেষ প্রদর্শনী • অন্যতা",
     "onnota_title": "অন্যান্য সৃষ্টি — অন্যতা (Others by Onnota)",
@@ -75,8 +66,6 @@ export const translations = {
     "onnota_filter_literature": "সাহিত্য ও স্মৃতিচারণ",
     "onnota_to_gallery": "ঐতিহ্যের ফটো গ্যালারিতে যান",
     "onnota_footer_tag": "সৃষ্টি ও শিল্পকলা • অন্যতা",
-
-    // Heritage Gallery
     "gallery_badge": "সাবেকি মহাফেজখানা",
     "gallery_badge_title": "১৯৯৭ সাল থেকে সংরক্ষিত ঐতিহ্য ও স্মৃতিমালা",
     "gallery_title": "ঐতিহ্যের ফটো গ্যালারি ও উৎসব স্মৃতি",
@@ -89,8 +78,6 @@ export const translations = {
     "gallery_filter_crafts": "হস্তশিল্প ও আলপনা",
     "gallery_filter_community": "ভক্তবৃন্দের স্মৃতি",
     "gallery_btn_upload": "স্মৃতি ও ছবি জমা দিন",
-
-    // Location & Footers
     "location_badge": "পূজামণ্ডপের অবস্থান ও দিকনির্দেশনা",
     "location_title": "ফুরফুরা মণ্ডল পরিবার নাটমন্দির",
     "location_desc": "ফুরফুরা, কাজীপাড়া, হুগলী, পশ্চিমবঙ্গ (Furfura Mondal Poribar Natmandir)",
@@ -101,21 +88,15 @@ export const translations = {
     "btn_full_schedule": "সম্পূর্ণ পূজার নির্ঘণ্ট ও সূচি",
     "footer_tag_onnota": "সৃষ্টি ও শিল্পকলা • অন্যতা",
     "footer_tag_heritage": "শ্রীশ্রী শারদোৎসব ২০২৬ • ফুরফুরা মণ্ডল পরিবার",
-
-    // Audio Bar & Dynamic Island
     "audio_now_playing": "বর্তমানে বাজছে",
     "audio_volume": "শব্দমাত্রা",
     "audio_ambient_label": "শারদ আবহ সঙ্গীত",
     "audio_dhak_label": "সাবেকি ঢাকের বোল",
-
-    // Welcome Onboarding Modal
     "welcome_lang_label": "ভাষা নির্বাচন / Language Preference",
     "welcome_sound_label": "শারদ আবহ সঙ্গীত ও শব্দ / Sound",
     "welcome_sound_yes": "শব্দসহ প্রবেশ (With Sound)",
     "welcome_sound_no": "শব্দহীন প্রবেশ (Without Sound)",
     "welcome_btn_enter": "উৎসব প্রাঙ্গণে প্রবেশ করুন",
-
-    // Modals Common
     "modal_playlists_title": "শারদ সুর ও আগমনী রেডিও",
     "modal_playlists_sub": "মণ্ডল বাড়ির পুজো",
     "tab_puja_radio": "সেরা আগমনী (PUJA)",
@@ -131,10 +112,236 @@ export const translations = {
     "modal_story_title": "শারদীয় স্টোরি কার্ড জেনারেটর",
     "modal_story_sub": "সোশ্যাল মিডিয়া শেয়ার কার্ড",
     "modal_shortcuts_title": "কীবোর্ড শর্টকাট সহায়িকা",
-    "modal_shortcuts_sub": "কুইক কন্ট্রোল"
-  },
+    "modal_shortcuts_sub": "কুইক কন্ট্রোল",
+    "live_visitors_title": "লাইভ ভক্ত ও দর্শনার্থী",
+    "island_open_player": "প্লেয়ার ও ঢাক স্টুডিও খুলুন",
+    "ctrl_play_aria": "গান চালু বা বন্ধ করুন",
+    "hero_countdown_inspect": "পূজার নির্ঘণ্ট ও সূচি দেখুন",
+    "river_row1_title": "প্রতিমা দর্শন ও নাটমন্দির প্রাঙ্গণ",
+    "river_row2_title": "ধুনুচি নৃত্য ও সাবেকি ঢাকের তাল",
+    "river_row3_title": "পারিবারিক মিলনমেলা ও শারদীয় আনন্দ",
+    "upload_badge": "স্মৃতি সংগ্রহ",
+    "upload_title": "উৎসবের স্মৃতি ও আলোকচিত্র জমা দিন",
+    "upload_desc": "মণ্ডল বাড়ির পূজায় তোলা আপনার প্রিয় মুহূর্ত, ঠাকুর দর্শন ও পারিবারিক স্মৃতি আমাদের মহাফেজখানায় যুক্ত করুন।",
+    "dropzone_text": "এখানে ছবি টেনে এনে ড্রপ করুন অথবা ব্রাউজ করুন",
+    "dropzone_hint": "সমর্থিত ফরম্যাট: JPG, PNG, WebP • সর্বোচ্চ ৫ মেগাবাইট",
+    "btn_browse_files": "ডিভাইস থেকে ফাইল নির্বাচন করুন",
+    "upload_caption_label": "ছবির শিরোনাম বা সংক্ষিপ্ত বিবরণ:",
+    "upload_caption_placeholder": "যেমন: নাটমন্দিরে মহাষ্টমীর সন্ধিপূজার আরতি",
+    "upload_author_label": "আপনার নাম ও পরিচয়:",
+    "upload_author_placeholder": "যেমন: সুব্রত মণ্ডল, হুগলী",
+    "upload_category_label": "ক্যাটাগরি নির্বাচন করুন:",
+    "cat_protima": "প্রতিমা দর্শন (Protima Darshan)",
+    "cat_aarti": "ধুনুচি ও আরতি (Dhunuchi & Aarti)",
+    "cat_heritage": "ঐতিহ্য ও পরিবার (Heritage & Family)",
+    "cat_sharat": "শরতের আগমনী (Autumn & Sharat)",
+    "cat_community": "ভক্তবৃন্দের স্মৃতি (Community Memories)",
+    "btn_submit_upload": "মহাফেজখানায় স্মৃতি যুক্ত করুন",
+    "btn_clear_upload": "ফর্ম সাফ করুন",
+    "nav_hero_title": "শীর্ষ ও ক্ষণগণনা (Hero & Countdown)",
+    "nav_hero_label": "কাউন্টডাউন",
+    "nav_invite_title": "সানন্দ আমন্ত্রণ (Formal Invitation)",
+    "nav_invite_label": "আমন্ত্রণপত্র",
+    "nav_river_title": "দৃষ্টিসুখ — ফটো রিভার (Photo River)",
+    "nav_river_label": "ফটো রিভার",
+    "nav_onnota_title": "অন্যান্য সৃষ্টি — অন্যতা (Others by Onnota)",
+    "nav_onnota_label": "অন্যতা",
+    "nav_gallery_title": "ঐতিহ্যের ফটো গ্যালারি (Heritage Photo Gallery)",
+    "nav_gallery_label": "ফটো গ্যালারি",
+    "launcher_title": "রেডিও প্লেয়ার প্যানেল খুলুন",
+    "launcher_label": "পূজা রেডিও",
+    "player_art_title": "বর্তমানে বাজছে",
+    "scrubber_aria": "গানের অবস্থান পরিবর্তন করুন",
+    "ctrl_prev_title": "পূর্ববর্তী গান (Previous Track)",
+    "ctrl_prev_aria": "পূর্ববর্তী গান",
+    "ctrl_play_title": "প্লে / পজ (Play / Pause)",
+    "ctrl_next_title": "পরবর্তী গান (Next Track)",
+    "ctrl_next_aria": "পরবর্তী গান",
+    "playlists_btn_title": "প্লেলিস্ট ও ঢাকের তালিকা খুলুন",
+    "dock_minimize_title": "প্লেয়ার ডক লুকান",
+    "dock_minimize_aria": "প্লেয়ার ডক লুকান",
+    "nav_radio": "রেডিও",
+    "nav_dhak": "ঢাক",
+    "nav_shankha": "শঙ্খ",
+    "nav_story": "স্টোরি",
+    "nav_mondal_bari": "মণ্ডল বাড়ি",
+    "tab_durga_puja": "সেরা আগমনী (PUJA)",
+    "tab_og_mahalaya": "মহালয়া ও স্তোত্র (MAHALAYA)",
+    "tab_mahalaya_songs": "চণ্ডীপাঠ ও গান (SONGS)",
+    "tab_dhak_vibes": "ঢাকের বোল (DHAK)",
+    "pujo_intro_badge": "ঐতিহ্যের ৩০তম বর্ষ",
+    "pujo_intro_title": "ফুরফুরা মণ্ডল পরিবার সাবেকি শারদোৎসব",
+    "pujo_intro_text": "১৯৯৭ সাল থেকে নিষ্ঠা ও ঐতিহ্যের সাথে অনুষ্ঠিত হয়ে আসছে ফুরফুরা মণ্ডল পরিবারের শ্রীশ্রী দুর্গাপূজা। সাবেকি একচালা ডাকের সাজের প্রতিমা, ১০৮ নীলপদ্ম ও প্রদীপে মহাষ্টমীর সন্ধিপূজা, নাটমন্দিরে ঐতিহ্যবাহী ধুনুচি নৃত্য ও বিজয়ায় সিঁদুর খেলা — এই পুজো এক পরম মিলনোৎসব।",
+    "insta_banner_title": "ইনস্টাগ্রামে আমাদের সাথে যুক্ত থাকুন",
+    "insta_banner_sub": "লাইভ আপডেট, উৎসবের রিলস ও ভক্তবৃন্দের আলোকচিত্র দেখতে ফলো করুন",
+    "pujo_schedule_title": "শ্রীশ্রী দুর্গাপূজা নির্ঘণ্ট ও সূচি ২০২৬",
+    "pujo_highlights_title": "মণ্ডলের সাবেকি ঐতিহ্যের বিশেষ আকর্ষণ",
+    "pujo_gallery_title": "ঐতিহাসিক স্মৃতি ও আলোকচিত্র মহাফেজখানা",
+    "pujo_gallery_hint": "যেকোনো ছবিতে ক্লিক করে সেই সময়ের আবহাওয়া থিমে সাইটটি উপভোগ করুন",
+    "btn_create_story": "শারদীয় স্টোরি কার্ড তৈরি করুন",
+    "btn_share_invite_wa": "হোয়াটসঅ্যাপে নিমন্ত্রণ জানান",
+    "story_modal_title": "শারদীয় স্টোরি কার্ড জেনারেটর",
+    "story_modal_sub": "ইনস্টাগ্রাম ও ফেসবুক স্টোরির জন্য সুন্দর এইচডি কার্ড তৈরি করুন",
+    "story_theme_label": "আবহাওয়া ও রঙের থিম:",
+    "story_theme_dawn": "ভোরের আলো (Dawn)",
+    "story_theme_morning": "সোনালী সকাল (Morning)",
+    "story_theme_evening": "সন্ধ্যা আরতি (Evening)",
+    "story_theme_night": "উৎসবের রাত (Night)",
+    "story_theme_autumn": "শরতের আকাশ (Autumn)",
+    "story_headline_label": "স্টোরির মূল বার্তা:",
+    "story_head_1": "পুজো আসছে (Pujo Asche)",
+    "story_head_2": "শুভ শারদীয়া (Subho Saradiya)",
+    "story_head_3": "মা আসছেন ঘরে (Maa Aschen)",
+    "story_head_4": "১০৮ পদ্মে সন্ধিপূজা (Sandhi Puja)",
+    "story_elements_label": "স্টোরিতে যুক্ত করার উপাদান:",
+    "story_chk_countdown": "লাইভ কাউন্টডাউন বক্স",
+    "story_chk_schedule": "পূজার সংক্ষিপ্ত নির্ঘণ্ট",
+    "story_btn_download": "এইচডি ইমেজ ডাউনলোড (Download HD)",
+    "story_btn_share": "স্টোরি শেয়ার করুন (Share Story)",
+    "story_btn_caption": "ক্যাপশন ও হ্যাশট্যাগ কপি",
+    "dhak_engine_label": "শব্দ ইঞ্জিন (Audio Engine Mode):",
+    "dhak_engine_pure_name": "খাঁটি স্টুডিও লুপার (Pure Studio Looper)",
+    "dhak_engine_pure_sub": "জিরো লেটেন্সি ও নিখুঁত মিউজিক্যাল কোয়ান্টাইজেশন",
+    "dhak_engine_default_badge": "প্রস্তাবিত (Default)",
+    "dhak_engine_yt_name": "ইউটিউব স্ট্রিম (YouTube Stream)",
+    "dhak_engine_yt_sub": "মূল ভিডিও স্ট্রিম থেকে সরাসরি অডিও",
+    "dhak_tab_live_main": "খাঁটি ঢাকের ৬টি পর্ব ও লুপ",
+    "dhak_tab_live_sub": "সাবেকি ঢাকের খাঁটি রেকর্ড",
+    "dhak_tab_synth_main": "ইন্টারেক্টিভ ড্রাম প্যাড ও সিকোয়েন্সার",
+    "dhak_tab_synth_sub": "নিজে বাজান ও তাল শিখুন",
+    "dhak_loop_badge": "অবিরাম লুপ চালু",
+    "dhak_prev_title": "পূর্ববর্তী পর্ব (Previous Part)",
+    "dhak_prev_aria": "পূর্ববর্তী পর্ব",
+    "dhak_play_loop_title": "লুপ চালু বা বন্ধ করুন (Play / Pause Loop)",
+    "dhak_next_title": "পরবর্তী পর্ব (Next Part)",
+    "dhak_next_aria": "পরবর্তী পর্ব",
+    "dhak_sound_booster_title": "স্টুডিও সাউন্ড বুস্টার ও অ্যাকোস্টিক এনহ্যান্সার",
+    "dhak_boost_bass": "গম্ভীর খাদ (Deep Bass Boost)",
+    "dhak_boost_snap": "তীব্র কাঠি চড় (Crisp Snare Snap)",
+    "dhak_boost_stage": "নাটমন্দির রিভার্ব (Stage Reverb)",
+    "dhak_boost_pure": "স্বাভাবিক শব্দ (Pure Flat)",
+    "dhak_playing_style_label": "বাদনশৈলী নির্বাচন করুন:",
+    "dhak_style_traditional": "সাবেকি বনেদি বাদন (Traditional)",
+    "dhak_style_sandhya": "সন্ধ্যা আরতি স্পেশাল (Sandhya Aarti)",
+    "dhak_style_dhunuchi": "ধুনুচি নাচ দ্রুতলয় (Dhunuchi Fast)",
+    "dhak_style_visarjan": "বিসর্জন ও শান্তিজল (Visarjan Beat)",
+    "dhak_bol_pattern_label": "ঢাকের বোল প্যাটার্ন নির্বাচন করুন:",
+    "dhak_opt_bol1": "বোল ১: সাবেকি বোধন ও আগমনী তাল",
+    "dhak_opt_bol2": "বোল ২: মহাষষ্ঠী আমন্ত্রণ ও অধিবাস",
+    "dhak_opt_bol3": "বোল ৩: সপ্তমী নবপত্রিকা ও অঞ্জলি",
+    "dhak_opt_bol4": "বোল ৪: মহাষ্টমী ১০৮ পদ্মে সন্ধিপূজা",
+    "dhak_opt_bol5": "বোল ৫: নবমী ধুনুচি নাচ ও ঢাকের লড়াই",
+    "dhak_opt_bol6": "বোল ৬: দশমী বিজয়া, সিঁদুর খেলা ও বিসর্জন",
+    "dhak_physical_pads_title": "শারীরিক ড্রাম প্যাড (Physical Drum Pads — Click or Tap)",
+    "dhak_pad_dha_sub": "গম্ভীর প্রধান ঘাত (Deep Base)",
+    "dhak_pad_dyang_sub": "খোলা গমকে টান (Open Rim)",
+    "dhak_pad_ta_sub": "তীক্ষ্ণ কাঠি চড় (Sharp Rimshot)",
+    "dhak_pad_kut_sub": "বন্ধ কাঠি ঘাত (Muted Click)",
+    "dhak_pad_gurgur_sub": "ঝটিতি দ্রুত রোল (Fast Roll)",
+    "dhak_pad_kansor_sub": "পিতলের কাঁসর ঘণ্টা (Brass Gong)",
+    "dhak_tempo_label": "লয়ের গতি (Tempo BPM):",
+    "dhak_volume_label": "স্টুডিও ভলিউম (Master Volume):",
+    "dhak_btn_start_seq": "সিকোয়েন্সার শুরু করুন",
+    "dhak_btn_stop_seq": "থামান",
+    "shortcuts_modal_title": "কীবোর্ড শর্টকাট সহায়িকা",
+    "shortcuts_modal_sub": "সহজ ও দ্রুত নিয়ন্ত্রণের জন্য কি ব্যবহার করুন",
+    "sc_play_pause": "রেডিও গান প্লে / পজ (Play / Pause)",
+    "sc_next_track": "পরবর্তী গান (Next Track)",
+    "sc_prev_track": "পূর্ববর্তী গান (Previous Track)",
+    "sc_shankha": "মঙ্গল শঙ্খ বাজান (Sacred Shankha)",
+    "sc_dhak_studio": "ঢাক স্টুডিও মডাল খুলুন (Dhak Studio)",
+    "sc_playlists": "প্লেলিস্ট ও রেডিও মডাল খুলুন",
+    "sc_pujo_info": "পূজার ইতিহাস ও নির্ঘণ্ট মডাল খুলুন",
+    "sc_story_gen": "শারদীয় স্টোরি কার্ড জেনারেটর খুলুন",
+    "sc_toggle_lang": "ভাষা পরিবর্তন (বাংলা / English)",
+    "sc_toggle_vibe": "আবহাওয়া ও আলোকসজ্জা পরিবর্তন",
+    "sc_toggle_particles": "শিউলি ফুল ও কণা অ্যানিমেশন চালু/বন্ধ",
+    "sc_close_modal": "যেকোনো খোলা মডাল বা লাইটবক্স বন্ধ করুন",
+    "sc_page_nav": "পরবর্তী / পূর্ববর্তী সেকশনে স্ক্রোল",
+    "sc_pad_dha": "ঢাক প্যাড: ধা (DHA Base Stroke)",
+    "sc_pad_ta": "ঢাক প্যাড: তা (TA Rimshot)",
+    "sc_pad_kansor": "পিতলের কাঁসর বাজান (Kanshor Bell)",
+    "lightbox_close_title": "মডাল বন্ধ করুন (Close Esc)",
+    "lightbox_close_aria": "মডাল বন্ধ করুন",
+    "lightbox_prev_title": "পূর্ববর্তী ছবি (Previous Image ←)",
+    "lightbox_prev_aria": "পূর্ববর্তী ছবি",
+    "lightbox_next_title": "পরবর্তী ছবি (Next Image →)",
+    "lightbox_next_aria": "পরবর্তী ছবি",
+    "lightbox_like_aria": "প্রণাম ও আশীর্বাদ নিবেদন করুন",
+    "lightbox_download_title": "এইচডি ছবি ডাউনলোড করুন",
+    "lightbox_download_aria": "ছবি ডাউনলোড করুন",
+    "lightbox_share_title": "হোয়াটসঅ্যাপে ছবি শেয়ার করুন",
+    "lightbox_share_aria": "ছবি শেয়ার করুন",
+    "shankha_hud_blessing": "মা দুর্গার পুণ্য আশীর্বাদ সবার উপর বর্ষিত হোক",
+    "dhak_trig_shankha_title": "শাঁখ",
+    "dhak_trig_kashor_title": "কাঁসর",
+    "dhak_chk_loop_title": "অবিরাম লুপ (Seamless Loop)",
+    "booster_title": "স্টুডিও সাউন্ড বুস্টার ও ইকুয়ালাইজার (STUDIO EQ & BOOSTER)",
+    "booster_sub": "Enhanced low-frequency punch, crisp stick snap & master volume gain",
+    "booster_status_active": "BOOST ACTIVE",
+    "booster_preset_flat": "স্ট্যান্ডার্ড (Flat)",
+    "booster_preset_bass": "বেস বুস্ট (+6dB)",
+    "booster_preset_snap": "কঞ্চি স্ন্যাপ (+4dB)",
+    "booster_preset_loud": "মহোৎসব লাউডনেস (150%)",
+    "booster_bass_name": "গভীর বেস বুস্ট (Barrel Bass 80Hz):",
+    "booster_snap_name": "কঞ্চি কাঠি স্ন্যাপ (Stick Snap 2.4kHz):",
+    "booster_master_name": "মাস্টার গেইন ভলিউম (Master Loudness):",
+    "dhak_parts_header": "খাঁটি ঢাকের ৬টি সাবেকি পর্ব (6 AUTHENTIC MASTER PARTS):",
+    "dhak_parts_hint": "১-ট্যাপে সরাসরি সুইচ ও নিরবচ্ছিন্ন লুপ করুন (Zero Latency)",
+    "dhak_style_label": "বোল বাজনার শৈলী (Playing Style):",
+    "dhak_style_ak": "এক কাঠি",
+    "dhak_style_duk": "দুক কাঠি",
+    "dhak_style_dankuni": "ডানকুনী ঘরানা",
+    "dhak_bol_label": "ঐতিহ্যবাহী পূজার বোল (Traditional Puja Bol):",
+    "dhak_bol_count": "৬টি সাবেকি বোল",
+    "bol_opt_1": "১. রথের বাজনা (\"ড্যাং তাং ড্যাং তাং | ধা ধা গুড়গুড় ধা\")",
+    "bol_opt_2": "২. আগমনী ও বরণ বাজনা (\"ড্যাং ড্যাং ড্যাংকা ড্যাং, মা আসছেন ঘরে\")",
+    "bol_opt_3": "৩. সন্ধ্যা আরতি ও ধুনুচি নৃত্য (\"তাক দুমা দুম তাক দুমা দুম, ঝম ঝমাকা ঝম\")",
+    "bol_opt_4": "৪. সন্ধিপূজা ও ১০৮ প্রদীপ মহোৎসব (\"কড়াতাং কড়াতাং গুড় গুড় ধা\")",
+    "bol_opt_5": "৫. বিসর্জন ও বিজয়া শোভাযাত্রা (\"বলো দুর্গা মাইকি জয়! আসছে বছর আবার হবে\")",
+    "bol_opt_6": "৬. এক কাঠি ও দুক কাঠি যুগলবন্দী (\"ধাগে তেটে তাক তাং, কড়াতাং কড়াতাং ধা\")",
+    "dhak_vis_label": "লাইভ ১৬-মাত্রা ট্র্যাকার (Live 16-Step Visualizer Grid):",
+    "dhak_pads_label": "ঢাকের খাঁটি ধ্বনি প্যাড (6 Physical Drum & Bell Pads):",
+    "dhak_pads_kbd_hint": "কীবোর্ড [1 to 6] প্রেস করুন",
+    "pad_dha_label": "ধা (Dha)",
+    "pad_dha_sub": "খোলা বেস (Bass)",
+    "pad_dyang_label": "ড্যাং (Dyang)",
+    "pad_dyang_sub": "কঞ্চি কাঠি (Snap)",
+    "pad_ta_label": "তা (Ta)",
+    "pad_ta_sub": "খোলা চাট্টি (Rim)",
+    "pad_kut_label": "কুট (Kut)",
+    "pad_kut_sub": "মিউটেড খটকা (Mute)",
+    "pad_gurgur_label": "গুড়গুড় (Roll)",
+    "pad_gurgur_sub": "দুই কাঠির রুল",
+    "pad_kashor_label": "কাঁসর (Kanshor)",
+    "pad_kashor_sub": "কাঁসার ঘণ্টা (Gong)",
+    "btn_tap_tempo": "ট্যাপ টেম্পো",
+    "dhak_vol_label": "সাউন্ড ভলিউম (Volume):",
+    "dhak_accelerando": "দ্রুতলয় বৃদ্ধি (Accelerando)",
+    "dhak_btn_play_bol": "বোল বাজানো শুরু করুন (Play Bol)",
+    "shortcuts_sub": "POWER USER CONTROLS",
+    "shortcuts_title": "KEYBOARD SHORTCUTS HUD",
+    "sc_pad_1": "Dhak Bass (১. ধা)",
+    "sc_pad_2": "Dhak Bamboo Snap (২. ড্যাং)",
+    "sc_pad_3": "Dhak Rim Slap (৩. তা)",
+    "sc_pad_4": "Dhak Ghost Mute (৪. কুট)",
+    "sc_pad_5": "Dhak Micro-Roll (৫. গুড়গুড়)",
+    "sc_pad_6": "Kanshor Bell (৬. কাঁসর)",
+    "sc_flowers": "Toggle Falling Flowers",
+    "sc_close": "Close Active Dialog",
+    "lightbox_aria": "✕",
+    "lightbox_pranam": "প্রণাম",
+    "dhak_play_loop": "dhak_play_loop",
+    "dhak_trig_shankha": "dhak_trig_shankha",
+    "dhak_trig_kashor": "dhak_trig_kashor",
+    "dhak_chk_loop": "dhak_chk_loop",
+    "lightbox_close": "lightbox_close",
+    "lightbox_prev": "lightbox_prev",
+    "lightbox_next": "lightbox_next",
+    "lightbox_download": "lightbox_download",
+    "lightbox_share": "lightbox_share"
+},
   en: {
-    // Brand & Dynamic Island
     "brand_title": "Mondal Barir Pujo",
     "brand_heritage_badge": "Heritage Est. 1997",
     "live_visitors": "Live Devotees & Visitors",
@@ -160,8 +367,6 @@ export const translations = {
     "vibe_auto": "Auto",
     "island_heritage_title": "Mondal Barir Pujo & Schedule",
     "island_heritage_desc": "Heritage established since 1997, complete puja schedule, and photo archive",
-
-    // Hero Section
     "hero_title_top": "Pujo",
     "hero_title_bottom": "Asche",
     "hero_subtag": "Mondal Barir Pujo 2026 • 30th Year of Heritage Est. 1997",
@@ -175,8 +380,6 @@ export const translations = {
     "hero_quote": "\"The divine resonance of conch shells and sacred chants heralds the homecoming of Maa Durga.\"",
     "hero_scroll_hint": "Scroll down to experience the festive celebrations",
     "countdown_label_text": "Maha Shasthi: 16 October 2026 • Full Schedule & Rituals",
-
-    // Formal Invitation Section
     "invitation_badge": "Auspicious Invitation",
     "invitation_title": "Sri Sri Durga Puja Cordial Invitation",
     "invitation_subtitle": "Furfura Mondal Poribar • Furfura, Kazipada, Hooghly",
@@ -186,15 +389,11 @@ export const translations = {
     "invitation_confirmed": "Pronam & Wishes Received",
     "invitation_zoom_badge": "View Fullscreen Invitation",
     "invitation_next_section": "Next Chapter: River of Festive Memories",
-
-    // Photo River
     "photo_river_badge": "Visual River • Festive Memories",
     "river_badge": "Visual River • Festive Memories",
     "river_title": "River of Memories — Living Moments of Durga Puja",
     "river_subtitle": "A seamless visual journey capturing Mondal Bari courtyard festivities, Dhunuchi dance, and festive memories",
     "river_hint": "Click any photo to view in full splendour • Hover to pause animation",
-
-    // Others by Onnota
     "onnota_badge": "Special Showcase • Onnota",
     "onnota_badge_title": "Special Showcase • Onnota",
     "onnota_title": "Creative Showcase — Others by Onnota (অন্যতা)",
@@ -206,8 +405,6 @@ export const translations = {
     "onnota_filter_literature": "Literature & Festive Memoirs",
     "onnota_to_gallery": "Explore Heritage Photo Gallery",
     "onnota_footer_tag": "Art & Creativity • Onnota",
-
-    // Heritage Gallery
     "gallery_badge": "Ancestral Archives (Est. 1997)",
     "gallery_badge_title": "Preserved Heritage & Memories Since 1997",
     "gallery_title": "Heritage Photo Gallery & Festive Memories",
@@ -220,8 +417,6 @@ export const translations = {
     "gallery_filter_crafts": "Crafts & Alpana",
     "gallery_filter_community": "Devotee Memories",
     "gallery_btn_upload": "Share Your Photos & Memories",
-
-    // Location & Footers
     "location_badge": "Puja Pandal Location & Directions",
     "location_title": "Furfura Mondal Poribar Natmandir",
     "location_desc": "Furfura, Kazipada, Hooghly, West Bengal (Furfura Mondal Poribar Natmandir)",
@@ -232,21 +427,15 @@ export const translations = {
     "btn_full_schedule": "Full Puja Schedule & Rituals",
     "footer_tag_onnota": "Art & Creativity • Onnota",
     "footer_tag_heritage": "Sri Sri Durga Puja 2026 • Furfura Mondal Poribar",
-
-    // Audio Bar & Dynamic Island
     "audio_now_playing": "Now Playing",
     "audio_volume": "Volume",
     "audio_ambient_label": "Festive Ambience",
     "audio_dhak_label": "Traditional Dhak Bols",
-
-    // Welcome Onboarding Modal
     "welcome_lang_label": "Language Preference / ভাষা নির্বাচন",
     "welcome_sound_label": "Festive Audio & Ambience / শব্দ ও আবহ সঙ্গীত",
     "welcome_sound_yes": "With Sound",
     "welcome_sound_no": "Without Sound",
     "welcome_btn_enter": "Enter Festive Courtyard",
-
-    // Modals Common
     "modal_playlists_title": "Festive Audio Playlists & Agomoni Radio",
     "modal_playlists_sub": "Mondal Bari Pujo",
     "tab_puja_radio": "Puja Classics (PUJA)",
@@ -262,21 +451,248 @@ export const translations = {
     "modal_story_title": "Instagram & WhatsApp Story Generator",
     "modal_story_sub": "Social Media Share Card",
     "modal_shortcuts_title": "Keyboard Shortcuts Guide",
-    "modal_shortcuts_sub": "Quick Controls"
-  }
+    "modal_shortcuts_sub": "Quick Controls",
+    "live_visitors_title": "Live Devotees & Visitors",
+    "island_open_player": "Open Player & Dhak Studio",
+    "ctrl_play_aria": "Play or Pause Audio",
+    "hero_countdown_inspect": "View Puja Schedule & Rituals",
+    "river_row1_title": "Protima Darshan & Natmandir Courtyard",
+    "river_row2_title": "Dhunuchi Dance & Heritage Dhak Beats",
+    "river_row3_title": "Family Reunion & Festive Celebrations",
+    "upload_badge": "Memory Collection",
+    "upload_title": "Submit Festive Photos & Memories",
+    "upload_desc": "Add your cherished moments, deity darshan, and family memories from Mondal Barir Pujo to our heritage archive.",
+    "dropzone_text": "Drag & drop photos here or browse files",
+    "dropzone_hint": "Supported formats: JPG, PNG, WebP • Max 5MB",
+    "btn_browse_files": "Select Files from Device",
+    "upload_caption_label": "Photo Title or Short Caption:",
+    "upload_caption_placeholder": "e.g. Maha Ashtami Sandhi Puja Aarti at Natmandir",
+    "upload_author_label": "Your Name & Contact:",
+    "upload_author_placeholder": "e.g. Subrata Mondal, Hooghly",
+    "upload_category_label": "Select Category:",
+    "cat_protima": "Protima Darshan",
+    "cat_aarti": "Dhunuchi & Aarti",
+    "cat_heritage": "Heritage & Family",
+    "cat_sharat": "Autumn & Sharat",
+    "cat_community": "Community Memories",
+    "btn_submit_upload": "Submit Memory to Archive",
+    "btn_clear_upload": "Clear Form",
+    "nav_hero_title": "Hero & Countdown",
+    "nav_hero_label": "Countdown",
+    "nav_invite_title": "Formal Invitation",
+    "nav_invite_label": "Invitation",
+    "nav_river_title": "Photo River",
+    "nav_river_label": "Photo River",
+    "nav_onnota_title": "Others by Onnota",
+    "nav_onnota_label": "Onnota",
+    "nav_gallery_title": "Heritage Gallery",
+    "nav_gallery_label": "Gallery",
+    "launcher_title": "Open Radio Player Panel",
+    "launcher_label": "Puja Radio",
+    "player_art_title": "Now Playing",
+    "scrubber_aria": "Seek Track Progress",
+    "ctrl_prev_title": "Previous Track",
+    "ctrl_prev_aria": "Previous Track",
+    "ctrl_play_title": "Play / Pause",
+    "ctrl_next_title": "Next Track",
+    "ctrl_next_aria": "Next Track",
+    "playlists_btn_title": "Open Playlists & Dhak Library",
+    "dock_minimize_title": "Minimize Player Dock",
+    "dock_minimize_aria": "Minimize Player Dock",
+    "nav_radio": "Radio",
+    "nav_dhak": "Dhak",
+    "nav_shankha": "Shankha",
+    "nav_story": "Story",
+    "nav_mondal_bari": "Mondal Bari",
+    "tab_durga_puja": "Agomoni Hits (PUJA)",
+    "tab_og_mahalaya": "Original Mahalaya (MAHALAYA)",
+    "tab_mahalaya_songs": "Chandi Path & Songs (SONGS)",
+    "tab_dhak_vibes": "Dhak Beats (DHAK)",
+    "pujo_intro_badge": "30th Year of Heritage",
+    "pujo_intro_title": "Furfura Mondal Poribar Ancestral Durga Puja",
+    "pujo_intro_text": "Since 1997, Sri Sri Durga Puja of Furfura Mondal Poribar has been celebrated with devotion and ancestral heritage. Featuring traditional Ekchala Daker Saaj, Maha Ashtami Sandhi Puja with 108 lotuses and lamps, soulful Dhunuchi dance in the Natmandir courtyard, and Bijoya Sindoor Khela — this celebration is a sacred union of devotion and togetherness.",
+    "insta_banner_title": "Connect with Us on Instagram",
+    "insta_banner_sub": "Follow for live festive updates, reels, and community photographs",
+    "pujo_schedule_title": "Sri Sri Durga Puja 2026 Schedule & Rituals",
+    "pujo_highlights_title": "Heritage Highlights of Mondal Barir Pujo",
+    "pujo_gallery_title": "Heritage Photographs & Archival Gallery",
+    "pujo_gallery_hint": "Click any photograph to immerse the portal in that time-of-day atmosphere",
+    "btn_create_story": "Create Festive Story Card",
+    "btn_share_invite_wa": "Share Invitation on WhatsApp",
+    "story_modal_title": "Festive Story Card Generator",
+    "story_modal_sub": "Create stunning HD story cards for Instagram & Facebook",
+    "story_theme_label": "Atmosphere & Color Theme:",
+    "story_theme_dawn": "Bhor (Dawn)",
+    "story_theme_morning": "Sokal (Morning)",
+    "story_theme_evening": "Sandhya (Evening)",
+    "story_theme_night": "Raat (Night)",
+    "story_theme_autumn": "Sharat (Autumn)",
+    "story_headline_label": "Story Headline Message:",
+    "story_head_1": "Pujo Asche",
+    "story_head_2": "Subho Saradiya",
+    "story_head_3": "Maa Aschen",
+    "story_head_4": "Sandhi Puja",
+    "story_elements_label": "Story Elements to Include:",
+    "story_chk_countdown": "Live Countdown Box",
+    "story_chk_schedule": "Puja Schedule Summary",
+    "story_btn_download": "Download HD Image",
+    "story_btn_share": "Share Story",
+    "story_btn_caption": "Copy Caption & Hashtags",
+    "dhak_engine_label": "Audio Engine Mode:",
+    "dhak_engine_pure_name": "Pure Studio Looper",
+    "dhak_engine_pure_sub": "Zero latency & quantized seamless loop",
+    "dhak_engine_default_badge": "Recommended",
+    "dhak_engine_yt_name": "YouTube Stream",
+    "dhak_engine_yt_sub": "Direct audio stream from video",
+    "dhak_tab_live_main": "6 Authentic Dhak Parts & Loops",
+    "dhak_tab_live_sub": "Pure heritage acoustic recording",
+    "dhak_tab_synth_main": "Interactive Drum Pads & Sequencer",
+    "dhak_tab_synth_sub": "Play and learn traditional Bols",
+    "dhak_loop_badge": "Continuous Loop Active",
+    "dhak_prev_title": "Previous Part",
+    "dhak_prev_aria": "Previous Part",
+    "dhak_play_loop_title": "Play / Pause Loop",
+    "dhak_next_title": "Next Part",
+    "dhak_next_aria": "Next Part",
+    "dhak_sound_booster_title": "Studio Sound Booster & Acoustic Enhancer",
+    "dhak_boost_bass": "Deep Bass Boost",
+    "dhak_boost_snap": "Crisp Snare Snap",
+    "dhak_boost_stage": "Natmandir Reverb",
+    "dhak_boost_pure": "Pure Flat",
+    "dhak_playing_style_label": "Select Playing Style:",
+    "dhak_style_traditional": "Traditional Heritage",
+    "dhak_style_sandhya": "Sandhya Aarti Special",
+    "dhak_style_dhunuchi": "Dhunuchi Fast Rhythm",
+    "dhak_style_visarjan": "Visarjan Beat",
+    "dhak_bol_pattern_label": "Select Dhak Bol Pattern:",
+    "dhak_opt_bol1": "Bol 1: Heritage Bodhon & Agomoni",
+    "dhak_opt_bol2": "Bol 2: Maha Sasthi Welcome",
+    "dhak_opt_bol3": "Bol 3: Saptami Anjali",
+    "dhak_opt_bol4": "Bol 4: Maha Ashtami Sandhi Puja",
+    "dhak_opt_bol5": "Bol 5: Navami Dhunuchi & Dhak Clash",
+    "dhak_opt_bol6": "Bol 6: Dashami Sindoor Khela & Visarjan",
+    "dhak_physical_pads_title": "Physical Drum Pads (Click or Tap)",
+    "dhak_pad_dha_sub": "Deep Base Stroke",
+    "dhak_pad_dyang_sub": "Open Rim Stroke",
+    "dhak_pad_ta_sub": "Sharp Rimshot",
+    "dhak_pad_kut_sub": "Muted Click Stroke",
+    "dhak_pad_gurgur_sub": "Rapid Dhak Roll",
+    "dhak_pad_kansor_sub": "Brass Gong Rhythm",
+    "dhak_tempo_label": "Tempo Speed (BPM):",
+    "dhak_volume_label": "Master Volume:",
+    "dhak_btn_start_seq": "Start Sequencer",
+    "dhak_btn_stop_seq": "Stop Sequencer",
+    "shortcuts_modal_title": "Keyboard Shortcuts Guide",
+    "shortcuts_modal_sub": "Use keyboard keys for fast and intuitive navigation",
+    "sc_play_pause": "Play / Pause Radio Audio",
+    "sc_next_track": "Next Track in Playlist",
+    "sc_prev_track": "Previous Track in Playlist",
+    "sc_shankha": "Play Sacred Shankhadhwani",
+    "sc_dhak_studio": "Open Dhak Drum Studio",
+    "sc_playlists": "Open Playlists & Radio Modal",
+    "sc_pujo_info": "Open Pujo Info & Schedule Modal",
+    "sc_story_gen": "Open Story Card Generator",
+    "sc_toggle_lang": "Toggle Language (Bengali / English)",
+    "sc_toggle_vibe": "Cycle Atmosphere Vibe",
+    "sc_toggle_particles": "Toggle Shiuli Particles",
+    "sc_close_modal": "Close Active Modal or Lightbox",
+    "sc_page_nav": "Navigate to Next / Prev Section",
+    "sc_pad_dha": "Dhak Pad: DHA (Base Stroke)",
+    "sc_pad_ta": "Dhak Pad: TA (Rimshot)",
+    "sc_pad_kansor": "Play Brass Kanshor Gong",
+    "lightbox_close_title": "Close Lightbox (Esc)",
+    "lightbox_close_aria": "Close Lightbox",
+    "lightbox_prev_title": "Previous Image (←)",
+    "lightbox_prev_aria": "Previous Image",
+    "lightbox_next_title": "Next Image (→)",
+    "lightbox_next_aria": "Next Image",
+    "lightbox_like_aria": "Offer Pronam Blessing",
+    "lightbox_download_title": "Download HD Photograph",
+    "lightbox_download_aria": "Download Photograph",
+    "lightbox_share_title": "Share Photograph on WhatsApp",
+    "lightbox_share_aria": "Share Photograph",
+    "shankha_hud_blessing": "May the divine blessings of Maa Durga fill your life with peace and joy",
+    "dhak_trig_shankha_title": "শাঁখ",
+    "dhak_trig_kashor_title": "কাঁসর",
+    "dhak_chk_loop_title": "অবিরাম লুপ (Seamless Loop)",
+    "booster_title": "স্টুডিও সাউন্ড বুস্টার ও ইকুয়ালাইজার (STUDIO EQ & BOOSTER)",
+    "booster_sub": "Enhanced low-frequency punch, crisp stick snap & master volume gain",
+    "booster_status_active": "BOOST ACTIVE",
+    "booster_preset_flat": "স্ট্যান্ডার্ড (Flat)",
+    "booster_preset_bass": "বেস বুস্ট (+6dB)",
+    "booster_preset_snap": "কঞ্চি স্ন্যাপ (+4dB)",
+    "booster_preset_loud": "মহোৎসব লাউডনেস (150%)",
+    "booster_bass_name": "গভীর বেস বুস্ট (Barrel Bass 80Hz):",
+    "booster_snap_name": "কঞ্চি কাঠি স্ন্যাপ (Stick Snap 2.4kHz):",
+    "booster_master_name": "মাস্টার গেইন ভলিউম (Master Loudness):",
+    "dhak_parts_header": "খাঁটি ঢাকের ৬টি সাবেকি পর্ব (6 AUTHENTIC MASTER PARTS):",
+    "dhak_parts_hint": "১-ট্যাপে সরাসরি সুইচ ও নিরবচ্ছিন্ন লুপ করুন (Zero Latency)",
+    "dhak_style_label": "বোল বাজনার শৈলী (Playing Style):",
+    "dhak_style_ak": "এক কাঠি",
+    "dhak_style_duk": "দুক কাঠি",
+    "dhak_style_dankuni": "ডানকুনী ঘরানা",
+    "dhak_bol_label": "ঐতিহ্যবাহী পূজার বোল (Traditional Puja Bol):",
+    "dhak_bol_count": "৬টি সাবেকি বোল",
+    "bol_opt_1": "১. রথের বাজনা (\"ড্যাং তাং ড্যাং তাং | ধা ধা গুড়গুড় ধা\")",
+    "bol_opt_2": "২. আগমনী ও বরণ বাজনা (\"ড্যাং ড্যাং ড্যাংকা ড্যাং, মা আসছেন ঘরে\")",
+    "bol_opt_3": "৩. সন্ধ্যা আরতি ও ধুনুচি নৃত্য (\"তাক দুমা দুম তাক দুমা দুম, ঝম ঝমাকা ঝম\")",
+    "bol_opt_4": "৪. সন্ধিপূজা ও ১০৮ প্রদীপ মহোৎসব (\"কড়াতাং কড়াতাং গুড় গুড় ধা\")",
+    "bol_opt_5": "৫. বিসর্জন ও বিজয়া শোভাযাত্রা (\"বলো দুর্গা মাইকি জয়! আসছে বছর আবার হবে\")",
+    "bol_opt_6": "৬. এক কাঠি ও দুক কাঠি যুগলবন্দী (\"ধাগে তেটে তাক তাং, কড়াতাং কড়াতাং ধা\")",
+    "dhak_vis_label": "লাইভ ১৬-মাত্রা ট্র্যাকার (Live 16-Step Visualizer Grid):",
+    "dhak_pads_label": "ঢাকের খাঁটি ধ্বনি প্যাড (6 Physical Drum & Bell Pads):",
+    "dhak_pads_kbd_hint": "কীবোর্ড [1 to 6] প্রেস করুন",
+    "pad_dha_label": "ধা (Dha)",
+    "pad_dha_sub": "খোলা বেস (Bass)",
+    "pad_dyang_label": "ড্যাং (Dyang)",
+    "pad_dyang_sub": "কঞ্চি কাঠি (Snap)",
+    "pad_ta_label": "তা (Ta)",
+    "pad_ta_sub": "খোলা চাট্টি (Rim)",
+    "pad_kut_label": "কুট (Kut)",
+    "pad_kut_sub": "মিউটেড খটকা (Mute)",
+    "pad_gurgur_label": "গুড়গুড় (Roll)",
+    "pad_gurgur_sub": "দুই কাঠির রুল",
+    "pad_kashor_label": "কাঁসর (Kanshor)",
+    "pad_kashor_sub": "কাঁসার ঘণ্টা (Gong)",
+    "btn_tap_tempo": "ট্যাপ টেম্পো",
+    "dhak_vol_label": "সাউন্ড ভলিউম (Volume):",
+    "dhak_accelerando": "দ্রুতলয় বৃদ্ধি (Accelerando)",
+    "dhak_btn_play_bol": "বোল বাজানো শুরু করুন (Play Bol)",
+    "shortcuts_sub": "POWER USER CONTROLS",
+    "shortcuts_title": "KEYBOARD SHORTCUTS HUD",
+    "sc_pad_1": "Dhak Bass (১. ধা)",
+    "sc_pad_2": "Dhak Bamboo Snap (২. ড্যাং)",
+    "sc_pad_3": "Dhak Rim Slap (৩. তা)",
+    "sc_pad_4": "Dhak Ghost Mute (৪. কুট)",
+    "sc_pad_5": "Dhak Micro-Roll (৫. গুড়গুড়)",
+    "sc_pad_6": "Kanshor Bell (৬. কাঁসর)",
+    "sc_flowers": "Toggle Falling Flowers",
+    "sc_close": "Close Active Dialog",
+    "lightbox_aria": "✕",
+    "lightbox_pranam": "প্রণাম",
+    "dhak_play_loop": "dhak_play_loop",
+    "dhak_trig_shankha": "dhak_trig_shankha",
+    "dhak_trig_kashor": "dhak_trig_kashor",
+    "dhak_chk_loop": "dhak_chk_loop",
+    "lightbox_close": "lightbox_close",
+    "lightbox_prev": "lightbox_prev",
+    "lightbox_next": "lightbox_next",
+    "lightbox_download": "lightbox_download",
+    "lightbox_share": "lightbox_share"
+}
 };
 
 let currentLanguage = 'bn';
 
 /**
- * Retrieve current active language code ('bn' or 'en')
+ * Get the current active language ('bn' or 'en')
  */
 export function getLanguage() {
   return currentLanguage;
 }
 
 /**
- * Retrieve saved language preference from localStorage
+ * Retrieve saved language preference from localStorage with graceful fallback
  */
 export function getSavedLanguage() {
   try {
@@ -315,6 +731,22 @@ export function updateAppLanguage(lang) {
 }
 
 /**
+ * Format numerals according to active language (Bengali digits for 'bn', standard for 'en')
+ * @param {number | string} num 
+ * @param {'bn' | 'en'} lang 
+ * @returns {string}
+ */
+export function formatNumber(num, lang = currentLanguage) {
+  if (num === null || num === undefined) return '';
+  const numStr = String(num);
+  if (lang === 'bn') {
+    const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return numStr.replace(/[0-9]/g, (d) => bengaliDigits[parseInt(d, 10)]);
+  }
+  return numStr;
+}
+
+/**
  * Translate a key according to the active language
  */
 export function t(key) {
@@ -323,9 +755,10 @@ export function t(key) {
 }
 
 /**
- * Update all DOM elements containing [data-i18n] with real-time text transitions
+ * Update all DOM elements containing [data-i18n], [data-i18n-placeholder], [data-i18n-title], [data-i18n-aria-label]
  */
 export function applyTranslations() {
+  // 1. Text contents & basic inputs
   const elements = document.querySelectorAll('[data-i18n]');
   elements.forEach((el) => {
     const key = el.getAttribute('data-i18n');
@@ -337,6 +770,24 @@ export function applyTranslations() {
         el.innerHTML = translated;
       }
     }
+  });
+
+  // 2. Explicit placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (key) el.setAttribute('placeholder', t(key));
+  });
+
+  // 3. Titles / tooltips
+  document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-title');
+    if (key) el.setAttribute('title', t(key));
+  });
+
+  // 4. Accessibility ARIA labels
+  document.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-aria-label');
+    if (key) el.setAttribute('aria-label', t(key));
   });
 
   // Update HTML lang attribute
@@ -351,4 +802,6 @@ if (typeof window !== 'undefined') {
   window.setLanguage = setLanguage;
   window.updateAppLanguage = updateAppLanguage;
   window.getLanguage = getLanguage;
+  window.formatNumber = formatNumber;
+  window.t = t;
 }
