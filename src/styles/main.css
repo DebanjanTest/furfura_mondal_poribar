@@ -7120,7 +7120,7 @@ button {
 }
 
 /* ==========================================================================
-   FORMAL INVITATION LETTERHEAD SECTION (শ্রীশ্রী দুর্গাপূজার সানন্দ আমন্ত্রণলিপি)
+   FORMAL INVITATION LETTERHEAD SECTION (FOCUSED PICTURE SHOWCASE)
    ========================================================================== */
 
 .invitation-section {
@@ -7131,18 +7131,18 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(2.5rem, 5vh, 4.25rem) 1.25rem clamp(2rem, 4vh, 3.5rem);
+  padding: clamp(2rem, 4vh, 3.5rem) 1.25rem clamp(1.5rem, 3vh, 2.5rem);
   box-sizing: border-box;
 }
 
 .invitation-container {
   width: 100%;
-  max-width: 1240px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1rem, 2.2vh, 1.75rem);
+  gap: clamp(0.75rem, 1.8vh, 1.25rem);
 }
 
 .invitation-header {
@@ -7150,136 +7150,121 @@ button {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.35rem;
-  max-width: 860px;
+  gap: 0.25rem;
 }
 
 .invitation-title {
   font-family: var(--font-bengali-sans);
-  font-size: clamp(1.65rem, 3.4vw, 2.5rem);
+  font-size: clamp(1.6rem, 3.2vw, 2.35rem);
   font-weight: 800;
   color: #ffffff;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   line-height: 1.2;
   text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9), 0 0 35px var(--heritage-gold-glow);
   margin: 0;
 }
 
-.invitation-subtitle {
-  font-family: var(--font-bengali-sans);
-  font-size: clamp(0.85rem, 1.35vw, 1rem);
-  color: rgba(255, 235, 200, 0.92);
-  line-height: 1.55;
-  margin: 0;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
-}
-
-.invitation-layout-grid {
-  display: grid;
-  grid-template-columns: minmax(320px, 420px) 1fr;
-  gap: clamp(1.25rem, 2.5vw, 2.25rem);
+/* Centered Picture Showcase Card */
+.invitation-showcase-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   width: 100%;
-  align-items: stretch;
-}
-
-/* Left Column: Authentic Letterhead Card */
-.invitation-letterhead-card {
+  max-width: 520px;
   background: rgba(14, 18, 28, 0.86);
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
-  border: 1.5px solid rgba(255, 207, 64, 0.4);
+  border: 1.5px solid rgba(255, 207, 64, 0.45);
   border-radius: var(--radius-lg);
-  padding: clamp(1rem, 2vh, 1.35rem);
-  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.9), 0 0 35px -5px rgba(255, 207, 64, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
+  padding: clamp(0.85rem, 1.8vh, 1.35rem);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.95), 0 0 40px -5px rgba(255, 207, 64, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   box-sizing: border-box;
 }
 
-.letterhead-frame {
+.invitation-frame {
   position: relative;
   width: 100%;
-  max-width: 380px;
-  max-height: clamp(340px, 52vh, 480px);
+  max-height: clamp(380px, 60vh, 560px);
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 207, 64, 0.15);
-  border: 2px solid rgba(255, 207, 64, 0.5);
-  background: #100a08;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 207, 64, 0.18);
+  border: 2px solid rgba(255, 207, 64, 0.55);
+  background: #140b08;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all var(--transition-fast);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.letterhead-frame:hover {
-  transform: scale(1.02);
+.invitation-frame:hover {
+  transform: scale(1.015);
   border-color: var(--heritage-gold);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.9), 0 0 30px var(--heritage-gold-glow);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.95), 0 0 35px var(--heritage-gold-glow);
 }
 
-.letterhead-image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.invitation-frame picture {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.letterhead-image {
   width: 100%;
   height: 100%;
-  max-height: clamp(340px, 52vh, 480px);
+}
+
+.invitation-hero-img {
+  width: 100%;
+  height: 100%;
+  max-height: clamp(380px, 60vh, 560px);
   display: block;
   aspect-ratio: 905/1280;
   object-fit: contain;
   transition: transform 0.4s ease;
 }
 
-.letterhead-frame:hover .letterhead-image {
-  transform: scale(1.03);
+.invitation-frame:hover .invitation-hero-img {
+  transform: scale(1.02);
 }
 
-.letterhead-zoom-hint {
+.invitation-zoom-badge {
   position: absolute;
   bottom: 0.75rem;
   right: 0.75rem;
-  background: rgba(8, 12, 22, 0.9);
+  background: rgba(8, 12, 22, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 207, 64, 0.45);
+  border: 1px solid rgba(255, 207, 64, 0.5);
   border-radius: var(--radius-pill);
-  padding: 0.3rem 0.7rem;
+  padding: 0.35rem 0.75rem;
   font-family: var(--font-bengali-sans);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--heritage-gold);
   font-weight: 700;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
   pointer-events: none;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 
-.letterhead-actions-row {
+/* Action Toolbar */
+.invitation-toolbar {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.65rem;
   width: 100%;
-  max-width: 380px;
+  flex-wrap: wrap;
 }
 
-.btn-invitation-action {
+.invitation-btn {
   flex: 1;
+  min-width: 110px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  padding: 0.7rem 0.85rem;
+  padding: 0.7rem 0.95rem;
   border-radius: var(--radius-pill);
   font-family: var(--font-bengali-sans);
   font-size: 0.8125rem;
@@ -7288,241 +7273,51 @@ button {
   cursor: pointer;
   transition: all var(--transition-fast);
   box-sizing: border-box;
+  white-space: nowrap;
 }
 
-.btn-download-invite {
+.btn-download {
   background: linear-gradient(135deg, var(--heritage-gold), #d97706);
   border: none;
   color: #070a12;
   box-shadow: 0 6px 20px var(--heritage-gold-glow);
 }
 
-.btn-download-invite:hover {
+.btn-download:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 10px 28px var(--heritage-gold-glow);
   color: #000000;
 }
 
-.btn-share-invite {
+.btn-share {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 207, 64, 0.4);
   color: #ffffff;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-.btn-share-invite:hover {
+.btn-share:hover {
   background: rgba(255, 207, 64, 0.2);
   border-color: var(--heritage-gold);
   color: var(--heritage-gold);
   transform: translateY(-2px);
 }
 
-/* Right Column: Royal Content & Highlights */
-.invitation-content-card {
-  background: rgba(14, 18, 28, 0.86);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
-  border: 1.5px solid rgba(255, 207, 64, 0.35);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.25rem, 2.5vw, 2rem);
-  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.15rem;
-  box-sizing: border-box;
-}
-
-.invitation-seal-box {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding-bottom: 0.95rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.seal-icon {
-  font-size: 2.2rem;
-  filter: drop-shadow(0 0 14px rgba(255, 207, 64, 0.7));
-  flex-shrink: 0;
-}
-
-.seal-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.12rem;
-}
-
-.seal-title {
-  font-family: var(--font-bengali-sans);
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--heritage-gold);
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.seal-family {
-  font-family: var(--font-bengali-sans);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.seal-location {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.8125rem;
-  color: rgba(255, 235, 200, 0.85);
-}
-
-.invitation-letter-body {
-  background: linear-gradient(135deg, rgba(255, 207, 64, 0.08), rgba(211, 47, 47, 0.08));
-  border-left: 3.5px solid var(--heritage-gold);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 1rem 1.25rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-
-.invitation-salutation {
-  font-family: var(--font-bengali-sans);
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--heritage-gold);
-  margin-bottom: 0.35rem;
-}
-
-.invitation-paragraph {
-  font-family: var(--font-bengali-sans);
-  font-size: clamp(0.95rem, 1.4vw, 1.075rem);
-  line-height: 1.7;
-  color: #fffdf8;
-  margin: 0;
-  letter-spacing: 0.01em;
-}
-
-.invitation-highlights-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.85rem;
-}
-
-.invite-highlight-item {
-  display: flex;
-  gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
-}
-
-.invite-highlight-item:hover {
-  background: rgba(255, 207, 64, 0.08);
-  border-color: rgba(255, 207, 64, 0.4);
-  transform: translateY(-2px);
-}
-
-.highlight-icon-wrap {
-  font-size: 1.4rem;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.highlight-item-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.12rem;
-}
-
-.highlight-time-badge {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  color: var(--heritage-gold);
-  background: rgba(255, 207, 64, 0.15);
-  border: 1px solid rgba(255, 207, 64, 0.38);
-  padding: 0.1rem 0.45rem;
-  border-radius: var(--radius-pill);
-  width: max-content;
-  margin-bottom: 0.15rem;
-}
-
-.highlight-name {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.9125rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-}
-
-.highlight-sub {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.735rem;
-  color: var(--text-secondary);
-  line-height: 1.35;
-  margin: 0;
-}
-
-.invitation-signoff-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.85rem;
-  flex-wrap: wrap;
-  padding-top: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.signoff-label {
-  font-family: var(--font-bengali-sans);
-  font-size: 0.75rem;
-  color: var(--heritage-gold);
-  font-weight: 600;
-}
-
-.signoff-names {
-  display: flex;
-  flex-direction: column;
-  gap: 0.12rem;
-  font-family: var(--font-bengali-sans);
-}
-
-.signoff-names strong {
-  font-size: 1rem;
-  color: #ffffff;
-  font-weight: 700;
-}
-
-.signoff-names span {
-  font-size: 0.735rem;
-  color: var(--text-secondary);
-}
-
-.btn-confirm-attendance {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.35rem;
+.btn-rsvp {
   background: linear-gradient(135deg, rgba(211, 47, 47, 0.55), rgba(255, 69, 0, 0.42));
   border: 1px solid rgba(255, 120, 80, 0.6);
-  border-radius: var(--radius-pill);
   color: #ffffff;
-  font-family: var(--font-bengali-sans);
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  box-shadow: 0 4px 18px rgba(211, 47, 47, 0.35);
+  box-shadow: 0 4px 16px rgba(211, 47, 47, 0.35);
 }
 
-.btn-confirm-attendance:hover {
+.btn-rsvp:hover {
   background: linear-gradient(135deg, rgba(211, 47, 47, 0.8), rgba(255, 69, 0, 0.65));
   border-color: rgba(255, 160, 120, 0.8);
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(211, 47, 47, 0.55);
+  box-shadow: 0 8px 24px rgba(211, 47, 47, 0.55);
 }
 
-.btn-confirm-attendance.confirmed {
+.btn-rsvp.confirmed {
   background: linear-gradient(135deg, #10b981, #059669);
   border-color: #34d399;
   color: #ffffff;
@@ -7571,75 +7366,34 @@ button {
   color: #ffffff;
 }
 
-@media (max-width: 960px) {
-  .invitation-layout-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  .letterhead-frame {
-    max-width: 340px;
-    max-height: 440px;
-  }
-
-  .letterhead-image {
-    max-height: 440px;
-  }
-
-  .letterhead-actions-row {
-    max-width: 340px;
-  }
-}
-
 @media (max-width: 640px) {
   .invitation-section {
-    padding: 2.25rem 1rem 1.75rem;
+    padding: 2rem 1rem 1.5rem;
     min-height: auto;
   }
 
-  .invitation-title {
-    font-size: 1.4rem;
+  .invitation-showcase-card {
+    max-width: 100%;
+    padding: 0.75rem;
+    gap: 0.75rem;
   }
 
-  .invitation-subtitle {
-    font-size: 0.78125rem;
+  .invitation-frame {
+    max-height: clamp(340px, 58vh, 460px);
   }
 
-  .letterhead-frame {
-    max-width: 280px;
-    max-height: 380px;
+  .invitation-hero-img {
+    max-height: clamp(340px, 58vh, 460px);
   }
 
-  .letterhead-image {
-    max-height: 380px;
-  }
-
-  .letterhead-actions-row {
-    max-width: 280px;
+  .invitation-toolbar {
     flex-direction: column;
     gap: 0.45rem;
   }
 
-  .btn-invitation-action {
+  .invitation-btn {
     width: 100%;
     padding: 0.65rem 0.85rem;
-    font-size: 0.78125rem;
-  }
-
-  .invitation-highlights-grid {
-    grid-template-columns: 1fr;
-    gap: 0.65rem;
-  }
-
-  .invitation-signoff-box {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-  }
-
-  .btn-confirm-attendance {
-    width: 100%;
-    justify-content: center;
     font-size: 0.8125rem;
   }
 }
