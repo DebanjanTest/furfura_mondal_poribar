@@ -6137,6 +6137,7 @@ button {
   height: 28px;
   border-radius: 50%;
   cursor: pointer;
+  pointer-events: auto;
   background: transparent;
   border: none;
   padding: 0;
