@@ -1533,6 +1533,7 @@
     <!-- Main Application Entrypoint -->
     <script type="module" src="/src/main.js"></script>
     <!-- YouTube Hidden Audio Stream Host Container -->
-  <div id="yt-hidden-player" aria-hidden="true" style="position:fixed;bottom:-600px;right:-600px;width:240px;height:180px;pointer-events:none;opacity:0.001;z-index:-9999;"></div>
+  <!-- YouTube Audio Stream Host Container (Active in Viewport) -->
+  <div id="yt-hidden-player" aria-hidden="true" style="position:fixed;top:0;left:0;width:240px;height:160px;pointer-events:none;opacity:0.005;z-index:-1;"></div>
 </body>
 </html>

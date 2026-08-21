@@ -1,5 +1,5 @@
 // YouTube IFrame API Background Audio Integration & High-Precision Audio Stream Sync Engine
-// Supports Agomoni Puja Radio, 6-Segment Mahalaya Master & Continuous Loop Playback
+// Supports Agomoni Puja Radio, 6-Segment Mahalaya Master & Continuous Playback
 
 class YouTubeAudioPlayer {
   constructor() {
@@ -35,29 +35,30 @@ class YouTubeAudioPlayer {
           container = document.createElement('div');
           container.id = containerId;
           container.style.position = 'fixed';
-          container.style.bottom = '-600px';
-          container.style.right = '-600px';
+          container.style.top = '0';
+          container.style.left = '0';
           container.style.width = '240px';
-          container.style.height = '180px';
-          container.style.zIndex = '-9999';
-          container.style.opacity = '0.001';
+          container.style.height = '160px';
+          container.style.zIndex = '-1';
+          container.style.opacity = '0.005';
           container.style.pointerEvents = 'none';
           document.body.appendChild(container);
         }
 
         try {
           this.player = new window.YT.Player(containerId, {
-            height: '180',
+            height: '160',
             width: '240',
             playerVars: {
-              enablejsapi: 1,
-              playsinline: 1,
+              autoplay: 1,
               controls: 0,
               disablekb: 1,
+              enablejsapi: 1,
               fs: 0,
-              rel: 0,
+              iv_load_policy: 3,
               modestbranding: 1,
-              autoplay: 1,
+              playsinline: 1,
+              rel: 0,
               origin: window.location.origin
             },
             events: {
@@ -83,7 +84,7 @@ class YouTubeAudioPlayer {
             }
           });
         } catch (err) {
-          console.warn('Error creating YT.Player instance:', err);
+          console.warn('Error initializing YT.Player instance:', err);
           resolve();
         }
       };
@@ -142,16 +143,11 @@ class YouTubeAudioPlayer {
         playlistKey: this.currentPlaylistKey
       });
     } else if (event.data === window.YT.PlayerState.ENDED) {
-      if (this.isLiveDhakMode && this.isLooping && this.currentTrack) {
-        this.seekTo(0);
-        this.play();
-      } else {
-        if (!this.hasEndedFired) {
-          this.hasEndedFired = true;
-          this.isPlaying = false;
-          this.stopProgressTicker();
-          this.notify({ type: 'ended', isLiveDhak: false, track: this.currentTrack });
-        }
+      if (!this.hasEndedFired) {
+        this.hasEndedFired = true;
+        this.isPlaying = false;
+        this.stopProgressTicker();
+        this.notify({ type: 'ended', isLiveDhak: false, track: this.currentTrack });
       }
     } else if (event.data === window.YT.PlayerState.BUFFERING) {
       this.notify({ type: 'buffering', track: this.currentTrack });
@@ -166,6 +162,11 @@ class YouTubeAudioPlayer {
     this.isLiveDhakMode = false;
     this.isTransitioning = true;
     this.hasEndedFired = false;
+
+    // Automatically ensure audio is unmuted when user requests to play a track
+    if (this.isMuted) {
+      this.isMuted = false;
+    }
 
     this.notify({
       type: 'trackChange',
@@ -187,6 +188,13 @@ class YouTubeAudioPlayer {
 
     this.cueDebounceTimer = setTimeout(() => {
       try {
+        if (typeof this.player.unMute === 'function') {
+          this.player.unMute();
+        }
+        if (typeof this.player.setVolume === 'function') {
+          this.player.setVolume(this.getEffectiveVolume());
+        }
+
         if (this.currentVideoId === targetVideoId) {
           this.player.seekTo(startSeconds, true);
           if (autoplay) {
@@ -212,9 +220,6 @@ class YouTubeAudioPlayer {
             this.isPlaying = false;
           }
         }
-        if (typeof this.player.setVolume === 'function') {
-          this.player.setVolume(this.getEffectiveVolume());
-        }
       } catch (err) {
         console.warn('Error cueing video:', err);
       }
@@ -223,22 +228,25 @@ class YouTubeAudioPlayer {
 
   getEffectiveVolume() {
     if (this.isMuted) return 0;
-    let effective = this.volume;
+    let effective = this.volume || 85;
     if (this.isAudioBoosted) {
-      effective = Math.min(100, Math.round(this.volume * (this.boostSettings.masterPercent / 100)));
+      effective = Math.min(100, Math.round(effective * (this.boostSettings.masterPercent / 100)));
     }
     return effective;
   }
 
   play() {
+    this.isMuted = false;
     if (this.player && this.isReady && typeof this.player.playVideo === 'function') {
       try {
+        if (typeof this.player.unMute === 'function') this.player.unMute();
+        if (typeof this.player.setVolume === 'function') this.player.setVolume(this.getEffectiveVolume());
         this.player.playVideo();
         this.isPlaying = true;
         this.notify({
           type: 'state',
           isPlaying: true,
-          isLiveDhak: this.isLiveDhakMode,
+          isLiveDhak: false,
           track: this.currentTrack
         });
       } catch (e) {}
@@ -255,7 +263,7 @@ class YouTubeAudioPlayer {
         this.notify({
           type: 'state',
           isPlaying: false,
-          isLiveDhak: this.isLiveDhakMode,
+          isLiveDhak: false,
           track: this.currentTrack
         });
       } catch (e) {}
@@ -288,6 +296,21 @@ class YouTubeAudioPlayer {
         if (this.isMuted && this.volume > 0) {
           this.player.unMute();
           this.isMuted = false;
+        }
+      } catch (e) {}
+    }
+    this.notify({ type: 'volume', volume: this.volume, isMuted: this.isMuted });
+  }
+
+  setMute(isMuted) {
+    this.isMuted = !!isMuted;
+    if (this.player && this.isReady) {
+      try {
+        if (this.isMuted) {
+          if (typeof this.player.mute === 'function') this.player.mute();
+        } else {
+          if (typeof this.player.unMute === 'function') this.player.unMute();
+          if (typeof this.player.setVolume === 'function') this.player.setVolume(this.getEffectiveVolume());
         }
       } catch (e) {}
     }

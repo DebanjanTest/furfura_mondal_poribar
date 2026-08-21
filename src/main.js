@@ -580,6 +580,9 @@ function initAudioPlayer() {
 }
 
 function handleTogglePlay() {
+  state.soundEnabled = true;
+  ytAudioPlayer.setMute(false);
+
   if (!state.isAudioPlaying) {
     const track = getCurrentTrack();
     ytAudioPlayer.loadTrack(track, state.currentPlaylistKey, true);
@@ -3217,17 +3220,16 @@ function initWelcomeModal() {
       state.lang = selectedLang;
       setLanguage(selectedLang);
 
-      // 2. Handle audio based on user choice
+            // 2. Handle audio based on user choice
       if (selectedSound === 'yes') {
+        state.soundEnabled = true;
         bgAmbience.isEnabled = true;
         bgAmbience.startAmbientPlayback();
       } else {
+        state.soundEnabled = false;
         bgAmbience.isEnabled = false;
         if (typeof ytAudioPlayer.pause === 'function') {
           ytAudioPlayer.pause();
-        }
-        if (typeof ytAudioPlayer.setMute === 'function') {
-          ytAudioPlayer.setMute(true);
         }
       }
     } catch (err) {
