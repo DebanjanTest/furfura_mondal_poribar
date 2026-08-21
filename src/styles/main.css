@@ -270,16 +270,7 @@ button {
   }
 }
 
-#particle-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
-  z-index: 5;
-  pointer-events: none;
-  display: block;
-}
+
 
 /* ==========================================================================
    HERO VIEWPORT FOLD (100dvh Vertical Viewport — Snap Section 1)
@@ -7495,4 +7486,17 @@ button:active, [role="button"]:active {
   background: rgba(26, 3, 9, 0.98) !important;
   border-color: rgba(255, 207, 64, 0.7) !important;
   color: var(--heritage-gold) !important;
+}
+
+
+/* Global Fullscreen Falling Shiuli Flower & Autumn Particle Canvas */
+#particle-canvas {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  z-index: 90 !important;
+  pointer-events: none !important;
+  display: block !important;
 }

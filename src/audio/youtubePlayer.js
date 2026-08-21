@@ -58,8 +58,7 @@ class YouTubeAudioPlayer {
               iv_load_policy: 3,
               modestbranding: 1,
               playsinline: 1,
-              rel: 0,
-              origin: window.location.origin
+              rel: 0
             },
             events: {
               onReady: () => {
@@ -162,11 +161,7 @@ class YouTubeAudioPlayer {
     this.isLiveDhakMode = false;
     this.isTransitioning = true;
     this.hasEndedFired = false;
-
-    // Automatically ensure audio is unmuted when user requests to play a track
-    if (this.isMuted) {
-      this.isMuted = false;
-    }
+    this.isMuted = false;
 
     this.notify({
       type: 'trackChange',
