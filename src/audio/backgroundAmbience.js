@@ -9,7 +9,7 @@ export const DEFAULT_AMBIENT_CONFIG = {
   videoId: 'DZ21CSg22nc', // User requested YouTube ambient audio stream
   title: 'মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondal Bari Ambient)',
   artist: 'ফুরফুরা মণ্ডল পরিবার আবহ',
-  lowVolume: 18, // 18% gentle smooth low tone
+  lowVolume: 80, // 18% gentle smooth low tone
   fadeInDurationMs: 2500
 };
 
@@ -75,7 +75,7 @@ class BackgroundAmbienceEngine {
     }
   }
 
-  smoothFadeIn(targetVol = 18, durationMs = 2500) {
+  smoothFadeIn(targetVol = 80, durationMs = 2500) {
     if (this.fadeInterval) clearInterval(this.fadeInterval);
 
     let currentVol = 2;

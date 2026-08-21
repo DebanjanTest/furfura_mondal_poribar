@@ -582,6 +582,7 @@ function initAudioPlayer() {
 function handleTogglePlay() {
   state.soundEnabled = true;
   ytAudioPlayer.setMute(false);
+  ytAudioPlayer.setVolume(85);
   if (typeof audioEngine.resumeAudioContext === 'function') {
     audioEngine.resumeAudioContext();
   }
@@ -3233,14 +3234,31 @@ function initWelcomeModal() {
       state.lang = selectedLang;
       setLanguage(selectedLang);
 
-            // 2. Handle audio based on user choice
+                  // 2. Handle audio based on user choice
       if (selectedSound === 'yes') {
         state.soundEnabled = true;
-        bgAmbience.isEnabled = true;
-        bgAmbience.startAmbientPlayback();
+        state.isAudioPlaying = true;
+        updatePlayPauseButton(true);
+        updateArtVinylAnimation(true);
+        updateEqualizerAnimation();
+        updateDynamicIslandState();
+
+        ytAudioPlayer.setMute(false);
+        ytAudioPlayer.setVolume(85);
+        if (typeof audioEngine.resumeAudioContext === 'function') {
+          audioEngine.resumeAudioContext();
+        }
+
+        const track = getCurrentTrack();
+        ytAudioPlayer.loadTrack(track, state.currentPlaylistKey, true);
       } else {
         state.soundEnabled = false;
-        bgAmbience.isEnabled = false;
+        state.isAudioPlaying = false;
+        updatePlayPauseButton(false);
+        updateArtVinylAnimation(false);
+        updateEqualizerAnimation();
+        updateDynamicIslandState();
+
         if (typeof ytAudioPlayer.pause === 'function') {
           ytAudioPlayer.pause();
         }
