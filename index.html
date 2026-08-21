@@ -32,7 +32,8 @@
     <link rel="preload" as="image" href="/bg/mondal-bari-hero.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp" />
     <link rel="preload" as="image" href="/bg-mobile/mondal-bari-hero-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp" />
     <meta name="build-version" content="1.0.1-2026.08.18-rel" />
-  </head>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
   <body>
     <div id="app" class="app-wrapper">
       
@@ -40,10 +41,18 @@
            BACKGROUND & SCENIC ATMOSPHERE SYSTEM
            ========================================== -->
       <div class="background-container" id="bg-container">
-        <picture>
+        <!-- Morning Background Layer (Bright Festive Natmandir) -->
+        <picture id="bg-layer-morning" class="bg-picture-layer active">
           <source media="(max-width: 768px)" srcset="/bg-mobile/mondal-bari-hero-mobile.webp" type="image/webp" />
           <source srcset="/bg/mondal-bari-hero.webp" type="image/webp" />
-          <img id="bg-mondal-hero" class="bg-layer active" src="/bg/mondal-bari-hero.webp" alt="Mondal Bari Durga Puja 2026 Signature Background" fetchpriority="high" decoding="sync" />
+          <img id="bg-morning" class="bg-layer active" src="/bg/mondal-bari-hero.webp" alt="Mondal Bari Durga Puja Morning Background" fetchpriority="high" decoding="sync" />
+        </picture>
+
+        <!-- Night Background Layer (Serene Dimmer Nocturnal Natmandir with no people) -->
+        <picture id="bg-layer-night" class="bg-picture-layer">
+          <source media="(max-width: 768px)" srcset="/bg-mobile/night-mobile.webp" type="image/webp" />
+          <source srcset="/bg/night-1920.webp" type="image/webp" />
+          <img id="bg-night" class="bg-layer" src="/bg/night-1920.webp" alt="Mondal Bari Durga Puja Night Background" loading="lazy" decoding="async" />
         </picture>
 
         <!-- Ambient Cinematic Lighting & Canvas Particle Overlay -->
@@ -73,11 +82,11 @@
                 <span id="island-online-text">54</span>
               </div>
               <!-- Fast Language Toggle Pill -->
-              <button class="island-lang-pill" id="btn-toggle-lang" data-i18n-title="island_lang_title" data-i18n-aria-label="island_lang_title" title="Toggle Language (বাংলা / English)" aria-label="Change Language" aria-pressed="true">
+              <button type="button" class="island-lang-pill" id="btn-toggle-lang" data-i18n-title="island_lang_title" data-i18n-aria-label="island_lang_title" title="Toggle Language (বাংলা / English)" aria-label="Change Language" aria-pressed="true">
                 <span id="lang-current-label">বাংলা</span>
               </button>
               <!-- Expand Quick Hub Menu Button -->
-              <button class="island-expand-btn" id="btn-island-expand" data-i18n-title="quick_hub" data-i18n-aria-label="quick_hub" title="Open Quick Action Menu" aria-label="Toggle Quick Hub">
+              <button type="button" class="island-expand-btn" id="btn-island-expand" data-i18n-title="quick_hub" data-i18n-aria-label="quick_hub" title="Open Quick Action Menu" aria-label="Toggle Quick Hub">
                 <span class="island-chevron-icon" id="island-chevron">▾</span>
               </button>
             </div>
@@ -103,7 +112,7 @@
             </div>
             <div class="island-right">
               <!-- Island Play / Pause -->
-              <button class="island-ctrl-btn" id="island-btn-play-pause" data-i18n-aria-label="ctrl_play_aria" aria-label="Play or Pause Audio">
+              <button type="button" class="island-ctrl-btn" id="island-btn-play-pause" data-i18n-aria-label="ctrl_play_aria" aria-label="Play or Pause Audio">
                 <svg id="island-icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
@@ -112,11 +121,11 @@
                 </svg>
               </button>
               <!-- Fast Language Switcher in Active Mode -->
-              <button class="island-lang-pill-mini" id="btn-toggle-lang-active" data-i18n-title="island_lang_title" data-i18n-aria-label="island_lang_title" title="Toggle Language" aria-label="Change Language">
+              <button type="button" class="island-lang-pill-mini" id="btn-toggle-lang-active" data-i18n-title="island_lang_title" data-i18n-aria-label="island_lang_title" title="Toggle Language" aria-label="Change Language">
                 <span id="lang-active-label">EN / BN</span>
               </button>
               <!-- Expand Quick Hub Button -->
-              <button class="island-expand-btn" id="btn-island-active-expand" data-i18n-title="quick_hub" data-i18n-aria-label="quick_hub" title="Open Quick Action Menu" aria-label="Toggle Quick Hub">
+              <button type="button" class="island-expand-btn" id="btn-island-active-expand" data-i18n-title="quick_hub" data-i18n-aria-label="quick_hub" title="Open Quick Action Menu" aria-label="Toggle Quick Hub">
                 <span class="island-chevron-icon">▾</span>
               </button>
             </div>
@@ -125,22 +134,16 @@
           <!-- Island Dropdown Quick Action Hub (Expanded State) -->
           <div class="island-quick-drawer" id="island-quick-drawer">
             <div class="island-quick-grid">
-              <button class="island-quick-item" id="island-quick-radio" data-i18n-aria-label="island_quick_radio" aria-label="Open Radio">
+              <button type="button" class="island-quick-item" id="island-quick-radio" data-i18n-aria-label="island_quick_radio" aria-label="Open Radio">
                 <span class="island-quick-label" data-i18n="island_quick_radio">পূজা রেডিও</span>
               </button>
-              <button class="island-quick-item" id="island-quick-dhak" data-i18n-aria-label="island_quick_dhak" aria-label="Open Dhak Studio">
-                <span class="island-quick-label" data-i18n="island_quick_dhak">ঢাকের বোল</span>
-              </button>
-              <button class="island-quick-item" id="island-quick-shankha" data-i18n-aria-label="island_quick_shankha" aria-label="Play Shankha">
-                <span class="island-quick-label" data-i18n="island_quick_shankha">শাঁখের ধ্বনি</span>
-              </button>
-              <button class="island-quick-item" id="island-quick-particles" data-i18n-aria-label="island_quick_flowers" aria-label="Toggle Falling Flowers">
+              <button type="button" class="island-quick-item" id="island-quick-particles" data-i18n-aria-label="island_quick_flowers" aria-label="Toggle Falling Flowers">
                 <span class="island-quick-label" data-i18n="island_quick_flowers">শিউলি ফুল</span>
               </button>
-              <button class="island-quick-item" id="island-quick-story" data-i18n-aria-label="island_quick_story" aria-label="Open Story Generator">
+              <button type="button" class="island-quick-item" id="island-quick-story" data-i18n-aria-label="island_quick_story" aria-label="Open Story Generator">
                 <span class="island-quick-label" data-i18n="island_quick_story">স্টোরি কার্ড</span>
               </button>
-              <button class="island-quick-item" id="island-quick-gallery" data-i18n-aria-label="island_quick_gallery" aria-label="Scroll to Photo Gallery">
+              <button type="button" class="island-quick-item" id="island-quick-gallery" data-i18n-aria-label="island_quick_gallery" aria-label="Scroll to Photo Gallery">
                 <span class="island-quick-label" data-i18n="island_quick_gallery">ফটো গ্যালারি</span>
               </button>
             </div>
@@ -149,8 +152,8 @@
             <div class="island-vibe-section island-lang-section">
               <span class="island-vibe-title" data-i18n="island_lang_title">ভাষা পরিবর্তন (Language):</span>
               <div class="island-vibe-chips">
-                <button class="island-vibe-chip active" id="island-lang-bn" data-lang="bn" aria-pressed="true">বাংলা</button>
-                <button class="island-vibe-chip" id="island-lang-en" data-lang="en" aria-pressed="false">English</button>
+                <button type="button" class="island-vibe-chip active" id="island-lang-bn" data-lang="bn" aria-pressed="true">বাংলা</button>
+                <button type="button" class="island-vibe-chip" id="island-lang-en" data-lang="en" aria-pressed="false">English</button>
               </div>
             </div>
 
@@ -158,17 +161,14 @@
             <div class="island-vibe-section">
               <span class="island-vibe-title" data-i18n="island_vibe_title">আবহাওয়া পরিবর্তন (Atmosphere Vibe):</span>
               <div class="island-vibe-chips">
-                <button class="island-vibe-chip" data-vibe="early-morning" data-i18n="vibe_dawn">ভোর</button>
-                <button class="island-vibe-chip" data-vibe="morning" data-i18n="vibe_morning">সকাল</button>
-                <button class="island-vibe-chip" data-vibe="afternoon" data-i18n="vibe_afternoon">দুপুর</button>
-                <button class="island-vibe-chip" data-vibe="evening" data-i18n="vibe_evening">সন্ধ্যা</button>
-                <button class="island-vibe-chip" data-vibe="night" data-i18n="vibe_night">রাত</button>
-                <button class="island-vibe-chip" data-vibe="auto" data-i18n="vibe_auto">অটো</button>
+                <button type="button" class="island-vibe-chip" data-vibe="morning" data-i18n="vibe_morning">🌅 সকাল (Morning)</button>
+                <button type="button" class="island-vibe-chip" data-vibe="night" data-i18n="vibe_night">🌙 রাত (Night)</button>
+                <button type="button" class="island-vibe-chip active" data-vibe="auto" data-i18n="vibe_auto">⚡ অটো (Auto)</button>
               </div>
             </div>
 
             <!-- Quick Link to Pujo Info & Schedule -->
-            <button class="island-heritage-banner" id="island-quick-heritage">
+            <button type="button" class="island-heritage-banner" id="island-quick-heritage">
               <div class="island-banner-text">
                 <strong data-i18n="island_heritage_title">মন্ডল বাড়ির পুজো ও নির্ঘণ্ট</strong>
                 <span data-i18n="island_heritage_desc">১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য, সম্পূর্ণ পূজার সূচি ও ফটো গ্যালারি</span>
@@ -239,13 +239,7 @@
 
           <!-- Floating Sound & Story Action Bar (Mobile & Desktop) -->
           <div class="floating-sound-triggers">
-            <button class="glass-pill sound-trigger-pill" id="btn-trig-shankha" title="Play Shankha Sound (Key S)">
-              <span data-i18n="shankha_sound">মঙ্গল শঙ্খধ্বনি</span>
-            </button>
-            <button class="glass-pill sound-trigger-pill" id="btn-trig-dhak" title="Play Dhak Drum Studio (Key D)">
-              <span data-i18n="dhak_studio">সাবেকি ঢাকের বোল</span>
-            </button>
-            <button class="glass-pill sound-trigger-pill story-sparkle-pill" id="btn-trig-story-gen" title="Generate Instagram Story (Key I)">
+            <button type="button" class="glass-pill sound-trigger-pill story-sparkle-pill" id="btn-trig-story-gen" title="Generate Instagram Story (Key I)">
               <span data-i18n="photo_story">শারদীয় স্টোরি কার্ড</span>
             </button>
           </div>
@@ -293,10 +287,10 @@
               <a href="/invitation/invitation.jpg" download="Furfura-Mondal-Poribar-Puja-Invitation.jpg" class="invitation-btn btn-download" id="btn-download-invitation" title="আমন্ত্রণপত্র ডাউনলোড করুন">
                 <span data-i18n="invitation_download">আমন্ত্রণপত্র ডাউনলোড</span>
               </a>
-              <button class="invitation-btn btn-share" id="btn-share-invitation" title="সানন্দ আমন্ত্রণ জানান">
+              <button type="button" class="invitation-btn btn-share" id="btn-share-invitation" title="সানন্দ আমন্ত্রণ জানান">
                 <span data-i18n="invitation_share">সানন্দ আমন্ত্রণ জানান</span>
               </button>
-              <button class="invitation-btn btn-rsvp" id="btn-confirm-attendance" title="উপস্থিত থাকার শুভেচ্ছা ও প্রণাম জানান">
+              <button type="button" class="invitation-btn btn-rsvp" id="btn-confirm-attendance" title="উপস্থিত থাকার শুভেচ্ছা ও প্রণাম জানান">
                 <span id="attendance-btn-text" data-i18n="invitation_confirm">প্রণাম ও শারদ শুভেচ্ছা</span>
               </button>
             </div>
@@ -384,23 +378,23 @@
           <!-- Filter Category Chips Bar -->
           <div class="onnota-filter-bar">
             <div class="onnota-filter-chips" id="onnota-category-chips" role="tablist" aria-label="Onnota Category Filters">
-              <button class="onnota-filter-chip active" data-category="all" role="tab" aria-selected="true">
+              <button type="button" class="onnota-filter-chip active" data-category="all" role="tab" aria-selected="true">
                 <span class="chip-label" data-i18n="onnota_filter_all">সমস্ত সৃষ্টি</span>
                 <span class="chip-count" id="onnota-count-all">12</span>
               </button>
-              <button class="onnota-filter-chip" data-category="art" role="tab" aria-selected="false">
+              <button type="button" class="onnota-filter-chip" data-category="art" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="onnota_filter_art">চিত্রশিল্প ও অলঙ্করণ</span>
                 <span class="chip-count" id="onnota-count-art">3</span>
               </button>
-              <button class="onnota-filter-chip" data-category="photography" role="tab" aria-selected="false">
+              <button type="button" class="onnota-filter-chip" data-category="photography" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="onnota_filter_photography">উৎসব আলোকচিত্র</span>
                 <span class="chip-count" id="onnota-count-photography">3</span>
               </button>
-              <button class="onnota-filter-chip" data-category="crafts" role="tab" aria-selected="false">
+              <button type="button" class="onnota-filter-chip" data-category="crafts" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="onnota_filter_crafts">হস্তশিল্প ও সাবেকি আলপনা</span>
                 <span class="chip-count" id="onnota-count-crafts">3</span>
               </button>
-              <button class="onnota-filter-chip" data-category="literature" role="tab" aria-selected="false">
+              <button type="button" class="onnota-filter-chip" data-category="literature" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="onnota_filter_literature">সাহিত্য ও স্মৃতিচারণ</span>
                 <span class="chip-count" id="onnota-count-literature">3</span>
               </button>
@@ -419,7 +413,7 @@
                 <span class="jump-arrow">↓</span>
                 <span data-i18n="onnota_to_gallery">ঐতিহ্যের ফটো গ্যালারিতে যান</span>
               </a>
-              <button class="btn-footer-schedule" id="btn-onnota-open-schedule">
+              <button type="button" class="btn-footer-schedule" id="btn-onnota-open-schedule">
                 <span data-i18n="btn_full_schedule">সম্পূর্ণ পূজার নির্ঘণ্ট ও সূচি</span>
               </button>
             </div>
@@ -453,34 +447,34 @@
           <!-- Category Filter Bar & Add Photos Button -->
           <div class="gallery-filter-bar">
             <div class="gallery-filter-chips" id="gallery-main-category-chips" role="tablist" aria-label="Photo Category Filters">
-              <button class="gallery-filter-chip active" data-category="all" role="tab" aria-selected="true">
+              <button type="button" class="gallery-filter-chip active" data-category="all" role="tab" aria-selected="true">
                 <span class="chip-label" data-i18n="gallery_filter_all">সমস্ত ছবি</span>
                 <span class="chip-count" id="count-cat-all">6</span>
               </button>
-              <button class="gallery-filter-chip" data-category="protima" role="tab" aria-selected="false">
+              <button type="button" class="gallery-filter-chip" data-category="protima" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="gallery_filter_protima">প্রতিমা দর্শন</span>
                 <span class="chip-count" id="count-cat-protima">1</span>
               </button>
-              <button class="gallery-filter-chip" data-category="aarti" role="tab" aria-selected="false">
+              <button type="button" class="gallery-filter-chip" data-category="aarti" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="gallery_filter_aarti">ধুনুচি ও আরতি</span>
                 <span class="chip-count" id="count-cat-aarti">1</span>
               </button>
-              <button class="gallery-filter-chip" data-category="heritage" role="tab" aria-selected="false">
+              <button type="button" class="gallery-filter-chip" data-category="heritage" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="gallery_filter_heritage">ঐতিহ্য ও পরিবার</span>
                 <span class="chip-count" id="count-cat-heritage">2</span>
               </button>
-              <button class="gallery-filter-chip" data-category="sharat" role="tab" aria-selected="false">
+              <button type="button" class="gallery-filter-chip" data-category="sharat" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="gallery_filter_sharat">শরতের আগমনী</span>
                 <span class="chip-count" id="count-cat-sharat">2</span>
               </button>
-              <button class="gallery-filter-chip" data-category="community" role="tab" aria-selected="false">
+              <button type="button" class="gallery-filter-chip" data-category="community" role="tab" aria-selected="false">
                 <span class="chip-label" data-i18n="gallery_filter_community">ভক্তবৃন্দের স্মৃতি</span>
                 <span class="chip-count" id="count-cat-community">0</span>
               </button>
             </div>
 
             <!-- Add Memory / Upload Toggle Button -->
-            <button class="btn-toggle-upload-widget" id="btn-toggle-upload" aria-expanded="false" aria-controls="photo-upload-widget">
+            <button type="button" class="btn-toggle-upload-widget" id="btn-toggle-upload" aria-expanded="false" aria-controls="photo-upload-widget">
               <span data-i18n="gallery_btn_upload">স্মৃতি ও ছবি জমা দিন</span>
               <span class="upload-btn-chevron" id="upload-chevron">▾</span>
             </button>
@@ -494,7 +488,7 @@
                 <h3 class="upload-title" data-i18n="upload_title">আপনার তোলা মন্ডল বাড়ির পূজার ছবি বা স্মৃতি যোগ করুন</h3>
                 <p class="upload-desc" data-i18n="upload_desc">ছবিটি সরাসরি আপনার ব্রাউজারের মেমোরিতে (localStorage) সংরক্ষিত হবে এবং লাইভ ফটো গ্যালারিতে তাৎক্ষণিক দৃশ্যমান হবে.</p>
               </div>
-              <button class="upload-card-close" id="btn-close-upload-card" aria-label="Close Upload Form">✕</button>
+              <button type="button" class="upload-card-close" id="btn-close-upload-card" aria-label="Close Upload Form">✕</button>
             </div>
 
             <div class="upload-form-grid">
@@ -596,7 +590,7 @@
                 <span class="jump-arrow">↑</span>
                 <span data-i18n="btn_jump_top">শীর্ষে যান (কাউন্টডাউন ও রেডিও)</span>
               </a>
-              <button class="btn-footer-schedule" id="btn-footer-open-schedule">
+              <button type="button" class="btn-footer-schedule" id="btn-footer-open-schedule">
                 <span data-i18n="btn_full_schedule">সম্পূর্ণ পূজার নির্ঘণ্ট ও সূচি</span>
               </button>
             </div>
@@ -608,37 +602,51 @@
         </div>
       </section>
 
-      <!-- Desktop Floating Snap Navigation Dots (Computer UI) -->
-      <nav class="desktop-snap-nav hide-on-mobile" id="desktop-snap-nav" aria-label="Page Sections Navigation">
-        <button class="snap-nav-dot active" data-target="hero-section" data-i18n-title="nav_hero_title" title="কাউন্টডাউন ও রেডিও (Hero)" aria-label="Go to Hero section">
-          <span class="snap-dot-core"></span>
-          <span class="snap-dot-label" data-i18n="nav_hero_label">আগমনী ও কাউন্টডাউন</span>
-        </button>
-        <button class="snap-nav-dot" data-target="invitation-section" data-i18n-title="nav_invite_title" title="শ্রীশ্রী দুর্গাপূজার আমন্ত্রণ (Formal Invitation)" aria-label="Go to Invitation section">
-          <span class="snap-dot-core"></span>
-          <span class="snap-dot-label" data-i18n="nav_invite_label">সানন্দ আমন্ত্রণলিপি</span>
-        </button>
-        <button class="snap-nav-dot" data-target="photo-river-section" data-i18n-title="nav_river_title" title="দৃষ্টিসুখ ও উৎসব বার (Photo River)" aria-label="Go to Photo River section">
-          <span class="snap-dot-core"></span>
-          <span class="snap-dot-label" data-i18n="nav_river_label">দৃষ্টিসুখ ও উৎসব বার</span>
-        </button>
-        <button class="snap-nav-dot" data-target="onnota-section" data-i18n-title="nav_onnota_title" title="অন্যান্য সৃষ্টি — অন্যতা (Onnota)" aria-label="Go to Onnota section">
-          <span class="snap-dot-core"></span>
-          <span class="snap-dot-label" data-i18n="nav_onnota_label">অন্যান্য সৃষ্টি (অন্যতা)</span>
-        </button>
-        <button class="snap-nav-dot" data-target="gallery-section" data-i18n-title="nav_gallery_title" title="ঐতিহ্যের ফটো গ্যালারি (Heritage Gallery)" aria-label="Go to Gallery section">
-          <span class="snap-dot-core"></span>
-          <span class="snap-dot-label" data-i18n="nav_gallery_label">ঐতিহ্যের ফটো গ্যালারি</span>
-        </button>
-      </nav>
-
       <!-- ==========================================
            BOTTOM DUAL INTERFACE: MINIMIZABLE DESKTOP GLASS DOCK & MOBILE DRAWER
            ========================================== -->
+      
+      
+      <!-- ==========================================
+           PONYTAIL LIVE FOCAL-COVERAGE SCROLLSPY
+           ========================================== -->
+      <aside class="ponytail-scrollspy hide-on-mobile" id="ponytail-scrollspy" aria-label="Website Section Navigator">
+        <div class="spy-track-laser" aria-hidden="true">
+          <div class="spy-track-active-fill" id="ponytail-spy-progress"></div>
+        </div>
+        <nav class="spy-nodes-group" role="navigation" aria-label="Section Links">
+          <button type="button" class="spy-node active" data-target="hero-section" data-index="0" data-i18n-title="nav_hero_title" title="কাউন্টডাউন ও আগমনী" aria-label="Section 1: Hero Countdown" aria-current="true">
+            <span class="spy-node-ring"></span>
+            <span class="spy-node-gem"></span>
+            <span class="spy-node-label" data-i18n="nav_hero_label">আগমনী ও কাউন্টডাউন</span>
+          </button>
+          <button type="button" class="spy-node" data-target="invitation-section" data-index="1" data-i18n-title="nav_invite_title" title="শ্রীশ্রী দুর্গাপূজার আমন্ত্রণ" aria-label="Section 2: Formal Invitation" aria-current="false">
+            <span class="spy-node-ring"></span>
+            <span class="spy-node-gem"></span>
+            <span class="spy-node-label" data-i18n="nav_invite_label">সানন্দ আমন্ত্রণলিপি</span>
+          </button>
+          <button type="button" class="spy-node" data-target="photo-river-section" data-index="2" data-i18n-title="nav_river_title" title="দৃষ্টিসুখ ও উৎসব বার" aria-label="Section 3: Photo River" aria-current="false">
+            <span class="spy-node-ring"></span>
+            <span class="spy-node-gem"></span>
+            <span class="spy-node-label" data-i18n="nav_river_label">দৃষ্টিসুখ ও উৎসব বার</span>
+          </button>
+          <button type="button" class="spy-node" data-target="onnota-section" data-index="3" data-i18n-title="nav_onnota_title" title="অন্যান্য সৃষ্টি — অন্যতা" aria-label="Section 4: Others by Onnota" aria-current="false">
+            <span class="spy-node-ring"></span>
+            <span class="spy-node-gem"></span>
+            <span class="spy-node-label" data-i18n="nav_onnota_label">অন্যান্য সৃষ্টি (অন্যতা)</span>
+          </button>
+          <button type="button" class="spy-node" data-target="gallery-section" data-index="4" data-i18n-title="nav_gallery_title" title="ঐতিহ্যের ফটো গ্যালারি" aria-label="Section 5: Heritage Photo Gallery" aria-current="false">
+            <span class="spy-node-ring"></span>
+            <span class="spy-node-gem"></span>
+            <span class="spy-node-label" data-i18n="nav_gallery_label">ঐতিহ্যের ফটো গ্যালারি</span>
+          </button>
+        </nav>
+      </aside>
+
       <footer class="bottom-system-container" role="contentinfo">
         
         <!-- Desktop Floating Minimal Music Launcher Pill (When Dock is Minimized) -->
-        <button class="floating-music-launcher hide-on-mobile" id="btn-floating-music-launcher" data-i18n-title="launcher_title" data-i18n-aria-label="launcher_title" title="রেডিও প্লেয়ার খুলুন (Key P)" aria-label="Open Radio Player">
+        <button type="button" class="floating-music-launcher hide-on-mobile" id="btn-floating-music-launcher" data-i18n-title="launcher_title" data-i18n-aria-label="launcher_title" title="রেডিও প্লেয়ার খুলুন (Key P)" aria-label="Open Radio Player">
           <span class="launcher-text" id="floating-pill-title" data-i18n="launcher_label">পুজো রেডিও</span>
           <span class="launcher-eq-bars" id="floating-pill-eq">
             <span></span><span></span><span></span>
@@ -671,12 +679,12 @@
 
             <!-- Playback Transport Controls -->
             <div class="playback-controls">
-              <button class="ctrl-btn" id="btn-prev-track" data-i18n-title="ctrl_prev_title" data-i18n-aria-label="ctrl_prev_aria" title="Previous Track (Left Arrow)" aria-label="Previous Track">
+              <button type="button" class="ctrl-btn" id="btn-prev-track" data-i18n-title="ctrl_prev_title" data-i18n-aria-label="ctrl_prev_aria" title="Previous Track (Left Arrow)" aria-label="Previous Track">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
                 </svg>
               </button>
-              <button class="ctrl-btn play-main" id="btn-play-pause" data-i18n-title="ctrl_play_title" data-i18n-aria-label="ctrl_play_aria" title="Play / Pause (Spacebar)" aria-label="Play or Pause Track">
+              <button type="button" class="ctrl-btn play-main" id="btn-play-pause" data-i18n-title="ctrl_play_title" data-i18n-aria-label="ctrl_play_aria" title="Play / Pause (Spacebar)" aria-label="Play or Pause Track">
                 <svg id="icon-play" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
@@ -684,7 +692,7 @@
                   <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                 </svg>
               </button>
-              <button class="ctrl-btn" id="btn-next-track" data-i18n-title="ctrl_next_title" data-i18n-aria-label="ctrl_next_aria" title="Next Track (Right Arrow)" aria-label="Next Track">
+              <button type="button" class="ctrl-btn" id="btn-next-track" data-i18n-title="ctrl_next_title" data-i18n-aria-label="ctrl_next_aria" title="Next Track (Right Arrow)" aria-label="Next Track">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
                 </svg>
@@ -692,19 +700,19 @@
             </div>
 
             <!-- Playlist Launcher Pill -->
-            <button class="playlist-launcher-btn" id="btn-open-playlists" data-i18n-title="playlists_btn_title" title="Open Full Puja Playlists (Key P)">
+            <button type="button" class="playlist-launcher-btn" id="btn-open-playlists" data-i18n-title="playlists_btn_title" title="Open Full Puja Playlists (Key P)">
               <span class="launcher-pulse"></span>
               <span id="launcher-pill-text">PUJA RADIO</span>
               <span class="launcher-icon">⌄</span>
             </button>
 
             <!-- Minimize Player Dock Button -->
-            <button class="dock-minimize-btn" id="btn-minimize-dock" data-i18n-title="dock_minimize_title" data-i18n-aria-label="dock_minimize_aria" title="প্লেয়ার লুকিয়ে রাখুন (Minimize)" aria-label="Minimize Player Dock">✕</button>
+            <button type="button" class="dock-minimize-btn" id="btn-minimize-dock" data-i18n-title="dock_minimize_title" data-i18n-aria-label="dock_minimize_aria" title="প্লেয়ার লুকিয়ে রাখুন (Minimize)" aria-label="Minimize Player Dock">✕</button>
           </div>
         </div>
 
         <!-- Mobile UI: Floating Music Launcher & Collapsible Bottom Drawer (<768px) -->
-        <button class="mobile-floating-music-btn hide-on-desktop" id="btn-mobile-floating-music" data-i18n-title="launcher_title" data-i18n-aria-label="launcher_title" title="রেডিও প্লেয়ার খুলুন" aria-label="Open Mobile Radio">
+        <button type="button" class="mobile-floating-music-btn hide-on-desktop" id="btn-mobile-floating-music" data-i18n-title="launcher_title" data-i18n-aria-label="launcher_title" title="রেডিও প্লেয়ার খুলুন" aria-label="Open Mobile Radio">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
           </svg>
@@ -722,7 +730,7 @@
               <div class="mobile-pill-artist" id="mobile-track-artist">Monali Thakur</div>
             </div>
             <div class="mobile-pill-actions">
-              <button class="mobile-ctrl-btn" id="mobile-btn-play-pause" data-i18n-aria-label="ctrl_play_aria" aria-label="Play/Pause">
+              <button type="button" class="mobile-ctrl-btn" id="mobile-btn-play-pause" data-i18n-aria-label="ctrl_play_aria" aria-label="Play/Pause">
                 <svg id="mobile-icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M8 5v14l11-7z"/>
                 </svg>
@@ -730,30 +738,24 @@
                   <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                 </svg>
               </button>
-              <button class="mobile-ctrl-btn" id="mobile-btn-next-track" data-i18n-aria-label="ctrl_next_aria" aria-label="Next">
+              <button type="button" class="mobile-ctrl-btn" id="mobile-btn-next-track" data-i18n-aria-label="ctrl_next_aria" aria-label="Next">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
                 </svg>
               </button>
-              <button class="mobile-ctrl-btn mobile-minimize-btn" id="btn-minimize-mobile-dock" data-i18n-aria-label="dock_minimize_aria" aria-label="Minimize">✕</button>
+              <button type="button" class="mobile-ctrl-btn mobile-minimize-btn" id="btn-minimize-mobile-dock" data-i18n-aria-label="dock_minimize_aria" aria-label="Minimize">✕</button>
             </div>
           </div>
 
           <!-- Bottom Drawer Navigation Bar (One-Thumb Reachable) -->
           <nav class="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
-            <button class="mobile-nav-item" id="mobile-nav-radio" data-i18n-aria-label="tab_durga_puja" aria-label="Open Radio Playlists">
+            <button type="button" class="mobile-nav-item" id="mobile-nav-radio" data-i18n-aria-label="tab_durga_puja" aria-label="Open Radio Playlists">
               <span class="nav-label" data-i18n="nav_radio">রেডিও</span>
             </button>
-            <button class="mobile-nav-item primary-pulse" id="mobile-nav-dhak" data-i18n-aria-label="nav_dhak" aria-label="Open Dhak Beats">
-              <span class="nav-label" data-i18n="nav_dhak">ঢাকের বোল</span>
-            </button>
-            <button class="mobile-nav-item" id="mobile-nav-shankha" data-i18n-aria-label="nav_shankha" aria-label="Blow Shankha">
-              <span class="nav-label" data-i18n="nav_shankha">শাঁখ</span>
-            </button>
-            <button class="mobile-nav-item" id="mobile-nav-story" data-i18n-aria-label="nav_story" aria-label="Generate Story Card">
+            <button type="button" class="mobile-nav-item" id="mobile-nav-story" data-i18n-aria-label="nav_story" aria-label="Generate Story Card">
               <span class="nav-label" data-i18n="nav_story">স্টোরি</span>
             </button>
-            <button class="mobile-nav-item" id="mobile-nav-pujo" data-i18n-aria-label="nav_mondal_bari" aria-label="Mondal Barir Pujo Heritage">
+            <button type="button" class="mobile-nav-item" id="mobile-nav-pujo" data-i18n-aria-label="nav_mondal_bari" aria-label="Mondal Barir Pujo Heritage">
               <span class="nav-label" data-i18n="nav_mondal_bari">মন্ডল বাড়ি</span>
             </button>
           </nav>
@@ -775,15 +777,15 @@
               <span class="modal-subtitle" data-i18n="modal_playlists_sub">MONDAL BARI PUJO</span>
               <h2 class="modal-title" id="playlists-modal-title" data-i18n="modal_playlists_title">FESTIVE AUDIO PLAYLISTS</h2>
             </div>
-            <button class="close-btn" id="btn-close-playlists" aria-label="Close Playlists">✕</button>
+            <button type="button" class="close-btn" id="btn-close-playlists" aria-label="Close Playlists">✕</button>
           </div>
 
           <!-- Playlist Category Filter Tabs -->
           <div class="modal-tabs" role="tablist">
-            <button class="tab-pill active" data-playlist="durgaPuja" role="tab" aria-selected="true" data-i18n="tab_durga_puja">সেরা আগমনী (PUJA)</button>
-            <button class="tab-pill" data-playlist="ogMahalaya" role="tab" aria-selected="false" data-i18n="tab_og_mahalaya">মহালয়া (MAHALAYA)</button>
-            <button class="tab-pill" data-playlist="mahalayaSongs" role="tab" aria-selected="false" data-i18n="tab_mahalaya_songs">চণ্ডীপাঠ গান (SONGS)</button>
-            <button class="tab-pill" data-playlist="dhakVibes" role="tab" aria-selected="false" data-i18n="tab_dhak_vibes">ঢাকের বোল (DHAK)</button>
+            <button type="button" class="tab-pill active" data-playlist="durgaPuja" role="tab" aria-selected="true" data-i18n="tab_durga_puja">সেরা আগমনী (PUJA)</button>
+            <button type="button" class="tab-pill" data-playlist="ogMahalaya" role="tab" aria-selected="false" data-i18n="tab_og_mahalaya">মহালয়া (MAHALAYA)</button>
+            <button type="button" class="tab-pill" data-playlist="mahalayaSongs" role="tab" aria-selected="false" data-i18n="tab_mahalaya_songs">চণ্ডীপাঠ গান (SONGS)</button>
+            <button type="button" class="tab-pill" data-playlist="dhakVibes" role="tab" aria-selected="false" data-i18n="tab_dhak_vibes">ঢাকের বোল (DHAK)</button>
           </div>
 
           <div class="tab-description" id="playlist-tab-desc">
@@ -810,7 +812,7 @@
               <span class="modal-subtitle" data-i18n="modal_pujo_sub">BONEDI BARI HERITAGE</span>
               <h2 class="modal-title" id="pujo-modal-title" data-i18n="modal_pujo_title">মন্ডল বাড়ির পুজো (MONDAL BARIR PUJO)</h2>
             </div>
-            <button class="close-btn" id="btn-close-pujo-info" aria-label="Close Modal">✕</button>
+            <button type="button" class="close-btn" id="btn-close-pujo-info" aria-label="Close Modal">✕</button>
           </div>
 
           <div class="modal-body-scroll">
@@ -878,10 +880,10 @@
 
             <!-- Dual Actions: Story Generator & Social Share -->
             <div class="pujo-modal-actions-row">
-              <button class="story-launch-modal-btn" id="btn-modal-open-story">
+              <button type="button" class="story-launch-modal-btn" id="btn-modal-open-story">
                 <span data-i18n="btn_create_story">Create Instagram Story Card</span>
               </button>
-              <button class="share-invitation-btn" id="btn-share-website">
+              <button type="button" class="share-invitation-btn" id="btn-share-website">
                 <span data-i18n="btn_share_invite_wa">Share Puja Invitation (WhatsApp)</span>
               </button>
             </div>
@@ -903,7 +905,7 @@
               <span class="modal-subtitle" data-i18n="story_modal_sub">INSTAGRAM & WHATSAPP</span>
               <h2 class="modal-title" id="story-modal-title" data-i18n="story_modal_title">STORY & SHARE CARD GENERATOR</h2>
             </div>
-            <button class="close-btn" id="btn-close-story-gen" aria-label="Close Story Generator">✕</button>
+            <button type="button" class="close-btn" id="btn-close-story-gen" aria-label="Close Story Generator">✕</button>
           </div>
 
           <div class="story-gen-body">
@@ -919,11 +921,8 @@
               <div class="control-group">
                 <label class="control-label" data-i18n="story_theme_label">আবহ ও রঙের থিম (Atmosphere Theme)</label>
                 <div class="story-theme-selector" id="story-theme-selector">
-                  <button class="theme-btn active" data-theme="early-morning" data-i18n="story_theme_dawn">ভোর (Dawn)</button>
-                  <button class="theme-btn" data-theme="morning" data-i18n="story_theme_morning">সকাল (Morning)</button>
-                  <button class="theme-btn" data-theme="evening" data-i18n="story_theme_evening">সন্ধ্যা (Aarti)</button>
-                  <button class="theme-btn" data-theme="night" data-i18n="story_theme_night">রাত (Night)</button>
-                  <button class="theme-btn" data-theme="afternoon" data-i18n="story_theme_autumn">শরৎ (Autumn)</button>
+                  <button type="button" class="theme-btn active" data-theme="morning" data-i18n="story_theme_morning">🌅 সকাল (Morning)</button>
+                  <button type="button" class="theme-btn" data-theme="night" data-i18n="story_theme_night">🌙 রাত (Night)</button>
                 </div>
               </div>
 
@@ -959,13 +958,13 @@
 
               <!-- Action Buttons -->
               <div class="story-actions-wrapper">
-                <button class="story-action-btn primary-download" id="btn-download-story-png">
+                <button type="button" class="story-action-btn primary-download" id="btn-download-story-png">
                   <span data-i18n="story_btn_download">Download Story Card (PNG)</span>
                 </button>
-                <button class="story-action-btn share-native" id="btn-share-story-native">
+                <button type="button" class="story-action-btn share-native" id="btn-share-story-native">
                   <span data-i18n="story_btn_share">Share to Instagram / WhatsApp</span>
                 </button>
-                <button class="story-action-btn copy-caption" id="btn-copy-story-caption">
+                <button type="button" class="story-action-btn copy-caption" id="btn-copy-story-caption">
                   <span data-i18n="story_btn_caption">Copy Caption & Hashtags</span>
                 </button>
               </div>
@@ -987,21 +986,21 @@
               <span class="modal-subtitle" data-i18n="modal_dhak_sub">বনেদি বাড়ির সাবেকি তাল</span>
               <h2 class="modal-title" id="dhak-modal-title" data-i18n="modal_dhak_title">ঢাকের বোল স্টুডিও ও মাস্টার বাদন</h2>
             </div>
-            <button class="close-btn" id="btn-close-dhak" aria-label="Close Drum Studio">✕</button>
+            <button type="button" class="close-btn" id="btn-close-dhak" aria-label="Close Drum Studio">✕</button>
           </div>
 
           <!-- Audio Engine Source Selector / Switcher Bar -->
           <div class="dhak-engine-source-bar">
             <span class="engine-source-label" data-i18n="dhak_engine_label">অডিও ইঞ্জিন সোর্স:</span>
             <div class="engine-source-radios" role="radiogroup" aria-label="Dhak Audio Engine Source">
-              <button class="engine-source-btn active" id="btn-engine-pure" data-engine="pure" role="radio" aria-checked="true" title="Zero-Latency Pure Percussion — Gapless, Zero Talk, Continuous Loop">
+              <button type="button" class="engine-source-btn active" id="btn-engine-pure" data-engine="pure" role="radio" aria-checked="true" title="Zero-Latency Pure Percussion — Gapless, Zero Talk, Continuous Loop">
                 <span class="source-text-wrap">
                   <span class="source-name" data-i18n="dhak_engine_pure_name">সাবেকি খাঁটি স্টুডিও লুপার</span>
                   <span class="source-sub" data-i18n="dhak_engine_pure_sub">জিরো লেটেন্সি ও নিখুঁত মিউজিক্যাল কোয়ান্টাইজেশন</span>
                 </span>
                 <span class="source-badge-recommended" data-i18n="dhak_engine_default_badge">প্রধান</span>
               </button>
-              <button class="engine-source-btn" id="btn-engine-yt" data-engine="youtube" role="radio" aria-checked="false" title="Original Field Recording with Dhaki Speech (8EA8JrDMZbM)">
+              <button type="button" class="engine-source-btn" id="btn-engine-yt" data-engine="youtube" role="radio" aria-checked="false" title="Original Field Recording with Dhaki Speech (8EA8JrDMZbM)">
                 <span class="source-text-wrap">
                   <span class="source-name" data-i18n="dhak_engine_yt_name">মূল রেকর্ডকৃত বাদন</span>
                   <span class="source-sub" data-i18n="dhak_engine_yt_sub">মূল অডিও স্ট্রিম</span>
@@ -1012,14 +1011,14 @@
 
           <!-- Segmented Top Mode Switcher -->
           <div class="dhak-top-nav-tabs" role="tablist">
-            <button class="dhak-tab-btn active" id="tab-btn-live-dhak" data-view="live" role="tab" aria-selected="true">
+            <button type="button" class="dhak-tab-btn active" id="tab-btn-live-dhak" data-view="live" role="tab" aria-selected="true">
               <span class="tab-text-wrap">
                 <span class="tab-title-main" data-i18n="dhak_tab_live_main">খাঁটি ঢাকের ৬টি পর্ব ও লুপ</span>
                 <span class="tab-title-sub" data-i18n="dhak_tab_live_sub">সাবেকি ঢাকের খাঁটি বাদন</span>
               </span>
               <span class="tab-live-badge" id="tab-engine-indicator">খাঁটি ইঞ্জিন</span>
             </button>
-            <button class="dhak-tab-btn" id="tab-btn-synth-dhak" data-view="synth" role="tab" aria-selected="false">
+            <button type="button" class="dhak-tab-btn" id="tab-btn-synth-dhak" data-view="synth" role="tab" aria-selected="false">
               <span class="tab-text-wrap">
                 <span class="tab-title-main" data-i18n="dhak_tab_synth_main">ইন্টারেক্টিভ ড্রাম প্যাড ও সিকোয়েন্সার</span>
                 <span class="tab-title-sub" data-i18n="dhak_tab_synth_sub">নিজে বাজান ও তাল শিখুন</span>
@@ -1080,16 +1079,16 @@
                 <!-- Live Transport & Loop Controls -->
                 <div class="live-transport-row">
                   <div class="live-transport-buttons">
-                    <button class="live-ctrl-btn" id="btn-live-prev-part" data-i18n-title="dhak_prev_title" data-i18n-aria-label="dhak_prev_aria" title="Previous Part (1-Tap Seamless Transition)" aria-label="Previous Part">
+                    <button type="button" class="live-ctrl-btn" id="btn-live-prev-part" data-i18n-title="dhak_prev_title" data-i18n-aria-label="dhak_prev_aria" title="Previous Part (1-Tap Seamless Transition)" aria-label="Previous Part">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
                       </svg>
                     </button>
-                    <button class="live-ctrl-btn play-master" id="btn-live-play-pause" data-i18n-title="dhak_play_loop_title" data-i18n-aria-label="dhak_play_loop_title" title="Play / Pause Seamless Dhak Loop" aria-label="Play Live Dhak">
+                    <button type="button" class="live-ctrl-btn play-master" id="btn-live-play-pause" data-i18n-title="dhak_play_loop_title" data-i18n-aria-label="dhak_play_loop_title" title="Play / Pause Seamless Dhak Loop" aria-label="Play Live Dhak">
                       <span id="live-play-icon">▶</span>
                       <span id="live-play-label" data-i18n="dhak_play_loop">লুপ বাজান (Play Loop)</span>
                     </button>
-                    <button class="live-ctrl-btn" id="btn-live-next-part" data-i18n-title="dhak_next_title" data-i18n-aria-label="dhak_next_aria" title="Next Part (1-Tap Seamless Transition)" aria-label="Next Part">
+                    <button type="button" class="live-ctrl-btn" id="btn-live-next-part" data-i18n-title="dhak_next_title" data-i18n-aria-label="dhak_next_aria" title="Next Part (1-Tap Seamless Transition)" aria-label="Next Part">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
                       </svg>
@@ -1098,10 +1097,10 @@
 
                   <!-- Quick Accompany Triggers -->
                   <div class="live-quick-triggers">
-                    <button class="mini-trigger-btn" id="btn-live-shankha" data-i18n-title="dhak_trig_shankha_title" title="Blow Sacred Shankha (শাঁখ)">
+                    <button type="button" class="mini-trigger-btn" id="btn-live-shankha" data-i18n-title="dhak_trig_shankha_title" title="Blow Sacred Shankha (শাঁখ)">
                       <span data-i18n="dhak_trig_shankha">শাঁখ</span>
                     </button>
-                    <button class="mini-trigger-btn" id="btn-live-kashor" data-i18n-title="dhak_trig_kashor_title" title="Strike Bell-Metal Gong (কাঁসর)">
+                    <button type="button" class="mini-trigger-btn" id="btn-live-kashor" data-i18n-title="dhak_trig_kashor_title" title="Strike Bell-Metal Gong (কাঁসর)">
                       <span data-i18n="dhak_trig_kashor">কাঁসর</span>
                     </button>
                   </div>
@@ -1129,10 +1128,10 @@
 
                 <!-- Booster Quick Preset Pills -->
                 <div class="booster-presets-row">
-                  <button class="booster-preset-btn" data-preset="flat" data-i18n="booster_preset_flat">স্বাভাবিক</button>
-                  <button class="booster-preset-btn active" data-preset="bass-heavy" data-i18n="booster_preset_bass">বেস বুস্ট (+৬ ডেসিবেল)</button>
-                  <button class="booster-preset-btn" data-preset="crisp-snap" data-i18n="booster_preset_snap">কাঠি স্ন্যাপ (+৪ ডেসিবেল)</button>
-                  <button class="booster-preset-btn" data-preset="festival-loud" data-i18n="booster_preset_loud">মহোৎসব লাউডনেস (১৫০%)</button>
+                  <button type="button" class="booster-preset-btn" data-preset="flat" data-i18n="booster_preset_flat">স্বাভাবিক</button>
+                  <button type="button" class="booster-preset-btn active" data-preset="bass-heavy" data-i18n="booster_preset_bass">বেস বুস্ট (+৬ ডেসিবেল)</button>
+                  <button type="button" class="booster-preset-btn" data-preset="crisp-snap" data-i18n="booster_preset_snap">কাঠি স্ন্যাপ (+৪ ডেসিবেল)</button>
+                  <button type="button" class="booster-preset-btn" data-preset="festival-loud" data-i18n="booster_preset_loud">মহোৎসব লাউডনেস (১৫০%)</button>
                 </div>
 
                 <!-- Sliders Grid -->
@@ -1186,15 +1185,15 @@
               <div class="dhak-mode-selector-wrap">
                 <span class="dhak-section-label" data-i18n="dhak_style_label">বোল বাজনার শৈলী (Playing Style):</span>
                 <div class="dhak-mode-pills" id="dhak-style-modes" role="radiogroup" aria-label="Dhak Style Modes">
-                  <button class="dhak-mode-btn" data-mode="ak_kathi" role="radio" aria-checked="false">
+                  <button type="button" class="dhak-mode-btn" data-mode="ak_kathi" role="radio" aria-checked="false">
                     <span class="mode-title" data-i18n="dhak_style_ak">এক কাঠি</span>
                     <span class="mode-sub">এক কাঠি</span>
                   </button>
-                  <button class="dhak-mode-btn active" data-mode="duk_kathi" role="radio" aria-checked="true">
+                  <button type="button" class="dhak-mode-btn active" data-mode="duk_kathi" role="radio" aria-checked="true">
                     <span class="mode-title" data-i18n="dhak_style_duk">দুক কাঠি</span>
                     <span class="mode-sub">দুক কাঠি</span>
                   </button>
-                  <button class="dhak-mode-btn" data-mode="dankuni_hooghly_heritage" role="radio" aria-checked="false">
+                  <button type="button" class="dhak-mode-btn" data-mode="dankuni_hooghly_heritage" role="radio" aria-checked="false">
                     <span class="mode-title" data-i18n="dhak_style_dankuni">ডানকুনী ঘরানা</span>
                     <span class="mode-sub">ডানকুনী ঘরানা</span>
                   </button>
@@ -1253,32 +1252,32 @@
                   <span class="dhak-kbd-hint" data-i18n="dhak_pads_kbd_hint">কীবোর্ড [1 to 6] প্রেস করুন</span>
                 </div>
                 <div class="dhak-pad-container">
-                  <button class="drum-pad" id="pad-dha" data-key="1" aria-label="Dha Bass Pad">
+                  <button type="button" class="drum-pad" id="pad-dha" data-key="1" aria-label="Dha Bass Pad">
                     <strong class="drum-pad-label" data-i18n="pad_dha_label">ধা (Dha)</strong>
                     <span class="drum-pad-sub" data-i18n="pad_dha_sub">খোলা বেস (Bass)</span>
                     <span class="drum-pad-key">১</span>
                   </button>
-                  <button class="drum-pad" id="pad-dyang" data-key="2" aria-label="Dyang Bamboo Snap Pad">
+                  <button type="button" class="drum-pad" id="pad-dyang" data-key="2" aria-label="Dyang Bamboo Snap Pad">
                     <strong class="drum-pad-label" data-i18n="pad_dyang_label">ড্যাং (Dyang)</strong>
                     <span class="drum-pad-sub" data-i18n="pad_dyang_sub">কঞ্চি কাঠি (Snap)</span>
                     <span class="drum-pad-key">২</span>
                   </button>
-                  <button class="drum-pad" id="pad-ta" data-key="3" aria-label="Ta Rim Slap Pad">
+                  <button type="button" class="drum-pad" id="pad-ta" data-key="3" aria-label="Ta Rim Slap Pad">
                     <strong class="drum-pad-label" data-i18n="pad_ta_label">তা (Ta)</strong>
                     <span class="drum-pad-sub" data-i18n="pad_ta_sub">খোলা চাট্টি (Rim)</span>
                     <span class="drum-pad-key">৩</span>
                   </button>
-                  <button class="drum-pad" id="pad-kut" data-key="4" aria-label="Kut Ghost Mute Pad">
+                  <button type="button" class="drum-pad" id="pad-kut" data-key="4" aria-label="Kut Ghost Mute Pad">
                     <strong class="drum-pad-label" data-i18n="pad_kut_label">কুট (Kut)</strong>
                     <span class="drum-pad-sub" data-i18n="pad_kut_sub">মিউটেড খটকা (Mute)</span>
                     <span class="drum-pad-key">৪</span>
                   </button>
-                  <button class="drum-pad" id="pad-gurgur" data-key="5" aria-label="Gurgur Roll Pad">
+                  <button type="button" class="drum-pad" id="pad-gurgur" data-key="5" aria-label="Gurgur Roll Pad">
                     <strong class="drum-pad-label" data-i18n="pad_gurgur_label">গুড়গুড় (Roll)</strong>
                     <span class="drum-pad-sub" data-i18n="pad_gurgur_sub">দুই কাঠির রুল</span>
                     <span class="drum-pad-key">৫</span>
                   </button>
-                  <button class="drum-pad" id="pad-kashor" data-key="6" aria-label="Kanshor Bell Pad">
+                  <button type="button" class="drum-pad" id="pad-kashor" data-key="6" aria-label="Kanshor Bell Pad">
                     <strong class="drum-pad-label" data-i18n="pad_kashor_label">কাঁসর (Kanshor)</strong>
                     <span class="drum-pad-sub" data-i18n="pad_kashor_sub">কাঁসার ঘণ্টা (Gong)</span>
                     <span class="drum-pad-key">৬</span>
@@ -1299,7 +1298,7 @@
                   </div>
 
                   <!-- Tap Tempo Button -->
-                  <button class="dhak-tap-tempo-btn" id="btn-tap-tempo" title="Click rhythmically to set tempo">
+                  <button type="button" class="dhak-tap-tempo-btn" id="btn-tap-tempo" title="Click rhythmically to set tempo">
                     <span data-i18n="btn_tap_tempo">ট্যাপ টেম্পো</span>
                   </button>
                 </div>
@@ -1324,14 +1323,14 @@
 
                 <!-- Action Triggers: Master Bol Play/Stop, Quick Shankha & Kanshor -->
                 <div class="dhak-actions-grid">
-                  <button class="rhythm-loop-btn main-play-btn" id="btn-loop-dhak-rhythm">
+                  <button type="button" class="rhythm-loop-btn main-play-btn" id="btn-loop-dhak-rhythm">
                     <span class="loop-icon" id="dhak-play-icon">▶</span>
                     <span id="dhak-play-text" data-i18n="dhak_btn_play_bol">বোল বাজানো শুরু করুন (Play Bol)</span>
                   </button>
-                  <button class="dhak-quick-btn" id="btn-dhak-shankha" data-i18n-title="dhak_trig_shankha_title" title="Blow Conch Shell">
+                  <button type="button" class="dhak-quick-btn" id="btn-dhak-shankha" data-i18n-title="dhak_trig_shankha_title" title="Blow Conch Shell">
                     <span data-i18n="dhak_trig_shankha">শাঁখ</span>
                   </button>
-                  <button class="dhak-quick-btn" id="btn-dhak-kashor" data-i18n-title="dhak_trig_kashor_title" title="Strike Bell-Metal Gong">
+                  <button type="button" class="dhak-quick-btn" id="btn-dhak-kashor" data-i18n-title="dhak_trig_kashor_title" title="Strike Bell-Metal Gong">
                     <span data-i18n="dhak_trig_kashor">কাঁসর</span>
                   </button>
                 </div>
@@ -1353,7 +1352,7 @@
               <span class="modal-subtitle" data-i18n="shortcuts_sub">কীবোর্ড শর্টকাট সহায়িকা</span>
               <h2 class="modal-title" id="shortcuts-modal-title" data-i18n="shortcuts_title">কীবোর্ড শর্টকাট তালিকা</h2>
             </div>
-            <button class="close-btn" id="btn-close-shortcuts" aria-label="Close Shortcuts">✕</button>
+            <button type="button" class="close-btn" id="btn-close-shortcuts" aria-label="Close Shortcuts">✕</button>
           </div>
 
           <div class="shortcuts-content">
@@ -1428,15 +1427,15 @@
            ========================================== -->
       <div class="modal-backdrop gallery-lightbox-backdrop" id="gallery-lightbox-modal" role="dialog" aria-modal="true" data-i18n-aria-label="lightbox_aria" aria-label="Photo Lightbox">
         <div class="lightbox-container">
-          <button class="lightbox-close-btn" id="btn-close-lightbox" data-i18n-aria-label="lightbox_close" aria-label="Close Fullscreen View">✕</button>
+          <button type="button" class="lightbox-close-btn close-btn" data-close-modal="true" id="btn-close-lightbox" data-i18n-aria-label="lightbox_close" aria-label="Close Fullscreen View">✕</button>
 
           <!-- Navigation Arrows -->
-          <button class="lightbox-nav-btn prev-btn" id="btn-lightbox-prev" data-i18n-aria-label="lightbox_prev" data-i18n-title="lightbox_prev" aria-label="Previous Photo" title="Previous Photo (Left Arrow)">
+          <button type="button" class="lightbox-nav-btn prev-btn" id="btn-lightbox-prev" data-i18n-aria-label="lightbox_prev" data-i18n-title="lightbox_prev" aria-label="Previous Photo" title="Previous Photo (Left Arrow)">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
             </svg>
           </button>
-          <button class="lightbox-nav-btn next-btn" id="btn-lightbox-next" data-i18n-aria-label="lightbox_next" data-i18n-title="lightbox_next" aria-label="Next Photo" title="Next Photo (Right Arrow)">
+          <button type="button" class="lightbox-nav-btn next-btn" id="btn-lightbox-next" data-i18n-aria-label="lightbox_next" data-i18n-title="lightbox_next" aria-label="Next Photo" title="Next Photo (Right Arrow)">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
             </svg>
@@ -1460,14 +1459,14 @@
             </div>
 
             <div class="lightbox-actions">
-              <button class="lightbox-like-btn" id="btn-lightbox-like" aria-label="Give Blessing Pranam">
+              <button type="button" class="lightbox-like-btn" id="btn-lightbox-like" aria-label="Give Blessing Pranam">
                 <span id="lightbox-like-count">২৫৪</span>
                 <span data-i18n="lightbox_pranam">প্রণাম</span>
               </button>
-              <button class="lightbox-action-btn" id="btn-lightbox-download" data-i18n-title="lightbox_download_title" title="Download Photo to Device">
+              <button type="button" class="lightbox-action-btn" id="btn-lightbox-download" data-i18n-title="lightbox_download_title" title="Download Photo to Device">
                 <span data-i18n="lightbox_download">ডাউনলোড</span>
               </button>
-              <button class="lightbox-action-btn" id="btn-lightbox-share" data-i18n-title="lightbox_share_title" title="Share Photo on WhatsApp">
+              <button type="button" class="lightbox-action-btn" id="btn-lightbox-share" data-i18n-title="lightbox_share_title" title="Share Photo on WhatsApp">
                 <span data-i18n="lightbox_share">শেয়ার</span>
               </button>
             </div>
@@ -1533,5 +1532,7 @@
 
     <!-- Main Application Entrypoint -->
     <script type="module" src="/src/main.js"></script>
-  </body>
+    <!-- YouTube Hidden Audio Stream Host Container -->
+  <div id="yt-hidden-player" aria-hidden="true" style="position:fixed;bottom:-600px;right:-600px;width:240px;height:180px;pointer-events:none;opacity:0.001;z-index:-9999;"></div>
+</body>
 </html>

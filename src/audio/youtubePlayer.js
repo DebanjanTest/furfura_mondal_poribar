@@ -1,5 +1,5 @@
 // YouTube IFrame API Background Audio Integration & High-Precision Audio Stream Sync Engine
-// Supports Agomoni Puja Radio, 6-Segment Mahalaya Master & Authentic Live Dhak Percussion Playback
+// Supports Agomoni Puja Radio, 6-Segment Mahalaya Master & Continuous Loop Playback
 
 class YouTubeAudioPlayer {
   constructor() {
@@ -14,6 +14,7 @@ class YouTubeAudioPlayer {
     this.isAudioBoosted = false;
     this.isTransitioning = false;
     this.hasEndedFired = false;
+    this.pendingTrack = null;
     this.boostSettings = {
       bassBoostDb: 6,
       snapBoostDb: 4,
@@ -28,65 +29,74 @@ class YouTubeAudioPlayer {
 
   init(containerId = 'yt-hidden-player') {
     return new Promise((resolve) => {
-      if (window.YT && window.YT.Player) {
-        this.createPlayer(containerId, resolve);
-        return;
-      }
+      const onReadyCallback = () => {
+        let container = document.getElementById(containerId);
+        if (!container) {
+          container = document.createElement('div');
+          container.id = containerId;
+          container.style.position = 'fixed';
+          container.style.bottom = '-600px';
+          container.style.right = '-600px';
+          container.style.width = '240px';
+          container.style.height = '180px';
+          container.style.zIndex = '-9999';
+          container.style.opacity = '0.001';
+          container.style.pointerEvents = 'none';
+          document.body.appendChild(container);
+        }
 
-      // Load YouTube Iframe API script
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      window.onYouTubeIframeAPIReady = () => {
-        this.createPlayer(containerId, resolve);
-      };
-    });
-  }
-
-  createPlayer(containerId, resolve) {
-    let container = document.getElementById(containerId);
-    if (!container) {
-      container = document.createElement('div');
-      container.id = containerId;
-      container.style.position = 'fixed';
-      container.style.bottom = '-600px';
-      container.style.right = '-600px';
-      container.style.width = '240px';
-      container.style.height = '180px';
-      container.style.zIndex = '-9999';
-      container.style.opacity = '0.01';
-      container.style.pointerEvents = 'none';
-      document.body.appendChild(container);
-    }
-
-    this.player = new window.YT.Player(containerId, {
-      height: '180',
-      width: '240',
-      playerVars: {
-        enablejsapi: 1,
-        playsinline: 1,
-        controls: 0,
-        disablekb: 1,
-        fs: 0,
-        rel: 0,
-        modestbranding: 1,
-        autoplay: 1,
-        origin: window.location.origin
-      },
-      events: {
-        onReady: () => {
-          this.isReady = true;
-          this.player.setVolume(this.getEffectiveVolume());
+        try {
+          this.player = new window.YT.Player(containerId, {
+            height: '180',
+            width: '240',
+            playerVars: {
+              enablejsapi: 1,
+              playsinline: 1,
+              controls: 0,
+              disablekb: 1,
+              fs: 0,
+              rel: 0,
+              modestbranding: 1,
+              autoplay: 1,
+              origin: window.location.origin
+            },
+            events: {
+              onReady: () => {
+                this.isReady = true;
+                if (this.player && typeof this.player.setVolume === 'function') {
+                  this.player.setVolume(this.getEffectiveVolume());
+                }
+                if (this.pendingTrack) {
+                  const pt = this.pendingTrack;
+                  this.pendingTrack = null;
+                  this.loadTrack(pt.track, pt.playlistKey, pt.autoplay);
+                }
+                resolve();
+              },
+              onStateChange: (event) => {
+                this.handleStateChange(event);
+              },
+              onError: (err) => {
+                console.warn('YouTube Player notice code:', err.data);
+                this.notify({ type: 'error', data: err.data });
+              }
+            }
+          });
+        } catch (err) {
+          console.warn('Error creating YT.Player instance:', err);
           resolve();
-        },
-        onStateChange: (event) => {
-          this.handleStateChange(event);
-        },
-        onError: (err) => {
-          console.warn('YouTube Player error code:', err.data);
-          this.notify({ type: 'error', data: err.data });
+        }
+      };
+
+      if (window.YT && window.YT.Player) {
+        onReadyCallback();
+      } else {
+        window.onYouTubeIframeAPIReady = onReadyCallback;
+        if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+          const tag = document.createElement('script');
+          tag.src = 'https://www.youtube.com/iframe_api';
+          const firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }
       }
     });
@@ -108,7 +118,8 @@ class YouTubeAudioPlayer {
   }
 
   handleStateChange(event) {
-    // YT.PlayerState: -1 unstarted, 0 ended, 1 playing, 2 paused, 3 buffering, 5 cued
+    if (!window.YT) return;
+
     if (event.data === window.YT.PlayerState.PLAYING) {
       this.isPlaying = true;
       this.isTransitioning = false;
@@ -132,13 +143,8 @@ class YouTubeAudioPlayer {
       });
     } else if (event.data === window.YT.PlayerState.ENDED) {
       if (this.isLiveDhakMode && this.isLooping && this.currentTrack) {
-        // Continuous loop for Live Dhak mode
         this.seekTo(0);
         this.play();
-      } else if (this.isLiveDhakMode && !this.isLooping) {
-        this.isPlaying = false;
-        this.stopProgressTicker();
-        this.notify({ type: 'liveDhakEnded', part: this.currentTrack });
       } else {
         if (!this.hasEndedFired) {
           this.hasEndedFired = true;
@@ -161,7 +167,6 @@ class YouTubeAudioPlayer {
     this.isTransitioning = true;
     this.hasEndedFired = false;
 
-    // Immediately notify UI of the track change for zero-latency metadata sync
     this.notify({
       type: 'trackChange',
       track: this.currentTrack,
@@ -170,8 +175,8 @@ class YouTubeAudioPlayer {
       isLiveDhak: false
     });
 
-    if (!this.player || !this.isReady) {
-      console.warn('Player not yet ready, queued for initial playback');
+    if (!this.player || !this.isReady || typeof this.player.loadVideoById !== 'function') {
+      this.pendingTrack = { track, playlistKey, autoplay };
       return;
     }
 
@@ -181,98 +186,39 @@ class YouTubeAudioPlayer {
     if (this.cueDebounceTimer) clearTimeout(this.cueDebounceTimer);
 
     this.cueDebounceTimer = setTimeout(() => {
-      // Seamless seek if the same video is already loaded (e.g. Mahalaya chapters)
-      if (this.currentVideoId === targetVideoId) {
-        this.player.seekTo(startSeconds, true);
-        if (autoplay) {
-          this.player.playVideo();
-          this.isPlaying = true;
+      try {
+        if (this.currentVideoId === targetVideoId) {
+          this.player.seekTo(startSeconds, true);
+          if (autoplay) {
+            this.player.playVideo();
+            this.isPlaying = true;
+          } else {
+            this.player.pauseVideo();
+            this.isPlaying = false;
+          }
         } else {
-          this.player.pauseVideo();
-          this.isPlaying = false;
+          this.currentVideoId = targetVideoId;
+          if (autoplay) {
+            this.player.loadVideoById({
+              videoId: targetVideoId,
+              startSeconds: startSeconds
+            });
+            this.isPlaying = true;
+          } else {
+            this.player.cueVideoById({
+              videoId: targetVideoId,
+              startSeconds: startSeconds
+            });
+            this.isPlaying = false;
+          }
         }
-      } else {
-        this.currentVideoId = targetVideoId;
-        if (autoplay) {
-          this.player.loadVideoById({
-            videoId: targetVideoId,
-            startSeconds: startSeconds
-          });
-          this.isPlaying = true;
-        } else {
-          this.player.cueVideoById({
-            videoId: targetVideoId,
-            startSeconds: startSeconds
-          });
-          this.isPlaying = false;
+        if (typeof this.player.setVolume === 'function') {
+          this.player.setVolume(this.getEffectiveVolume());
         }
+      } catch (err) {
+        console.warn('Error cueing video:', err);
       }
-      this.player.setVolume(this.getEffectiveVolume());
     }, 40);
-  }
-
-  // Dedicated Authentic Live Dhak Part Cueing & Continuous Playback
-  playLiveDhakPart(part, loop = true) {
-    if (!part) return;
-
-    this.currentTrack = part;
-    this.currentPlaylistKey = 'liveDhakMaster';
-    this.isLiveDhakMode = true;
-    this.isLooping = loop;
-    this.isTransitioning = true;
-    this.hasEndedFired = false;
-
-    this.notify({
-      type: 'liveDhakChange',
-      part: this.currentTrack,
-      isLooping: this.isLooping,
-      isPlaying: true
-    });
-
-    if (!this.player || !this.isReady) {
-      console.warn('Player not yet ready for Live Dhak');
-      return;
-    }
-
-    const targetVideoId = part.videoId || '8EA8JrDMZbM';
-    const startSeconds = part.start || 0;
-
-    if (this.cueDebounceTimer) clearTimeout(this.cueDebounceTimer);
-
-    this.cueDebounceTimer = setTimeout(() => {
-      if (this.currentVideoId === targetVideoId) {
-        this.player.seekTo(startSeconds, true);
-        this.player.playVideo();
-      } else {
-        this.currentVideoId = targetVideoId;
-        this.player.loadVideoById({
-          videoId: targetVideoId,
-          startSeconds: startSeconds
-        });
-      }
-      this.isPlaying = true;
-      this.player.setVolume(this.getEffectiveVolume());
-    }, 40);
-  }
-
-  setLiveDhakLoop(isLooping) {
-    this.isLooping = Boolean(isLooping);
-    this.notify({ type: 'loopChange', isLooping: this.isLooping });
-  }
-
-  setAudioBooster(settings = {}) {
-    this.boostSettings = { ...this.boostSettings, ...settings };
-    if (typeof settings.boosted === 'boolean') {
-      this.isAudioBoosted = settings.boosted;
-    }
-    if (this.player && this.isReady && typeof this.player.setVolume === 'function') {
-      this.player.setVolume(this.getEffectiveVolume());
-    }
-    this.notify({
-      type: 'boostChange',
-      isBoosted: this.isAudioBoosted,
-      settings: this.boostSettings
-    });
   }
 
   getEffectiveVolume() {
@@ -286,27 +232,33 @@ class YouTubeAudioPlayer {
 
   play() {
     if (this.player && this.isReady && typeof this.player.playVideo === 'function') {
-      this.player.playVideo();
-      this.isPlaying = true;
-      this.notify({
-        type: 'state',
-        isPlaying: true,
-        isLiveDhak: this.isLiveDhakMode,
-        track: this.currentTrack
-      });
+      try {
+        this.player.playVideo();
+        this.isPlaying = true;
+        this.notify({
+          type: 'state',
+          isPlaying: true,
+          isLiveDhak: this.isLiveDhakMode,
+          track: this.currentTrack
+        });
+      } catch (e) {}
+    } else if (this.currentTrack) {
+      this.loadTrack(this.currentTrack, this.currentPlaylistKey, true);
     }
   }
 
   pause() {
     if (this.player && this.isReady && typeof this.player.pauseVideo === 'function') {
-      this.player.pauseVideo();
-      this.isPlaying = false;
-      this.notify({
-        type: 'state',
-        isPlaying: false,
-        isLiveDhak: this.isLiveDhakMode,
-        track: this.currentTrack
-      });
+      try {
+        this.player.pauseVideo();
+        this.isPlaying = false;
+        this.notify({
+          type: 'state',
+          isPlaying: false,
+          isLiveDhak: this.isLiveDhakMode,
+          track: this.currentTrack
+        });
+      } catch (e) {}
     }
   }
 
@@ -320,45 +272,24 @@ class YouTubeAudioPlayer {
 
   seekTo(seconds) {
     if (this.player && this.isReady && typeof this.player.seekTo === 'function') {
-      const trackStart = this.currentTrack?.start || 0;
-      const actualTarget = Math.max(0, trackStart + seconds);
-      this.player.seekTo(actualTarget, true);
+      try {
+        const trackStart = this.currentTrack?.start || 0;
+        const actualTarget = Math.max(0, trackStart + seconds);
+        this.player.seekTo(actualTarget, true);
+      } catch (e) {}
     }
   }
 
   setVolume(val) {
     this.volume = Math.max(0, Math.min(100, val));
     if (this.player && this.isReady && typeof this.player.setVolume === 'function') {
-      this.player.setVolume(this.getEffectiveVolume());
-      if (this.isMuted && this.volume > 0) {
-        this.player.unMute();
-        this.isMuted = false;
-      }
-    }
-    this.notify({ type: 'volume', volume: this.volume, isMuted: this.isMuted });
-  }
-
-  toggleMute() {
-    if (this.player && this.isReady) {
-      if (this.isMuted) {
-        this.player.unMute();
-        this.isMuted = false;
-      } else {
-        this.player.mute();
-        this.isMuted = true;
-      }
-      this.notify({ type: 'volume', volume: this.volume, isMuted: this.isMuted });
-    }
-  }
-
-  setMute(isMuted) {
-    this.isMuted = !!isMuted;
-    if (this.player && this.isReady) {
-      if (this.isMuted) {
-        if (typeof this.player.mute === 'function') this.player.mute();
-      } else {
-        if (typeof this.player.unMute === 'function') this.player.unMute();
-      }
+      try {
+        this.player.setVolume(this.getEffectiveVolume());
+        if (this.isMuted && this.volume > 0) {
+          this.player.unMute();
+          this.isMuted = false;
+        }
+      } catch (e) {}
     }
     this.notify({ type: 'volume', volume: this.volume, isMuted: this.isMuted });
   }
@@ -367,7 +298,7 @@ class YouTubeAudioPlayer {
     this.stopProgressTicker();
     this.progressInterval = setInterval(() => {
       this.checkTrackBounds();
-    }, 200);
+    }, 250);
   }
 
   stopProgressTicker() {
@@ -391,35 +322,11 @@ class YouTubeAudioPlayer {
       const trackDuration = this.currentTrack?.duration ||
         (trackEnd !== null ? Math.max(1, trackEnd - trackStart) : (this.player.getDuration() || 0));
 
-      // Handle Segment Boundary Reached (for segmented broadcasts or Live Dhak parts)
       if (trackEnd !== null && rawCurrent >= (trackEnd - 0.3)) {
-        if (this.isLiveDhakMode && this.isLooping) {
-          this.player.seekTo(trackStart, true);
-          this.notify({
-            type: 'timeUpdate',
-            currentTime: 0,
-            duration: trackDuration,
-            progress: 0,
-            isLiveDhak: true,
-            part: this.currentTrack
-          });
-          return;
-        } else if (this.isLiveDhakMode && !this.isLooping) {
-          this.pause();
-          this.notify({ type: 'liveDhakEnded', part: this.currentTrack });
-          return;
-        } else {
-          if (!this.hasEndedFired) {
-            this.hasEndedFired = true;
-            this.notify({ type: 'ended', isLiveDhak: false, track: this.currentTrack });
-          }
-          return;
+        if (!this.hasEndedFired) {
+          this.hasEndedFired = true;
+          this.notify({ type: 'ended', isLiveDhak: false, track: this.currentTrack });
         }
-      }
-
-      // Guard if player time is before track start
-      if (trackStart > 0 && rawCurrent < trackStart - 0.4) {
-        this.player.seekTo(trackStart, true);
         return;
       }
 
@@ -431,13 +338,10 @@ class YouTubeAudioPlayer {
         currentTime: relativeCurrent,
         duration: trackDuration,
         progress: progress,
-        isLiveDhak: this.isLiveDhakMode,
-        part: this.currentTrack,
+        isLiveDhak: false,
         track: this.currentTrack
       });
-    } catch (e) {
-      // Ignore transient ticker exceptions
-    }
+    } catch (e) {}
   }
 }
 

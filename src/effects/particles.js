@@ -1,7 +1,9 @@
-// Atmospheric Particles: Falling Shiuli Flowers, Golden Sparkles & Floating Kash Phool
+// Atmospheric Particles: Authentic Falling Shiuli Flowers, Golden Sparkles & Floating Kash Phool
+// Built with Ponytail Canvas Rendering Standards
 
 export class ParticleSystem {
-  constructor(canvasId) {
+  constructor(canvasId = 'particle-canvas') {
+    this.canvasId = canvasId;
     this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas ? this.canvas.getContext('2d') : null;
     this.particles = [];
@@ -12,17 +14,27 @@ export class ParticleSystem {
   }
 
   init() {
+    this.canvas = document.getElementById(this.canvasId);
     if (!this.canvas) return;
+    this.ctx = this.canvas.getContext('2d');
     this.resize();
+    window.removeEventListener('resize', this.resizeHandler);
     window.addEventListener('resize', this.resizeHandler);
     this.createParticles();
-    this.animate();
+    if (!this.animationFrame) {
+      this.animate();
+    }
   }
 
   resize() {
     if (!this.canvas) return;
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.canvas.width = window.innerWidth * dpr;
+    this.canvas.height = window.innerHeight * dpr;
+    if (this.ctx) {
+      this.ctx.resetTransform();
+      this.ctx.scale(dpr, dpr);
+    }
   }
 
   setTimeOfDay(time) {
@@ -32,79 +44,130 @@ export class ParticleSystem {
 
   createParticles() {
     this.particles = [];
-    const count = window.innerWidth < 768 ? 24 : 45;
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 32 : 55;
 
     for (let i = 0; i < count; i++) {
+      // Particle types: 70% Shiuli flowers, 20% golden sparks/diya glow, 10% kash phool wisps
+      const rand = Math.random();
+      let type = 'shiuli';
+      if (rand > 0.8) type = 'sparkle';
+      else if (rand > 0.7) type = 'kash';
+
       this.particles.push({
-        x: Math.random() * this.canvas.width,
-        y: Math.random() * this.canvas.height,
-        size: Math.random() * 8 + 6,
-        speedY: Math.random() * 1.2 + 0.4,
-        speedX: (Math.random() - 0.5) * 0.8,
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: type === 'shiuli' ? (Math.random() * 8 + 7) : (Math.random() * 5 + 3),
+        speedY: type === 'sparkle' ? (Math.random() * 0.8 + 0.3) : (Math.random() * 1.2 + 0.5),
+        speedX: (Math.random() - 0.5) * 0.6,
+        swayAmplitude: Math.random() * 1.5 + 0.8,
+        swayFrequency: Math.random() * 0.02 + 0.01,
+        swayPhase: Math.random() * Math.PI * 2,
         rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.03,
-        opacity: Math.random() * 0.7 + 0.3,
-        petalColor: this.timeOfDay === 'night' || this.timeOfDay === 'midnight' ? '#ffd700' : '#ffffff',
-        stalkColor: '#ff6600', // Traditional Shiuli orange stem
-        type: (this.timeOfDay === 'night' || this.timeOfDay === 'midnight') ? 'sparkle' : 'shiuli'
+        rotationSpeed: (Math.random() - 0.5) * 0.025,
+        opacity: Math.random() * 0.45 + 0.55,
+        type: type,
+        petalCount: 6
       });
     }
   }
 
   animate() {
-    if (!this.enabled || !this.ctx) return;
+    if (!this.enabled || !this.ctx || !this.canvas) return;
 
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    this.ctx.clearRect(0, 0, w, h);
+
+    const isNight = this.timeOfDay === 'night' || this.timeOfDay === 'midnight';
 
     this.particles.forEach((p) => {
+      // Physics updates
       p.y += p.speedY;
-      p.x += p.speedX + Math.sin(p.y * 0.01) * 0.3;
+      p.swayPhase += p.swayFrequency;
+      p.x += p.speedX + Math.sin(p.swayPhase) * p.swayAmplitude;
       p.rotation += p.rotationSpeed;
 
-      if (p.y > this.canvas.height + 20) {
-        p.y = -20;
-        p.x = Math.random() * this.canvas.width;
+      // Wrap around screen boundaries
+      if (p.y > h + 30) {
+        p.y = -30;
+        p.x = Math.random() * w;
       }
-      if (p.x > this.canvas.width + 20) p.x = -20;
-      if (p.x < -20) p.x = this.canvas.width + 20;
+      if (p.x > w + 30) p.x = -30;
+      if (p.x < -30) p.x = w + 30;
 
       this.ctx.save();
       this.ctx.translate(p.x, p.y);
       this.ctx.rotate(p.rotation);
       this.ctx.globalAlpha = p.opacity;
 
-      if (p.type === 'sparkle') {
+      if (p.type === 'shiuli') {
+        // ==========================================
+        // AUTHENTIC BENGALI SHIULI FLOWER
+        // Pure white 6 petals with brilliant saffron-orange tube center
+        // ==========================================
+        const radius = p.size;
+        const petalCount = p.petalCount || 6;
+
+        // 1. Draw central bright saffron-orange star / stalk core
+        this.ctx.beginPath();
+        this.ctx.fillStyle = isNight ? '#ff7700' : '#ff5500';
+        this.ctx.arc(0, 0, radius * 0.38, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // 2. Draw 6 radiating soft white petals
+        for (let j = 0; j < petalCount; j++) {
+          const angle = (j * Math.PI * 2) / petalCount;
+          const px = Math.cos(angle) * (radius * 0.72);
+          const py = Math.sin(angle) * (radius * 0.72);
+
+          this.ctx.save();
+          this.ctx.translate(px, py);
+          this.ctx.rotate(angle);
+
+          // Petal Gradient for realistic soft petal texture
+          const petalGrad = this.ctx.createLinearGradient(-radius * 0.3, 0, radius * 0.6, 0);
+          if (isNight) {
+            petalGrad.addColorStop(0, '#ffa044'); // warm glow at inner root
+            petalGrad.addColorStop(0.3, 'rgba(255, 250, 240, 0.95)');
+            petalGrad.addColorStop(1, 'rgba(255, 255, 255, 0.85)');
+          } else {
+            petalGrad.addColorStop(0, '#ff6600'); // saffron root
+            petalGrad.addColorStop(0.28, '#ffffff');
+            petalGrad.addColorStop(1, '#fbfcfe');
+          }
+
+          this.ctx.fillStyle = petalGrad;
+          this.ctx.beginPath();
+          this.ctx.ellipse(0, 0, radius * 0.52, radius * 0.28, 0, 0, Math.PI * 2);
+          this.ctx.fill();
+
+          this.ctx.restore();
+        }
+
+        // 3. Central pinhole dot
+        this.ctx.beginPath();
+        this.ctx.fillStyle = '#d84000';
+        this.ctx.arc(0, 0, radius * 0.16, 0, Math.PI * 2);
+        this.ctx.fill();
+
+      } else if (p.type === 'sparkle') {
         // Glowing Golden Firefly / Diya Sparkle
-        const grad = this.ctx.createRadialGradient(0, 0, 0, 0, 0, p.size);
-        grad.addColorStop(0, 'rgba(255, 245, 180, 1)');
-        grad.addColorStop(0.4, 'rgba(255, 180, 50, 0.7)');
+        const grad = this.ctx.createRadialGradient(0, 0, 0, 0, 0, p.size * 1.5);
+        grad.addColorStop(0, 'rgba(255, 250, 190, 1)');
+        grad.addColorStop(0.35, 'rgba(255, 190, 50, 0.8)');
         grad.addColorStop(1, 'rgba(255, 140, 0, 0)');
         this.ctx.fillStyle = grad;
         this.ctx.beginPath();
-        this.ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+        this.ctx.arc(0, 0, p.size * 1.5, 0, Math.PI * 2);
         this.ctx.fill();
-      } else {
-        // Authentic Shiuli Flower (White 6 petals + bright orange tube center)
-        const petalCount = 6;
-        const radius = p.size;
 
-        // Draw orange central stalk/core
-        this.ctx.fillStyle = '#ff6b00';
+      } else if (p.type === 'kash') {
+        // Kash Phool Soft Autumnal Feather Wisp
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
         this.ctx.beginPath();
-        this.ctx.arc(0, 0, radius * 0.35, 0, Math.PI * 2);
+        this.ctx.ellipse(0, 0, p.size * 1.6, p.size * 0.45, Math.PI / 4, 0, Math.PI * 2);
         this.ctx.fill();
-
-        // Draw white petals
-        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-        for (let j = 0; j < petalCount; j++) {
-          const angle = (j * Math.PI * 2) / petalCount;
-          const px = Math.cos(angle) * (radius * 0.7);
-          const py = Math.sin(angle) * (radius * 0.7);
-
-          this.ctx.beginPath();
-          this.ctx.ellipse(px, py, radius * 0.45, radius * 0.25, angle, 0, Math.PI * 2);
-          this.ctx.fill();
-        }
       }
 
       this.ctx.restore();
@@ -118,14 +181,16 @@ export class ParticleSystem {
     if (this.enabled) {
       this.animate();
     } else {
-      cancelAnimationFrame(this.animationFrame);
-      if (this.ctx) this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
+      this.animationFrame = null;
+      if (this.ctx) this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     }
     return this.enabled;
   }
 
   destroy() {
-    cancelAnimationFrame(this.animationFrame);
+    if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
+    this.animationFrame = null;
     window.removeEventListener('resize', this.resizeHandler);
   }
 }

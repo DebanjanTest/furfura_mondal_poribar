@@ -112,81 +112,54 @@ function initAtmosphere() {
     }
   }, 60000);
 
-  // Vibe Dropdown Toggle
-  const dropdownBtn = document.getElementById('btn-vibe-dropdown');
-  const dropdownMenu = document.getElementById('vibe-menu');
-
-  dropdownBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isExpanded = dropdownMenu.classList.toggle('show');
-    dropdownBtn.setAttribute('aria-expanded', isExpanded);
-  });
-
-  document.addEventListener('click', () => {
-    dropdownMenu?.classList.remove('show');
-    dropdownBtn?.setAttribute('aria-expanded', 'false');
-  });
-
-  // Vibe Selection Items
-  const vibeItems = document.querySelectorAll('.vibe-item');
-  vibeItems.forEach((btn) => {
+  // Vibe Selection in Island
+  document.querySelectorAll('.island-vibe-chip[data-vibe]').forEach((btn) => {
     btn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
       const selectedVibe = btn.getAttribute('data-vibe');
       state.activeVibe = selectedVibe;
       updateAtmosphere();
-      dropdownMenu?.classList.remove('show');
-      dropdownBtn?.setAttribute('aria-expanded', 'false');
     });
   });
 }
 
 function updateAtmosphere() {
-  const effectiveTime = state.activeVibe === 'auto' ? getTimeOfDay() : state.activeVibe;
+  const currentHour = new Date().getHours();
+  const autoVibe = (currentHour >= 6 && currentHour < 18) ? 'morning' : 'night';
+  const effectiveTime = state.activeVibe === 'auto' ? autoVibe : (state.activeVibe === 'night' ? 'night' : 'morning');
   state.currentVibeTime = effectiveTime;
 
-  // Background scenic layers
-  const allBgs = document.querySelectorAll('.bg-layer');
-  allBgs.forEach((bg) => bg.classList.remove('active'));
+  document.documentElement.setAttribute('data-theme', effectiveTime);
 
-  const targetBg = document.getElementById(`bg-${effectiveTime}`) || document.getElementById('bg-mondal-hero') || allBgs[0];
-  if (targetBg) {
-    targetBg.classList.add('active');
+  // Switch background picture layers and inner img elements
+  const morningPicture = document.getElementById('bg-layer-morning');
+  const nightPicture = document.getElementById('bg-layer-night');
+  const morningImg = document.getElementById('bg-morning');
+  const nightImg = document.getElementById('bg-night');
+
+  if (effectiveTime === 'night') {
+    morningPicture?.classList.remove('active');
+    morningImg?.classList.remove('active');
+    nightPicture?.classList.add('active');
+    nightImg?.classList.add('active');
+  } else {
+    nightPicture?.classList.remove('active');
+    nightImg?.classList.remove('active');
+    morningPicture?.classList.add('active');
+    morningImg?.classList.add('active');
   }
 
-  // Dropdown Label & Icon
-  const lang = getLanguage();
-  const vibeLabels = {
-    'early-morning': { icon: '', label: lang === 'bn' ? 'ভোর (Dawn)' : 'Dawn (Bhor)' },
-    'morning': { icon: '', label: lang === 'bn' ? 'সকাল (Morning)' : 'Morning (Sokal)' },
-    'afternoon': { icon: '', label: lang === 'bn' ? 'দুপুর (Afternoon)' : 'Afternoon (Dupur)' },
-    'evening': { icon: '', label: lang === 'bn' ? 'সন্ধ্যা (Aarti)' : 'Evening (Sandhya)' },
-    'night': { icon: '', label: lang === 'bn' ? 'রাত (Night)' : 'Night (Raat)' },
-    'midnight': { icon: '', label: lang === 'bn' ? 'মধ্যরাত (Midnight)' : 'Midnight (Modhyoraat)' }
-  };
-
-  const currentInfo = vibeLabels[effectiveTime] || vibeLabels['morning'];
-  const iconEl = document.getElementById('current-vibe-icon');
-  const labelEl = document.getElementById('current-vibe-label');
-
-  if (iconEl) iconEl.textContent = currentInfo.icon;
-  if (labelEl) {
-    const autoSuffix = lang === 'bn' ? ' (স্বয়ংক্রিয়)' : ' (Auto)';
-    labelEl.textContent = state.activeVibe === 'auto' ? `${currentInfo.label}${autoSuffix}` : currentInfo.label;
-  }
-
-  // Active state on dropdown items
-  document.querySelectorAll('.vibe-item').forEach((item) => {
-    item.classList.toggle('active', item.getAttribute('data-vibe') === state.activeVibe);
-  });
-
-  // Active state on island vibe chips
-  document.querySelectorAll('.island-vibe-chip').forEach((chip) => {
-    chip.classList.toggle('active', chip.getAttribute('data-vibe') === state.activeVibe);
+  // Update active state on island vibe chips
+  document.querySelectorAll('.island-vibe-chip[data-vibe]').forEach((chip) => {
+    const chipVibe = chip.getAttribute('data-vibe');
+    const isActive = chipVibe === state.activeVibe;
+    chip.classList.toggle('active', isActive);
+    chip.setAttribute('aria-pressed', isActive ? 'true' : 'false');
   });
 
   // Update particles color & lighting theme
-  if (particles) {
+  if (particles && typeof particles.setTimeOfDay === 'function') {
     particles.setTimeOfDay(effectiveTime);
   }
 }
@@ -219,11 +192,7 @@ function initDynamicIsland() {
 
   // Active Island Tap -> Opens Player Sheet (Playlists or Dhak)
   activeTapTarget?.addEventListener('click', () => {
-    if (state.isLiveDhakPlaying) {
-      openModal('dhak-modal');
-    } else {
-      openModal('playlists-modal');
-    }
+    openModal('playlists-modal');
   });
 
   // Island Play / Pause Touch Trigger
@@ -263,7 +232,7 @@ function initDynamicIsland() {
 
   document.getElementById('island-quick-dhak')?.addEventListener('click', (e) => {
     e.stopPropagation();
-    openModal('dhak-modal');
+    openModal('playlists-modal');
     island?.classList.remove('drawer-open');
   });
 
@@ -806,7 +775,7 @@ function initSoundTriggers() {
 
   // Dhak Studio Modal Openers
   const openDhakModal = () => {
-    openModal('dhak-modal');
+    openModal('playlists-modal');
   };
 
   document.getElementById('btn-quick-dhak')?.addEventListener('click', openDhakModal);
@@ -824,6 +793,8 @@ function initSoundTriggers() {
 }
 
 function initDhakStudio() {
+  const dhakModal = document.getElementById('dhak-modal');
+  if (!dhakModal) return;
   // -------------------------------------------------------------
   // A. Audio Engine Source Switcher (Pure Web Audio vs YouTube Stream)
   // -------------------------------------------------------------
@@ -2365,6 +2336,21 @@ function renderOnnotaGrid() {
 }
 
 function initGalleryLightbox() {
+
+  // Fullscreen Lightbox close on backdrop click
+  const lightboxModal = document.getElementById('gallery-lightbox-modal');
+  lightboxModal?.addEventListener('click', (e) => {
+    if (e.target === lightboxModal || e.target.classList.contains('gallery-lightbox-backdrop')) {
+      closeModal('gallery-lightbox-modal');
+    }
+  });
+
+  document.getElementById('btn-close-lightbox')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeModal('gallery-lightbox-modal');
+  });
+
   const modal = document.getElementById('gallery-lightbox-modal');
   const closeBtn = document.getElementById('btn-close-lightbox');
   const prevBtn = document.getElementById('btn-lightbox-prev');
@@ -2506,18 +2492,22 @@ function updateLightboxUI() {
    ========================================================================== */
 
 function initStoryGenerator() {
-  // Triggers to open story generator
-  document.getElementById('btn-open-story-gen')?.addEventListener('click', () => {
-    openModal('story-generator-modal');
-    renderStoryCanvas();
-  });
-  document.getElementById('btn-trig-story-gen')?.addEventListener('click', () => {
-    openModal('story-generator-modal');
-    renderStoryCanvas();
-  });
-  document.getElementById('mobile-nav-story')?.addEventListener('click', () => {
-    openModal('story-generator-modal');
-    renderStoryCanvas();
+
+  // All Story Generator triggers
+  const storyTriggers = [
+    'btn-open-story-gen',
+    'btn-trig-story-gen',
+    'mobile-nav-story',
+    'btn-modal-open-story',
+    'island-quick-story'
+  ];
+
+  storyTriggers.forEach((id) => {
+    document.getElementById(id)?.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal('story-generator-modal');
+      renderStoryCanvas();
+    });
   });
 
   // Story Theme Buttons
@@ -2956,7 +2946,7 @@ function initKeyboardShortcuts() {
     }
     // 'D': Dhak Studio Modal
     else if (key.toLowerCase() === 'd') {
-      openModal('dhak-modal');
+      openModal('playlists-modal');
     }
     // '1': Dhak Bass (ধা)
     else if (key === '1') {
@@ -3017,6 +3007,74 @@ function initKeyboardShortcuts() {
 }
 
 function initModals() {
+
+// Universal Click Delegation for all Interactive Modals and Section Links (Ponytail Engine)
+document.addEventListener('click', (e) => {
+  const target = e.target;
+  if (!target) return;
+
+  // 1. Story Generator triggers
+  if (target.closest('#btn-trig-story-gen, #island-quick-story, #mobile-nav-story, #btn-modal-open-story, .story-launch-modal-btn')) {
+    e.preventDefault();
+    openModal('story-generator-modal');
+    return;
+  }
+
+  // 2. Puja Schedule & Rituals triggers
+  if (target.closest('#btn-footer-open-schedule, #btn-onnota-open-schedule, .countdown-footer-badge, #countdown-sub-label, #btn-open-pujo-info, #mobile-nav-pujo, .btn-footer-schedule')) {
+    e.preventDefault();
+    openModal('pujo-info-modal');
+    return;
+  }
+
+  // 3. Playlists & Festive Radio triggers
+  if (target.closest('#btn-open-playlists, #island-quick-radio, #mobile-nav-radio, #player-art-btn, #mobile-media-pill-btn')) {
+    e.preventDefault();
+    openModal('playlists-modal');
+    return;
+  }
+
+  // 4. Modal Close buttons
+  if (target.closest('.close-btn, .lightbox-close-btn, #btn-close-lightbox, [data-close-modal]')) {
+    e.preventDefault();
+    e.stopPropagation();
+    const modal = target.closest('.modal-backdrop, .gallery-lightbox-backdrop') || document.getElementById('gallery-lightbox-modal');
+    if (modal) {
+      modal.classList.remove('active');
+    }
+    closeModal('gallery-lightbox-modal');
+    closeAllModals();
+    document.body.style.overflow = '';
+    return;
+  }
+});
+
+
+  // Wire all Puja Schedule & Rituals triggers across the platform
+  const scheduleButtons = [
+    'btn-footer-open-schedule',
+    'btn-onnota-open-schedule',
+    'countdown-sub-label',
+    'btn-open-pujo-info',
+    'mobile-nav-pujo'
+  ];
+
+  scheduleButtons.forEach((btnId) => {
+    document.getElementById(btnId)?.addEventListener('click', (e) => {
+      e.preventDefault();
+      renderPujoModalContent();
+      openModal('pujo-info-modal');
+    });
+  });
+
+  document.querySelectorAll('.btn-footer-schedule, .countdown-footer-badge').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      renderPujoModalContent();
+      openModal('pujo-info-modal');
+    });
+  });
+
   // Close buttons
   document.getElementById('btn-close-playlists')?.addEventListener('click', () => closeModal('playlists-modal'));
   document.getElementById('btn-close-pujo-info')?.addEventListener('click', () => closeModal('pujo-info-modal'));
@@ -3065,12 +3123,27 @@ function initModals() {
 
 function openModal(modalId) {
   const el = document.getElementById(modalId);
-  if (el) el.classList.add('active');
+  if (!el) return;
+
+  if (modalId === 'pujo-info-modal' && typeof renderPujoModalContent === 'function') {
+    renderPujoModalContent();
+  }
+  if (modalId === 'story-generator-modal' && typeof renderStoryCanvas === 'function') {
+    renderStoryCanvas();
+  }
+
+  el.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal(modalId) {
   const el = document.getElementById(modalId);
   if (el) el.classList.remove('active');
+
+  const anyActive = document.querySelector('.modal-backdrop.active, #welcome-modal-overlay:not(.hidden)');
+  if (!anyActive) {
+    document.body.style.overflow = '';
+  }
 }
 
 function closeAllModals() {
@@ -3498,32 +3571,34 @@ Instagram: @furfura_mondal_poribar`;
 }
 
 /* ==========================================================================
-   9. PONYTAIL EASE-IN SMOOTH SCROLL ENGINE & PC SECTIONAL LOCKING
+   9. PONYTAIL INTERLOCKING SECTIONAL SCROLL LOCKING & SCROLLSPY ENGINE (PC ONLY)
    ========================================================================== */
 
 let activeScrollAnimId = null;
 let isProgrammaticScrolling = false;
 
 /**
- * High-performance smooth scrolling with a subtle, silky ease-in / ease-in-out curve
- * Starts with gentle ease-in acceleration, glides fluidly, softly eases out at arrival.
+ * High-performance smooth scrolling with a firm, prominent ease-in / ease-in-out curve
+ * Starts with swift ease-in acceleration, glides fluidly, firmly locks at arrival.
  * @param {number} targetY - Destination scrollTop in pixels
- * @param {number} duration - Animation duration in ms (default: 580ms)
+ * @param {number} duration - Animation duration in ms (default: 460ms)
  * @param {Function} onComplete - Callback executed when scroll finishes
  */
-export function smoothScrollToTarget(targetY, duration = 580, onComplete = null) {
+export function smoothScrollToTarget(targetY, duration = 460, onComplete = null) {
   if (activeScrollAnimId) {
     cancelAnimationFrame(activeScrollAnimId);
     activeScrollAnimId = null;
   }
 
-  const startY = window.pageYOffset || document.documentElement.scrollTop || 0;
-  const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const scrollEl = document.scrollingElement || document.documentElement || document.body;
+  const startY = window.pageYOffset || window.scrollY || scrollEl.scrollTop || 0;
+  const maxScroll = Math.max(0, scrollEl.scrollHeight - window.innerHeight);
   const clampedTargetY = Math.max(0, Math.min(Math.round(targetY), maxScroll));
   const distance = clampedTargetY - startY;
 
   if (Math.abs(distance) < 2) {
     window.scrollTo(0, clampedTargetY);
+    scrollEl.scrollTop = clampedTargetY;
     if (onComplete) onComplete();
     return;
   }
@@ -3531,7 +3606,6 @@ export function smoothScrollToTarget(targetY, duration = 580, onComplete = null)
   isProgrammaticScrolling = true;
 
   // Ponytail Custom Subtle Ease-In-Out Curve (cubic-bezier):
-  // Gentle initial acceleration, silky gliding velocity, smooth landing
   const easeInOutCubic = (t) => {
     return t < 0.5
       ? 4 * t * t * t
@@ -3545,12 +3619,15 @@ export function smoothScrollToTarget(targetY, duration = 580, onComplete = null)
     const progress = Math.min(elapsed / duration, 1);
     const easedProgress = easeInOutCubic(progress);
 
-    window.scrollTo(0, Math.round(startY + distance * easedProgress));
+    const nextY = Math.round(startY + distance * easedProgress);
+    window.scrollTo(0, nextY);
+    scrollEl.scrollTop = nextY;
 
     if (progress < 1) {
       activeScrollAnimId = requestAnimationFrame(step);
     } else {
       window.scrollTo(0, clampedTargetY);
+      scrollEl.scrollTop = clampedTargetY;
       activeScrollAnimId = null;
       isProgrammaticScrolling = false;
       if (onComplete) onComplete();
@@ -3561,20 +3638,23 @@ export function smoothScrollToTarget(targetY, duration = 580, onComplete = null)
 }
 
 /**
- * Scroll smoothly to a specific DOM element or selector with subtle ease-in motion
+ * Scroll smoothly to a specific DOM element or selector with firm ease-in motion
  */
-export function smoothScrollToSection(elementOrId, duration = 580, offset = 0, onComplete = null) {
+export function smoothScrollToSection(elementOrId, duration = 460, offset = 0, onComplete = null) {
   const el = typeof elementOrId === 'string' ? document.getElementById(elementOrId) : elementOrId;
   if (!el) return;
+
   const rect = el.getBoundingClientRect();
-  const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const scrollEl = document.scrollingElement || document.documentElement || document.body;
+  const currentScroll = window.pageYOffset || window.scrollY || scrollEl.scrollTop || 0;
   const targetY = rect.top + currentScroll + offset;
   smoothScrollToTarget(targetY, duration, onComplete);
 }
 
 function initSectionScrollLocking() {
-  const snapNavDots = document.querySelectorAll('.snap-nav-dot');
-  
+  const nodes = document.querySelectorAll('.spy-node');
+  const progressFill = document.getElementById('ponytail-spy-progress');
+
   const snapSections = [
     { id: 'hero-section', name: 'Hero' },
     { id: 'invitation-section', name: 'Invitation' },
@@ -3583,112 +3663,151 @@ function initSectionScrollLocking() {
     { id: 'gallery-section', name: 'Gallery' }
   ];
 
-  // Helper to update active dot state
-  const setActiveDot = (activeId) => {
-    snapNavDots.forEach((dot) => {
-      const isMatch = dot.getAttribute('data-target') === activeId;
-      dot.classList.toggle('active', isMatch);
-      dot.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+  let currentSectionIdx = 0;
+  let isGliding = false;
+  let glideCooldownTimer = null;
+
+  const getDocTop = (el) => {
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const scrollEl = document.scrollingElement || document.documentElement || document.body;
+    const scrollY = window.pageYOffset || window.scrollY || scrollEl.scrollTop || 0;
+    return rect.top + scrollY;
+  };
+
+  const getSectionHeight = (el) => {
+    if (!el) return 0;
+    return el.offsetHeight || el.getBoundingClientRect().height || 0;
+  };
+
+  // Helper to update active node state in the side bar and track progress
+  const setActiveNode = (idx) => {
+    currentSectionIdx = idx;
+    nodes.forEach((node, nIdx) => {
+      const isActive = nIdx === idx;
+      node.classList.toggle('active', isActive);
+      node.setAttribute('aria-current', isActive ? 'true' : 'false');
     });
   };
 
-  // High-precision scroll tracking for side panel indication
+  // Lock to a specific section by index with smooth glide and frame clipping
+  function lockToSectionIndex(targetIdx) {
+    if (targetIdx < 0 || targetIdx >= snapSections.length) return;
+    const targetSec = snapSections[targetIdx];
+    const targetEl = document.getElementById(targetSec.id);
+    if (!targetEl) return;
+
+    isGliding = true;
+    setActiveNode(targetIdx);
+
+    const targetY = getDocTop(targetEl);
+
+    smoothScrollToTarget(targetY, 460, () => {
+      if (glideCooldownTimer) clearTimeout(glideCooldownTimer);
+      glideCooldownTimer = setTimeout(() => {
+        isGliding = false;
+        updateScrollSpyLive();
+      }, 100);
+    });
+
+    if (glideCooldownTimer) clearTimeout(glideCooldownTimer);
+    glideCooldownTimer = setTimeout(() => {
+      isGliding = false;
+    }, 650);
+  }
+
+  // Real-time ScrollSpy & progress bar updater
   let isTicking = false;
-  const updateActiveSectionOnScroll = () => {
+  const updateScrollSpyLive = () => {
     if (!isTicking) {
       requestAnimationFrame(() => {
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const scrollEl = document.scrollingElement || document.documentElement || document.body;
+        const scrollY = window.pageYOffset || window.scrollY || scrollEl.scrollTop || 0;
         const vh = window.innerHeight;
-        const totalHeight = document.documentElement.scrollHeight;
-        const probeY = scrollY + vh * 0.38;
+        const totalHeight = scrollEl.scrollHeight;
+        const maxScroll = Math.max(1, totalHeight - vh);
 
-        let currentActiveId = 'hero-section';
-
-        if (scrollY + vh >= totalHeight - 60) {
-          currentActiveId = 'gallery-section';
-        } else {
-          for (let i = snapSections.length - 1; i >= 0; i--) {
-            const secEl = document.getElementById(snapSections[i].id);
-            if (secEl) {
-              const top = secEl.offsetTop;
-              if (probeY >= top - 30) {
-                currentActiveId = snapSections[i].id;
-                break;
-              }
-            }
-          }
+        // Update progress bar (0% to 100%)
+        if (progressFill) {
+          const progressPercent = Math.min(100, Math.max(0, (scrollY / maxScroll) * 100));
+          progressFill.style.height = `${progressPercent.toFixed(1)}%`;
         }
 
-        setActiveDot(currentActiveId);
+        if (!isGliding) {
+          const focalY = vh * 0.45;
+          let highestScore = -1;
+          let bestIdx = 0;
+
+          snapSections.forEach((s, idx) => {
+            const el = document.getElementById(s.id);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              const visibleTop = Math.max(0, rect.top);
+              const visibleBottom = Math.min(vh, rect.bottom);
+              const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+              const viewportCoverage = visibleHeight / vh;
+
+              const containsFocalPoint = (rect.top <= focalY && rect.bottom >= focalY);
+              const score = (containsFocalPoint ? 2.0 : 0.0) + viewportCoverage;
+
+              if (score > highestScore) {
+                highestScore = score;
+                bestIdx = idx;
+              }
+            }
+          });
+
+          setActiveNode(bestIdx);
+        }
+
         isTicking = false;
       });
       isTicking = true;
     }
   };
 
-  window.addEventListener('scroll', updateActiveSectionOnScroll, { passive: true });
-  updateActiveSectionOnScroll();
+  window.addEventListener('scroll', updateScrollSpyLive, { passive: true });
+  document.addEventListener('scroll', updateScrollSpyLive, { passive: true });
+  window.addEventListener('resize', updateScrollSpyLive, { passive: true });
+  updateScrollSpyLive();
 
-  // Section Lock & Glide Controller
-  let isGliding = false;
-  let glideCooldown = null;
-
-  function lockToSection(sectionIdOrEl) {
-    const el = typeof sectionIdOrEl === 'string' ? document.getElementById(sectionIdOrEl) : sectionIdOrEl;
-    if (!el) return;
-    isGliding = true;
-    const targetId = el.id;
-    if (targetId) setActiveDot(targetId);
-
-    const rect = el.getBoundingClientRect();
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
-    const targetY = rect.top + currentScroll;
-
-    smoothScrollToTarget(targetY, 580, () => {
-      clearTimeout(glideCooldown);
-      glideCooldown = setTimeout(() => {
-        isGliding = false;
-      }, 100);
-    });
-
-    clearTimeout(glideCooldown);
-    glideCooldown = setTimeout(() => {
-      isGliding = false;
-    }, 700);
-  }
-
-  // 1. Navigation Dots Click Handlers (Side Panel Jump)
-  snapNavDots.forEach((dot) => {
-    dot.addEventListener('click', (e) => {
+  // 1. Navigation Dots Click Handlers
+  nodes.forEach((node, idx) => {
+    node.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const targetId = dot.getAttribute('data-target');
-      if (targetId) {
-        setActiveDot(targetId);
-        lockToSection(targetId);
-      }
+      lockToSectionIndex(idx);
     });
   });
 
-  // 2. Intercept In-Page Anchor Links (Scroll down button, Next chapter buttons, etc.)
+  // 2. Intercept In-Page Anchor Links (Scroll down cue, Next chapter buttons, etc.)
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
       if (!href || href === '#' || href === '#!') return;
       const targetId = href.substring(1);
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
+      const targetIdx = snapSections.findIndex(s => s.id === targetId);
+      if (targetIdx !== -1) {
         e.preventDefault();
-        setActiveDot(targetId);
-        lockToSection(targetId);
+        lockToSectionIndex(targetIdx);
       }
     });
   });
 
-  // 3. Desktop Single-Scroll Sectional Locking & In-Section General Scrolling
+  // 3. Desktop Interlocking Sectional Wheel Controller (PC ONLY)
   window.addEventListener('wheel', (e) => {
     // Only apply on desktop / PC viewports (> 768px)
     if (window.innerWidth <= 768) return;
+
+    // If a modal or lightbox dialog is active, allow internal modal scrolling
+    const isModalOpen = !!(
+      document.querySelector('.modal-backdrop.active') || 
+      document.querySelector('#welcome-modal-overlay:not(.hidden)') ||
+      document.querySelector('#gallery-lightbox-modal.active')
+    );
+    if (isModalOpen) {
+      return;
+    }
 
     // If currently gliding or animating, consume wheel event to lock the landing
     if (isProgrammaticScrolling || isGliding) {
@@ -3696,100 +3815,79 @@ function initSectionScrollLocking() {
       return;
     }
 
-    const deltaThreshold = 15;
+    const deltaThreshold = 6;
     if (Math.abs(e.deltaY) < deltaThreshold) return;
 
-    const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    const scrollEl = document.scrollingElement || document.documentElement || document.body;
+    const scrollY = window.pageYOffset || window.scrollY || scrollEl.scrollTop || 0;
     const vh = window.innerHeight;
 
-    const heroEl = document.getElementById('hero-section');
-    const inviteEl = document.getElementById('invitation-section');
-    const riverEl = document.getElementById('photo-river-section');
-    const onnotaEl = document.getElementById('onnota-section');
-    const galleryEl = document.getElementById('gallery-section');
+    // Get current section geometry
+    const currentSec = snapSections[currentSectionIdx];
+    const currentEl = document.getElementById(currentSec.id);
+    if (!currentEl) return;
 
-    if (!heroEl || !inviteEl || !riverEl || !onnotaEl || !galleryEl) return;
+    const sectionTop = getDocTop(currentEl);
+    const sectionHeight = getSectionHeight(currentEl);
+    const sectionBottom = sectionTop + sectionHeight;
 
-    const heroTop = heroEl.offsetTop;
-    const inviteTop = inviteEl.offsetTop;
-    const inviteHeight = inviteEl.offsetHeight;
-    const riverTop = riverEl.offsetTop;
-    const onnotaTop = onnotaEl.offsetTop;
-    const onnotaHeight = onnotaEl.offsetHeight;
-    const galleryTop = galleryEl.offsetTop;
-
-    // SECTION 0: COUNTDOWN / HERO SECTION (Single scroll takes to Invitation)
-    if (scrollY < inviteTop - 30) {
-      if (e.deltaY > 0) {
+    // SCROLL DOWN (e.deltaY > 0)
+    if (e.deltaY > 0) {
+      // Single-viewport sections (Hero: 0, Photo River: 2) -> 1-scroll glide to next section
+      if (currentSectionIdx === 0) {
         e.preventDefault();
-        lockToSection(inviteEl);
+        lockToSectionIndex(1);
+        return;
+      }
+      if (currentSectionIdx === 2) {
+        e.preventDefault();
+        lockToSectionIndex(3);
+        return;
+      }
+
+      // Tall sections (Invitation: 1, Onnota: 3)
+      if (currentSectionIdx === 1 || currentSectionIdx === 3) {
+        const atSectionBottom = (scrollY + vh >= sectionBottom - 20);
+        if (atSectionBottom) {
+          e.preventDefault();
+          lockToSectionIndex(currentSectionIdx + 1);
+          return;
+        }
+        // Not at bottom yet -> allow natural general scrolling inside this section
+        return;
+      }
+
+      // Grand Gallery (Section 4) -> full general scrolling
+      if (currentSectionIdx === 4) {
         return;
       }
     }
 
-    // SECTION 1: FORMAL INVITATION SECTION (Longer section -> scroll within, at end single scroll to Photo River)
-    else if (scrollY >= inviteTop - 30 && scrollY < riverTop - 30) {
-      const atTop = scrollY <= inviteTop + 15;
-      const atBottom = scrollY + vh >= inviteTop + inviteHeight - 25;
+    // SCROLL UP (e.deltaY < 0)
+    else if (e.deltaY < 0) {
+      // Hero (Section 0) -> stay at top
+      if (currentSectionIdx === 0) {
+        return;
+      }
 
-      if (e.deltaY < 0 && atTop) {
+      // Single-viewport section (Photo River: 2) -> 1-scroll glide back to Invitation
+      if (currentSectionIdx === 2) {
         e.preventDefault();
-        lockToSection(heroEl);
+        lockToSectionIndex(1);
         return;
       }
-      if (e.deltaY > 0 && atBottom) {
-        e.preventDefault();
-        lockToSection(riverEl);
-        return;
-      }
-      // Continue normal scrolling inside Invitation
-      return;
-    }
 
-    // SECTION 2: PHOTO RIVER SECTION (Single scroll takes to Onnota / Invitation)
-    else if (scrollY >= riverTop - 30 && scrollY < onnotaTop - 30) {
-      if (e.deltaY > 0) {
-        e.preventDefault();
-        lockToSection(onnotaEl);
+      // Tall sections (Invitation: 1, Onnota: 3, Gallery: 4)
+      if (currentSectionIdx === 1 || currentSectionIdx === 3 || currentSectionIdx === 4) {
+        const atSectionTop = (scrollY <= sectionTop + 20);
+        if (atSectionTop) {
+          e.preventDefault();
+          lockToSectionIndex(currentSectionIdx - 1);
+          return;
+        }
+        // Not at top yet -> allow natural general scrolling up inside this section
         return;
       }
-      if (e.deltaY < 0) {
-        e.preventDefault();
-        lockToSection(inviteEl);
-        return;
-      }
-    }
-
-    // SECTION 3: OTHERS BY ONNOTA (Scroll within cards, at end single scroll to Grand Gallery)
-    else if (scrollY >= onnotaTop - 30 && scrollY < galleryTop - 30) {
-      const atTop = scrollY <= onnotaTop + 15;
-      const atBottom = scrollY + vh >= onnotaTop + onnotaHeight - 30;
-
-      if (e.deltaY < 0 && atTop) {
-        e.preventDefault();
-        lockToSection(riverEl);
-        return;
-      }
-      if (e.deltaY > 0 && atBottom) {
-        e.preventDefault();
-        lockToSection(galleryEl);
-        return;
-      }
-      // Continue normal scrolling inside Onnota
-      return;
-    }
-
-    // SECTION 4: GRAND HERITAGE GALLERY (Continuous general scrolling)
-    else if (scrollY >= galleryTop - 30) {
-      const atTop = scrollY <= galleryTop + 15;
-
-      if (e.deltaY < 0 && atTop) {
-        e.preventDefault();
-        lockToSection(onnotaEl);
-        return;
-      }
-      // Continue full general scrolling inside Gallery
-      return;
     }
   }, { passive: false });
 
@@ -3798,25 +3896,11 @@ function initSectionScrollLocking() {
     if (['input', 'textarea', 'select'].includes(document.activeElement?.tagName?.toLowerCase())) return;
 
     if (e.key === 'PageDown' || e.key === 'PageUp') {
-      const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-      const vh = window.innerHeight;
-      const probeY = scrollY + vh * 0.4;
-      let currentIdx = 0;
-
-      for (let i = snapSections.length - 1; i >= 0; i--) {
-        const secEl = document.getElementById(snapSections[i].id);
-        if (secEl && probeY >= secEl.offsetTop) {
-          currentIdx = i;
-          break;
-        }
-      }
-
       const direction = e.key === 'PageDown' ? 1 : -1;
-      const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentIdx + direction));
-      const targetSec = document.getElementById(snapSections[nextIdx].id);
-      if (targetSec) {
+      const nextIdx = Math.max(0, Math.min(snapSections.length - 1, currentSectionIdx + direction));
+      if (nextIdx !== currentSectionIdx) {
         e.preventDefault();
-        lockToSection(targetSec);
+        lockToSectionIndex(nextIdx);
       }
     }
   });
