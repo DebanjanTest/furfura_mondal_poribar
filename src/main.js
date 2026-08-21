@@ -582,12 +582,25 @@ function initAudioPlayer() {
 function handleTogglePlay() {
   state.soundEnabled = true;
   ytAudioPlayer.setMute(false);
+  if (typeof audioEngine.resumeAudioContext === 'function') {
+    audioEngine.resumeAudioContext();
+  }
 
+  const track = getCurrentTrack();
   if (!state.isAudioPlaying) {
-    const track = getCurrentTrack();
+    state.isAudioPlaying = true;
+    updatePlayPauseButton(true);
+    updateArtVinylAnimation(true);
+    updateEqualizerAnimation();
+    updateDynamicIslandState();
     ytAudioPlayer.loadTrack(track, state.currentPlaylistKey, true);
   } else {
-    ytAudioPlayer.togglePlay();
+    state.isAudioPlaying = false;
+    updatePlayPauseButton(false);
+    updateArtVinylAnimation(false);
+    updateEqualizerAnimation();
+    updateDynamicIslandState();
+    ytAudioPlayer.pause();
   }
 }
 

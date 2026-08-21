@@ -24,7 +24,6 @@ class YouTubeAudioPlayer {
     this.listeners = new Set();
     this.volume = 85;
     this.isMuted = false;
-    this.cueDebounceTimer = null;
   }
 
   init(containerId = 'yt-hidden-player') {
@@ -179,46 +178,43 @@ class YouTubeAudioPlayer {
     const targetVideoId = track.videoId || 'xlElO06nQy8';
     const startSeconds = track.start || 0;
 
-    if (this.cueDebounceTimer) clearTimeout(this.cueDebounceTimer);
-
-    this.cueDebounceTimer = setTimeout(() => {
-      try {
-        if (typeof this.player.unMute === 'function') {
-          this.player.unMute();
-        }
-        if (typeof this.player.setVolume === 'function') {
-          this.player.setVolume(this.getEffectiveVolume());
-        }
-
-        if (this.currentVideoId === targetVideoId) {
-          this.player.seekTo(startSeconds, true);
-          if (autoplay) {
-            this.player.playVideo();
-            this.isPlaying = true;
-          } else {
-            this.player.pauseVideo();
-            this.isPlaying = false;
-          }
-        } else {
-          this.currentVideoId = targetVideoId;
-          if (autoplay) {
-            this.player.loadVideoById({
-              videoId: targetVideoId,
-              startSeconds: startSeconds
-            });
-            this.isPlaying = true;
-          } else {
-            this.player.cueVideoById({
-              videoId: targetVideoId,
-              startSeconds: startSeconds
-            });
-            this.isPlaying = false;
-          }
-        }
-      } catch (err) {
-        console.warn('Error cueing video:', err);
+    // SYNCHRONOUS EXECUTION to retain browser user gesture token
+    try {
+      if (typeof this.player.unMute === 'function') {
+        this.player.unMute();
       }
-    }, 40);
+      if (typeof this.player.setVolume === 'function') {
+        this.player.setVolume(this.getEffectiveVolume());
+      }
+
+      if (this.currentVideoId === targetVideoId) {
+        this.player.seekTo(startSeconds, true);
+        if (autoplay) {
+          this.player.playVideo();
+          this.isPlaying = true;
+        } else {
+          this.player.pauseVideo();
+          this.isPlaying = false;
+        }
+      } else {
+        this.currentVideoId = targetVideoId;
+        if (autoplay) {
+          this.player.loadVideoById({
+            videoId: targetVideoId,
+            startSeconds: startSeconds
+          });
+          this.isPlaying = true;
+        } else {
+          this.player.cueVideoById({
+            videoId: targetVideoId,
+            startSeconds: startSeconds
+          });
+          this.isPlaying = false;
+        }
+      }
+    } catch (err) {
+      console.warn('Error cueing video synchronously:', err);
+    }
   }
 
   getEffectiveVolume() {
