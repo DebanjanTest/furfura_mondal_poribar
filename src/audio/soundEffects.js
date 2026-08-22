@@ -19,6 +19,109 @@ export class AudioEngine {
     this.bassBoostDb = 6.0;
     this.snapBoostDb = 4.0;
     this.masterOutputLevel = 1.2;
+    this.isRadioPlaying = false;
+    this.melodyTimeout = null;
+  }
+
+  resumeAudioContext() {
+    this.init();
+    if (this.ctx && this.ctx.state === 'suspended') {
+      return this.ctx.resume();
+    }
+    return Promise.resolve();
+  }
+
+  // Real-time Bengali Shehnai & Sacred Agomoni Melody Synthesizer
+  startFestivePujaRadio(trackTitle = 'দুগ্গা এলো') {
+    this.init();
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+    if (this.melodyTimeout) clearTimeout(this.melodyTimeout);
+
+    this.isRadioPlaying = true;
+    const ctx = this.ctx;
+
+    // Sacred Raga Bhairav scale (Sa, Re_k, Ga, Ma, Pa, Dha_k, Ni, Sa')
+    const scale = [261.63, 277.18, 329.63, 349.23, 392.00, 415.30, 493.88, 523.25];
+    
+    // Traditional Agomoni melody phrase
+    const phrase = [
+      { note: 0, dur: 0.6 }, { note: 2, dur: 0.4 }, { note: 4, dur: 0.8 }, { note: 5, dur: 0.4 },
+      { note: 4, dur: 0.6 }, { note: 3, dur: 0.4 }, { note: 2, dur: 0.8 }, { note: 1, dur: 0.6 },
+      { note: 0, dur: 1.0 }, { note: 4, dur: 0.6 }, { note: 5, dur: 0.6 }, { note: 7, dur: 1.2 },
+      { note: 6, dur: 0.6 }, { note: 5, dur: 0.6 }, { note: 4, dur: 0.8 }, { note: 2, dur: 0.6 },
+      { note: 1, dur: 0.8 }, { note: 0, dur: 1.5 }
+    ];
+
+    let stepIndex = 0;
+    const playNextNote = () => {
+      if (!this.isRadioPlaying || !this.ctx) return;
+      const item = phrase[stepIndex % phrase.length];
+      const freq = scale[item.note];
+      const duration = item.dur;
+      const t = ctx.currentTime;
+
+      // Shehnai Dual Reed Sound Design
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const vibrato = ctx.createOscillator();
+      const vibratoGain = ctx.createGain();
+      const noteGain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+
+      osc1.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(freq, t);
+
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(freq * 1.004, t);
+
+      vibrato.frequency.setValueAtTime(5.5, t);
+      vibratoGain.gain.setValueAtTime(3.5, t);
+      vibrato.connect(osc1.frequency);
+      vibrato.connect(osc2.frequency);
+
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1400, t);
+      filter.Q.setValueAtTime(2.8, t);
+
+      noteGain.gain.setValueAtTime(0.001, t);
+      noteGain.gain.linearRampToValueAtTime(0.22, t + 0.08);
+      noteGain.gain.exponentialRampToValueAtTime(0.001, t + duration);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(noteGain);
+      noteGain.connect(this.masterGain);
+
+      vibrato.start(t);
+      osc1.start(t);
+      osc2.start(t);
+
+      vibrato.stop(t + duration);
+      osc1.stop(t + duration);
+      osc2.stop(t + duration);
+
+      // Accompany with authentic Dhak & Kansor beats
+      if (stepIndex % 4 === 0) {
+        this.playDha(0.75, t);
+      } else if (stepIndex % 2 === 0) {
+        this.playTa(0.45, t);
+      }
+      if (stepIndex % 8 === 0) {
+        this.playKansor(0.35, t);
+      }
+
+      stepIndex++;
+      this.melodyTimeout = setTimeout(playNextNote, duration * 920);
+    };
+
+    playNextNote();
+  }
+
+  stopFestivePujaRadio() {
+    this.isRadioPlaying = false;
+    if (this.melodyTimeout) clearTimeout(this.melodyTimeout);
   }
 
   init() {

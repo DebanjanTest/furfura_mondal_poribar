@@ -581,11 +581,11 @@ function initAudioPlayer() {
 
 function handleTogglePlay() {
   state.soundEnabled = true;
-  ytAudioPlayer.setMute(false);
-  ytAudioPlayer.setVolume(85);
   if (typeof audioEngine.resumeAudioContext === 'function') {
     audioEngine.resumeAudioContext();
   }
+  ytAudioPlayer.setMute(false);
+  ytAudioPlayer.setVolume(85);
 
   const track = getCurrentTrack();
   if (!state.isAudioPlaying) {
@@ -602,6 +602,9 @@ function handleTogglePlay() {
     updateEqualizerAnimation();
     updateDynamicIslandState();
     ytAudioPlayer.pause();
+    if (typeof audioEngine.stopFestivePujaRadio === 'function') {
+      audioEngine.stopFestivePujaRadio();
+    }
   }
 }
 

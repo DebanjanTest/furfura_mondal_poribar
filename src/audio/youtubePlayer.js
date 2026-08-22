@@ -1,5 +1,5 @@
 // Dual-Engine Audio Streaming System: High-Definition YouTube Stream + Native Web Audio Synthesizer
-// Guarantees zero silence across all browsers, ad-blockers, and network conditions
+// Guarantees immediate audio playback across all browsers and environments
 
 import { audioEngine } from './soundEffects.js';
 
@@ -20,8 +20,7 @@ class YouTubeAudioPlayer {
     this.listeners = new Set();
     this.volume = 85;
     this.isMuted = false;
-    this.fallbackTimer = null;
-    this.isWebAudioFallbackActive = false;
+    this.isWebAudioActive = false;
   }
 
   init(containerId = 'yt-hidden-player') {
@@ -74,14 +73,14 @@ class YouTubeAudioPlayer {
                 this.handleStateChange(event);
               },
               onError: (err) => {
-                console.warn('YouTube stream notice (engaging Web Audio fallback):', err.data);
-                this.startWebAudioFallback();
+                console.warn('YouTube stream notice:', err.data);
+                this.startNativeWebAudio();
               }
             }
           });
         } catch (err) {
-          console.warn('YouTube Player initialization notice:', err);
-          this.startWebAudioFallback();
+          console.warn('YouTube Player notice:', err);
+          this.startNativeWebAudio();
           resolve();
         }
       };
@@ -121,7 +120,7 @@ class YouTubeAudioPlayer {
     if (event.data === window.YT.PlayerState.PLAYING) {
       this.isPlaying = true;
       this.isTransitioning = false;
-      this.stopWebAudioFallback();
+      this.stopNativeWebAudio();
       this.startProgressTicker();
       this.notify({
         type: 'state',
@@ -152,18 +151,18 @@ class YouTubeAudioPlayer {
     }
   }
 
-  startWebAudioFallback() {
-    if (this.isWebAudioFallbackActive) return;
-    this.isWebAudioFallbackActive = true;
+  startNativeWebAudio() {
+    if (this.isWebAudioActive) return;
+    this.isWebAudioActive = true;
     try {
-      audioEngine.init();
+      audioEngine.resumeAudioContext();
       audioEngine.startFestivePujaRadio(this.currentTrack?.title_bn || 'দুগ্গা এলো');
     } catch (e) {}
   }
 
-  stopWebAudioFallback() {
-    if (!this.isWebAudioFallbackActive) return;
-    this.isWebAudioFallbackActive = false;
+  stopNativeWebAudio() {
+    if (!this.isWebAudioActive) return;
+    this.isWebAudioActive = false;
     try {
       audioEngine.stopFestivePujaRadio();
     } catch (e) {}
@@ -179,9 +178,9 @@ class YouTubeAudioPlayer {
     this.hasEndedFired = false;
     this.isMuted = false;
 
-    // Start Web Audio festive melody immediately so audio is heard with 0ms delay!
+    // Start instant native Web Audio so user hears sound IMMEDIATELY with 0ms delay!
     if (autoplay) {
-      this.startWebAudioFallback();
+      this.startNativeWebAudio();
     }
 
     this.notify({
@@ -216,7 +215,7 @@ class YouTubeAudioPlayer {
         } else {
           this.player.pauseVideo();
           this.isPlaying = false;
-          this.stopWebAudioFallback();
+          this.stopNativeWebAudio();
         }
       } else {
         this.currentVideoId = targetVideoId;
@@ -232,7 +231,7 @@ class YouTubeAudioPlayer {
             startSeconds: startSeconds
           });
           this.isPlaying = false;
-          this.stopWebAudioFallback();
+          this.stopNativeWebAudio();
         }
       }
     } catch (err) {
@@ -248,7 +247,7 @@ class YouTubeAudioPlayer {
   play() {
     this.isMuted = false;
     this.isPlaying = true;
-    this.startWebAudioFallback();
+    this.startNativeWebAudio();
 
     if (this.player && this.isReady && typeof this.player.playVideo === 'function') {
       try {
@@ -270,7 +269,7 @@ class YouTubeAudioPlayer {
 
   pause() {
     this.isPlaying = false;
-    this.stopWebAudioFallback();
+    this.stopNativeWebAudio();
 
     if (this.player && this.isReady && typeof this.player.pauseVideo === 'function') {
       try {
@@ -332,7 +331,7 @@ class YouTubeAudioPlayer {
       } catch (e) {}
     }
     if (this.isMuted) {
-      this.stopWebAudioFallback();
+      this.stopNativeWebAudio();
     }
     this.notify({ type: 'volume', volume: this.volume, isMuted: this.isMuted });
   }
