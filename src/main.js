@@ -290,7 +290,10 @@ function updateDynamicIslandState() {
     const track = getCurrentTrack();
     if (islandTrackTitle) islandTrackTitle.textContent = (lang === 'bn' ? (track?.title_bn || track?.title) : (track?.title || track?.title_bn)) || 'Dugga Elo';
     if (islandArtistName) islandArtistName.textContent = track?.artist || (lang === 'bn' ? 'মন্ডল বাড়ি রেডিও' : 'Mondal Bari Radio');
-    if (islandArtImg) islandArtImg.src = track?.cover || '/favicon.png';
+    if (islandArtImg) {
+      islandArtImg.src = getTrackThumbnail(track);
+      islandArtImg.onerror = () => { islandArtImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg'; };
+    }
   } else {
     if (idleState) idleState.style.display = 'flex';
     if (activeState) activeState.style.display = 'none';
@@ -556,13 +559,24 @@ function getCurrentTrack() {
   return currentList[state.currentTrackIndex] || currentList[0];
 }
 
+function getTrackThumbnail(track) {
+  if (!track) return 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg';
+  if (track.cover && typeof track.cover === 'string' && track.cover.startsWith('http') && track.cover.length > 10 && track.cover !== 'https:') {
+    return track.cover;
+  }
+  if (track.videoId && typeof track.videoId === 'string' && track.videoId.length >= 6) {
+    return `https://img.youtube.com/vi/${track.videoId}/hqdefault.jpg`;
+  }
+  return 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg';
+}
+
 function updatePlayerUI(track) {
   if (!track) return;
 
   const lang = getLanguage();
   const displayTitle = lang === 'bn' ? (track.title_bn || track.title || 'দুগ্গা এলো') : (track.title || track.title_bn || 'Dugga Elo');
   const displayArtist = `${track.artist || 'Agomoni'}${track.composer ? ` • ${track.composer}` : ''}`;
-  const displayCover = track.cover || '/favicon.png';
+  const displayCover = getTrackThumbnail(track);
   const displayDuration = track.durationLabel || '3:30';
   const displayPill = playlists[state.currentPlaylistKey]?.pillLabel || 'PUJA RADIO';
 
@@ -575,7 +589,10 @@ function updatePlayerUI(track) {
 
   if (titleEl) titleEl.textContent = displayTitle;
   if (artistEl) artistEl.textContent = displayArtist;
-  if (coverImg) coverImg.src = displayCover;
+  if (coverImg) {
+    coverImg.src = displayCover;
+    coverImg.onerror = () => { coverImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg'; };
+  }
   if (timeEl) timeEl.textContent = `0:00 / ${displayDuration}`;
   if (launcherText) launcherText.textContent = displayPill;
 
@@ -590,7 +607,10 @@ function updatePlayerUI(track) {
 
   if (mobTitleEl) mobTitleEl.textContent = displayTitle;
   if (mobArtistEl) mobArtistEl.textContent = displayArtist;
-  if (mobCoverImg) mobCoverImg.src = displayCover;
+  if (mobCoverImg) {
+    mobCoverImg.src = displayCover;
+    mobCoverImg.onerror = () => { mobCoverImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg'; };
+  }
 
   // Dynamic Island UI Sync
   updateDynamicIslandState();
@@ -686,6 +706,7 @@ function renderPlaylistTracks(playlistKey) {
     const numLabel = formatNumber(index + 1 < 10 ? `0${index + 1}` : `${index + 1}`, lang);
     const rowTitle = lang === 'bn' ? (track.title_bn || track.title) : (track.title || track.title_bn);
     const rowArtist = `${track.artist || 'Traditional'}${track.composer ? ` • ${track.composer}` : ''}`;
+    const rowCover = getTrackThumbnail(track);
 
     row.innerHTML = `
       <span class="track-row-num">
@@ -697,7 +718,7 @@ function renderPlaylistTracks(playlistKey) {
           </div>
         ` : numLabel}
       </span>
-      <img class="track-row-thumb" src="${track.cover}" alt="${track.title}" loading="lazy" />
+      <img class="track-row-thumb" src="${rowCover}" alt="${rowTitle}" loading="lazy" onerror="this.onerror=null; this.src='https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg';" />
       <div class="track-row-info">
         <div class="track-row-title">${rowTitle}</div>
         <div class="track-row-artist">${rowArtist}</div>
