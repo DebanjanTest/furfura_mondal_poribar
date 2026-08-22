@@ -2433,6 +2433,11 @@ function initLanguageSwitcher() {
       desktopLabel.textContent = lang === 'bn' ? 'বাংলা' : 'English';
     }
 
+    const activeLabel = document.getElementById('lang-active-label');
+    if (activeLabel) {
+      activeLabel.textContent = lang === 'bn' ? 'বাংলা • EN' : 'EN • বাং';
+    }
+
     const activeToggle = document.getElementById('btn-toggle-lang-active');
     if (activeToggle) {
       activeToggle.setAttribute('aria-label', `Change Language (Current: ${lang === 'bn' ? 'বাংলা' : 'English'})`);

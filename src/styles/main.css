@@ -509,23 +509,34 @@ button {
 }
 
 .island-lang-pill-mini {
-  width: 28px;
   height: 28px;
-  border-radius: 50%;
-  background: rgba(255, 207, 64, 0.12);
-  border: 1px solid rgba(255, 207, 64, 0.35);
-  display: flex;
+  min-width: fit-content;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 207, 64, 0.14);
+  border: 1px solid rgba(255, 207, 64, 0.4);
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  gap: 4px;
+  font-family: var(--font-bengali-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--heritage-gold);
   cursor: pointer;
+  white-space: nowrap;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   transition: all var(--transition-fast);
 }
 
 .island-lang-pill-mini:hover {
   background: var(--heritage-gold);
   color: #080103;
+  border-color: var(--heritage-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 207, 64, 0.25);
 }
 
 .island-expand-btn {
