@@ -7511,3 +7511,325 @@ button:active, [role="button"]:active {
   pointer-events: none !important;
   display: block !important;
 }
+
+
+/* ==========================================================================
+   HARMONIOUS APPLE-GRADE SPACING & PADDING REFINEMENTS
+   ========================================================================== */
+
+/* 1. Universal Dynamic Island Spacing */
+.universal-dynamic-island-container {
+  position: fixed;
+  top: 1.15rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: min(94vw, 480px);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dynamic-island {
+  pointer-events: auto;
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  box-sizing: border-box;
+}
+
+.island-state {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0.75rem 0.3rem 0.85rem;
+  min-height: 48px;
+  gap: 0.75rem;
+  box-sizing: border-box;
+}
+
+.island-active .island-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.island-art-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 207, 64, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.island-track-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.island-track-title {
+  font-family: var(--font-bengali-sans);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.island-track-sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--heritage-gold);
+  line-height: 1.2;
+}
+
+.island-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.island-lang-pill-mini {
+  height: 30px;
+  min-width: fit-content;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 207, 64, 0.15);
+  border: 1px solid rgba(255, 207, 64, 0.45);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--font-bengali-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--heritage-gold);
+  cursor: pointer;
+  white-space: nowrap;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.island-lang-pill-mini:hover {
+  background: var(--heritage-gold);
+  color: #080103;
+  border-color: var(--heritage-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 207, 64, 0.3);
+}
+
+.island-ctrl-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--heritage-gold);
+  color: #080103;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 14px var(--heritage-gold-glow);
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.island-expand-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* 2. Hero Viewport Section & Countdown Card */
+.hero-viewport-section {
+  padding-top: clamp(5rem, 9vh, 6.75rem);
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px) + 0.75rem);
+  box-sizing: border-box;
+}
+
+.festive-countdown-card {
+  margin-top: 0.5rem;
+  padding: 1rem 1.5rem 0.9rem;
+  border-radius: 22px;
+  gap: 0.65rem;
+  box-sizing: border-box;
+}
+
+.countdown-units-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.countdown-unit-box {
+  min-width: 62px;
+  padding: 0.45rem 0.75rem;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+/* 3. Creative Showcase (Onnota Section) Grid & Cards */
+.onnota-section {
+  padding: 5.5rem 1.5rem 5.5rem;
+  box-sizing: border-box;
+}
+
+.onnota-section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.onnota-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.onnota-card {
+  border-radius: 22px;
+}
+
+.onnota-card-body {
+  padding: 1.35rem 1.35rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.onnota-card-footer {
+  padding-top: 0.85rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 4. Grand Heritage Photo Gallery Section Grid & Cards */
+.gallery-section {
+  padding: 5.5rem 1.5rem 5.5rem;
+  box-sizing: border-box;
+}
+
+.gallery-section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.main-photo-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gallery-photo-card {
+  border-radius: 22px;
+}
+
+.photo-card-body {
+  padding: 1.35rem 1.35rem 1.15rem;
+  box-sizing: border-box;
+}
+
+/* 5. Formal Invitation Showcase */
+.invitation-section {
+  padding: 4.5rem 1.5rem 5rem;
+  box-sizing: border-box;
+}
+
+.invitation-letterhead-container {
+  padding: clamp(1.5rem, 4vw, 2.75rem) clamp(1.25rem, 3.5vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+/* 6. Mobile Responsiveness Polishing (<768px) */
+@media (max-width: 767px) {
+  .universal-dynamic-island-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    padding: max(8px, env(safe-area-inset-top, 0px)) 0.65rem 0;
+  }
+
+  .island-state {
+    padding: 0.3rem 0.5rem 0.3rem 0.65rem;
+    min-height: 44px;
+    gap: 0.45rem;
+  }
+
+  .island-lang-pill-mini {
+    height: 28px;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.7rem;
+  }
+
+  .hero-viewport-section {
+    padding-top: calc(max(8px, env(safe-area-inset-top, 0px)) + 62px);
+    padding-bottom: calc(max(10px, env(safe-area-inset-bottom, 0px)) + 14px);
+  }
+
+  .festive-countdown-card {
+    padding: 0.85rem 1rem 0.75rem;
+  }
+
+  .countdown-units-grid {
+    gap: 0.35rem;
+  }
+
+  .countdown-unit-box {
+    min-width: 52px;
+    padding: 0.35rem 0.45rem;
+  }
+
+  .onnota-section,
+  .gallery-section,
+  .invitation-section {
+    padding: 3.75rem 1rem 4rem;
+  }
+
+  .onnota-cards-grid,
+  .main-photo-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+}
