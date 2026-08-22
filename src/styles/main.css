@@ -8804,3 +8804,93 @@ button:active, [role="button"]:active {
     border-color: var(--heritage-gold);
   }
 }
+
+
+/* ==========================================================================
+   PIXEL-PERFECT MODAL TABS & TAB-PILL PADDING & PLACEMENT OVERHAUL
+   ========================================================================== */
+
+.modal-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.55rem;
+  padding: 0.85rem 1.5rem 0.85rem;
+  background: rgba(12, 1, 4, 0.7);
+  border-bottom: 1px solid rgba(255, 207, 64, 0.16);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+
+.modal-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-pill {
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-bengali-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  white-space: nowrap;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.tab-pill:hover {
+  color: var(--heritage-gold);
+  background: rgba(255, 207, 64, 0.16);
+  border-color: rgba(255, 207, 64, 0.45);
+  transform: translateY(-1px);
+}
+
+.tab-pill:active {
+  transform: scale(0.96);
+}
+
+.tab-pill.active {
+  background: var(--heritage-gold);
+  color: #080103;
+  border-color: var(--heritage-gold);
+  box-shadow: 0 4px 14px var(--heritage-gold-glow);
+  font-weight: 700;
+  transform: translateY(-1px);
+}
+
+.tab-description {
+  padding: 0.65rem 1.5rem 0.5rem;
+  font-size: 0.76rem;
+  color: var(--heritage-gold);
+  font-family: var(--font-bengali-sans);
+  font-weight: 500;
+  line-height: 1.4;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile Responsiveness for Modal Tabs (<768px) */
+@media (max-width: 767px) {
+  .modal-tabs {
+    padding: 0.65rem 1rem;
+    gap: 0.4rem;
+  }
+
+  .tab-pill {
+    padding: 0.38rem 0.85rem;
+    font-size: 0.74rem;
+  }
+
+  .tab-description {
+    padding: 0.5rem 1rem 0.4rem;
+    font-size: 0.72rem;
+  }
+}
