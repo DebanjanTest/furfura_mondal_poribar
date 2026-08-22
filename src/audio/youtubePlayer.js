@@ -1,7 +1,5 @@
-// Dual-Engine Audio Streaming System: High-Definition YouTube Stream + Native Web Audio Synthesizer
-// Guarantees immediate audio playback across all browsers and environments
-
-import { audioEngine } from './soundEffects.js';
+// High-Precision YouTube Audio Streaming Engine & Radio Manager
+// Dedicated to Durga Puja Agomoni, Mahalaya Broadcast & Classic Festive Playlists
 
 class YouTubeAudioPlayer {
   constructor() {
@@ -11,8 +9,6 @@ class YouTubeAudioPlayer {
     this.currentPlaylistKey = 'durgaPuja';
     this.currentVideoId = null;
     this.isPlaying = false;
-    this.isLiveDhakMode = false;
-    this.isAudioBoosted = false;
     this.isTransitioning = false;
     this.hasEndedFired = false;
     this.pendingTrack = null;
@@ -20,7 +16,6 @@ class YouTubeAudioPlayer {
     this.listeners = new Set();
     this.volume = 85;
     this.isMuted = false;
-    this.isWebAudioActive = false;
   }
 
   init(containerId = 'yt-hidden-player') {
@@ -73,14 +68,13 @@ class YouTubeAudioPlayer {
                 this.handleStateChange(event);
               },
               onError: (err) => {
-                console.warn('YouTube stream notice:', err.data);
-                this.startNativeWebAudio();
+                console.warn('YouTube Player notice code:', err.data);
+                this.notify({ type: 'error', data: err.data });
               }
             }
           });
         } catch (err) {
-          console.warn('YouTube Player notice:', err);
-          this.startNativeWebAudio();
+          console.warn('YouTube Player init notice:', err);
           resolve();
         }
       };
@@ -120,12 +114,10 @@ class YouTubeAudioPlayer {
     if (event.data === window.YT.PlayerState.PLAYING) {
       this.isPlaying = true;
       this.isTransitioning = false;
-      this.stopNativeWebAudio();
       this.startProgressTicker();
       this.notify({
         type: 'state',
         isPlaying: true,
-        isLiveDhak: this.isLiveDhakMode,
         track: this.currentTrack,
         playlistKey: this.currentPlaylistKey
       });
@@ -135,7 +127,6 @@ class YouTubeAudioPlayer {
       this.notify({
         type: 'state',
         isPlaying: false,
-        isLiveDhak: this.isLiveDhakMode,
         track: this.currentTrack,
         playlistKey: this.currentPlaylistKey
       });
@@ -144,28 +135,11 @@ class YouTubeAudioPlayer {
         this.hasEndedFired = true;
         this.isPlaying = false;
         this.stopProgressTicker();
-        this.notify({ type: 'ended', isLiveDhak: false, track: this.currentTrack });
+        this.notify({ type: 'ended', track: this.currentTrack });
       }
     } else if (event.data === window.YT.PlayerState.BUFFERING) {
       this.notify({ type: 'buffering', track: this.currentTrack });
     }
-  }
-
-  startNativeWebAudio() {
-    if (this.isWebAudioActive) return;
-    this.isWebAudioActive = true;
-    try {
-      audioEngine.resumeAudioContext();
-      audioEngine.startFestivePujaRadio(this.currentTrack?.title_bn || 'দুগ্গা এলো');
-    } catch (e) {}
-  }
-
-  stopNativeWebAudio() {
-    if (!this.isWebAudioActive) return;
-    this.isWebAudioActive = false;
-    try {
-      audioEngine.stopFestivePujaRadio();
-    } catch (e) {}
   }
 
   loadTrack(track, playlistKey = 'durgaPuja', autoplay = true) {
@@ -173,22 +147,15 @@ class YouTubeAudioPlayer {
 
     this.currentTrack = track;
     this.currentPlaylistKey = playlistKey;
-    this.isLiveDhakMode = false;
     this.isTransitioning = true;
     this.hasEndedFired = false;
     this.isMuted = false;
-
-    // Start instant native Web Audio so user hears sound IMMEDIATELY with 0ms delay!
-    if (autoplay) {
-      this.startNativeWebAudio();
-    }
 
     this.notify({
       type: 'trackChange',
       track: this.currentTrack,
       playlistKey: this.currentPlaylistKey,
-      isPlaying: autoplay,
-      isLiveDhak: false
+      isPlaying: autoplay
     });
 
     if (!this.player || !this.isReady || typeof this.player.loadVideoById !== 'function') {
@@ -215,7 +182,6 @@ class YouTubeAudioPlayer {
         } else {
           this.player.pauseVideo();
           this.isPlaying = false;
-          this.stopNativeWebAudio();
         }
       } else {
         this.currentVideoId = targetVideoId;
@@ -231,7 +197,6 @@ class YouTubeAudioPlayer {
             startSeconds: startSeconds
           });
           this.isPlaying = false;
-          this.stopNativeWebAudio();
         }
       }
     } catch (err) {
@@ -247,7 +212,6 @@ class YouTubeAudioPlayer {
   play() {
     this.isMuted = false;
     this.isPlaying = true;
-    this.startNativeWebAudio();
 
     if (this.player && this.isReady && typeof this.player.playVideo === 'function') {
       try {
@@ -262,14 +226,12 @@ class YouTubeAudioPlayer {
     this.notify({
       type: 'state',
       isPlaying: true,
-      isLiveDhak: false,
       track: this.currentTrack
     });
   }
 
   pause() {
     this.isPlaying = false;
-    this.stopNativeWebAudio();
 
     if (this.player && this.isReady && typeof this.player.pauseVideo === 'function') {
       try {
@@ -280,7 +242,6 @@ class YouTubeAudioPlayer {
     this.notify({
       type: 'state',
       isPlaying: false,
-      isLiveDhak: false,
       track: this.currentTrack
     });
   }
@@ -314,7 +275,6 @@ class YouTubeAudioPlayer {
         }
       } catch (e) {}
     }
-    audioEngine.setMasterOutputLevel((this.volume / 100) * 1.2);
     this.notify({ type: 'volume', volume: this.volume, isMuted: this.isMuted });
   }
 
@@ -329,9 +289,6 @@ class YouTubeAudioPlayer {
           if (typeof this.player.setVolume === 'function') this.player.setVolume(this.getEffectiveVolume());
         }
       } catch (e) {}
-    }
-    if (this.isMuted) {
-      this.stopNativeWebAudio();
     }
     this.notify({ type: 'volume', volume: this.volume, isMuted: this.isMuted });
   }
@@ -367,7 +324,7 @@ class YouTubeAudioPlayer {
       if (trackEnd !== null && rawCurrent >= (trackEnd - 0.3)) {
         if (!this.hasEndedFired) {
           this.hasEndedFired = true;
-          this.notify({ type: 'ended', isLiveDhak: false, track: this.currentTrack });
+          this.notify({ type: 'ended', track: this.currentTrack });
         }
         return;
       }
@@ -380,7 +337,6 @@ class YouTubeAudioPlayer {
         currentTime: relativeCurrent,
         duration: trackDuration,
         progress: progress,
-        isLiveDhak: false,
         track: this.currentTrack
       });
     } catch (e) {}
