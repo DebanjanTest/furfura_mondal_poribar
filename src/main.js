@@ -274,13 +274,24 @@ function initFirebaseAuthUI() {
   });
 
   const completeUserLogin = (user) => {
+    if (!user) return;
     const lang = getLanguage();
     setStoredUser(user);
+    localStorage.setItem('mondal_bari_welcome_entered', 'true');
+    const welcomeOverlay = document.getElementById('welcome-modal-overlay');
+    if (welcomeOverlay) {
+      welcomeOverlay.remove();
+    }
+
     updateAuthUI(user);
     closeModal('google-signin-modal');
+    if (typeof window.renderGoogleAccountsList === 'function') {
+      window.renderGoogleAccountsList();
+    }
+
     const welcomeMsg = lang === 'bn' 
-      ? `Google সাইন ইন সফল হয়েছে! স্বাগতম, ${user.displayName}` 
-      : `Signed in with Google! Welcome, ${user.displayName}`;
+      ? `Google সাইন ইন সফল হয়েছে! স্বাগতম, ${user.displayName} 🌸` 
+      : `Signed in with Google! Welcome, ${user.displayName} 🌸`;
     showAuthToast(welcomeMsg);
     if (typeof audioEngine?.playDiyaLight === 'function') {
       audioEngine.playDiyaLight();
@@ -2750,6 +2761,13 @@ function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
   if (!welcomeOverlay) return;
 
+  // Check if user already passed welcome gate or is already authenticated
+  const isAlreadyEntered = localStorage.getItem('mondal_bari_welcome_entered') === 'true';
+  if (isAlreadyEntered) {
+    welcomeOverlay.remove();
+    return;
+  }
+
   const langBnBtn = document.getElementById('welcome-lang-bn');
   const langEnBtn = document.getElementById('welcome-lang-en');
   const soundYesBtn = document.getElementById('welcome-sound-yes');
@@ -2845,11 +2863,12 @@ function initWelcomeModal() {
       console.warn('Audio preference init notice on enter:', err);
     } finally {
       // 3. Always Animate away modal and safely unlock view
+      localStorage.setItem('mondal_bari_welcome_entered', 'true');
       if (welcomeOverlay) {
         welcomeOverlay.classList.add('hidden');
         setTimeout(() => {
           welcomeOverlay.remove();
-        }, 400);
+        }, 300);
       }
 
       // 4. Always ensure viewport starts at the top of Hero section
