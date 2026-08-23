@@ -9549,42 +9549,49 @@ button:active, [role="button"]:active {
    GOOGLE AUTHENTICATION MODAL & TOAST NOTIFICATION STYLING
    ========================================================================== */
 
+
 .google-auth-backdrop {
-  display: none;
   position: fixed;
   inset: 0;
-  z-index: 1200;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  z-index: 2500;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  display: flex !important;
   align-items: center;
   justify-content: center;
   padding: 1rem;
   box-sizing: border-box;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
 .google-auth-backdrop.active {
-  display: flex;
-  opacity: 1;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
 }
 
 .google-auth-modal-card {
   position: relative;
   width: 100%;
   max-width: 440px;
-  background: rgba(22, 3, 8, 0.96);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid rgba(255, 207, 64, 0.4);
+  background: rgba(22, 3, 8, 0.98);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border: 1.5px solid rgba(255, 207, 64, 0.5);
   border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 207, 64, 0.2);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 207, 64, 0.25);
   padding: 1.8rem 1.6rem 1.4rem;
   box-sizing: border-box;
   color: #ffffff;
+  pointer-events: auto !important;
+  z-index: 2501;
   animation: authModalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 
 @keyframes authModalPop {
   0% { transform: scale(0.92) translateY(10px); opacity: 0; }

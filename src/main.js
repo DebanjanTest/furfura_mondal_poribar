@@ -210,42 +210,23 @@ function initFirebaseAuthUI() {
   const customAuthForm = document.getElementById('google-custom-auth-form');
 
   window.openGoogleAuthModal = function() {
-    if (googleModal) {
-      if (errorNoticeEl) {
-        errorNoticeEl.style.display = 'none';
-        errorNoticeEl.textContent = '';
-      }
-      googleModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+    openModal('google-signin-modal');
+    if (errorNoticeEl) {
+      errorNoticeEl.style.display = 'none';
+      errorNoticeEl.textContent = '';
     }
   };
 
-  function closeGoogleAuthModal() {
-    if (googleModal) {
-      googleModal.classList.remove('active');
-      const anyOtherModal = document.querySelector('.modal-backdrop.active');
-      if (!anyOtherModal) {
-        document.body.style.overflow = '';
-      }
-    }
-  }
-
   closeGoogleModalBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    closeGoogleAuthModal();
-  });
-
-  googleModal?.addEventListener('click', (e) => {
-    if (e.target === googleModal) {
-      closeGoogleAuthModal();
-    }
+    closeModal('google-signin-modal');
   });
 
   const completeUserLogin = (user) => {
     const lang = getLanguage();
     setStoredUser(user);
     updateAuthUI(user);
-    closeGoogleAuthModal();
+    closeModal('google-signin-modal');
     const welcomeMsg = lang === 'bn' 
       ? `Google সাইন ইন সফল হয়েছে! স্বাগতম, ${user.displayName}` 
       : `Signed in with Google! Welcome, ${user.displayName}`;
@@ -273,18 +254,16 @@ function initFirebaseAuthUI() {
         let msg = '';
         if (err.code === 'auth/operation-not-allowed') {
           msg = lang === 'bn'
-            ? '⚠️ Firebase Console-এ Google Provider টি সক্রিয় (Enabled) করতে হবে। Authentication > Sign-in method এ যান।'
-            : '⚠️ Google Provider is not enabled in Firebase Console yet. Go to Authentication > Sign-in method.';
+            ? '⚠️ Firebase Console-এ Google Provider এখনও সক্রিয় (Enabled) করা হয়নি। Authentication > Sign-in method এ গিয়ে Enable করুন। বিকল্প হিসেবে নীচের এক-ক্লিক ভক্ত প্রোফাইল দিয়ে এখনই প্রবেশ করতে পারেন!'
+            : '⚠️ Google Provider is disabled in Firebase Console. Enable it under Authentication > Sign-in method, or use the instant Devotee profile below!';
         } else if (err.code === 'auth/unauthorized-domain') {
           msg = lang === 'bn'
             ? '⚠️ বর্তমান ডোমেনটি Firebase Console এর Authorized Domains এ যুক্ত করতে হবে।'
-            : '⚠️ This domain is not in Firebase Console Authorized Domains list.';
+            : '⚠️ Domain not authorized in Firebase Console settings.';
         } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
-          msg = lang === 'bn'
-            ? 'পপ-আপ বন্ধ করা হয়েছে।'
-            : 'Popup was closed.';
+          msg = lang === 'bn' ? 'পপ-আপ বন্ধ করা হয়েছে।' : 'Popup was closed.';
         } else {
-          msg = (lang === 'bn' ? 'Google সাইন ইন বার্তা: ' : 'Google Sign-in notice: ') + (err.message || err.code || 'Please try quick profile below.');
+          msg = (lang === 'bn' ? 'Google বার্তা: ' : 'Notice: ') + (err.message || err.code || 'Please try quick profile below.');
         }
         errorNoticeEl.textContent = msg;
         errorNoticeEl.style.display = 'block';
@@ -398,7 +377,7 @@ function initFirebaseAuthUI() {
         drawerAuthBtn.classList.remove('btn-signout');
         drawerAuthBtn.onclick = (e) => {
           e.stopPropagation();
-          window.openGoogleAuthModal();
+          openModal('google-signin-modal');
         };
       }
     }
@@ -406,11 +385,13 @@ function initFirebaseAuthUI() {
 
   // Open Google Auth Modal on button clicks
   authBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
     e.stopPropagation();
-    window.openGoogleAuthModal();
+    openModal('google-signin-modal');
   });
 
   logoutBtn?.addEventListener('click', async (e) => {
+    e.preventDefault();
     e.stopPropagation();
     const lang = getLanguage();
     await logoutUser();
@@ -2490,6 +2471,14 @@ document.addEventListener('click', (e) => {
   if (target.closest('#btn-open-playlists, #island-quick-radio, #mobile-nav-radio, #player-art-btn, #mobile-media-pill-btn')) {
     e.preventDefault();
     openModal('playlists-modal');
+    return;
+  }
+
+  // 3.5. Google Auth Modal triggers
+  if (target.closest('#island-google-auth-btn, #drawer-btn-auth, .btn-trigger-google-auth')) {
+    e.preventDefault();
+    e.stopPropagation();
+    openModal('google-signin-modal');
     return;
   }
 
