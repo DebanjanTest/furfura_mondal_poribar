@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initAtmosphere();
   initDynamicIsland();
+  initFirebaseAuthUI();
   initCountdown();
   initOnlineCounter();
   initAudioPlayer();
@@ -3474,4 +3475,11 @@ function initSectionScrollLocking() {
       }
     }
   });
+}
+
+// Immediate fallback init if DOM is ready
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  setTimeout(() => {
+    try { initFirebaseAuthUI(); } catch (_) {}
+  }, 100);
 }
