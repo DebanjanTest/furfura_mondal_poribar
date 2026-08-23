@@ -72,24 +72,32 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage('bn');
   }
 
-  initAtmosphere();
-  initDynamicIsland();
-  initFirebaseAuthUI();
-  initCountdown();
-  initOnlineCounter();
-  initAudioPlayer();
-  initModals();
-  initWelcomeModal();
-  initLanguageSwitcher();
-  initPujoInfoAndGallery();
-  initInvitationSection();
-  initPhotoRiver();
-  initGrandGallery();
-  initOnnotaSection();
-  initStoryGenerator();
-  initKeyboardShortcuts();
-  initParticles();
-  initSectionScrollLocking();
+  const safeInit = (name, fn) => {
+    try {
+      if (typeof fn === 'function') fn();
+    } catch (err) {
+      console.warn(`[Init] ${name} notice:`, err);
+    }
+  };
+
+  safeInit('WelcomeModal', initWelcomeModal);
+  safeInit('Atmosphere', initAtmosphere);
+  safeInit('DynamicIsland', initDynamicIsland);
+  safeInit('FirebaseAuthUI', initFirebaseAuthUI);
+  safeInit('Countdown', initCountdown);
+  safeInit('OnlineCounter', initOnlineCounter);
+  safeInit('AudioPlayer', initAudioPlayer);
+  safeInit('Modals', initModals);
+  safeInit('LanguageSwitcher', initLanguageSwitcher);
+  safeInit('PujoInfoAndGallery', initPujoInfoAndGallery);
+  safeInit('InvitationSection', initInvitationSection);
+  safeInit('PhotoRiver', initPhotoRiver);
+  safeInit('GrandGallery', initGrandGallery);
+  safeInit('OnnotaSection', initOnnotaSection);
+  safeInit('StoryGenerator', initStoryGenerator);
+  safeInit('KeyboardShortcuts', initKeyboardShortcuts);
+  safeInit('Particles', initParticles);
+  safeInit('SectionScrollLocking', initSectionScrollLocking);
 
   // Initialize YouTube Audio Player
   ytAudioPlayer.init().then(() => {
@@ -2551,6 +2559,15 @@ function initModals() {
 document.addEventListener('click', (e) => {
   const target = e.target;
   if (!target) return;
+
+  // 0. Welcome Enter Site Trigger
+  if (target.closest('#btn-welcome-enter, .welcome-enter-btn')) {
+    const overlay = document.getElementById('welcome-modal-overlay');
+    if (overlay) {
+      overlay.classList.add('hidden');
+      setTimeout(() => overlay.remove(), 350);
+    }
+  }
 
   // 1. Story Generator triggers
   if (target.closest('#btn-trig-story-gen, #island-quick-story, #mobile-nav-story, #btn-modal-open-story, .story-launch-modal-btn')) {
