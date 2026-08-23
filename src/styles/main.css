@@ -6070,30 +6070,78 @@ scroll-snap-align: none !important;
 .onnota-like-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.75rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  gap: 0.45rem;
+  padding: 0.42rem 0.95rem;
+  background: rgba(22, 2, 8, 0.72);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 207, 64, 0.3);
   border-radius: var(--radius-pill);
-  color: rgba(255, 255, 255, 0.88);
+  color: #ffffff;
   font-family: var(--font-bengali-sans);
-  font-size: 0.71875rem;
+  font-size: 0.76rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  user-select: none;
 }
 
 .onnota-like-btn:hover {
   background: rgba(211, 47, 47, 0.25);
-  border-color: rgba(255, 82, 82, 0.45);
-  color: #ff9e9e;
-  transform: scale(1.05);
+  border-color: rgba(255, 82, 82, 0.65);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.35), 0 0 14px rgba(255, 82, 82, 0.25);
+}
+
+.onnota-like-btn:active {
+  transform: scale(0.94);
 }
 
 .onnota-like-btn.liked {
-  background: rgba(211, 47, 47, 0.35);
+  background: linear-gradient(135deg, rgba(211, 47, 47, 0.9), rgba(183, 28, 28, 0.95));
   border-color: #ff5252;
-  color: #ffb4b4;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(211, 47, 47, 0.55), 0 0 16px rgba(255, 82, 82, 0.4);
+}
+
+.onnota-like-btn .like-num {
+  font-weight: 700;
+  color: var(--heritage-gold);
+  transition: color 0.2s ease;
+}
+
+.onnota-like-btn.liked .like-num {
+  color: #ffffff;
+}
+
+.onnota-like-btn .pranam-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.onnota-like-btn.liked .pranam-label {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.onnota-like-btn .pranam-heart-icon {
+  font-size: 0.82rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.onnota-like-btn:hover .pranam-heart-icon {
+  transform: scale(1.25);
+}
+
+.onnota-like-btn:active .pranam-heart-icon {
+  transform: scale(1.4) rotate(-10deg);
 }
 
 .onnota-section-footer {

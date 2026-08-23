@@ -1472,8 +1472,9 @@ function renderOnnotaGrid() {
           <span class="onnota-card-date">${date}</span>
         </div>
         <button type="button" class="onnota-like-btn ${isLiked ? 'liked' : ''}" data-item-id="${item.id}" aria-label="Give Pranam Blessing">
+          <span class="pranam-heart-icon" aria-hidden="true">${isLiked ? '❤️' : '🤍'}</span>
           <span class="like-num">${formatNumber(likeCount, lang)}</span>
-          <span>${pranamLabel}</span>
+          <span class="pranam-label">${pranamLabel}</span>
         </button>
       </div>
     `;
@@ -1498,6 +1499,8 @@ function renderOnnotaGrid() {
       likeBtn.classList.add('liked');
       const numEl = likeBtn.querySelector('.like-num');
       if (numEl) numEl.textContent = formatNumber(updatedCount, lang);
+      const heartEl = likeBtn.querySelector('.pranam-heart-icon');
+      if (heartEl) heartEl.textContent = '❤️';
     });
 
     grid.appendChild(card);
