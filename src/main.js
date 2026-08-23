@@ -224,12 +224,37 @@ const DEFAULT_ACCOUNTS = [
 function getSavedAccounts() {
   try {
     const raw = localStorage.getItem('mondal_bari_saved_accounts');
-    if (raw) {
-      const list = JSON.parse(raw);
-      if (Array.isArray(list) && list.length > 0) return list;
+    let list = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(list) || list.length === 0) {
+      list = [
+        {
+          uid: 'google-debanjan-mondal',
+          displayName: 'Debanjan Mondal',
+          email: 'debanjanmondal8996@gmail.com',
+          bgClass: 'bg-blue',
+          symbol: 'D'
+        },
+        {
+          uid: 'google-devotee',
+          displayName: 'শ্রদ্ধেয় ভক্ত ও দর্শনার্থী',
+          email: 'devotee@gmail.com',
+          bgClass: 'bg-gold',
+          symbol: '🌸'
+        },
+        {
+          uid: 'google-family',
+          displayName: 'মণ্ডল পরিবার সদস্য / অতিথি',
+          email: 'mondal.poribar@gmail.com',
+          bgClass: 'bg-vermilion',
+          symbol: '🪔'
+        }
+      ];
+      localStorage.setItem('mondal_bari_saved_accounts', JSON.stringify(list));
     }
-  } catch (_) {}
-  return DEFAULT_ACCOUNTS;
+    return list;
+  } catch (_) {
+    return [];
+  }
 }
 
 function saveAccountsList(list) {
@@ -384,55 +409,53 @@ function initFirebaseAuthUI() {
   });
 
   // 1. Single Unified Live Google OAuth Click Handler
-  liveOAuthBtn?.addEventListener('click', async (e) => {
+  liveOAuthBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (errorNoticeEl) {
       errorNoticeEl.style.display = 'none';
       errorNoticeEl.textContent = '';
     }
-    try {
-      const user = await loginWithGoogleLivePopup();
-      if (user) {
-        const list = getSavedAccounts();
-        if (!list.some(a => a.email === user.email)) {
-          list.unshift({
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-            bgClass: 'bg-blue',
-            symbol: user.displayName ? user.displayName.charAt(0).toUpperCase() : 'G'
-          });
-          saveAccountsList(list);
+
+    loginWithGoogleLivePopup()
+      .then((user) => {
+        if (user) {
+          const list = getSavedAccounts();
+          if (!list.some(a => a.email === user.email)) {
+            list.unshift({
+              uid: user.uid,
+              displayName: user.displayName,
+              email: user.email,
+              bgClass: 'bg-blue',
+              symbol: user.displayName ? user.displayName.charAt(0).toUpperCase() : 'G'
+            });
+            saveAccountsList(list);
+          }
+          window.completePujoUserLogin(user);
         }
-        completeUserLogin(user);
-      }
-    } catch (err) {
-      console.warn('Google Live Auth notice:', err);
-      const lang = getLanguage();
-      if (errorNoticeEl) {
-        let msg = '';
-        if (err.code === 'auth/operation-not-allowed') {
-          msg = lang === 'bn'
-            ? '⚠️ Firebase Console-এ Google Provider টি সক্রিয় (Enabled) করতে হবে (Authentication > Sign-in method)। বিকল্প হিসেবে নীচের তালিকায় আপনার অ্যাকাউন্ট বেছে নিন!'
-            : '⚠️ Google Provider is disabled in Firebase Console. Please enable it in Authentication > Sign-in method, or select your account below!';
-        } else if (err.code === 'auth/popup-blocked') {
-          msg = lang === 'bn'
-            ? '⚠️ ব্রাউজার পপ-আপ ব্লক করেছে। অ্যাড্রেস বারের পপ-আপ আইকনে ক্লিক করে Allow করুন, অথবা নীচের তালিকা থেকে অ্যাকাউন্ট বেছে নিন!'
-            : '⚠️ Browser blocked popup. Please allow popups in address bar, or select your account below!';
-        } else if (err.code === 'auth/unauthorized-domain') {
-          msg = lang === 'bn'
-            ? '⚠️ বর্তমান ডোমেনটি Firebase Console এর Authorized Domains এ যুক্ত করতে হবে।'
-            : '⚠️ Domain not authorized in Firebase Console settings.';
-        } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
-          msg = lang === 'bn' ? 'পপ-আপ বন্ধ করা হয়েছে।' : 'Popup was closed.';
-        } else {
-          msg = (lang === 'bn' ? 'Google বার্তা: ' : 'Notice: ') + (err.message || err.code || 'Please select your account below.');
+      })
+      .catch((err) => {
+        console.warn('Google Live Auth notice:', err);
+        const lang = getLanguage();
+        if (errorNoticeEl) {
+          let msg = '';
+          if (err.code === 'auth/operation-not-allowed') {
+            msg = lang === 'bn'
+              ? '⚠️ Firebase Console-এ Google Provider টি সক্রিয় (Enabled) করতে হবে। নীচের তালিকা থেকে আপনার অ্যাকাউন্ট বেছে নিন!'
+              : '⚠️ Google Provider is disabled in Firebase Console. Please select your account below for instant sign-in!';
+          } else if (err.code === 'auth/popup-blocked') {
+            msg = lang === 'bn'
+              ? '⚠️ ব্রাউজার পপ-আপ ব্লক করেছে। অ্যাড্রেস বারের পপ-আপ আইকনে ক্লিক করে Allow করুন, অথবা নীচের তালিকা থেকে অ্যাকাউন্ট বেছে নিন!'
+              : '⚠️ Popup was blocked by browser. Allow popups in the address bar, or choose an account below for instant sign-in.';
+          } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
+            msg = lang === 'bn' ? 'পপ-আপ বন্ধ করা হয়েছে।' : 'Popup was closed.';
+          } else {
+            msg = (lang === 'bn' ? 'Google বার্তা: ' : 'Notice: ') + (err.message || err.code || 'Please select an account below.');
+          }
+          errorNoticeEl.textContent = msg;
+          errorNoticeEl.style.display = 'block';
         }
-        errorNoticeEl.textContent = msg;
-        errorNoticeEl.style.display = 'block';
-      }
-    }
+      });
   });
 
   // 2. Custom Name & Official Email Form Submit Handler

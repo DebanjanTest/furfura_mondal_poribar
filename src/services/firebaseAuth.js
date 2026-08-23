@@ -102,20 +102,22 @@ function notifyAuthSubscribers(user) {
 /**
  * Directly execute live Google popup OAuth
  */
-export async function loginWithGoogleLivePopup() {
+export function loginWithGoogleLivePopup() {
   if (!auth || !googleProvider) {
-    throw new Error('Firebase Auth instance is not initialized.');
+    return Promise.reject(new Error('Firebase Auth instance is not initialized.'));
   }
-  const result = await signInWithPopup(auth, googleProvider);
-  const user = {
-    uid: result.user.uid,
-    displayName: result.user.displayName || 'Devotee',
-    email: result.user.email || '',
-    photoURL: result.user.photoURL || generateAvatarUrl(result.user.displayName, result.user.email),
-    isFirebaseLive: true
-  };
-  setStoredUser(user);
-  return user;
+  googleProvider.setCustomParameters({ prompt: 'select_account' });
+  return signInWithPopup(auth, googleProvider).then((result) => {
+    const user = {
+      uid: result.user.uid,
+      displayName: result.user.displayName || 'Devotee',
+      email: result.user.email || '',
+      photoURL: result.user.photoURL || generateAvatarUrl(result.user.displayName, result.user.email),
+      isFirebaseLive: true
+    };
+    setStoredUser(user);
+    return user;
+  });
 }
 
 /**
