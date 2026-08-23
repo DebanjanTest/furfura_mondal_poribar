@@ -2789,12 +2789,7 @@ function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
   if (!welcomeOverlay) return;
 
-  // Check if user already passed welcome gate or is already authenticated
-  const isAlreadyEntered = localStorage.getItem('mondal_bari_welcome_entered') === 'true';
-  if (isAlreadyEntered) {
-    welcomeOverlay.remove();
-    return;
-  }
+
 
   const langBnBtn = document.getElementById('welcome-lang-bn');
   const langEnBtn = document.getElementById('welcome-lang-en');
@@ -2891,12 +2886,11 @@ function initWelcomeModal() {
       console.warn('Audio preference init notice on enter:', err);
     } finally {
       // 3. Always Animate away modal and safely unlock view
-      localStorage.setItem('mondal_bari_welcome_entered', 'true');
       if (welcomeOverlay) {
         welcomeOverlay.classList.add('hidden');
         setTimeout(() => {
-          welcomeOverlay.remove();
-        }, 300);
+          try { welcomeOverlay.remove(); } catch (_) {}
+        }, 350);
       }
 
       // 4. Always ensure viewport starts at the top of Hero section
