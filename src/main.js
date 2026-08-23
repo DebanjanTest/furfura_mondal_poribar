@@ -279,7 +279,7 @@ function initFirebaseAuthUI() {
   };
 
   // Render Dynamic Accounts List
-  function renderAccountsList() {
+  window.renderGoogleAccountsList = function renderAccountsList() {
     if (!accountsContainer) return;
     const accounts = getSavedAccounts();
     const currentUser = getCurrentUser();
@@ -2676,6 +2676,9 @@ function openModal(modalId) {
   }
   if (modalId === 'story-generator-modal' && typeof renderStoryCanvas === 'function') {
     renderStoryCanvas();
+  }
+  if (modalId === 'google-signin-modal' && typeof window.renderGoogleAccountsList === 'function') {
+    window.renderGoogleAccountsList();
   }
 
   el.classList.add('active');
