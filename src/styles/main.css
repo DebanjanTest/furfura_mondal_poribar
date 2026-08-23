@@ -8999,3 +8999,129 @@ button:active, [role="button"]:active {
     font-size: 0.72rem;
   }
 }
+
+
+/* ==========================================================================
+   UNIVERSAL LIKE BUTTON SYSTEM (UIVERSE BEATING HEART & MOVING BORDERS BY LILAREST)
+   Applied across Onnota Showcase, Grand Photo Gallery, and Fullscreen Lightbox
+   ========================================================================== */
+
+.onnota-like-btn,
+.gallery-like-btn,
+.lightbox-like-btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.45rem 1rem 0.45rem 0.85rem;
+  box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset, 0 4px 14px rgba(0, 0, 0, 0.5);
+  background-color: #170205;
+  border-color: black;
+  border-style: solid;
+  border-width: 1.5px;
+  border-radius: 25px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-weight: 900;
+  color: White;
+  font-family: var(--font-bengali-sans);
+  transition:
+    transform 400ms cubic-bezier(0.68, -0.55, 0.27, 2.5),
+    border-color 400ms ease-in-out,
+    background-color 400ms ease-in-out,
+    box-shadow 400ms ease-in-out;
+  gap: 0.45rem;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  user-select: none;
+  word-spacing: -1px;
+}
+
+.onnota-like-btn:hover,
+.gallery-like-btn:hover,
+.lightbox-like-btn:hover {
+  background-color: #3D1C21;
+  transform: scale(1.05);
+  animation: movingBorders 3s infinite;
+}
+
+.onnota-like-btn .btn-heart-wrapper,
+.gallery-like-btn .btn-heart-wrapper,
+.lightbox-like-btn .btn-heart-wrapper {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.onnota-like-btn svg,
+.gallery-like-btn svg,
+.lightbox-like-btn svg {
+  fill: rgb(255, 110, 110);
+  transition: opacity 100ms ease-in-out;
+  display: block;
+}
+
+.onnota-like-btn .empty,
+.gallery-like-btn .empty,
+.lightbox-like-btn .empty {
+  opacity: 1;
+}
+
+.onnota-like-btn .filled,
+.gallery-like-btn .filled,
+.lightbox-like-btn .filled {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.onnota-like-btn:hover .empty,
+.gallery-like-btn:hover .empty,
+.lightbox-like-btn:hover .empty {
+  opacity: 0;
+}
+
+.onnota-like-btn:hover .filled,
+.gallery-like-btn:hover .filled,
+.lightbox-like-btn:hover .filled {
+  opacity: 1;
+  animation: beatingHeart 1.2s infinite;
+}
+
+.onnota-like-btn.liked,
+.gallery-like-btn.liked,
+.lightbox-like-btn.liked {
+  background-color: #3D1C21;
+  border-color: #ffd8d8;
+}
+
+.onnota-like-btn.liked .empty,
+.gallery-like-btn.liked .empty,
+.lightbox-like-btn.liked .empty {
+  opacity: 0;
+}
+
+.onnota-like-btn.liked .filled,
+.gallery-like-btn.liked .filled,
+.lightbox-like-btn.liked .filled {
+  opacity: 1;
+  animation: beatingHeart 1.5s ease-in-out infinite;
+}
+
+.onnota-like-btn .like-num,
+.gallery-like-btn .like-num,
+.lightbox-like-btn .like-num {
+  font-weight: 900;
+  color: #ffd8d8;
+}
+
+.onnota-like-btn .like-label,
+.gallery-like-btn .like-label,
+.lightbox-like-btn .like-label {
+  font-weight: 700;
+  color: #ffffff;
+}
