@@ -1,4 +1,4 @@
-// Firebase Modular Authentication Service (Intelligent Hybrid Engine)
+// Firebase Modular Authentication Service for Mondal Barir Pujo
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import {
   getAuth,
@@ -10,14 +10,15 @@ import {
 
 const STORAGE_KEY = 'mondal_bari_auth_user';
 
-// Default Firebase configuration with environment variable override
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDummyKeyForBuildOnly-MondalBari1997",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "furfura-mondal-poribar.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "furfura-mondal-poribar",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "furfura-mondal-poribar.appspot.com",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "102938475610",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:102938475610:web:abcdef123456"
+// Authentic Firebase Project Configuration for Mondal Barir Pujo
+export const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDTIahFo-QmOsZcGft5SxOSmslJsW_Jm-Y",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "mondal-barir-pujo.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "mondal-barir-pujo",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "mondal-barir-pujo.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "988253678071",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:988253678071:web:bf4a14d991484683c8a6f2",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-L5Q056X418"
 };
 
 let app = null;
@@ -30,8 +31,9 @@ try {
   auth = getAuth(app);
   googleProvider = new GoogleAuthProvider();
   googleProvider.setCustomParameters({ prompt: 'select_account' });
+  console.log('Firebase Authentication initialized for Mondal Barir Pujo.');
 } catch (e) {
-  console.warn('Firebase initialization notice:', e?.message || e);
+  console.warn('Firebase initialization note:', e?.message || e);
 }
 
 // Generate an authentic avatar URL with colored initial
@@ -72,10 +74,11 @@ function notifyAuthSubscribers(user) {
   });
 }
 
+/**
+ * Execute Google Sign-In via Firebase Authentication Popup
+ */
 export async function loginWithGoogle() {
-  // 1. Try Firebase standard popup authentication if valid credentials
-  const hasRealKey = firebaseConfig.apiKey && !firebaseConfig.apiKey.includes('DummyKey');
-  if (auth && googleProvider && hasRealKey) {
+  if (auth && googleProvider) {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = {
@@ -88,30 +91,36 @@ export async function loginWithGoogle() {
       setStoredUser(user);
       return user;
     } catch (firebaseErr) {
-      console.warn('Live Firebase Popup unavailable, fallback to interactive Google Profile selector:', firebaseErr?.message);
+      // If user closed popup intentionally, don't throw harsh error
+      if (firebaseErr.code === 'auth/popup-closed-by-user' || firebaseErr.code === 'auth/cancelled-popup-request') {
+        console.log('Google Sign-In popup was closed by user.');
+        return null;
+      }
+      console.warn('Firebase Google Sign-In encountered issue:', firebaseErr);
+      
+      // If domain is unauthorized or popup blocked, launch the friendly account selector
+      if (typeof window !== 'undefined' && typeof window.openGoogleAuthModal === 'function') {
+        return new Promise((resolve) => {
+          window.openGoogleAuthModal((userData) => {
+            setStoredUser(userData);
+            resolve(userData);
+          });
+        });
+      }
+      throw firebaseErr;
     }
   }
 
-  // 2. Interactive Google Account Selection
-  return new Promise((resolve) => {
-    if (typeof window !== 'undefined' && typeof window.openGoogleAuthModal === 'function') {
+  // Fallback if auth instance not ready
+  if (typeof window !== 'undefined' && typeof window.openGoogleAuthModal === 'function') {
+    return new Promise((resolve) => {
       window.openGoogleAuthModal((userData) => {
         setStoredUser(userData);
         resolve(userData);
       });
-    } else {
-      // Direct Devotee Quick Profile
-      const defaultUser = {
-        uid: 'google-devotee-' + Date.now(),
-        displayName: 'ভক্ত ও দর্শনার্থী',
-        email: 'devotee@mondalbari.org',
-        photoURL: generateAvatarUrl('ভক্ত ও দর্শনার্থী'),
-        isFirebaseLive: false
-      };
-      setStoredUser(defaultUser);
-      resolve(defaultUser);
-    }
-  });
+    });
+  }
+  return null;
 }
 
 export async function logoutUser() {
@@ -126,7 +135,7 @@ export async function logoutUser() {
 export function subscribeAuthState(callback) {
   authListeners.add(callback);
 
-  // Check Firebase live auth
+  // Check Firebase live auth state
   if (auth) {
     onAuthStateChanged(auth, (user) => {
       if (user) {

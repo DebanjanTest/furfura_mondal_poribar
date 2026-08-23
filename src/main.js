@@ -355,21 +355,31 @@ function initFirebaseAuthUI() {
       if (drawerAuthBtnText) drawerAuthBtnText.textContent = lang === 'bn' ? 'Google সাইন ইন' : 'Google Sign In';
       if (drawerAuthBtn) {
         drawerAuthBtn.classList.remove('btn-signout');
-        drawerAuthBtn.onclick = (e) => {
+        drawerAuthBtn.onclick = async (e) => {
           e.stopPropagation();
-          window.openGoogleAuthModal((userData) => {
-            completeUserLogin(userData);
-          });
+          try {
+            const user = await loginWithGoogle();
+            if (user) {
+              completeUserLogin(user);
+            }
+          } catch (err) {
+            console.warn('Google sign-in notice:', err);
+          }
         };
       }
     }
   };
 
-  authBtn?.addEventListener('click', (e) => {
+  authBtn?.addEventListener('click', async (e) => {
     e.stopPropagation();
-    window.openGoogleAuthModal((userData) => {
-      completeUserLogin(userData);
-    });
+    try {
+      const user = await loginWithGoogle();
+      if (user) {
+        completeUserLogin(user);
+      }
+    } catch (err) {
+      console.warn('Google sign-in notice:', err);
+    }
   });
 
   logoutBtn?.addEventListener('click', async (e) => {
