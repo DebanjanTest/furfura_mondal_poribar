@@ -5,7 +5,7 @@ import { audioEngine } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
 import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations, formatNumber } from './utils/i18n.js';
-import { loginWithGoogle, loginWithGoogleLivePopup, logoutUser, subscribeAuthState, getCurrentUser, setStoredUser, generateAvatarUrl } from './services/firebaseAuth.js';
+import { loginWithGoogle, loginWithGoogleLivePopup, loginWithGoogleRedirect, logoutUser, subscribeAuthState, getCurrentUser, setStoredUser, generateAvatarUrl } from './services/firebaseAuth.js';
 
 // Application State
 const state = {
@@ -341,7 +341,24 @@ function initFirebaseAuthUI() {
     }
   });
 
-  // 1. Live Google OAuth Popup Click Handler
+  const liveRedirectBtn = document.getElementById('btn-google-live-redirect');
+
+  // 1. Live Google OAuth Redirect Click Handler (No popup blocker)
+  liveRedirectBtn?.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    try {
+      await loginWithGoogleRedirect();
+    } catch (err) {
+      console.warn('Google Redirect Sign-In error:', err);
+      const lang = getLanguage();
+      if (errorNoticeEl) {
+        errorNoticeEl.textContent = (lang === 'bn' ? 'রিডাইরেক্ট বার্তা: ' : 'Redirect notice: ') + (err.message || err.code || 'Please select an account below.');
+        errorNoticeEl.style.display = 'block';
+      }
+    }
+  });
+
+  // 1b. Live Google OAuth Popup Click Handler
   liveOAuthBtn?.addEventListener('click', async (e) => {
     e.stopPropagation();
     if (errorNoticeEl) {
@@ -377,6 +394,10 @@ function initFirebaseAuthUI() {
           msg = lang === 'bn'
             ? '⚠️ বর্তমান ডোমেনটি Firebase Console এর Authorized Domains এ যুক্ত করতে হবে।'
             : '⚠️ Domain not authorized in Firebase Console settings.';
+        } else if (err.code === 'auth/popup-blocked') {
+          msg = lang === 'bn'
+            ? '⚠️ ব্রাউজারের পপ-আপ ব্লকার সক্রিয় আছে! অ্যাড্রেস বারের পপ-আপ আইকনে ক্লিক করে Allow করুন, অথবা উপরের "Google রিডাইরেক্ট" বোতামে ক্লিক করুন।'
+            : '⚠️ Pop-up was blocked by browser. Please allow popups in address bar, or click "Sign in with Google Redirect" above!';
         } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
           msg = lang === 'bn' ? 'পপ-আপ বন্ধ করা হয়েছে।' : 'Popup was closed.';
         } else {

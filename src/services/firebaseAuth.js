@@ -4,6 +4,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
   onAuthStateChanged
 } from 'firebase/auth';
@@ -31,6 +33,23 @@ try {
   auth = getAuth(app);
   googleProvider = new GoogleAuthProvider();
   googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+  // Handle redirect result if user returned from Google Redirect Sign-In
+  getRedirectResult(auth).then((result) => {
+    if (result && result.user) {
+      const user = {
+        uid: result.user.uid,
+        displayName: result.user.displayName || 'Devotee',
+        email: result.user.email || '',
+        photoURL: result.user.photoURL || generateAvatarUrl(result.user.displayName, result.user.email),
+        isFirebaseLive: true
+      };
+      setStoredUser(user);
+    }
+  }).catch((e) => {
+    console.warn('Redirect Auth handling notice:', e);
+  });
+
   console.log('Firebase Authentication initialized for Mondal Barir Pujo.');
 } catch (e) {
   console.warn('Firebase initialization note:', e?.message || e);
@@ -75,10 +94,6 @@ function notifyAuthSubscribers(user) {
 }
 
 /**
- * Execute Google Sign-In via Firebase Authentication Popup
- */
-
-/**
  * Directly execute live Google popup OAuth
  */
 export async function loginWithGoogleLivePopup() {
@@ -97,50 +112,19 @@ export async function loginWithGoogleLivePopup() {
   return user;
 }
 
-export async function loginWithGoogle() {
-  if (auth && googleProvider) {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = {
-        uid: result.user.uid,
-        displayName: result.user.displayName || 'Devotee',
-        email: result.user.email || '',
-        photoURL: result.user.photoURL || generateAvatarUrl(result.user.displayName, result.user.email),
-        isFirebaseLive: true
-      };
-      setStoredUser(user);
-      return user;
-    } catch (firebaseErr) {
-      // If user closed popup intentionally, don't throw harsh error
-      if (firebaseErr.code === 'auth/popup-closed-by-user' || firebaseErr.code === 'auth/cancelled-popup-request') {
-        console.log('Google Sign-In popup was closed by user.');
-        return null;
-      }
-      console.warn('Firebase Google Sign-In encountered issue:', firebaseErr);
-      
-      // If domain is unauthorized or popup blocked, launch the friendly account selector
-      if (typeof window !== 'undefined' && typeof window.openGoogleAuthModal === 'function') {
-        return new Promise((resolve) => {
-          window.openGoogleAuthModal((userData) => {
-            setStoredUser(userData);
-            resolve(userData);
-          });
-        });
-      }
-      throw firebaseErr;
-    }
+/**
+ * Execute Google Sign-In via Full-Page Redirect (Bypasses popup blockers completely)
+ */
+export async function loginWithGoogleRedirect() {
+  if (!auth || !googleProvider) {
+    throw new Error('Firebase Auth instance is not initialized.');
   }
+  googleProvider.setCustomParameters({ prompt: 'select_account' });
+  await signInWithRedirect(auth, googleProvider);
+}
 
-  // Fallback if auth instance not ready
-  if (typeof window !== 'undefined' && typeof window.openGoogleAuthModal === 'function') {
-    return new Promise((resolve) => {
-      window.openGoogleAuthModal((userData) => {
-        setStoredUser(userData);
-        resolve(userData);
-      });
-    });
-  }
-  return null;
+export async function loginWithGoogle() {
+  return loginWithGoogleLivePopup();
 }
 
 export async function logoutUser() {

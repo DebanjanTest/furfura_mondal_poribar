@@ -7,6 +7,10 @@ export const translations = {
     "brand_title": "মণ্ডল বাড়ির পুজো",
     "google_login_title": "Google দিয়ে সাইন ইন (ঐচ্ছিক)",
     
+    
+    "google_live_redirect_btn": "Google রিডাইরেক্ট দিয়ে সাইন ইন (No Popup)",
+    
+    "google_live_redirect_btn": "Sign in with Google Redirect (No Popup)",
     "google_live_popup_btn": "Google পপ-আপ দিয়ে সাইন ইন (Live)",
     "google_modal_or_custom": "অথবা আপনার নাম লিখুন",
     
