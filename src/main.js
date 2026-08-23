@@ -341,24 +341,7 @@ function initFirebaseAuthUI() {
     }
   });
 
-  const liveRedirectBtn = document.getElementById('btn-google-live-redirect');
-
-  // 1. Live Google OAuth Redirect Click Handler (No popup blocker)
-  liveRedirectBtn?.addEventListener('click', async (e) => {
-    e.stopPropagation();
-    try {
-      await loginWithGoogleRedirect();
-    } catch (err) {
-      console.warn('Google Redirect Sign-In error:', err);
-      const lang = getLanguage();
-      if (errorNoticeEl) {
-        errorNoticeEl.textContent = (lang === 'bn' ? 'রিডাইরেক্ট বার্তা: ' : 'Redirect notice: ') + (err.message || err.code || 'Please select an account below.');
-        errorNoticeEl.style.display = 'block';
-      }
-    }
-  });
-
-  // 1b. Live Google OAuth Popup Click Handler
+  // 1. Single Unified Live Google OAuth Click Handler
   liveOAuthBtn?.addEventListener('click', async (e) => {
     e.stopPropagation();
     if (errorNoticeEl) {
@@ -367,7 +350,6 @@ function initFirebaseAuthUI() {
     try {
       const user = await loginWithGoogleLivePopup();
       if (user) {
-        // Save to dynamic accounts list if new
         const list = getSavedAccounts();
         if (!list.some(a => a.email === user.email)) {
           list.unshift({
@@ -382,22 +364,26 @@ function initFirebaseAuthUI() {
         completeUserLogin(user);
       }
     } catch (err) {
-      console.warn('Firebase Live Google Auth error:', err);
+      console.warn('Google Auth notice:', err);
+      // Auto-fallback to redirect if popup is blocked
+      if (err.code === 'auth/popup-blocked') {
+        try {
+          await loginWithGoogleRedirect();
+          return;
+        } catch (_) {}
+      }
+
       const lang = getLanguage();
       if (errorNoticeEl) {
         let msg = '';
         if (err.code === 'auth/operation-not-allowed') {
           msg = lang === 'bn'
-            ? '⚠️ Firebase Console-এ Google Provider টি সক্রিয় (Enabled) করতে হবে। Authentication > Sign-in method এ যান। বিকল্প হিসেবে নীচের অ্যাকাউন্ট বেছে নিন বা আপনার অ্যাকাউন্ট যুক্ত করুন!'
-            : '⚠️ Google Provider is disabled in Firebase Console. Enable it under Authentication > Sign-in method, or choose/add your account below!';
+            ? '⚠️ Firebase Console-এ Google Provider সক্রিয় (Enabled) করতে হবে। Authentication > Sign-in method এ যান।'
+            : '⚠️ Google Provider is disabled in Firebase Console. Enable it in Authentication > Sign-in method.';
         } else if (err.code === 'auth/unauthorized-domain') {
           msg = lang === 'bn'
             ? '⚠️ বর্তমান ডোমেনটি Firebase Console এর Authorized Domains এ যুক্ত করতে হবে।'
             : '⚠️ Domain not authorized in Firebase Console settings.';
-        } else if (err.code === 'auth/popup-blocked') {
-          msg = lang === 'bn'
-            ? '⚠️ ব্রাউজারের পপ-আপ ব্লকার সক্রিয় আছে! অ্যাড্রেস বারের পপ-আপ আইকনে ক্লিক করে Allow করুন, অথবা উপরের "Google রিডাইরেক্ট" বোতামে ক্লিক করুন।'
-            : '⚠️ Pop-up was blocked by browser. Please allow popups in address bar, or click "Sign in with Google Redirect" above!';
         } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
           msg = lang === 'bn' ? 'পপ-আপ বন্ধ করা হয়েছে।' : 'Popup was closed.';
         } else {

@@ -24,6 +24,8 @@ export const translations = {
     "google_btn_add_account": "Add another Google Account",
     "google_btn_save_signin": "Save Account & Sign In",
     "google_modal_or_accounts": "or choose an account to continue",
+        "google_unified_signin_btn": "Google অ্যাকাউন্ট দিয়ে সাইন ইন করুন",
+        "google_unified_signin_btn": "Sign in with Google Account",
     "google_modal_title": "Google অ্যাকাউন্ট দিয়ে সাইন ইন করুন",
     "google_modal_subtitle": "মণ্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) উৎসব পোর্টালে আপনার উপস্থিতি ও স্মৃতি সংরক্ষণ করুন।",
     "quick_account_devotee": "শ্রদ্ধেয় ভক্ত ও দর্শনার্থী",
