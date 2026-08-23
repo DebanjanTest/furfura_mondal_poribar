@@ -279,18 +279,44 @@ function initFirebaseAuthUI() {
     setStoredUser(user);
     localStorage.setItem('mondal_bari_welcome_entered', 'true');
 
-    // Remove welcome modal immediately
+    // 1. Immediately Close Google Signin Modal Card
+    const googleModal = document.getElementById('google-signin-modal');
+    if (googleModal) {
+      googleModal.classList.remove('active');
+      googleModal.style.setProperty('opacity', '0', 'important');
+      googleModal.style.setProperty('visibility', 'hidden', 'important');
+      googleModal.style.setProperty('pointer-events', 'none', 'important');
+      setTimeout(() => {
+        googleModal.style.removeProperty('opacity');
+        googleModal.style.removeProperty('visibility');
+        googleModal.style.removeProperty('pointer-events');
+      }, 350);
+    }
+    closeModal('google-signin-modal');
+    document.querySelectorAll('.modal-backdrop').forEach(b => b.classList.remove('active'));
+    document.body.style.overflow = '';
+
+    // 2. Remove welcome modal if open
     const welcomeOverlay = document.getElementById('welcome-modal-overlay');
     if (welcomeOverlay) {
       welcomeOverlay.remove();
     }
 
+    // 3. Update all UI elements & Dynamic Island
     updateAuthUI(user);
-    closeModal('google-signin-modal');
+
+    // 4. Redirect / Smoothly Scroll to Hero Section
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    const heroEl = document.getElementById('hero-section') || document.querySelector('.hero-viewport-section');
+    if (heroEl) {
+      heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     if (typeof window.renderGoogleAccountsList === 'function') {
       window.renderGoogleAccountsList();
     }
 
+    // 5. Celebration Toast & Chime
     const welcomeMsg = lang === 'bn' 
       ? `Google সাইন ইন সফল হয়েছে! স্বাগতম, ${user.displayName} 🌸` 
       : `Signed in with Google! Welcome, ${user.displayName} 🌸`;
@@ -329,6 +355,7 @@ function initFirebaseAuthUI() {
     // Attach click listeners to all account items
     accountsContainer.querySelectorAll('.google-account-item').forEach((btn) => {
       btn.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         const email = btn.getAttribute('data-email');
         const name = btn.getAttribute('data-name');
@@ -339,7 +366,7 @@ function initFirebaseAuthUI() {
           photoURL: generateAvatarUrl(name, email),
           isFirebaseLive: false
         };
-        completeUserLogin(user);
+        window.completePujoUserLogin(user);
       });
     });
   }
