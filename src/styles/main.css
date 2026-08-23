@@ -9142,3 +9142,206 @@ button:active, [role="button"]:active {
   font-weight: 700;
   color: #ffffff;
 }
+
+
+/* ==========================================================================
+   DYNAMIC ISLAND GOOGLE AUTHENTICATION SYSTEM (OPTIONAL SIGN-IN)
+   ========================================================================== */
+
+.island-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.68rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  color: #ffffff;
+  font-family: var(--font-bengali-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.island-auth-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: var(--heritage-gold);
+  color: var(--heritage-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 207, 64, 0.2);
+}
+
+.island-auth-btn:active {
+  transform: scale(0.95);
+}
+
+.island-auth-btn .google-svg-icon {
+  flex-shrink: 0;
+}
+
+.island-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.2rem 0.5rem 0.2rem 0.28rem;
+  background: rgba(255, 207, 64, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 207, 64, 0.4);
+  border-radius: var(--radius-pill);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.island-user-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--heritage-gold);
+}
+
+.island-user-name {
+  font-family: var(--font-bengali-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--heritage-gold);
+  max-width: 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.island-logout-trigger {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.island-logout-trigger:hover {
+  background: rgba(211, 47, 47, 0.8);
+  color: #ffffff;
+}
+
+/* Account Banner inside Island Quick Drawer */
+.island-account-section {
+  padding: 0.4rem 0.35rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 0.65rem;
+}
+
+.island-account-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 207, 64, 0.2);
+  border-radius: 16px;
+}
+
+.account-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.account-avatar-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 207, 64, 0.15);
+  border: 1px solid rgba(255, 207, 64, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--heritage-gold);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.account-user-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 1px;
+}
+
+.account-name {
+  font-family: var(--font-bengali-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-sub {
+  font-family: var(--font-bengali-sans);
+  font-size: 0.66rem;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drawer-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 207, 64, 0.35);
+  border-radius: var(--radius-pill);
+  color: var(--heritage-gold);
+  font-family: var(--font-bengali-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.drawer-auth-btn:hover {
+  background: rgba(255, 207, 64, 0.2);
+  border-color: var(--heritage-gold);
+  transform: translateY(-1px);
+}
+
+.drawer-auth-btn.btn-signout {
+  border-color: rgba(255, 82, 82, 0.4);
+  color: #ff8a80;
+  background: rgba(211, 47, 47, 0.15);
+}
+
+.drawer-auth-btn.btn-signout:hover {
+  background: rgba(211, 47, 47, 0.4);
+  border-color: #ff5252;
+  color: #ffffff;
+}

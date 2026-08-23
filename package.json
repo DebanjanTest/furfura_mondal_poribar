@@ -10,6 +10,7 @@
     "optimize:images": "node scripts/optimize-images.js"
   },
   "dependencies": {
+    "firebase": "^12.18.0",
     "vite": "^6.0.0"
   },
   "devDependencies": {

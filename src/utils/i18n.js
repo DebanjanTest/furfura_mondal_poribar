@@ -5,6 +5,14 @@ export const translations = {
   bn: {
     // Brand & Dynamic Island
     "brand_title": "মণ্ডল বাড়ির পুজো",
+    "google_login_title": "Google দিয়ে সাইন ইন (ঐচ্ছিক)",
+    "google_signin_short": "লগইন",
+    "google_signin_btn": "Google সাইন ইন",
+    "google_signout_btn": "লগআউট",
+    "account_guest_title": "ভক্ত ও দর্শনার্থী",
+    "account_guest_sub": "ঐচ্ছিক Google অ্যাকাউন্ট",
+    "account_signed_in": "সংযুক্ত ভক্ত",
+
     "brand_heritage_badge": "১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য",
     "live_visitors": "লাইভ দর্শনার্থী ও ভক্তবৃন্দ",
     "quick_hub": "উৎসব পরিক্রমা ও সহায়িকা",
@@ -377,6 +385,14 @@ export const translations = {
   en: {
     // Brand & Dynamic Island
     "brand_title": "Mondal Barir Pujo",
+    "google_login_title": "Sign in with Google (Optional)",
+    "google_signin_short": "Sign in",
+    "google_signin_btn": "Sign In with Google",
+    "google_signout_btn": "Sign Out",
+    "account_guest_title": "Devotee & Visitor",
+    "account_guest_sub": "Optional Google Account",
+    "account_signed_in": "Connected Account",
+
     "brand_heritage_badge": "Heritage Est. 1997",
     "live_visitors": "Live Devotees & Visitors",
     "quick_hub": "Festive Quick Hub",

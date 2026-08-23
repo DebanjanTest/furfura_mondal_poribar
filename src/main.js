@@ -5,6 +5,7 @@ import { audioEngine } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
 import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations, formatNumber } from './utils/i18n.js';
+import { loginWithGoogle, logoutUser, subscribeAuthState, getCurrentUser } from './services/firebaseAuth.js';
 
 // Application State
 const state = {
@@ -166,6 +167,120 @@ function updateAtmosphere() {
 /* ==========================================================================
    2. MOBILE FLOATING DYNAMIC ISLAND SYSTEM
    ========================================================================== */
+
+
+/* ==========================================================================
+   2.5. FIREBASE GOOGLE AUTHENTICATION SYSTEM (DYNAMIC ISLAND & PROFILE)
+   ========================================================================== */
+
+function initFirebaseAuthUI() {
+  const authBtn = document.getElementById('island-google-auth-btn');
+  const userPill = document.getElementById('island-user-pill');
+  const userAvatar = document.getElementById('island-user-avatar');
+  const userName = document.getElementById('island-user-name');
+  const logoutBtn = document.getElementById('island-btn-logout');
+
+  const drawerUserImg = document.getElementById('drawer-user-img');
+  const drawerUserName = document.getElementById('drawer-user-name');
+  const drawerUserSub = document.getElementById('drawer-user-sub');
+  const drawerAuthBtn = document.getElementById('drawer-btn-auth');
+  const drawerAuthBtnText = document.getElementById('drawer-auth-btn-text');
+
+  const updateAuthUI = (user) => {
+    const lang = getLanguage();
+    if (user) {
+      // 1. Signed In State
+      if (authBtn) authBtn.style.display = 'none';
+      if (userPill) userPill.style.display = 'inline-flex';
+      if (userAvatar) {
+        userAvatar.src = user.photoURL || '/favicon.png';
+        userAvatar.alt = user.displayName || 'User Profile';
+      }
+      if (userName) {
+        const firstName = (user.displayName || 'User').split(' ')[0];
+        userName.textContent = firstName;
+      }
+
+      // Drawer details
+      if (drawerUserImg) {
+        drawerUserImg.src = user.photoURL || '/favicon.png';
+        drawerUserImg.style.display = 'block';
+      }
+      const guestIcon = document.querySelector('.account-guest-icon');
+      if (guestIcon) guestIcon.style.display = 'none';
+
+      if (drawerUserName) drawerUserName.textContent = user.displayName || 'Devotee';
+      if (drawerUserSub) drawerUserSub.textContent = user.email || (lang === 'bn' ? 'সংযুক্ত ভক্ত' : 'Connected Devotee');
+      if (drawerAuthBtnText) drawerAuthBtnText.textContent = lang === 'bn' ? 'লগআউট' : 'Sign Out';
+      if (drawerAuthBtn) {
+        drawerAuthBtn.classList.add('btn-signout');
+        drawerAuthBtn.onclick = async (e) => {
+          e.stopPropagation();
+          await logoutUser();
+        };
+      }
+
+      // Autofill Contributor name in Photo Upload if empty
+      const authorInput = document.getElementById('gallery-author-input');
+      if (authorInput && !authorInput.value.trim()) {
+        authorInput.value = user.displayName || '';
+      }
+    } else {
+      // 2. Signed Out / Guest State
+      if (authBtn) authBtn.style.display = 'inline-flex';
+      if (userPill) userPill.style.display = 'none';
+
+      if (drawerUserImg) {
+        drawerUserImg.style.display = 'none';
+      }
+      const guestIcon = document.querySelector('.account-guest-icon');
+      if (guestIcon) guestIcon.style.display = 'block';
+
+      if (drawerUserName) drawerUserName.textContent = lang === 'bn' ? 'ভক্ত ও দর্শনার্থী' : 'Devotee & Visitor';
+      if (drawerUserSub) drawerUserSub.textContent = lang === 'bn' ? 'ঐচ্ছিক Google অ্যাকাউন্ট' : 'Optional Google Account';
+      if (drawerAuthBtnText) drawerAuthBtnText.textContent = lang === 'bn' ? 'Google সাইন ইন' : 'Google Sign In';
+      if (drawerAuthBtn) {
+        drawerAuthBtn.classList.remove('btn-signout');
+        drawerAuthBtn.onclick = async (e) => {
+          e.stopPropagation();
+          await handleGoogleLogin();
+        };
+      }
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const user = await loginWithGoogle();
+      updateAuthUI(user);
+    } catch (err) {
+      console.log('Google Sign-In note:', err?.message || err);
+    }
+  };
+
+  authBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    handleGoogleLogin();
+  });
+
+  logoutBtn?.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    await logoutUser();
+  });
+
+  // Re-sync UI on language change
+  window.addEventListener('pujo_language_changed', () => {
+    updateAuthUI(getCurrentUser());
+  });
+
+  // Listen for live Firebase auth state changes
+  subscribeAuthState((user) => {
+    updateAuthUI(user);
+  });
+
+  // Initial Sync
+  updateAuthUI(getCurrentUser());
+}
 
 function initDynamicIsland() {
   const island = document.getElementById('dynamic-island');
