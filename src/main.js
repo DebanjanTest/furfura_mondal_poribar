@@ -2804,9 +2804,7 @@ function openModal(modalId) {
   if (modalId === 'story-generator-modal' && typeof renderStoryCanvas === 'function') {
     renderStoryCanvas();
   }
-  if (modalId === 'google-signin-modal' && typeof window.renderGoogleAccountsList === 'function') {
-    window.renderGoogleAccountsList();
-  }
+  
 
   el.classList.add('active');
   document.body.style.overflow = 'hidden';

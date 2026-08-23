@@ -25,6 +25,14 @@ export const translations = {
     "google_btn_save_signin": "Save Account & Sign In",
     "google_modal_or_accounts": "or choose an account to continue",
         "google_unified_signin_btn": "Google অ্যাকাউন্ট দিয়ে সাইন ইন করুন",
+    "google_modal_or_guest": "or",
+    "google_btn_guest": "Continue as Guest Devotee",
+    "google_auth_disclaimer": "🔒 100% Secure. Only you can authenticate with your verified Google account. No unauthorized access permitted.",
+
+    "google_modal_or_guest": "অথবা",
+    "google_btn_guest": "অতিথি ভক্ত হিসেবে প্রবেশ করুন",
+    "google_auth_disclaimer": "🔒 সম্পূর্ণ নিরাপদ ও সুরক্ষিত। শুধুমাত্র আপনি আপনার আসল Google অ্যাকাউন্টে লগইন করে ভেরিফায়েড উপস্থিতি নিশ্চিত করতে পারেন।",
+
         "google_unified_signin_btn": "Sign in with Google Account",
     "google_modal_title": "Google অ্যাকাউন্ট দিয়ে সাইন ইন করুন",
     "google_modal_subtitle": "মণ্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) উৎসব পোর্টালে আপনার উপস্থিতি ও স্মৃতি সংরক্ষণ করুন।",
