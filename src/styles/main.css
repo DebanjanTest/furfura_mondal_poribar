@@ -382,31 +382,34 @@ button {
 
 /* ==========================================================================
    UNIVERSAL UNIFIED FLOATING DYNAMIC ISLAND (DESKTOP & MOBILE)
+   Ergonomic padding, clean indentation, and responsive button flow
    ========================================================================== */
 
 .universal-dynamic-island-container {
   position: fixed;
-  top: 1rem;
+  top: 1.15rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  width: min(92vw, 460px);
+  width: min(94vw, 560px);
   display: flex;
   justify-content: center;
   pointer-events: none;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), top 0.3s ease;
 }
 
 .dynamic-island {
   pointer-events: auto;
   width: 100%;
-  background: rgba(18, 2, 6, 0.92);
+  background: rgba(18, 2, 6, 0.94);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
   border: 1px solid rgba(255, 207, 64, 0.35);
-  border-radius: 28px;
+  border-radius: 32px;
   box-shadow: 0 14px 40px -4px rgba(0, 0, 0, 0.88), 0 0 22px -4px rgba(255, 207, 64, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.16);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .dynamic-island:hover {
@@ -418,87 +421,204 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.35rem 0.65rem 0.35rem 0.85rem;
+  padding: 0.38rem 0.65rem 0.38rem 1rem;
   min-height: 48px;
-  gap: 0.5rem;
+  gap: 0.65rem;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 /* Island Idle State */
 .island-idle .island-left {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  flex: 1;
+  gap: 0.5rem;
+  flex: 1 1 auto;
   min-width: 0;
   cursor: pointer;
 }
 
-.island-emblem {
-  font-size: 1.15rem;
-  filter: drop-shadow(0 0 8px rgba(255, 207, 64, 0.6));
+.island-emblem-dot {
+  color: var(--heritage-gold);
+  font-size: 1.1rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(255, 207, 64, 0.7));
   flex-shrink: 0;
 }
 
 .island-brand-text {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   min-width: 0;
 }
 
 .island-title {
   font-family: var(--font-bengali-sans);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: #ffffff;
   white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
 .island-badge {
-  font-size: 0.625rem;
+  font-size: 0.62rem;
   font-weight: 700;
   color: var(--heritage-gold);
-  background: rgba(255, 207, 64, 0.18);
-  border: 1px solid rgba(255, 207, 64, 0.4);
-  padding: 0.12rem 0.4rem;
+  background: rgba(255, 207, 64, 0.16);
+  border: 1px solid rgba(255, 207, 64, 0.38);
+  padding: 0.12rem 0.45rem;
   border-radius: var(--radius-pill);
   white-space: nowrap;
 }
 
+/* Island Right Controls Container */
 .island-right {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.42rem;
   flex-shrink: 0;
 }
 
+/* 1. Live Visitor Beacon Pill */
 .island-live-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.55rem;
+  gap: 0.32rem;
+  height: 28px;
+  padding: 0 0.55rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-pill);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: #a7f3d0;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
+.island-live-pill .beacon-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  flex-shrink: 0;
+}
+
+/* 2. Optional Google Sign-In Pill */
+.island-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  height: 28px;
+  padding: 0 0.58rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  color: #ffffff;
+  font-family: var(--font-bengali-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.island-auth-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: var(--heritage-gold);
+  color: var(--heritage-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 207, 64, 0.2);
+}
+
+.island-auth-btn:active {
+  transform: scale(0.95);
+}
+
+.island-auth-btn .google-svg-icon {
+  flex-shrink: 0;
+}
+
+/* 3. Logged-in User Profile Capsule */
+.island-user-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  height: 28px;
+  padding: 0 0.45rem 0 0.22rem;
+  background: rgba(255, 207, 64, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 207, 64, 0.4);
+  border-radius: var(--radius-pill);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.island-user-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--heritage-gold);
+}
+
+.island-user-name {
+  font-family: var(--font-bengali-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--heritage-gold);
+  max-width: 65px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.island-logout-trigger {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.island-logout-trigger:hover {
+  background: rgba(211, 47, 47, 0.8);
+  color: #ffffff;
+}
+
+/* 4. Language Switcher Pill */
 .island-lang-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.25rem 0.65rem;
+  justify-content: center;
+  height: 28px;
+  padding: 0 0.55rem;
   background: rgba(255, 207, 64, 0.12);
   border: 1px solid rgba(255, 207, 64, 0.35);
   border-radius: var(--radius-pill);
   font-family: var(--font-bengali-sans);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--heritage-gold);
   cursor: pointer;
   transition: all var(--transition-fast);
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .island-lang-pill:hover {
@@ -510,25 +630,25 @@ button {
 
 .island-lang-pill-mini {
   height: 28px;
-  min-width: fit-content;
-  padding: 0.2rem 0.65rem;
+  padding: 0 0.55rem;
   border-radius: var(--radius-pill);
   background: rgba(255, 207, 64, 0.14);
   border: 1px solid rgba(255, 207, 64, 0.4);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
   font-family: var(--font-bengali-sans);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
   color: var(--heritage-gold);
   cursor: pointer;
   white-space: nowrap;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   transition: all var(--transition-fast);
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .island-lang-pill-mini:hover {
@@ -536,22 +656,24 @@ button {
   color: #080103;
   border-color: var(--heritage-gold);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 207, 64, 0.25);
 }
 
+/* 5. Island Expand Button */
 .island-expand-btn {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   transition: transform var(--transition-fast), background var(--transition-fast);
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .island-expand-btn:active {
@@ -567,7 +689,7 @@ button {
 .island-active .island-left {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   flex: 1;
   min-width: 0;
   cursor: pointer;
@@ -575,8 +697,8 @@ button {
 
 .island-art-wrap {
   position: relative;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -591,16 +713,6 @@ button {
   animation: vinylRotate 8s linear infinite;
 }
 
-.island-playing-tag {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-}
-
 .island-track-meta {
   display: flex;
   flex-direction: column;
@@ -609,7 +721,7 @@ button {
 }
 
 .island-track-title {
-  font-size: 0.8125rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: #ffffff;
   white-space: nowrap;
@@ -623,7 +735,7 @@ button {
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 0.6875rem;
+  font-size: 0.66rem;
   color: var(--heritage-gold);
   font-family: var(--font-bengali-sans);
 }
@@ -632,8 +744,8 @@ button {
   display: inline-flex;
   align-items: flex-end;
   gap: 2px;
-  height: 10px;
-  width: 10px;
+  height: 9px;
+  width: 9px;
 }
 
 .island-eq-bar {
@@ -651,15 +763,16 @@ button {
   background: var(--heritage-gold);
   color: #080103;
   border: none;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 0 14px var(--heritage-gold-glow);
+  box-shadow: 0 0 12px var(--heritage-gold-glow);
   transition: transform var(--transition-fast);
+  flex-shrink: 0;
 }
 
 .island-ctrl-btn:active {
@@ -677,12 +790,97 @@ button {
 }
 
 .dynamic-island.drawer-open .island-quick-drawer {
-  max-height: 460px;
+  max-height: 480px;
   opacity: 1;
   pointer-events: auto;
-  border-color: rgba(255, 255, 255, 0.09);
-  padding: 0.85rem 0.85rem 1rem;
+  border-top-color: rgba(255, 207, 64, 0.18);
+  padding: 0.65rem 0.85rem 0.85rem;
 }
+
+/* Responsive Media Queries for Dynamic Island */
+@media (max-width: 640px) {
+  .universal-dynamic-island-container {
+    width: min(94vw, 440px);
+    top: 0.65rem;
+  }
+
+  .island-state {
+    padding: 0.32rem 0.5rem 0.32rem 0.75rem;
+    min-height: 44px;
+    gap: 0.45rem;
+  }
+
+  .island-title {
+    font-size: 0.78rem;
+  }
+
+  .island-badge {
+    font-size: 0.58rem;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .island-right {
+    gap: 0.3rem;
+  }
+
+  .island-live-pill,
+  .island-auth-btn,
+  .island-user-pill,
+  .island-lang-pill,
+  .island-lang-pill-mini {
+    height: 26px;
+    padding: 0 0.45rem;
+    font-size: 0.68rem;
+  }
+
+  .island-expand-btn,
+  .island-ctrl-btn {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (max-width: 440px) {
+  .universal-dynamic-island-container {
+    width: min(96vw, 400px);
+    top: 0.5rem;
+  }
+
+  .island-badge {
+    display: none;
+  }
+
+  .island-state {
+    padding: 0.3rem 0.4rem 0.3rem 0.65rem;
+    gap: 0.35rem;
+  }
+
+  .island-title {
+    font-size: 0.74rem;
+  }
+
+  .island-right {
+    gap: 0.25rem;
+  }
+
+  .island-live-pill,
+  .island-auth-btn,
+  .island-user-pill,
+  .island-lang-pill,
+  .island-lang-pill-mini {
+    height: 24px;
+    padding: 0 0.38rem;
+    font-size: 0.64rem;
+  }
+
+  .island-expand-btn,
+  .island-ctrl-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 0.68rem;
+  }
+}
+
 
 .island-quick-grid {
   display: grid;
