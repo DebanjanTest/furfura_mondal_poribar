@@ -6067,81 +6067,138 @@ scroll-snap-align: none !important;
   color: var(--text-muted);
 }
 
+/* ==========================================================================
+   ONNOTA LIKE BUTTON (UIVERSE BEATING HEART & MOVING BORDERS THEME BY LILAREST)
+   ========================================================================== */
+
 .onnota-like-btn {
+  position: relative;
   display: inline-flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.42rem 0.95rem;
-  background: rgba(22, 2, 8, 0.72);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 207, 64, 0.3);
-  border-radius: var(--radius-pill);
-  color: #ffffff;
-  font-family: var(--font-bengali-sans);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  padding: 0.45rem 1rem 0.45rem 0.85rem;
+  box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset, 0 4px 14px rgba(0, 0, 0, 0.5);
+  background-color: #170205;
+  border-color: black;
+  border-style: solid;
+  border-width: 1.5px;
+  border-radius: 25px;
+  font-size: 0.78rem;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 900;
+  color: White;
+  font-family: var(--font-bengali-sans);
+  transition:
+    transform 400ms cubic-bezier(0.68, -0.55, 0.27, 2.5),
+    border-color 400ms ease-in-out,
+    background-color 400ms ease-in-out,
+    box-shadow 400ms ease-in-out;
+  gap: 0.45rem;
   box-sizing: border-box;
   flex-shrink: 0;
   user-select: none;
+  word-spacing: -1px;
+}
+
+@keyframes movingBorders {
+  0% {
+    border-color: #fce4e4;
+  }
+
+  50% {
+    border-color: #ffd8d8;
+  }
+
+  90% {
+    border-color: #fce4e4;
+  }
 }
 
 .onnota-like-btn:hover {
-  background: rgba(211, 47, 47, 0.25);
-  border-color: rgba(255, 82, 82, 0.65);
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.35), 0 0 14px rgba(255, 82, 82, 0.25);
+  background-color: #3D1C21;
+  transform: scale(1.05);
+  animation: movingBorders 3s infinite;
 }
 
-.onnota-like-btn:active {
-  transform: scale(0.94);
+.onnota-like-btn .btn-heart-wrapper {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.onnota-like-btn svg {
+  fill: rgb(255, 110, 110);
+  transition: opacity 100ms ease-in-out;
+  display: block;
+}
+
+.onnota-like-btn .empty {
+  opacity: 1;
+}
+
+.onnota-like-btn .filled {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+@keyframes beatingHeart {
+  0% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.15);
+  }
+
+  30% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.15);
+  }
+
+  60% {
+    transform: scale(1);
+  }
+}
+
+.onnota-like-btn:hover .empty {
+  opacity: 0;
+}
+
+.onnota-like-btn:hover .filled {
+  opacity: 1;
+  animation: beatingHeart 1.2s infinite;
 }
 
 .onnota-like-btn.liked {
-  background: linear-gradient(135deg, rgba(211, 47, 47, 0.9), rgba(183, 28, 28, 0.95));
-  border-color: #ff5252;
-  color: #ffffff;
-  box-shadow: 0 4px 16px rgba(211, 47, 47, 0.55), 0 0 16px rgba(255, 82, 82, 0.4);
+  background-color: #3D1C21;
+  border-color: #ffd8d8;
+}
+
+.onnota-like-btn.liked .empty {
+  opacity: 0;
+}
+
+.onnota-like-btn.liked .filled {
+  opacity: 1;
+  animation: beatingHeart 1.5s ease-in-out infinite;
 }
 
 .onnota-like-btn .like-num {
-  font-weight: 700;
-  color: var(--heritage-gold);
-  transition: color 0.2s ease;
-}
-
-.onnota-like-btn.liked .like-num {
-  color: #ffffff;
+  font-weight: 900;
+  color: #ffd8d8;
 }
 
 .onnota-like-btn .pranam-label {
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.onnota-like-btn.liked .pranam-label {
-  color: #ffffff;
   font-weight: 700;
-}
-
-.onnota-like-btn .pranam-heart-icon {
-  font-size: 0.82rem;
-  line-height: 1;
-  display: inline-block;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.onnota-like-btn:hover .pranam-heart-icon {
-  transform: scale(1.25);
-}
-
-.onnota-like-btn:active .pranam-heart-icon {
-  transform: scale(1.4) rotate(-10deg);
+  color: #ffffff;
 }
 
 .onnota-section-footer {
