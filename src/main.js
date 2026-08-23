@@ -188,6 +188,47 @@ function showAuthToast(message) {
   }, 3200);
 }
 
+const DEFAULT_ACCOUNTS = [
+  {
+    uid: 'acc-debanjan',
+    displayName: 'Debanjan Mondal',
+    email: 'debanjan.mondal@gmail.com',
+    bgClass: 'bg-blue',
+    symbol: 'D'
+  },
+  {
+    uid: 'acc-devotee',
+    displayName: 'শ্রদ্ধেয় ভক্ত ও দর্শনার্থী',
+    email: 'devotee@gmail.com',
+    bgClass: 'bg-gold',
+    symbol: '🌸'
+  },
+  {
+    uid: 'acc-family',
+    displayName: 'মণ্ডল পরিবার সদস্য / অতিথি',
+    email: 'mondal.poribar@gmail.com',
+    bgClass: 'bg-vermilion',
+    symbol: '🪔'
+  }
+];
+
+function getSavedAccounts() {
+  try {
+    const raw = localStorage.getItem('mondal_bari_saved_accounts');
+    if (raw) {
+      const list = JSON.parse(raw);
+      if (Array.isArray(list) && list.length > 0) return list;
+    }
+  } catch (_) {}
+  return DEFAULT_ACCOUNTS;
+}
+
+function saveAccountsList(list) {
+  try {
+    localStorage.setItem('mondal_bari_saved_accounts', JSON.stringify(list));
+  } catch (_) {}
+}
+
 function initFirebaseAuthUI() {
   const authBtn = document.getElementById('island-google-auth-btn');
   const userPill = document.getElementById('island-user-pill');
@@ -205,12 +246,12 @@ function initFirebaseAuthUI() {
   const closeGoogleModalBtn = document.getElementById('btn-close-google-auth');
   const liveOAuthBtn = document.getElementById('btn-google-live-popup');
   const errorNoticeEl = document.getElementById('google-auth-error-notice');
-  const quickDebanjanBtn = document.getElementById('btn-quick-auth-debanjan');
-  const quickDevoteeBtn = document.getElementById('btn-quick-auth-devotee');
-  const quickFamilyBtn = document.getElementById('btn-quick-auth-family');
+  const accountsContainer = document.getElementById('google-accounts-dynamic-list');
+  const toggleAddAccountBtn = document.getElementById('btn-toggle-add-account');
   const customAuthForm = document.getElementById('google-custom-auth-form');
 
   window.openGoogleAuthModal = function() {
+    renderAccountsList();
     openModal('google-signin-modal');
     if (errorNoticeEl) {
       errorNoticeEl.style.display = 'none';
@@ -237,6 +278,60 @@ function initFirebaseAuthUI() {
     }
   };
 
+  // Render Dynamic Accounts List
+  function renderAccountsList() {
+    if (!accountsContainer) return;
+    const accounts = getSavedAccounts();
+    const currentUser = getCurrentUser();
+
+    accountsContainer.innerHTML = accounts.map((acc) => {
+      const isCurrent = currentUser && (currentUser.email === acc.email || currentUser.displayName === acc.displayName);
+      const symbol = acc.symbol || (acc.displayName ? acc.displayName.charAt(0).toUpperCase() : 'G');
+      const bgClass = acc.bgClass || 'bg-blue';
+      return `
+        <button type="button" class="google-account-item google-browser-account-item ${isCurrent ? 'active-account' : ''}" data-email="${acc.email}" data-name="${acc.displayName}">
+          <div class="account-avatar-circle ${bgClass}">
+            <span>${symbol}</span>
+          </div>
+          <div class="account-details">
+            <span class="account-name-row">${acc.displayName}</span>
+            <span class="account-email-row">${acc.email}</span>
+          </div>
+          <span class="account-select-arrow">${isCurrent ? '✓' : '→'}</span>
+        </button>
+      `;
+    }).join('');
+
+    // Attach click listeners to all account items
+    accountsContainer.querySelectorAll('.google-account-item').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const email = btn.getAttribute('data-email');
+        const name = btn.getAttribute('data-name');
+        const user = {
+          uid: 'google-' + encodeURIComponent(email).replace(/[^a-zA-Z0-9]/g, '-'),
+          displayName: name,
+          email: email,
+          photoURL: generateAvatarUrl(name, email),
+          isFirebaseLive: false
+        };
+        completeUserLogin(user);
+      });
+    });
+  }
+
+  // Toggle Add Account Form
+  toggleAddAccountBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (customAuthForm) {
+      const isVisible = customAuthForm.style.display !== 'none';
+      customAuthForm.style.display = isVisible ? 'none' : 'flex';
+      if (!isVisible) {
+        document.getElementById('auth-input-name')?.focus();
+      }
+    }
+  });
+
   // 1. Live Google OAuth Popup Click Handler
   liveOAuthBtn?.addEventListener('click', async (e) => {
     e.stopPropagation();
@@ -246,6 +341,18 @@ function initFirebaseAuthUI() {
     try {
       const user = await loginWithGoogleLivePopup();
       if (user) {
+        // Save to dynamic accounts list if new
+        const list = getSavedAccounts();
+        if (!list.some(a => a.email === user.email)) {
+          list.unshift({
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            bgClass: 'bg-blue',
+            symbol: user.displayName ? user.displayName.charAt(0).toUpperCase() : 'G'
+          });
+          saveAccountsList(list);
+        }
         completeUserLogin(user);
       }
     } catch (err) {
@@ -255,8 +362,8 @@ function initFirebaseAuthUI() {
         let msg = '';
         if (err.code === 'auth/operation-not-allowed') {
           msg = lang === 'bn'
-            ? '⚠️ Firebase Console-এ Google Provider টি সক্রিয় (Enabled) করতে হবে। Authentication > Sign-in method এ যান।'
-            : '⚠️ Google Provider is disabled in Firebase Console. Enable it under Authentication > Sign-in method.';
+            ? '⚠️ Firebase Console-এ Google Provider টি সক্রিয় (Enabled) করতে হবে। Authentication > Sign-in method এ যান। বিকল্প হিসেবে নীচের অ্যাকাউন্ট বেছে নিন বা আপনার অ্যাকাউন্ট যুক্ত করুন!'
+            : '⚠️ Google Provider is disabled in Firebase Console. Enable it under Authentication > Sign-in method, or choose/add your account below!';
         } else if (err.code === 'auth/unauthorized-domain') {
           msg = lang === 'bn'
             ? '⚠️ বর্তমান ডোমেনটি Firebase Console এর Authorized Domains এ যুক্ত করতে হবে।'
@@ -264,7 +371,7 @@ function initFirebaseAuthUI() {
         } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
           msg = lang === 'bn' ? 'পপ-আপ বন্ধ করা হয়েছে।' : 'Popup was closed.';
         } else {
-          msg = (lang === 'bn' ? 'Google বার্তা: ' : 'Notice: ') + (err.message || err.code || 'Please try selecting an account below.');
+          msg = (lang === 'bn' ? 'Google বার্তা: ' : 'Notice: ') + (err.message || err.code || 'Please add or select your account below.');
         }
         errorNoticeEl.textContent = msg;
         errorNoticeEl.style.display = 'block';
@@ -272,62 +379,34 @@ function initFirebaseAuthUI() {
     }
   });
 
-  // 2. Direct Browser Account Click Handlers (1-Click Google Identity)
-  quickDebanjanBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const name = 'Debanjan Mondal';
-    const email = 'debanjan.mondal@gmail.com';
-    const user = {
-      uid: 'google-debanjan-' + Date.now(),
-      displayName: name,
-      email: email,
-      photoURL: generateAvatarUrl(name, email),
-      isFirebaseLive: true
-    };
-    completeUserLogin(user);
-  });
-
-  quickDevoteeBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const lang = getLanguage();
-    const name = lang === 'bn' ? 'ভক্ত ও দর্শনার্থী' : 'Devotee & Visitor';
-    const email = 'devotee@gmail.com';
-    const user = {
-      uid: 'google-devotee-' + Date.now(),
-      displayName: name,
-      email: email,
-      photoURL: generateAvatarUrl(name, email),
-      isFirebaseLive: false
-    };
-    completeUserLogin(user);
-  });
-
-  quickFamilyBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const lang = getLanguage();
-    const name = lang === 'bn' ? 'মণ্ডল পরিবার সদস্য / অতিথি' : 'Mondal Family Guest';
-    const email = 'mondal.poribar@gmail.com';
-    const user = {
-      uid: 'google-family-' + Date.now(),
-      displayName: name,
-      email: email,
-      photoURL: generateAvatarUrl(name, email),
-      isFirebaseLive: false
-    };
-    completeUserLogin(user);
-  });
-
-  // 3. Custom Name Form Submit Handler
+  // 2. Custom Name & Official Email Form Submit Handler
   customAuthForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     e.stopPropagation();
     const nameInput = document.getElementById('auth-input-name');
     const emailInput = document.getElementById('auth-input-email');
-    const nameVal = (nameInput?.value || '').trim() || 'Devotee';
-    const emailVal = (emailInput?.value || '').trim() || 'devotee@gmail.com';
+    const nameVal = (nameInput?.value || '').trim() || 'Debanjan Mondal';
+    const emailVal = (emailInput?.value || '').trim() || 'debanjan.mondal@gmail.com';
+
+    // Add to saved accounts list
+    const list = getSavedAccounts();
+    const existingIdx = list.findIndex(a => a.email.toLowerCase() === emailVal.toLowerCase());
+    const newAcc = {
+      uid: 'google-' + encodeURIComponent(emailVal).replace(/[^a-zA-Z0-9]/g, '-'),
+      displayName: nameVal,
+      email: emailVal,
+      bgClass: 'bg-blue',
+      symbol: nameVal.charAt(0).toUpperCase()
+    };
+    if (existingIdx >= 0) {
+      list[existingIdx] = newAcc;
+    } else {
+      list.unshift(newAcc);
+    }
+    saveAccountsList(list);
 
     const user = {
-      uid: 'google-user-' + Date.now(),
+      uid: newAcc.uid,
       displayName: nameVal,
       email: emailVal,
       photoURL: generateAvatarUrl(nameVal, emailVal),
@@ -343,7 +422,7 @@ function initFirebaseAuthUI() {
       if (authBtn) authBtn.style.display = 'none';
       if (userPill) userPill.style.display = 'inline-flex';
       if (userAvatar) {
-        userAvatar.src = user.photoURL || generateAvatarUrl(user.displayName);
+        userAvatar.src = user.photoURL || generateAvatarUrl(user.displayName, user.email);
         userAvatar.alt = user.displayName || 'User Profile';
       }
       if (userName) {
@@ -353,7 +432,7 @@ function initFirebaseAuthUI() {
 
       // Drawer details
       if (drawerUserImg) {
-        drawerUserImg.src = user.photoURL || generateAvatarUrl(user.displayName);
+        drawerUserImg.src = user.photoURL || generateAvatarUrl(user.displayName, user.email);
         drawerUserImg.style.display = 'block';
       }
       const guestIcon = document.querySelector('.account-guest-icon');
@@ -404,6 +483,7 @@ function initFirebaseAuthUI() {
   authBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
+    renderAccountsList();
     openModal('google-signin-modal');
   });
 
@@ -426,6 +506,7 @@ function initFirebaseAuthUI() {
   });
 
   // Initial Sync
+  renderAccountsList();
   updateAuthUI(getCurrentUser());
 }
 
