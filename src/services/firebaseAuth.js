@@ -34,9 +34,11 @@ try {
   googleProvider = new GoogleAuthProvider();
   googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-  // Handle redirect result if user returned from Google Redirect Sign-In
+  
+  // Automatically process Google OAuth Redirect Results upon page return
   getRedirectResult(auth).then((result) => {
     if (result && result.user) {
+      console.log('Firebase Redirect Sign-In verified for:', result.user.displayName);
       const user = {
         uid: result.user.uid,
         displayName: result.user.displayName || 'Devotee',
@@ -45,10 +47,14 @@ try {
         isFirebaseLive: true
       };
       setStoredUser(user);
+      if (typeof window !== 'undefined' && typeof window.completePujoUserLogin === 'function') {
+        window.completePujoUserLogin(user);
+      }
     }
   }).catch((e) => {
     console.warn('Redirect Auth handling notice:', e);
   });
+
 
   console.log('Firebase Authentication initialized for Mondal Barir Pujo.');
 } catch (e) {
