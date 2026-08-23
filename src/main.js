@@ -475,9 +475,11 @@ function initFirebaseAuthUI() {
     const lang = getLanguage();
     if (user) {
       // 1. Signed In State - Dynamic Island (Avatar Only)
-      if (authBtn) authBtn.style.display = 'none';
+      if (authBtn) {
+        authBtn.style.setProperty('display', 'none', 'important');
+      }
       if (userPill) {
-        userPill.style.display = 'inline-flex';
+        userPill.style.setProperty('display', 'inline-flex', 'important');
         userPill.setAttribute('title', `Logged in as ${user.displayName} (${user.email})`);
       }
       if (userAvatar) {
@@ -525,8 +527,12 @@ function initFirebaseAuthUI() {
       }
     } else {
       // 2. Signed Out / Guest State
-      if (authBtn) authBtn.style.display = 'inline-flex';
-      if (userPill) userPill.style.display = 'none';
+      if (authBtn) {
+        authBtn.style.setProperty('display', 'inline-flex', 'important');
+      }
+      if (userPill) {
+        userPill.style.setProperty('display', 'none', 'important');
+      }
 
       if (drawerUserImg) {
         drawerUserImg.style.display = 'none';
@@ -548,11 +554,19 @@ function initFirebaseAuthUI() {
   };
 
   // Open Google Auth Modal on button clicks
-  authBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    renderAccountsList();
+  const handleOpenAuthModal = (e) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    if (typeof window.renderGoogleAccountsList === 'function') {
+      window.renderGoogleAccountsList();
+    }
     openModal('google-signin-modal');
+  };
+
+  authBtn?.addEventListener('click', handleOpenAuthModal);
+  authBtn?.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    handleOpenAuthModal(e);
   });
 
   logoutBtn?.addEventListener('click', async (e) => {
