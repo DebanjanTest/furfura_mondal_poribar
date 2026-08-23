@@ -9889,3 +9889,20 @@ button:active, [role="button"]:active {
   margin-bottom: 0.85rem;
   text-align: left;
 }
+
+
+.account-avatar-circle.bg-blue {
+  background: rgba(66, 133, 244, 0.25);
+  border: 1px solid rgba(66, 133, 244, 0.6);
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+.google-browser-account-item {
+  border-left: 3.5px solid #4285f4;
+}
+
+.google-browser-account-item:hover {
+  background: rgba(66, 133, 244, 0.16);
+  border-color: #4285f4;
+}

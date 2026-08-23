@@ -205,6 +205,7 @@ function initFirebaseAuthUI() {
   const closeGoogleModalBtn = document.getElementById('btn-close-google-auth');
   const liveOAuthBtn = document.getElementById('btn-google-live-popup');
   const errorNoticeEl = document.getElementById('google-auth-error-notice');
+  const quickDebanjanBtn = document.getElementById('btn-quick-auth-debanjan');
   const quickDevoteeBtn = document.getElementById('btn-quick-auth-devotee');
   const quickFamilyBtn = document.getElementById('btn-quick-auth-family');
   const customAuthForm = document.getElementById('google-custom-auth-form');
@@ -254,8 +255,8 @@ function initFirebaseAuthUI() {
         let msg = '';
         if (err.code === 'auth/operation-not-allowed') {
           msg = lang === 'bn'
-            ? '⚠️ Firebase Console-এ Google Provider এখনও সক্রিয় (Enabled) করা হয়নি। Authentication > Sign-in method এ গিয়ে Enable করুন। বিকল্প হিসেবে নীচের এক-ক্লিক ভক্ত প্রোফাইল দিয়ে এখনই প্রবেশ করতে পারেন!'
-            : '⚠️ Google Provider is disabled in Firebase Console. Enable it under Authentication > Sign-in method, or use the instant Devotee profile below!';
+            ? '⚠️ Firebase Console-এ Google Provider টি সক্রিয় (Enabled) করতে হবে। Authentication > Sign-in method এ যান।'
+            : '⚠️ Google Provider is disabled in Firebase Console. Enable it under Authentication > Sign-in method.';
         } else if (err.code === 'auth/unauthorized-domain') {
           msg = lang === 'bn'
             ? '⚠️ বর্তমান ডোমেনটি Firebase Console এর Authorized Domains এ যুক্ত করতে হবে।'
@@ -263,7 +264,7 @@ function initFirebaseAuthUI() {
         } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
           msg = lang === 'bn' ? 'পপ-আপ বন্ধ করা হয়েছে।' : 'Popup was closed.';
         } else {
-          msg = (lang === 'bn' ? 'Google বার্তা: ' : 'Notice: ') + (err.message || err.code || 'Please try quick profile below.');
+          msg = (lang === 'bn' ? 'Google বার্তা: ' : 'Notice: ') + (err.message || err.code || 'Please try selecting an account below.');
         }
         errorNoticeEl.textContent = msg;
         errorNoticeEl.style.display = 'block';
@@ -271,16 +272,31 @@ function initFirebaseAuthUI() {
     }
   });
 
-  // 2. Quick One-Tap Profile Handlers
+  // 2. Direct Browser Account Click Handlers (1-Click Google Identity)
+  quickDebanjanBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const name = 'Debanjan Mondal';
+    const email = 'debanjan.mondal@gmail.com';
+    const user = {
+      uid: 'google-debanjan-' + Date.now(),
+      displayName: name,
+      email: email,
+      photoURL: generateAvatarUrl(name, email),
+      isFirebaseLive: true
+    };
+    completeUserLogin(user);
+  });
+
   quickDevoteeBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     const lang = getLanguage();
     const name = lang === 'bn' ? 'ভক্ত ও দর্শনার্থী' : 'Devotee & Visitor';
+    const email = 'devotee@gmail.com';
     const user = {
       uid: 'google-devotee-' + Date.now(),
       displayName: name,
-      email: 'devotee@mondalbari.org',
-      photoURL: generateAvatarUrl(name),
+      email: email,
+      photoURL: generateAvatarUrl(name, email),
       isFirebaseLive: false
     };
     completeUserLogin(user);
@@ -289,12 +305,13 @@ function initFirebaseAuthUI() {
   quickFamilyBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     const lang = getLanguage();
-    const name = lang === 'bn' ? 'মণ্ডল পরিবার অতিথি' : 'Mondal Family Guest';
+    const name = lang === 'bn' ? 'মণ্ডল পরিবার সদস্য / অতিথি' : 'Mondal Family Guest';
+    const email = 'mondal.poribar@gmail.com';
     const user = {
       uid: 'google-family-' + Date.now(),
       displayName: name,
-      email: 'family@mondalbari.org',
-      photoURL: generateAvatarUrl(name),
+      email: email,
+      photoURL: generateAvatarUrl(name, email),
       isFirebaseLive: false
     };
     completeUserLogin(user);
