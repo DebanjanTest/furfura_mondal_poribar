@@ -6,6 +6,12 @@ export const translations = {
     // Brand & Dynamic Island
     "brand_title": "মণ্ডল বাড়ির পুজো",
     "google_login_title": "Google দিয়ে সাইন ইন (ঐচ্ছিক)",
+    
+    "google_live_popup_btn": "Google পপ-আপ দিয়ে সাইন ইন (Live)",
+    "google_modal_or_custom": "অথবা আপনার নাম লিখুন",
+    
+    "google_live_popup_btn": "Sign in with Google Popup (Live)",
+    "google_modal_or_custom": "or enter your custom name",
     "google_modal_title": "Google অ্যাকাউন্ট দিয়ে সাইন ইন করুন",
     "google_modal_subtitle": "মণ্ডল বাড়ির পুজো ২০২৬ (ফুরফুরা মণ্ডল পরিবার) উৎসব পোর্টালে আপনার উপস্থিতি ও স্মৃতি সংরক্ষণ করুন।",
     "quick_account_devotee": "শ্রদ্ধেয় ভক্ত ও দর্শনার্থী",

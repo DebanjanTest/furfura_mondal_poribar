@@ -77,6 +77,26 @@ function notifyAuthSubscribers(user) {
 /**
  * Execute Google Sign-In via Firebase Authentication Popup
  */
+
+/**
+ * Directly execute live Google popup OAuth
+ */
+export async function loginWithGoogleLivePopup() {
+  if (!auth || !googleProvider) {
+    throw new Error('Firebase Auth instance is not initialized.');
+  }
+  const result = await signInWithPopup(auth, googleProvider);
+  const user = {
+    uid: result.user.uid,
+    displayName: result.user.displayName || 'Devotee',
+    email: result.user.email || '',
+    photoURL: result.user.photoURL || generateAvatarUrl(result.user.displayName, result.user.email),
+    isFirebaseLive: true
+  };
+  setStoredUser(user);
+  return user;
+}
+
 export async function loginWithGoogle() {
   if (auth && googleProvider) {
     try {

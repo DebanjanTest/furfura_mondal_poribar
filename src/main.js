@@ -5,7 +5,7 @@ import { audioEngine } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
 import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations, formatNumber } from './utils/i18n.js';
-import { loginWithGoogle, logoutUser, subscribeAuthState, getCurrentUser, setStoredUser, generateAvatarUrl } from './services/firebaseAuth.js';
+import { loginWithGoogle, loginWithGoogleLivePopup, logoutUser, subscribeAuthState, getCurrentUser, setStoredUser, generateAvatarUrl } from './services/firebaseAuth.js';
 
 // Application State
 const state = {
@@ -203,15 +203,18 @@ function initFirebaseAuthUI() {
 
   const googleModal = document.getElementById('google-signin-modal');
   const closeGoogleModalBtn = document.getElementById('btn-close-google-auth');
+  const liveOAuthBtn = document.getElementById('btn-google-live-popup');
+  const errorNoticeEl = document.getElementById('google-auth-error-notice');
   const quickDevoteeBtn = document.getElementById('btn-quick-auth-devotee');
   const quickFamilyBtn = document.getElementById('btn-quick-auth-family');
   const customAuthForm = document.getElementById('google-custom-auth-form');
 
-  let pendingAuthCallback = null;
-
-  window.openGoogleAuthModal = function(callback) {
-    pendingAuthCallback = callback;
+  window.openGoogleAuthModal = function() {
     if (googleModal) {
+      if (errorNoticeEl) {
+        errorNoticeEl.style.display = 'none';
+        errorNoticeEl.textContent = '';
+      }
       googleModal.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
@@ -225,7 +228,6 @@ function initFirebaseAuthUI() {
         document.body.style.overflow = '';
       }
     }
-    pendingAuthCallback = null;
   }
 
   closeGoogleModalBtn?.addEventListener('click', (e) => {
@@ -253,6 +255,44 @@ function initFirebaseAuthUI() {
     }
   };
 
+  // 1. Live Google OAuth Popup Click Handler
+  liveOAuthBtn?.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    if (errorNoticeEl) {
+      errorNoticeEl.style.display = 'none';
+    }
+    try {
+      const user = await loginWithGoogleLivePopup();
+      if (user) {
+        completeUserLogin(user);
+      }
+    } catch (err) {
+      console.warn('Firebase Live Google Auth error:', err);
+      const lang = getLanguage();
+      if (errorNoticeEl) {
+        let msg = '';
+        if (err.code === 'auth/operation-not-allowed') {
+          msg = lang === 'bn'
+            ? '⚠️ Firebase Console-এ Google Provider টি সক্রিয় (Enabled) করতে হবে। Authentication > Sign-in method এ যান।'
+            : '⚠️ Google Provider is not enabled in Firebase Console yet. Go to Authentication > Sign-in method.';
+        } else if (err.code === 'auth/unauthorized-domain') {
+          msg = lang === 'bn'
+            ? '⚠️ বর্তমান ডোমেনটি Firebase Console এর Authorized Domains এ যুক্ত করতে হবে।'
+            : '⚠️ This domain is not in Firebase Console Authorized Domains list.';
+        } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
+          msg = lang === 'bn'
+            ? 'পপ-আপ বন্ধ করা হয়েছে।'
+            : 'Popup was closed.';
+        } else {
+          msg = (lang === 'bn' ? 'Google সাইন ইন বার্তা: ' : 'Google Sign-in notice: ') + (err.message || err.code || 'Please try quick profile below.');
+        }
+        errorNoticeEl.textContent = msg;
+        errorNoticeEl.style.display = 'block';
+      }
+    }
+  });
+
+  // 2. Quick One-Tap Profile Handlers
   quickDevoteeBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
     const lang = getLanguage();
@@ -281,6 +321,7 @@ function initFirebaseAuthUI() {
     completeUserLogin(user);
   });
 
+  // 3. Custom Name Form Submit Handler
   customAuthForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -355,31 +396,18 @@ function initFirebaseAuthUI() {
       if (drawerAuthBtnText) drawerAuthBtnText.textContent = lang === 'bn' ? 'Google সাইন ইন' : 'Google Sign In';
       if (drawerAuthBtn) {
         drawerAuthBtn.classList.remove('btn-signout');
-        drawerAuthBtn.onclick = async (e) => {
+        drawerAuthBtn.onclick = (e) => {
           e.stopPropagation();
-          try {
-            const user = await loginWithGoogle();
-            if (user) {
-              completeUserLogin(user);
-            }
-          } catch (err) {
-            console.warn('Google sign-in notice:', err);
-          }
+          window.openGoogleAuthModal();
         };
       }
     }
   };
 
-  authBtn?.addEventListener('click', async (e) => {
+  // Open Google Auth Modal on button clicks
+  authBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    try {
-      const user = await loginWithGoogle();
-      if (user) {
-        completeUserLogin(user);
-      }
-    } catch (err) {
-      console.warn('Google sign-in notice:', err);
-    }
+    window.openGoogleAuthModal();
   });
 
   logoutBtn?.addEventListener('click', async (e) => {

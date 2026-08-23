@@ -9837,3 +9837,48 @@ button:active, [role="button"]:active {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
+
+
+.google-direct-oauth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.75rem 1.1rem;
+  background: #ffffff;
+  border: 1.5px solid #ffffff;
+  border-radius: 14px;
+  color: #1f2937;
+  font-family: var(--font-bengali-sans);
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(255, 255, 255, 0.2);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  margin-bottom: 0.85rem;
+}
+
+.google-direct-oauth-btn:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 255, 255, 0.35);
+}
+
+.google-direct-oauth-btn:active {
+  transform: scale(0.97);
+}
+
+.google-auth-error-notice {
+  padding: 0.65rem 0.85rem;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 12px;
+  color: #fca5a5;
+  font-family: var(--font-bengali-sans);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin-bottom: 0.85rem;
+  text-align: left;
+}
