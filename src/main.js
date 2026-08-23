@@ -434,9 +434,12 @@ function initFirebaseAuthUI() {
   const updateAuthUI = (user) => {
     const lang = getLanguage();
     if (user) {
-      // 1. Signed In State
+      // 1. Signed In State - Dynamic Island
       if (authBtn) authBtn.style.display = 'none';
-      if (userPill) userPill.style.display = 'inline-flex';
+      if (userPill) {
+        userPill.style.display = 'inline-flex';
+        userPill.setAttribute('title', `Logged in as ${user.displayName} (${user.email})`);
+      }
       if (userAvatar) {
         userAvatar.src = user.photoURL || generateAvatarUrl(user.displayName, user.email);
         userAvatar.alt = user.displayName || 'User Profile';
@@ -446,7 +449,7 @@ function initFirebaseAuthUI() {
         userName.textContent = firstName;
       }
 
-      // Drawer details
+      // 2. Drawer Profile Section
       if (drawerUserImg) {
         drawerUserImg.src = user.photoURL || generateAvatarUrl(user.displayName, user.email);
         drawerUserImg.style.display = 'block';
@@ -455,7 +458,7 @@ function initFirebaseAuthUI() {
       if (guestIcon) guestIcon.style.display = 'none';
 
       if (drawerUserName) drawerUserName.textContent = user.displayName || 'Devotee';
-      if (drawerUserSub) drawerUserSub.textContent = user.email || (lang === 'bn' ? 'সংযুক্ত ভক্ত' : 'Connected Devotee');
+      if (drawerUserSub) drawerUserSub.textContent = user.email || (lang === 'bn' ? 'সংযুক্ত Google ভক্ত' : 'Connected Google Account');
       if (drawerAuthBtnText) drawerAuthBtnText.textContent = lang === 'bn' ? 'লগআউট' : 'Sign Out';
       if (drawerAuthBtn) {
         drawerAuthBtn.classList.add('btn-signout');
@@ -466,10 +469,20 @@ function initFirebaseAuthUI() {
         };
       }
 
-      // Autofill Contributor name in Photo Upload if empty
-      const authorInput = document.getElementById('gallery-author-input');
-      if (authorInput && !authorInput.value.trim()) {
+      // 3. Photo Gallery Upload Form Autofill
+      const authorInput = document.getElementById('upload-author-input');
+      const galleryAuthorInput = document.getElementById('gallery-author-input');
+      if (authorInput && (!authorInput.value.trim() || authorInput.value === 'ভক্ত ও দর্শনার্থী')) {
         authorInput.value = user.displayName || '';
+      }
+      if (galleryAuthorInput && (!galleryAuthorInput.value.trim() || galleryAuthorInput.value === 'ভক্ত ও দর্শনার্থী')) {
+        galleryAuthorInput.value = user.displayName || '';
+      }
+
+      // 4. Story Generator Personalization
+      const storyAuthorInput = document.getElementById('story-author-input');
+      if (storyAuthorInput && !storyAuthorInput.value.trim()) {
+        storyAuthorInput.value = user.displayName || '';
       }
     } else {
       // 2. Signed Out / Guest State
@@ -509,6 +522,14 @@ function initFirebaseAuthUI() {
     const lang = getLanguage();
     await logoutUser();
     showAuthToast(lang === 'bn' ? 'লগআউট সম্পন্ন হয়েছে' : 'Signed out successfully');
+  });
+
+  // Tap on User Capsule opens Quick Drawer
+  userPill?.addEventListener('click', (e) => {
+    if (e.target === logoutBtn || e.target.closest('#island-btn-logout')) return;
+    e.stopPropagation();
+    const island = document.getElementById('dynamic-island');
+    island?.classList.toggle('drawer-open');
   });
 
   // Re-sync UI on language change
