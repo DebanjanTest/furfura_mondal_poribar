@@ -5180,44 +5180,7 @@ button {
   text-overflow: ellipsis;
 }
 
-.gallery-like-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.75rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-pill);
-  color: #ffffff;
-  font-family: var(--font-bengali-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  flex-shrink: 0;
-}
-
-.gallery-like-btn:hover {
-  background: rgba(211, 47, 47, 0.25);
-  border-color: #ff5252;
-  color: #ff8a80;
-  transform: scale(1.05);
-}
-
-.gallery-like-btn.liked {
-  background: rgba(211, 47, 47, 0.4);
-  border-color: #ff5252;
-  color: #ffffff;
-}
-
-.gallery-like-btn .like-heart {
-  font-size: 0.85rem;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.gallery-like-btn:active .like-heart {
-  transform: scale(1.4);
-}
+/* .gallery-like-btn styled universally in Universal Like Button System */
 
 /* Gallery Section Footer */
 .gallery-section-footer {
@@ -9017,39 +8980,14 @@ button:active, [role="button"]:active {
 
 /* ==========================================================================
    UNIVERSAL LIKE BUTTON SYSTEM (UIVERSE BEATING HEART & MOVING BORDERS BY LILAREST)
-   Applied across Onnota Showcase, Grand Photo Gallery, and Fullscreen Lightbox
+   Universal styling for all buttons responsible for the "Like" function:
+   - .onnota-like-btn (Onnota Creative Showcase)
+   - .gallery-like-btn (Grand Heritage Photo Gallery)
+   - .lightbox-like-btn (Fullscreen Lightbox Modal)
    ========================================================================== */
 
 .onnota-like-btn,
-.gallery-like-btn {
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.45rem 1rem 0.45rem 0.85rem;
-  box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset, 0 4px 14px rgba(0, 0, 0, 0.5);
-  background-color: #170205;
-  border-color: black;
-  border-style: solid;
-  border-width: 1.5px;
-  border-radius: 25px;
-  font-size: 0.78rem;
-  cursor: pointer;
-  font-weight: 900;
-  color: White;
-  font-family: var(--font-bengali-sans);
-  transition:
-    transform 400ms cubic-bezier(0.68, -0.55, 0.27, 2.5),
-    border-color 400ms ease-in-out,
-    background-color 400ms ease-in-out,
-    box-shadow 400ms ease-in-out;
-  gap: 0.45rem;
-  box-sizing: border-box;
-  flex-shrink: 0;
-  user-select: none;
-  word-spacing: -1px;
-}
-
+.gallery-like-btn,
 .lightbox-like-btn {
   position: relative;
   display: inline-flex;
@@ -9079,12 +9017,27 @@ button:active, [role="button"]:active {
   word-spacing: -1px;
 }
 
+@keyframes movingBorders {
+  0% {
+    border-color: #fce4e4;
+  }
+
+  50% {
+    border-color: #ffd8d8;
+  }
+
+  90% {
+    border-color: #fce4e4;
+  }
+}
+
 .onnota-like-btn:hover,
 .gallery-like-btn:hover,
 .lightbox-like-btn:hover {
   background-color: #3D1C21;
   transform: scale(1.05);
   animation: movingBorders 3s infinite;
+  box-shadow: rgba(255, 110, 110, 0.25) 0px -2px 8px 0px inset, 0 6px 20px rgba(0, 0, 0, 0.7);
 }
 
 .onnota-like-btn .btn-heart-wrapper,
@@ -9119,6 +9072,28 @@ button:active, [role="button"]:active {
   position: absolute;
   inset: 0;
   opacity: 0;
+}
+
+@keyframes beatingHeart {
+  0% {
+    transform: scale(1);
+  }
+
+  15% {
+    transform: scale(1.15);
+  }
+
+  30% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.15);
+  }
+
+  60% {
+    transform: scale(1);
+  }
 }
 
 .onnota-like-btn:hover .empty,
