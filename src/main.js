@@ -447,6 +447,11 @@ function initFirebaseAuthUI() {
             msg = lang === 'bn'
               ? '⚠️ ব্রাউজার পপ-আপ ব্লক করেছে। অ্যাড্রেস বারের পপ-আপ আইকনে ক্লিক করে Allow করুন, অথবা নীচের তালিকা থেকে অ্যাকাউন্ট বেছে নিন!'
               : '⚠️ Popup was blocked by browser. Allow popups in the address bar, or choose an account below for instant sign-in.';
+          } else if (err.code === 'auth/unauthorized-domain') {
+            const host = window.location.hostname || 'localhost';
+            msg = lang === 'bn'
+              ? `📱 বর্তমান ডোমেন (${host}) Firebase Authorized Domains-এ যুক্ত নেই। নীচের তালিকা থেকে সরাসরি 1-ক্লিকে সাইন ইন করুন!`
+              : `📱 Current domain (${host}) is not in Firebase Authorized Domains. Choose your account below for instant 1-tap sign in!`;
           } else if (err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request') {
             msg = lang === 'bn' ? 'পপ-আপ বন্ধ করা হয়েছে।' : 'Popup was closed.';
           } else {
