@@ -549,25 +549,33 @@ button {
 .island-user-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.32rem;
+  justify-content: center;
+  width: 28px;
   height: 28px;
-  padding: 0 0.45rem 0 0.22rem;
-  background: rgba(255, 207, 64, 0.14);
+  padding: 0;
+  background: rgba(255, 207, 64, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 207, 64, 0.4);
-  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--heritage-gold);
+  border-radius: 50%;
   box-sizing: border-box;
   flex-shrink: 0;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.island-user-pill:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 10px var(--heritage-gold-glow);
 }
 
 .island-user-avatar {
-  width: 20px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid var(--heritage-gold);
+  display: block;
 }
 
 .island-user-name {
@@ -9385,24 +9393,33 @@ button:active, [role="button"]:active {
 .island-user-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.38rem;
-  padding: 0.2rem 0.5rem 0.2rem 0.28rem;
-  background: rgba(255, 207, 64, 0.14);
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: rgba(255, 207, 64, 0.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 207, 64, 0.4);
-  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--heritage-gold);
+  border-radius: 50%;
   box-sizing: border-box;
   flex-shrink: 0;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.island-user-pill:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 10px var(--heritage-gold-glow);
 }
 
 .island-user-avatar {
-  width: 20px;
-  height: 20px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid var(--heritage-gold);
+  display: block;
 }
 
 .island-user-name {

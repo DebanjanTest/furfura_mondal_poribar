@@ -474,7 +474,7 @@ function initFirebaseAuthUI() {
   const updateAuthUI = (user) => {
     const lang = getLanguage();
     if (user) {
-      // 1. Signed In State - Dynamic Island
+      // 1. Signed In State - Dynamic Island (Avatar Only)
       if (authBtn) authBtn.style.display = 'none';
       if (userPill) {
         userPill.style.display = 'inline-flex';
@@ -485,8 +485,7 @@ function initFirebaseAuthUI() {
         userAvatar.alt = user.displayName || 'User Profile';
       }
       if (userName) {
-        const firstName = (user.displayName || 'User').split(' ')[0];
-        userName.textContent = firstName;
+        userName.textContent = '';
       }
 
       // 2. Drawer Profile Section
@@ -564,9 +563,9 @@ function initFirebaseAuthUI() {
     showAuthToast(lang === 'bn' ? 'লগআউট সম্পন্ন হয়েছে' : 'Signed out successfully');
   });
 
-  // Tap on User Capsule opens Quick Drawer
+  // Tap on User Avatar Capsule opens Quick Drawer
   userPill?.addEventListener('click', (e) => {
-    if (e.target === logoutBtn || e.target.closest('#island-btn-logout')) return;
+    e.preventDefault();
     e.stopPropagation();
     const island = document.getElementById('dynamic-island');
     island?.classList.toggle('drawer-open');
