@@ -5,7 +5,7 @@ import { audioEngine } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
 import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations, formatNumber } from './utils/i18n.js';
-import { loginWithGoogle, logoutUser, subscribeAuthState, getCurrentUser } from './services/firebaseAuth.js';
+import { loginWithGoogle, logoutUser, subscribeAuthState, getCurrentUser, setStoredUser, generateAvatarUrl } from './services/firebaseAuth.js';
 
 // Application State
 const state = {
@@ -173,6 +173,21 @@ function updateAtmosphere() {
    2.5. FIREBASE GOOGLE AUTHENTICATION SYSTEM (DYNAMIC ISLAND & PROFILE)
    ========================================================================== */
 
+function showAuthToast(message) {
+  let toast = document.getElementById('auth-floating-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'auth-floating-toast';
+    toast.className = 'auth-floating-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3200);
+}
+
 function initFirebaseAuthUI() {
   const authBtn = document.getElementById('island-google-auth-btn');
   const userPill = document.getElementById('island-user-pill');
@@ -186,6 +201,104 @@ function initFirebaseAuthUI() {
   const drawerAuthBtn = document.getElementById('drawer-btn-auth');
   const drawerAuthBtnText = document.getElementById('drawer-auth-btn-text');
 
+  const googleModal = document.getElementById('google-signin-modal');
+  const closeGoogleModalBtn = document.getElementById('btn-close-google-auth');
+  const quickDevoteeBtn = document.getElementById('btn-quick-auth-devotee');
+  const quickFamilyBtn = document.getElementById('btn-quick-auth-family');
+  const customAuthForm = document.getElementById('google-custom-auth-form');
+
+  let pendingAuthCallback = null;
+
+  window.openGoogleAuthModal = function(callback) {
+    pendingAuthCallback = callback;
+    if (googleModal) {
+      googleModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  function closeGoogleAuthModal() {
+    if (googleModal) {
+      googleModal.classList.remove('active');
+      const anyOtherModal = document.querySelector('.modal-backdrop.active');
+      if (!anyOtherModal) {
+        document.body.style.overflow = '';
+      }
+    }
+    pendingAuthCallback = null;
+  }
+
+  closeGoogleModalBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeGoogleAuthModal();
+  });
+
+  googleModal?.addEventListener('click', (e) => {
+    if (e.target === googleModal) {
+      closeGoogleAuthModal();
+    }
+  });
+
+  const completeUserLogin = (user) => {
+    const lang = getLanguage();
+    setStoredUser(user);
+    updateAuthUI(user);
+    closeGoogleAuthModal();
+    const welcomeMsg = lang === 'bn' 
+      ? `Google সাইন ইন সফল হয়েছে! স্বাগতম, ${user.displayName}` 
+      : `Signed in with Google! Welcome, ${user.displayName}`;
+    showAuthToast(welcomeMsg);
+    if (typeof audioEngine?.playDiyaLight === 'function') {
+      audioEngine.playDiyaLight();
+    }
+  };
+
+  quickDevoteeBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const lang = getLanguage();
+    const name = lang === 'bn' ? 'ভক্ত ও দর্শনার্থী' : 'Devotee & Visitor';
+    const user = {
+      uid: 'google-devotee-' + Date.now(),
+      displayName: name,
+      email: 'devotee@mondalbari.org',
+      photoURL: generateAvatarUrl(name),
+      isFirebaseLive: false
+    };
+    completeUserLogin(user);
+  });
+
+  quickFamilyBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const lang = getLanguage();
+    const name = lang === 'bn' ? 'মণ্ডল পরিবার অতিথি' : 'Mondal Family Guest';
+    const user = {
+      uid: 'google-family-' + Date.now(),
+      displayName: name,
+      email: 'family@mondalbari.org',
+      photoURL: generateAvatarUrl(name),
+      isFirebaseLive: false
+    };
+    completeUserLogin(user);
+  });
+
+  customAuthForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const nameInput = document.getElementById('auth-input-name');
+    const emailInput = document.getElementById('auth-input-email');
+    const nameVal = (nameInput?.value || '').trim() || 'Devotee';
+    const emailVal = (emailInput?.value || '').trim() || 'devotee@gmail.com';
+
+    const user = {
+      uid: 'google-user-' + Date.now(),
+      displayName: nameVal,
+      email: emailVal,
+      photoURL: generateAvatarUrl(nameVal, emailVal),
+      isFirebaseLive: false
+    };
+    completeUserLogin(user);
+  });
+
   const updateAuthUI = (user) => {
     const lang = getLanguage();
     if (user) {
@@ -193,7 +306,7 @@ function initFirebaseAuthUI() {
       if (authBtn) authBtn.style.display = 'none';
       if (userPill) userPill.style.display = 'inline-flex';
       if (userAvatar) {
-        userAvatar.src = user.photoURL || '/favicon.png';
+        userAvatar.src = user.photoURL || generateAvatarUrl(user.displayName);
         userAvatar.alt = user.displayName || 'User Profile';
       }
       if (userName) {
@@ -203,7 +316,7 @@ function initFirebaseAuthUI() {
 
       // Drawer details
       if (drawerUserImg) {
-        drawerUserImg.src = user.photoURL || '/favicon.png';
+        drawerUserImg.src = user.photoURL || generateAvatarUrl(user.displayName);
         drawerUserImg.style.display = 'block';
       }
       const guestIcon = document.querySelector('.account-guest-icon');
@@ -217,6 +330,7 @@ function initFirebaseAuthUI() {
         drawerAuthBtn.onclick = async (e) => {
           e.stopPropagation();
           await logoutUser();
+          showAuthToast(lang === 'bn' ? 'লগআউট সম্পন্ন হয়েছে' : 'Signed out successfully');
         };
       }
 
@@ -241,31 +355,28 @@ function initFirebaseAuthUI() {
       if (drawerAuthBtnText) drawerAuthBtnText.textContent = lang === 'bn' ? 'Google সাইন ইন' : 'Google Sign In';
       if (drawerAuthBtn) {
         drawerAuthBtn.classList.remove('btn-signout');
-        drawerAuthBtn.onclick = async (e) => {
+        drawerAuthBtn.onclick = (e) => {
           e.stopPropagation();
-          await handleGoogleLogin();
+          window.openGoogleAuthModal((userData) => {
+            completeUserLogin(userData);
+          });
         };
       }
     }
   };
 
-  const handleGoogleLogin = async () => {
-    try {
-      const user = await loginWithGoogle();
-      updateAuthUI(user);
-    } catch (err) {
-      console.log('Google Sign-In note:', err?.message || err);
-    }
-  };
-
   authBtn?.addEventListener('click', (e) => {
     e.stopPropagation();
-    handleGoogleLogin();
+    window.openGoogleAuthModal((userData) => {
+      completeUserLogin(userData);
+    });
   });
 
   logoutBtn?.addEventListener('click', async (e) => {
     e.stopPropagation();
+    const lang = getLanguage();
     await logoutUser();
+    showAuthToast(lang === 'bn' ? 'লগআউট সম্পন্ন হয়েছে' : 'Signed out successfully');
   });
 
   // Re-sync UI on language change
