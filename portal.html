@@ -100,20 +100,18 @@
          ========================================== -->
     <div id="portal-dashboard" class="portal-dashboard" style="display: none;">
       
-      <!-- Top Navigation Header (Full-Breadth Infinite Single-Line Bar) -->
+      <!-- Top Navigation Header (Separated Brand Header on Top + Actions Ribbon Below) -->
       <header class="portal-navbar">
-        <div class="portal-nav-bar-inner" role="toolbar" aria-label="Portal Header Actions">
-          <!-- Left: Brand Section -->
-          <div class="nav-brand-section">
+        <div class="portal-nav-container">
+          <!-- Top Row: Distinct Brand Header -->
+          <div class="nav-brand-header">
             <span class="nav-brand-title" data-i18n="portal_nav_brand">মন্ডল বাড়ির পুজো</span>
-            <span class="nav-bar-divider" aria-hidden="true">|</span>
+            <span class="nav-brand-dot" aria-hidden="true">•</span>
             <span class="nav-portal-tag" data-i18n="portal_nav_tag">কিউরেটর ও ম্যানেজমেন্ট পোর্টাল</span>
           </div>
 
-          <!-- Right: Actions & Metadata (Single Continuous Line) -->
-          <div class="nav-actions-section">
-            <span class="nav-bar-divider desktop-divider" aria-hidden="true">|</span>
-
+          <!-- Bottom Row: Unified Full-Breadth Divided Action Bar (Zero-Scroll Auto-Fit) -->
+          <div class="nav-actions-ribbon" role="toolbar" aria-label="Portal Header Actions">
             <!-- Language Toggle -->
             <button type="button" id="btn-portal-lang-toggle" class="nav-action-btn" aria-label="Change Language">
               <span id="portal-lang-text">বাংলা</span>
