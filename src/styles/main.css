@@ -919,6 +919,51 @@ button {
   }
 }
 
+/* Curator Management Portal Link inside Dynamic Island Drawer */
+.drawer-portal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.85rem;
+  background: rgba(255, 207, 64, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 207, 64, 0.45);
+  border-radius: var(--radius-pill);
+  color: var(--heritage-gold);
+  font-family: var(--font-bengali-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+  margin-top: 0.35rem;
+}
+
+.drawer-portal-link:hover {
+  background: var(--heritage-gold);
+  color: #080103;
+  border-color: var(--heritage-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px var(--heritage-gold-glow);
+}
+
+.drawer-portal-link:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 480px) {
+  .drawer-portal-link {
+    font-size: 0.68rem;
+    padding: 0.26rem 0.65rem;
+    gap: 0.25rem;
+  }
+}
+
 /* Quick Action Buttons Grid - 2x2 on Mobile, 4x1 on Wide */
 .island-quick-grid {
   display: grid;

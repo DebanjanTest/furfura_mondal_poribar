@@ -122,11 +122,11 @@ function updateNavUserInfo(user, role) {
 
   if (roleBadge) {
     if (role === ROLES.ADMIN) {
-      roleBadge.textContent = '👑 সুপার অ্যাডমিন';
+      roleBadge.textContent = 'সুপার অ্যাডমিন';
       roleBadge.style.borderColor = 'var(--portal-gold)';
       roleBadge.style.color = 'var(--portal-gold)';
     } else {
-      roleBadge.textContent = '✍️ কনটেন্ট এডিটর';
+      roleBadge.textContent = 'কনটেন্ট এডিটর';
       roleBadge.style.borderColor = '#60a5fa';
       roleBadge.style.color = '#93c5fd';
     }

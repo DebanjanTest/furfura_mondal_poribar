@@ -537,7 +537,7 @@ function initFirebaseAuthUI() {
       }
       if (drawerUserSub) {
         drawerUserSub.textContent = isCurator 
-          ? (role === ROLES.ADMIN ? '👑 সুপার অ্যাডমিন' : '✍️ কনটেন্ট এডিটর')
+          ? (role === ROLES.ADMIN ? (lang === 'bn' ? 'সুপার অ্যাডমিন' : 'Super Admin') : (lang === 'bn' ? 'কনটেন্ট এডিটর' : 'Content Editor'))
           : (user.email || (lang === 'bn' ? 'সংযুক্ত Google ভক্ত' : 'Connected Google Account'));
       }
 
@@ -549,12 +549,15 @@ function initFirebaseAuthUI() {
           portalBtn.id = 'drawer-portal-link';
           portalBtn.href = '/portal.html';
           portalBtn.target = '_blank';
+          portalBtn.rel = 'noopener noreferrer';
           portalBtn.className = 'drawer-portal-link';
-          portalBtn.style.cssText = 'display:inline-flex; align-items:center; gap:0.35rem; padding:0.25rem 0.65rem; border-radius:9999px; background:rgba(255,207,64,0.18); border:1px solid var(--heritage-gold); color:var(--heritage-gold); font-size:0.72rem; font-weight:700; text-decoration:none; margin-top:0.35rem;';
-          portalBtn.innerHTML = '<span>👑 কিউরেটর পোর্টাল (Curator Portal) ↗</span>';
+          portalBtn.setAttribute('aria-label', lang === 'bn' ? 'কিউরেটর পোর্টাল' : 'Curator Portal');
           drawerUserName.parentElement.appendChild(portalBtn);
         }
-        if (portalBtn) portalBtn.style.display = 'inline-flex';
+        if (portalBtn) {
+          portalBtn.innerHTML = `<span>${lang === 'bn' ? 'কিউরেটর পোর্টাল (Curator Portal) ↗' : 'Curator Portal ↗'}</span>`;
+          portalBtn.style.display = 'inline-flex';
+        }
       } else if (portalBtn) {
         portalBtn.style.display = 'none';
       }
