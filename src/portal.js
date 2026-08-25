@@ -63,7 +63,6 @@ function initPortalLanguage() {
   langToggleBtn?.addEventListener('click', () => {
     const nextLang = getLanguage() === 'bn' ? 'en' : 'bn';
     setLanguage(nextLang);
-    syncPortalLangUI(nextLang);
     loadAllDashboardData();
   });
 
@@ -71,9 +70,8 @@ function initPortalLanguage() {
   document.querySelectorAll('.portal-auth-lang-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const nextLang = btn.getAttribute('data-lang');
-      if (nextLang) {
+      if (nextLang && nextLang !== getLanguage()) {
         setLanguage(nextLang);
-        syncPortalLangUI(nextLang);
         loadAllDashboardData();
       }
     });
@@ -86,8 +84,6 @@ function initPortalLanguage() {
 }
 
 function syncPortalLangUI(lang) {
-  applyTranslations();
-
   const langText = document.getElementById('portal-lang-text');
   if (langText) {
     langText.textContent = lang === 'bn' ? 'বাংলা' : 'English';

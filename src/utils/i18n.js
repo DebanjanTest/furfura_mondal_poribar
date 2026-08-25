@@ -1050,47 +1050,55 @@ export function t(key) {
   return dict[key] || translations.bn[key] || key;
 }
 
+let isApplyingTranslations = false;
+
 /**
  * Update all DOM elements containing [data-i18n], [data-i18n-placeholder], [data-i18n-title], [data-i18n-aria-label]
  */
 export function applyTranslations() {
-  // 1. Text contents & basic inputs
-  const elements = document.querySelectorAll('[data-i18n]');
-  elements.forEach((el) => {
-    const key = el.getAttribute('data-i18n');
-    if (key) {
-      const translated = t(key);
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.setAttribute('placeholder', translated);
-      } else {
-        el.innerHTML = translated;
+  if (isApplyingTranslations) return;
+  isApplyingTranslations = true;
+  try {
+    // 1. Text contents & basic inputs
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (key) {
+        const translated = t(key);
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.setAttribute('placeholder', translated);
+        } else {
+          el.innerHTML = translated;
+        }
       }
-    }
-  });
+    });
 
-  // 2. Explicit placeholders
-  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    if (key) el.setAttribute('placeholder', t(key));
-  });
+    // 2. Explicit placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if (key) el.setAttribute('placeholder', t(key));
+    });
 
-  // 3. Titles / tooltips
-  document.querySelectorAll('[data-i18n-title]').forEach((el) => {
-    const key = el.getAttribute('data-i18n-title');
-    if (key) el.setAttribute('title', t(key));
-  });
+    // 3. Titles / tooltips
+    document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-title');
+      if (key) el.setAttribute('title', t(key));
+    });
 
-  // 4. Accessibility ARIA labels
-  document.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
-    const key = el.getAttribute('data-i18n-aria-label');
-    if (key) el.setAttribute('aria-label', t(key));
-  });
+    // 4. Accessibility ARIA labels
+    document.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+      const key = el.getAttribute('data-i18n-aria-label');
+      if (key) el.setAttribute('aria-label', t(key));
+    });
 
-  // Update HTML lang attribute
-  document.documentElement.lang = currentLanguage;
+    // Update HTML lang attribute
+    document.documentElement.lang = currentLanguage;
 
-  // Dispatch global language change event
-  window.dispatchEvent(new CustomEvent('pujo_language_changed', { detail: { lang: currentLanguage } }));
+    // Dispatch global language change event
+    window.dispatchEvent(new CustomEvent('pujo_language_changed', { detail: { lang: currentLanguage } }));
+  } finally {
+    isApplyingTranslations = false;
+  }
 }
 
 // Expose on window for runtime diagnostics / scripts
