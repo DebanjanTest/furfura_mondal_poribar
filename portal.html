@@ -100,38 +100,50 @@
          ========================================== -->
     <div id="portal-dashboard" class="portal-dashboard" style="display: none;">
       
-      <!-- Top Navigation Header -->
+      <!-- Top Navigation Header (Executive Segmented Glass Header) -->
       <header class="portal-navbar">
         <div class="portal-nav-left">
-          <span class="nav-emblem">🪔</span>
           <div class="nav-brand-wrap">
             <span class="nav-brand-title" data-i18n="portal_nav_brand">মন্ডল বাড়ির পুজো</span>
+            <span class="nav-brand-divider" aria-hidden="true">|</span>
             <span class="nav-portal-tag" data-i18n="portal_nav_tag">কিউরেটর ও ম্যানেজমেন্ট পোর্টাল</span>
           </div>
         </div>
 
         <div class="portal-nav-right">
-          <!-- Language Toggle Pill -->
-          <button type="button" id="btn-portal-lang-toggle" class="portal-lang-pill" aria-label="Change Language">
-            <span id="portal-lang-text">বাংলা</span>
-          </button>
+          <div class="portal-nav-hub" role="toolbar" aria-label="Portal Header Actions">
+            <!-- Language Toggle -->
+            <button type="button" id="btn-portal-lang-toggle" class="nav-hub-btn" aria-label="Change Language">
+              <span id="portal-lang-text">বাংলা</span>
+            </button>
 
-          <!-- Role Pill -->
-          <div class="nav-role-badge" id="nav-role-badge">সুপার অ্যাডমিন</div>
+            <span class="nav-hub-divider" aria-hidden="true">|</span>
 
-          <!-- User Capsule -->
-          <div class="nav-user-capsule">
-            <img id="nav-user-avatar" class="nav-avatar-img" src="/favicon.png" alt="Admin Avatar" />
-            <span id="nav-user-name" class="nav-user-name">দেবাঞ্জন মণ্ডল</span>
+            <!-- Role Badge -->
+            <div class="nav-hub-item nav-role-badge" id="nav-role-badge">সুপার অ্যাডমিন</div>
+
+            <span class="nav-hub-divider" aria-hidden="true">|</span>
+
+            <!-- User Capsule -->
+            <div class="nav-hub-item nav-user-capsule">
+              <img id="nav-user-avatar" class="nav-avatar-img" src="/favicon.png" alt="Admin Avatar" />
+              <span id="nav-user-name" class="nav-user-name">দেবাঞ্জন মণ্ডল</span>
+            </div>
+
+            <span class="nav-hub-divider" aria-hidden="true">|</span>
+
+            <!-- Public Website Link -->
+            <a href="/" class="nav-hub-btn nav-site-link" target="_blank" rel="noopener noreferrer" title="View Public Website">
+              <span data-i18n="portal_nav_public_site">মূল ওয়েবসাইট ↗</span>
+            </a>
+
+            <span class="nav-hub-divider" aria-hidden="true">|</span>
+
+            <!-- Logout -->
+            <button type="button" id="btn-portal-logout" class="nav-hub-btn nav-logout-btn" title="Sign Out">
+              <span data-i18n="portal_nav_logout">লগআউট</span>
+            </button>
           </div>
-
-          <a href="/" class="nav-site-link" target="_blank" rel="noopener noreferrer" title="View Public Website">
-            <span data-i18n="portal_nav_public_site">মূল ওয়েবসাইট ↗</span>
-          </a>
-
-          <button type="button" id="btn-portal-logout" class="nav-logout-btn" title="Sign Out">
-            <span data-i18n="portal_nav_logout">লগআউট</span>
-          </button>
         </div>
       </header>
 
