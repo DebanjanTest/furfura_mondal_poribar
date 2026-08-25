@@ -374,19 +374,21 @@ body.portal-body {
 
 /* Bottom Row: Full-Breadth Divided Action Ribbon (Architectural Rectangular) */
 .nav-actions-ribbon {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: auto;
-  max-width: 100%;
-  gap: 0.25rem;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  gap: 0;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 207, 64, 0.25);
   border-radius: 8px;
-  padding: 3px 8px;
+  padding: 3px 6px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .nav-bar-divider {
@@ -394,19 +396,23 @@ body.portal-body {
   font-size: 0.82rem;
   font-weight: 300;
   user-select: none;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 0.2rem;
+  padding: 0 1px;
+  flex-shrink: 0;
   line-height: 1;
 }
 
 .nav-action-btn,
 .nav-action-item {
-  display: inline-flex;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
+  text-align: center;
+  gap: 0.35rem;
   font-family: var(--font-bengali-sans);
   font-size: 0.76rem;
   font-weight: 700;
@@ -415,13 +421,20 @@ body.portal-body {
   border: 1px solid transparent;
   text-decoration: none;
   cursor: pointer;
-  padding: 0.25rem 0.65rem;
+  padding: 0.25rem 0.45rem;
   border-radius: 6px;
   transition: all var(--transition-fast);
   height: 28px;
   line-height: 1;
   box-sizing: border-box;
   white-space: nowrap;
+}
+
+.nav-action-btn > span,
+.nav-action-item > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-action-btn:hover {
@@ -435,14 +448,11 @@ body.portal-body {
   font-size: 0.72rem;
   font-weight: 700;
   cursor: default;
-  padding: 0.2rem 0.5rem;
   border-radius: 4px;
 }
 
 .nav-user-capsule {
   cursor: default;
-  gap: 0.4rem;
-  padding: 0.15rem 0.5rem;
   border-radius: 6px;
 }
 
@@ -459,7 +469,7 @@ body.portal-body {
   font-size: 0.74rem;
   font-weight: 600;
   color: #ffffff;
-  max-width: 120px;
+  max-width: 110px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
