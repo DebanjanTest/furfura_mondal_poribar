@@ -336,29 +336,27 @@ body.portal-body {
 
 .nav-brand-wrap {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  min-width: 0;
 }
 
 .nav-brand-title {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 800;
   color: #ffffff;
-  line-height: 1;
-}
-
-.nav-brand-divider {
-  color: rgba(255, 207, 64, 0.35);
-  font-size: 0.82rem;
-  user-select: none;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .nav-portal-tag {
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   color: var(--portal-gold);
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .portal-nav-right {
@@ -1112,23 +1110,24 @@ body.portal-body {
 
   .portal-nav-left {
     justify-content: center;
+    width: 100%;
   }
 
   .nav-brand-wrap {
+    align-items: center;
     justify-content: center;
-    gap: 0.35rem;
+    text-align: center;
+    gap: 0.1rem;
   }
 
   .nav-brand-title {
-    font-size: 0.8rem;
-  }
-
-  .nav-brand-divider {
-    font-size: 0.72rem;
+    font-size: 0.84rem;
+    line-height: 1.2;
   }
 
   .nav-portal-tag {
-    font-size: 0.66rem;
+    font-size: 0.68rem;
+    line-height: 1.2;
   }
 
   .portal-nav-hub {
