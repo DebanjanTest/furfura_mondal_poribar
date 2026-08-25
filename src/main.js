@@ -682,10 +682,15 @@ function initDynamicIsland() {
     }
     const isRunning = particles.toggle();
     const lang = getLanguage();
-    showAuthToast(isRunning 
-      ? (lang === 'bn' ? '🌸 শিউলি ফুল ঝরা সক্রিয় করা হয়েছে' : 'Shiuli Flower fall enabled')
-      : (lang === 'bn' ? 'শিউলি ফুল ঝরা বন্ধ করা হয়েছে' : 'Shiuli Flower fall paused')
-    );
+    const isNight = (state.currentVibeTime === 'night' || state.currentVibeTime === 'midnight');
+    const toastMsg = isRunning
+      ? (isNight 
+          ? (lang === 'bn' ? '✨ নিশীথ শিশির কণা সক্রিয় করা হয়েছে' : 'Golden Night Dews enabled')
+          : (lang === 'bn' ? '🌸 শিউলি ফুল ঝরা সক্রিয় করা হয়েছে' : 'Shiuli Flower fall enabled'))
+      : (isNight
+          ? (lang === 'bn' ? 'নিশীথ শিশির কণা বন্ধ করা হয়েছে' : 'Golden Night Dews paused')
+          : (lang === 'bn' ? 'শিউলি ফুল ঝরা বন্ধ করা হয়েছে' : 'Shiuli Flower fall paused'));
+    showAuthToast(toastMsg);
     island?.classList.remove('drawer-open');
   });
 

@@ -38,6 +38,7 @@ export class ParticleSystem {
   }
 
   setTimeOfDay(time) {
+    if (this.timeOfDay === time && this.particles.length > 0) return;
     this.timeOfDay = time;
     this.createParticles();
   }
@@ -45,30 +46,67 @@ export class ParticleSystem {
   createParticles() {
     this.particles = [];
     const isMobile = window.innerWidth < 768;
-    const count = isMobile ? 32 : 55;
+    const isNight = (this.timeOfDay === 'night' || this.timeOfDay === 'midnight');
 
-    for (let i = 0; i < count; i++) {
-      // Particle types: 70% Shiuli flowers, 20% golden sparks/diya glow, 10% kash phool wisps
-      const rand = Math.random();
-      let type = 'shiuli';
-      if (rand > 0.8) type = 'sparkle';
-      else if (rand > 0.7) type = 'kash';
+    if (isNight) {
+      // ==========================================
+      // NIGHT MODE: SOFT LUMINOUS GOLDEN LIGHT DEWS
+      // Reduced count (14 on mobile, 22 on desktop)
+      // Very slow, tranquil floating motion & breathing pulse
+      // ==========================================
+      const count = isMobile ? 14 : 22;
 
-      this.particles.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: type === 'shiuli' ? (Math.random() * 8 + 7) : (Math.random() * 5 + 3),
-        speedY: type === 'sparkle' ? (Math.random() * 0.6 + 0.225) : (Math.random() * 0.9 + 0.375),
-        speedX: (Math.random() - 0.5) * 0.45,
-        swayAmplitude: Math.random() * 1.5 + 0.8,
-        swayFrequency: Math.random() * 0.015 + 0.0075,
-        swayPhase: Math.random() * Math.PI * 2,
-        rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.01875,
-        opacity: Math.random() * 0.45 + 0.55,
-        type: type,
-        petalCount: 6
-      });
+      for (let i = 0; i < count; i++) {
+        this.particles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          size: Math.random() * 3.5 + 2.5,
+          speedY: Math.random() * 0.18 + 0.08, // Very gentle downward drift
+          speedX: (Math.random() - 0.5) * 0.15, // Subtle breeze
+          swayAmplitude: Math.random() * 0.8 + 0.35,
+          swayFrequency: Math.random() * 0.008 + 0.004,
+          swayPhase: Math.random() * Math.PI * 2,
+          rotation: 0,
+          rotationSpeed: 0,
+          baseOpacity: Math.random() * 0.35 + 0.55,
+          pulsePhase: Math.random() * Math.PI * 2,
+          pulseSpeed: Math.random() * 0.025 + 0.012, // Organic soft shimmer
+          type: 'dew',
+          petalCount: 0
+        });
+      }
+    } else {
+      // ==========================================
+      // DAY MODE: AUTHENTIC SHIULI FLOWERS + KASH PHOOL
+      // Full festive count (32 on mobile, 55 on desktop)
+      // 25% calibrated slow gentle autumn flutter
+      // ==========================================
+      const count = isMobile ? 32 : 55;
+
+      for (let i = 0; i < count; i++) {
+        const rand = Math.random();
+        let type = 'shiuli';
+        if (rand > 0.8) type = 'sparkle';
+        else if (rand > 0.7) type = 'kash';
+
+        this.particles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          size: type === 'shiuli' ? (Math.random() * 8 + 7) : (Math.random() * 5 + 3),
+          speedY: type === 'sparkle' ? (Math.random() * 0.6 + 0.225) : (Math.random() * 0.9 + 0.375),
+          speedX: (Math.random() - 0.5) * 0.45,
+          swayAmplitude: Math.random() * 1.5 + 0.8,
+          swayFrequency: Math.random() * 0.015 + 0.0075,
+          swayPhase: Math.random() * Math.PI * 2,
+          rotation: Math.random() * Math.PI * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.01875,
+          baseOpacity: Math.random() * 0.45 + 0.55,
+          pulsePhase: 0,
+          pulseSpeed: 0,
+          type: type,
+          petalCount: 6
+        });
+      }
     }
   }
 
@@ -82,13 +120,19 @@ export class ParticleSystem {
     const isNight = this.timeOfDay === 'night' || this.timeOfDay === 'midnight';
 
     this.particles.forEach((p) => {
-      // Physics updates
+      // Physics & drift updates
       p.y += p.speedY;
       p.swayPhase += p.swayFrequency;
       p.x += p.speedX + Math.sin(p.swayPhase) * p.swayAmplitude;
       p.rotation += p.rotationSpeed;
 
-      // Wrap around screen boundaries
+      let currentOpacity = p.baseOpacity;
+      if (p.type === 'dew') {
+        p.pulsePhase += p.pulseSpeed;
+        currentOpacity = Math.max(0.2, Math.min(1, p.baseOpacity + Math.sin(p.pulsePhase) * 0.28));
+      }
+
+      // Wrap around screen boundaries with margin
       if (p.y > h + 30) {
         p.y = -30;
         p.x = Math.random() * w;
@@ -98,10 +142,36 @@ export class ParticleSystem {
 
       this.ctx.save();
       this.ctx.translate(p.x, p.y);
-      this.ctx.rotate(p.rotation);
-      this.ctx.globalAlpha = p.opacity;
+      if (p.rotation) {
+        this.ctx.rotate(p.rotation);
+      }
+      this.ctx.globalAlpha = currentOpacity;
 
-      if (p.type === 'shiuli') {
+      if (p.type === 'dew') {
+        // ==========================================
+        // NIGHT LIGHT DEWS (SOFT LUMINOUS GOLDEN DEWDROPS)
+        // Concentric radial glow with crystal highlight core
+        // ==========================================
+        const haloRadius = p.size * 2.7;
+        const grad = this.ctx.createRadialGradient(0, 0, 0, 0, 0, haloRadius);
+        grad.addColorStop(0, 'rgba(255, 255, 240, 1)'); // Bright dew center
+        grad.addColorStop(0.18, 'rgba(255, 230, 110, 0.92)'); // Golden warm liquid glow
+        grad.addColorStop(0.48, 'rgba(255, 185, 45, 0.55)'); // Ambient gold illumination
+        grad.addColorStop(0.78, 'rgba(255, 135, 20, 0.18)'); // Soft outer haze
+        grad.addColorStop(1, 'rgba(255, 110, 0, 0)'); // Transparent falloff
+
+        this.ctx.fillStyle = grad;
+        this.ctx.beginPath();
+        this.ctx.arc(0, 0, haloRadius, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        // Crystalline micro-specular point
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+        this.ctx.beginPath();
+        this.ctx.arc(-p.size * 0.28, -p.size * 0.28, p.size * 0.22, 0, Math.PI * 2);
+        this.ctx.fill();
+
+      } else if (p.type === 'shiuli') {
         // ==========================================
         // AUTHENTIC BENGALI SHIULI FLOWER
         // Pure white 6 petals with brilliant saffron-orange tube center
