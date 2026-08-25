@@ -3545,31 +3545,26 @@ function initSectionScrollLocking() {
 
     // SCROLL DOWN (e.deltaY > 0)
     if (e.deltaY > 0) {
-      // Single-viewport sections (Hero: 0, Photo River: 2) -> 1-scroll glide to next section
+      // Single-viewport section (Hero: 0) -> 1-scroll glide to Invitation
       if (currentSectionIdx === 0) {
         e.preventDefault();
         lockToSectionIndex(1);
         return;
       }
-      if (currentSectionIdx === 2) {
-        e.preventDefault();
-        lockToSectionIndex(3);
-        return;
-      }
 
-      // Tall sections (Invitation: 1, Onnota: 3)
-      if (currentSectionIdx === 1 || currentSectionIdx === 3) {
-        const atSectionBottom = (scrollY + vh >= sectionBottom - 20);
+      // Multi-element tall sections (Invitation: 1, Photo River: 2, Onnota: 3)
+      if (currentSectionIdx === 1 || currentSectionIdx === 2 || currentSectionIdx === 3) {
+        const atSectionBottom = (scrollY + vh >= sectionBottom - 25);
         if (atSectionBottom) {
           e.preventDefault();
           lockToSectionIndex(currentSectionIdx + 1);
           return;
         }
-        // Not at bottom yet -> allow natural general scrolling inside this section
+        // Not at bottom yet -> allow natural scroll-free exploration to view all 3 marquee rows and end of section
         return;
       }
 
-      // Grand Gallery (Section 4) -> full general scrolling
+      // Grand Gallery (Section 4) -> full natural scrolling
       if (currentSectionIdx === 4) {
         return;
       }
@@ -3582,22 +3577,15 @@ function initSectionScrollLocking() {
         return;
       }
 
-      // Single-viewport section (Photo River: 2) -> 1-scroll glide back to Invitation
-      if (currentSectionIdx === 2) {
-        e.preventDefault();
-        lockToSectionIndex(1);
-        return;
-      }
-
-      // Tall sections (Invitation: 1, Onnota: 3, Gallery: 4)
-      if (currentSectionIdx === 1 || currentSectionIdx === 3 || currentSectionIdx === 4) {
-        const atSectionTop = (scrollY <= sectionTop + 20);
+      // Multi-element tall sections (Invitation: 1, Photo River: 2, Onnota: 3, Gallery: 4)
+      if (currentSectionIdx >= 1) {
+        const atSectionTop = (scrollY <= sectionTop + 25);
         if (atSectionTop) {
           e.preventDefault();
           lockToSectionIndex(currentSectionIdx - 1);
           return;
         }
-        // Not at top yet -> allow natural general scrolling up inside this section
+        // Not at top yet -> allow natural smooth scrolling upwards inside this section
         return;
       }
     }
