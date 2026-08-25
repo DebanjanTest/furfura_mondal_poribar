@@ -814,30 +814,37 @@ button {
   max-height: 0;
   opacity: 0;
   pointer-events: none;
-  transition: max-height 0.35s ease, opacity 0.25s ease;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
   border-top: 1px solid transparent;
   padding: 0 0.85rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dynamic-island.drawer-open {
+  width: min(94vw, 440px) !important;
 }
 
 .dynamic-island.drawer-open .island-quick-drawer {
-  max-height: 480px;
+  max-height: 520px;
   opacity: 1;
   pointer-events: auto;
   border-top-color: rgba(255, 207, 64, 0.18);
-  padding: 0.65rem 0.85rem 0.85rem;
+  padding: 0.75rem 0.85rem 0.95rem;
 }
 
 /* Responsive Media Queries for Dynamic Island */
 @media (max-width: 640px) {
   .universal-dynamic-island-container {
-    width: min(94vw, 440px);
+    width: auto;
+    max-width: min(94vw, 440px);
     top: 0.65rem;
   }
 
   .island-state {
-    padding: 0.32rem 0.5rem 0.32rem 0.75rem;
+    padding: 0.32rem 0.65rem;
     min-height: 44px;
-    gap: 0.45rem;
+    gap: 0.5rem;
   }
 
   .island-title {
@@ -850,7 +857,7 @@ button {
   }
 
   .island-right {
-    gap: 0.3rem;
+    gap: 0.35rem;
   }
 
   .island-live-pill,
@@ -859,7 +866,7 @@ button {
   .island-lang-pill,
   .island-lang-pill-mini {
     height: 26px;
-    padding: 0 0.45rem;
+    padding: 0 0.48rem;
     font-size: 0.68rem;
   }
 
@@ -872,7 +879,8 @@ button {
 
 @media (max-width: 440px) {
   .universal-dynamic-island-container {
-    width: min(96vw, 400px);
+    width: auto;
+    max-width: min(96vw, 400px);
     top: 0.5rem;
   }
 
@@ -881,8 +889,8 @@ button {
   }
 
   .island-state {
-    padding: 0.3rem 0.4rem 0.3rem 0.65rem;
-    gap: 0.35rem;
+    padding: 0.3rem 0.55rem;
+    gap: 0.45rem;
   }
 
   .island-title {
@@ -890,7 +898,7 @@ button {
   }
 
   .island-right {
-    gap: 0.25rem;
+    gap: 0.3rem;
   }
 
   .island-live-pill,
@@ -899,7 +907,7 @@ button {
   .island-lang-pill,
   .island-lang-pill-mini {
     height: 24px;
-    padding: 0 0.38rem;
+    padding: 0 0.42rem;
     font-size: 0.64rem;
   }
 
@@ -911,95 +919,130 @@ button {
   }
 }
 
-
+/* Quick Action Buttons Grid - 2x2 on Mobile, 4x1 on Wide */
 .island-quick-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.35rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 100%;
   margin-bottom: 0.75rem;
+  box-sizing: border-box;
 }
 
-@media (max-width: 380px) {
+@media (min-width: 520px) {
   .island-quick-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.45rem;
   }
 }
 
 .island-quick-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
-  padding: 0.55rem 0.2rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-sm);
+  height: 42px;
+  min-height: 42px;
+  padding: 0 0.65rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 207, 64, 0.35);
+  border-radius: 12px;
   color: #ffffff;
   cursor: pointer;
   transition: all var(--transition-fast);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .island-quick-item:hover {
-  background: rgba(255, 207, 64, 0.18);
+  background: rgba(255, 207, 64, 0.2);
   border-color: var(--heritage-gold);
+  color: var(--heritage-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 207, 64, 0.2);
 }
 
 .island-quick-item:active {
-  transform: scale(0.94);
-  background: rgba(255, 207, 64, 0.25);
-}
-
-.island-quick-icon {
-  font-size: 1.15rem;
+  transform: scale(0.96);
+  background: rgba(255, 207, 64, 0.3);
 }
 
 .island-quick-label {
-  font-size: 0.625rem;
-  font-weight: 600;
+  font-size: 0.76rem;
+  font-weight: 700;
   font-family: var(--font-bengali-sans);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  width: 100%;
+  display: block;
+  letter-spacing: 0.01em;
 }
 
 .island-vibe-section {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.4rem;
   margin-bottom: 0.75rem;
+  width: 100%;
 }
 
 .island-vibe-title {
-  font-size: 0.6875rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: var(--heritage-gold);
   font-family: var(--font-bengali-sans);
+  letter-spacing: 0.02em;
 }
 
 .island-vibe-chips {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.4rem;
+  width: 100%;
 }
 
 .island-vibe-chip {
-  padding: 0.32rem 0.65rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-pill);
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.71875rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 32px;
+  padding: 0 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
   font-family: var(--font-bengali-sans);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  box-sizing: border-box;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .island-vibe-chip:hover {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 207, 64, 0.16);
+  border-color: rgba(255, 207, 64, 0.4);
+  color: var(--heritage-gold);
 }
 
-.island-vibe-chip:active {
-  transform: scale(0.95);
+.island-vibe-chip.active {
+  background: var(--heritage-gold);
+  color: #080103;
+  border-color: var(--heritage-gold);
+  font-weight: 700;
+  box-shadow: 0 0 12px var(--heritage-gold-glow);
 }
+
+
 
 .island-vibe-chip.active {
   background: var(--heritage-gold);
