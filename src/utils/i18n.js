@@ -86,8 +86,8 @@ export const translations = {
     "hero_title_bottom": "আসছে",
     "hero_subtag": "মণ্ডল বাড়ির পুজো ২০২৬ • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ৩০তম বর্ষ",
     "hero_badge": "ফুরফুরা মণ্ডল পরিবার — সাবেকি শারদোৎসব ২০২৬ (৩০তম বর্ষ)",
-    "hero_countdown_title": "মা দুর্গার পুণ্য আগমনী ও মহাষষ্ঠীর ক্ষণগণনা",
-    "hero_countdown_sub": "মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • পূজার নির্ঘণ্ট ও সূচি",
+    "hero_countdown_title": "মা দুর্গার পুণ্য আগমনী ও মহালয়ার ক্ষণগণনা",
+    "hero_countdown_sub": "শুভ মহালয়া: ১০ অক্টোবর ২০২৬ • পূজার নির্ঘণ্ট ও সূচি",
     "hero_countdown_inspect": "পূজার নির্ঘণ্ট ও সূচি দেখুন",
     "hero_days": "দিন",
     "hero_hours": "ঘণ্টা",
@@ -96,7 +96,7 @@ export const translations = {
     "hero_quote": "“আশ্বিনের শারদপ্রাতে বেজে উঠেছে আলোক মঞ্জীর... শারদ আকাশে বাজে আগমনীর সুর।”",
     "hero_scroll_hint": "স্ক্রোল করে সাবেকি উৎসব পরিক্রমা দর্শন করুন",
     "hero_scroll_prompt": "স্ক্রোল করুন",
-    "countdown_label_text": "মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • পূজার নির্ঘণ্ট ও সূচি",
+    "countdown_label_text": "শুভ মহালয়া: ১০ অক্টোবর ২০২৬ • পূজার নির্ঘণ্ট ও সূচি",
 
     // Formal Invitation Letterhead Section
     "invitation_badge": "সানন্দ আমন্ত্রণ",
@@ -478,8 +478,8 @@ export const translations = {
     "hero_title_bottom": "Asche",
     "hero_subtag": "Mondal Barir Pujo 2026 • 30th Year of Heritage Est. 1997",
     "hero_badge": "Furfura Mondal Poribar — Ancestral Durga Puja 2026 (30th Year)",
-    "hero_countdown_title": "Divine Homecoming of Maa Durga — Live Countdown",
-    "hero_countdown_sub": "Maha Shasthi: 16 October 2026 • Full Schedule & Rituals",
+    "hero_countdown_title": "Divine Homecoming of Maa Durga — Live Mahalaya Countdown",
+    "hero_countdown_sub": "Subho Mahalaya: 10 October 2026 • Full Schedule & Rituals",
     "hero_countdown_inspect": "View Puja Schedule & Rituals",
     "hero_days": "Days",
     "hero_hours": "Hours",
@@ -488,7 +488,7 @@ export const translations = {
     "hero_quote": "\"The divine resonance of conch shells and sacred chants heralds the homecoming of Maa Durga.\"",
     "hero_scroll_hint": "Scroll down to experience the festive celebrations",
     "hero_scroll_prompt": "Scroll Down",
-    "countdown_label_text": "Maha Shasthi: 16 October 2026 • Full Schedule & Rituals",
+    "countdown_label_text": "Subho Mahalaya: 10 October 2026 • Full Schedule & Rituals",
 
     // Formal Invitation Letterhead Section
     "invitation_badge": "Auspicious Invitation",

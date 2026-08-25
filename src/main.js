@@ -809,8 +809,8 @@ function initCountdown() {
     }
     if (labelEl) {
       labelEl.textContent = lang === 'bn' 
-        ? 'মহা ষষ্ঠী: ১৬ অক্টোবর ২০২৬ • নির্ঘণ্ট ও সূচি'
-        : 'Maha Sasthi: 16 October 2026 • Full Schedule';
+        ? 'শুভ মহালয়া: ১০ অক্টোবর ২০২৬ • নির্ঘণ্ট ও সূচি'
+        : 'Subho Mahalaya: 10 October 2026 • Full Schedule';
     }
   }
 

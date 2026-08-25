@@ -1,6 +1,6 @@
 // Time of Day and Durga Puja Countdown Calculations
 
-export const PUJA_TARGET_DATE = new Date('2026-10-16T00:00:00+05:30'); // Maha Shasthi 2026
+export const PUJA_TARGET_DATE = new Date('2026-10-10T00:00:00+05:30'); // Subho Mahalaya 2026
 
 export function getTimeOfDay(forcedHour = null) {
   const now = new Date();
@@ -25,7 +25,7 @@ export function getCountdown() {
       minutes: 0,
       seconds: 0,
       isPujoHere: true,
-      label: "মা এসে গেছেন! শুভ দুর্গাপূজা!"
+      label: "শুভ মহালয়া এসে গেছে! দেবীপক্ষের শুভ সূচনা!"
     };
   }
 
@@ -41,7 +41,7 @@ export function getCountdown() {
     minutes,
     seconds,
     isPujoHere: false,
-    label: `${days} days until Durga Pujo 2026`
+    label: `${days} days until Subho Mahalaya 2026`
   };
 }
 
