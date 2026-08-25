@@ -51,10 +51,10 @@ export class ParticleSystem {
     if (isNight) {
       // ==========================================
       // NIGHT MODE: SOFT LUMINOUS GOLDEN LIGHT DEWS
-      // Reduced count (14 on mobile, 22 on desktop)
+      // Reduced count (9 on mobile, 14 on desktop)
       // Very slow, tranquil floating motion & breathing pulse
       // ==========================================
-      const count = isMobile ? 14 : 22;
+      const count = isMobile ? 9 : 14;
 
       for (let i = 0; i < count; i++) {
         this.particles.push({
@@ -78,10 +78,10 @@ export class ParticleSystem {
     } else {
       // ==========================================
       // DAY MODE: AUTHENTIC SHIULI FLOWERS + KASH PHOOL
-      // Full festive count (32 on mobile, 55 on desktop)
+      // Elegant calibrated count (16 on mobile, 26 on desktop)
       // 25% calibrated slow gentle autumn flutter
       // ==========================================
-      const count = isMobile ? 32 : 55;
+      const count = isMobile ? 16 : 26;
 
       for (let i = 0; i < count; i++) {
         const rand = Math.random();
