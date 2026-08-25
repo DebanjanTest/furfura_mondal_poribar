@@ -57,10 +57,11 @@ export class ParticleSystem {
       const count = isMobile ? 9 : 14;
 
       for (let i = 0; i < count; i++) {
+        const dewSize = isMobile ? (Math.random() * 1.8 + 1.6) : (Math.random() * 3.0 + 2.2);
         this.particles.push({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          size: Math.random() * 3.5 + 2.5,
+          size: dewSize,
           speedY: Math.random() * 0.18 + 0.08, // Very gentle downward drift
           speedX: (Math.random() - 0.5) * 0.15, // Subtle breeze
           swayAmplitude: Math.random() * 0.8 + 0.35,
@@ -79,7 +80,7 @@ export class ParticleSystem {
       // ==========================================
       // DAY MODE: AUTHENTIC SHIULI FLOWERS + KASH PHOOL
       // Elegant calibrated count (16 on mobile, 26 on desktop)
-      // 25% calibrated slow gentle autumn flutter
+      // Mobile-optimized refined delicate flower size
       // ==========================================
       const count = isMobile ? 16 : 26;
 
@@ -89,10 +90,14 @@ export class ParticleSystem {
         if (rand > 0.8) type = 'sparkle';
         else if (rand > 0.7) type = 'kash';
 
+        const particleSize = isMobile
+          ? (type === 'shiuli' ? (Math.random() * 3.0 + 3.8) : (Math.random() * 2.0 + 1.8))
+          : (type === 'shiuli' ? (Math.random() * 7.0 + 6.5) : (Math.random() * 4.0 + 2.5));
+
         this.particles.push({
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          size: type === 'shiuli' ? (Math.random() * 8 + 7) : (Math.random() * 5 + 3),
+          size: particleSize,
           speedY: type === 'sparkle' ? (Math.random() * 0.6 + 0.225) : (Math.random() * 0.9 + 0.375),
           speedX: (Math.random() - 0.5) * 0.45,
           swayAmplitude: Math.random() * 1.5 + 0.8,
