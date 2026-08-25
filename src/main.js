@@ -6,6 +6,8 @@ import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
 import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations, formatNumber } from './utils/i18n.js';
 import { loginWithGoogle, loginWithGoogleLivePopup, loginWithGoogleRedirect, logoutUser, subscribeAuthState, getCurrentUser, setStoredUser, generateAvatarUrl } from './services/firebaseAuth.js';
+import { resolveUserRole, canAccessPortal, ROLES } from './services/rbacService.js';
+import { getCuratedGallery, getCuratedOnnota, getLiveAnnouncement } from './services/contentStore.js';
 
 // Application State
 const state = {
@@ -499,7 +501,7 @@ function initFirebaseAuthUI() {
     completeUserLogin(user);
   });
 
-  const updateAuthUI = (user) => {
+  const updateAuthUI = async (user) => {
     const lang = getLanguage();
     if (user) {
       // 1. Signed In State - Dynamic Island (Avatar Only)
@@ -526,8 +528,37 @@ function initFirebaseAuthUI() {
       const guestIcon = document.querySelector('.account-guest-icon');
       if (guestIcon) guestIcon.style.display = 'none';
 
-      if (drawerUserName) drawerUserName.textContent = user.displayName || 'Devotee';
-      if (drawerUserSub) drawerUserSub.textContent = user.email || (lang === 'bn' ? 'সংযুক্ত Google ভক্ত' : 'Connected Google Account');
+      // Check Role
+      const role = await resolveUserRole(user);
+      const isCurator = canAccessPortal(role);
+
+      if (drawerUserName) {
+        drawerUserName.textContent = user.displayName || 'Devotee';
+      }
+      if (drawerUserSub) {
+        drawerUserSub.textContent = isCurator 
+          ? (role === ROLES.ADMIN ? '👑 সুপার অ্যাডমিন' : '✍️ কনটেন্ট এডিটর')
+          : (user.email || (lang === 'bn' ? 'সংযুক্ত Google ভক্ত' : 'Connected Google Account'));
+      }
+
+      // Show Curator Portal Link if Admin or Editor
+      let portalBtn = document.getElementById('drawer-portal-link');
+      if (isCurator) {
+        if (!portalBtn && drawerUserName?.parentElement) {
+          portalBtn = document.createElement('a');
+          portalBtn.id = 'drawer-portal-link';
+          portalBtn.href = '/portal.html';
+          portalBtn.target = '_blank';
+          portalBtn.className = 'drawer-portal-link';
+          portalBtn.style.cssText = 'display:inline-flex; align-items:center; gap:0.35rem; padding:0.25rem 0.65rem; border-radius:9999px; background:rgba(255,207,64,0.18); border:1px solid var(--heritage-gold); color:var(--heritage-gold); font-size:0.72rem; font-weight:700; text-decoration:none; margin-top:0.35rem;';
+          portalBtn.innerHTML = '<span>👑 কিউরেটর পোর্টাল (Curator Portal) ↗</span>';
+          drawerUserName.parentElement.appendChild(portalBtn);
+        }
+        if (portalBtn) portalBtn.style.display = 'inline-flex';
+      } else if (portalBtn) {
+        portalBtn.style.display = 'none';
+      }
+
       if (drawerAuthBtnText) drawerAuthBtnText.textContent = lang === 'bn' ? 'লগআউট' : 'Sign Out';
       if (drawerAuthBtn) {
         drawerAuthBtn.classList.add('btn-signout');
@@ -555,6 +586,9 @@ function initFirebaseAuthUI() {
       }
     } else {
       // 2. Signed Out / Guest State
+      const portalBtn = document.getElementById('drawer-portal-link');
+      if (portalBtn) portalBtn.style.display = 'none';
+
       if (authBtn) {
         authBtn.style.setProperty('display', 'inline-flex', 'important');
       }
