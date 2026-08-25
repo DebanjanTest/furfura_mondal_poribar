@@ -100,46 +100,49 @@
          ========================================== -->
     <div id="portal-dashboard" class="portal-dashboard" style="display: none;">
       
-      <!-- Top Navigation Header (Executive Segmented Glass Header) -->
+      <!-- Top Navigation Header (Full-Breadth Infinite Single-Line Bar) -->
       <header class="portal-navbar">
-        <div class="portal-nav-left">
-          <div class="nav-brand-wrap">
+        <div class="portal-nav-bar-inner" role="toolbar" aria-label="Portal Header Actions">
+          <!-- Left: Brand Section -->
+          <div class="nav-brand-section">
             <span class="nav-brand-title" data-i18n="portal_nav_brand">মন্ডল বাড়ির পুজো</span>
+            <span class="nav-bar-divider" aria-hidden="true">|</span>
             <span class="nav-portal-tag" data-i18n="portal_nav_tag">কিউরেটর ও ম্যানেজমেন্ট পোর্টাল</span>
           </div>
-        </div>
 
-        <div class="portal-nav-right">
-          <div class="portal-nav-hub" role="toolbar" aria-label="Portal Header Actions">
+          <!-- Right: Actions & Metadata (Single Continuous Line) -->
+          <div class="nav-actions-section">
+            <span class="nav-bar-divider desktop-divider" aria-hidden="true">|</span>
+
             <!-- Language Toggle -->
-            <button type="button" id="btn-portal-lang-toggle" class="nav-hub-btn" aria-label="Change Language">
+            <button type="button" id="btn-portal-lang-toggle" class="nav-action-btn" aria-label="Change Language">
               <span id="portal-lang-text">বাংলা</span>
             </button>
 
-            <span class="nav-hub-divider" aria-hidden="true">|</span>
+            <span class="nav-bar-divider" aria-hidden="true">|</span>
 
             <!-- Role Badge -->
-            <div class="nav-hub-item nav-role-badge" id="nav-role-badge">সুপার অ্যাডমিন</div>
+            <div class="nav-action-item nav-role-badge" id="nav-role-badge">সুপার অ্যাডমিন</div>
 
-            <span class="nav-hub-divider" aria-hidden="true">|</span>
+            <span class="nav-bar-divider" aria-hidden="true">|</span>
 
-            <!-- User Capsule -->
-            <div class="nav-hub-item nav-user-capsule">
+            <!-- User Info -->
+            <div class="nav-action-item nav-user-capsule">
               <img id="nav-user-avatar" class="nav-avatar-img" src="/favicon.png" alt="Admin Avatar" />
               <span id="nav-user-name" class="nav-user-name">দেবাঞ্জন মণ্ডল</span>
             </div>
 
-            <span class="nav-hub-divider" aria-hidden="true">|</span>
+            <span class="nav-bar-divider" aria-hidden="true">|</span>
 
             <!-- Public Website Link -->
-            <a href="/" class="nav-hub-btn nav-site-link" target="_blank" rel="noopener noreferrer" title="View Public Website">
+            <a href="/" class="nav-action-btn nav-site-link" target="_blank" rel="noopener noreferrer" title="View Public Website">
               <span data-i18n="portal_nav_public_site">মূল ওয়েবসাইট ↗</span>
             </a>
 
-            <span class="nav-hub-divider" aria-hidden="true">|</span>
+            <span class="nav-bar-divider" aria-hidden="true">|</span>
 
             <!-- Logout -->
-            <button type="button" id="btn-portal-logout" class="nav-hub-btn nav-logout-btn" title="Sign Out">
+            <button type="button" id="btn-portal-logout" class="nav-action-btn nav-logout-btn" title="Sign Out">
               <span data-i18n="portal_nav_logout">লগআউট</span>
             </button>
           </div>
