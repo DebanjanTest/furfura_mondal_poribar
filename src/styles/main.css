@@ -10069,24 +10069,29 @@ button:active, [role="button"]:active {
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  padding: 0.85rem 1.25rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px dashed rgba(255, 207, 64, 0.45);
-  border-radius: var(--radius-pill);
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 207, 64, 0.08);
+  border: 1px solid rgba(255, 207, 64, 0.35);
+  border-radius: 8px;
   color: #ffffff;
   font-family: var(--font-bengali-sans);
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
 
 .google-guest-oauth-btn:hover {
-  background: rgba(255, 207, 64, 0.16);
+  background: rgba(255, 207, 64, 0.18);
   border-color: var(--heritage-gold);
   color: var(--heritage-gold);
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 207, 64, 0.2);
+}
+
+.google-guest-oauth-btn:active {
+  transform: scale(0.98);
 }
 
 .guest-btn-icon {

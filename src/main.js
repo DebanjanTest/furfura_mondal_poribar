@@ -501,6 +501,23 @@ function initFirebaseAuthUI() {
     completeUserLogin(user);
   });
 
+  // 3. Guest Devotee Authentication Handler
+  const guestAuthBtn = document.getElementById('btn-continue-as-guest');
+  guestAuthBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const lang = getLanguage();
+    const guestUser = {
+      uid: 'guest-' + Date.now(),
+      displayName: lang === 'bn' ? 'অতিথি ভক্ত' : 'Guest Devotee',
+      email: 'guest@mondalbarirpujo.in',
+      photoURL: '/favicon.png',
+      isGuest: true,
+      isFirebaseLive: false
+    };
+    window.completePujoUserLogin(guestUser);
+  });
+
   const updateAuthUI = async (user) => {
     const lang = getLanguage();
     if (user) {
