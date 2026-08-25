@@ -675,7 +675,17 @@ function initDynamicIsland() {
 
   document.getElementById('island-quick-particles')?.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (particles) particles.toggle();
+    if (!particles) {
+      particles = new ParticleSystem('particle-canvas');
+      particles.init();
+      particles.setTimeOfDay(state.currentVibeTime || 'morning');
+    }
+    const isRunning = particles.toggle();
+    const lang = getLanguage();
+    showAuthToast(isRunning 
+      ? (lang === 'bn' ? '🌸 শিউলি ফুল ঝরা সক্রিয় করা হয়েছে' : 'Shiuli Flower fall enabled')
+      : (lang === 'bn' ? 'শিউলি ফুল ঝরা বন্ধ করা হয়েছে' : 'Shiuli Flower fall paused')
+    );
     island?.classList.remove('drawer-open');
   });
 
