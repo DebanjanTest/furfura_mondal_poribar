@@ -372,7 +372,7 @@ body.portal-body {
   line-height: 1.2;
 }
 
-/* Bottom Row: Full-Breadth Divided Action Ribbon */
+/* Bottom Row: Full-Breadth Divided Action Ribbon (Architectural Rectangular) */
 .nav-actions-ribbon {
   display: flex;
   align-items: center;
@@ -383,7 +383,7 @@ body.portal-body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 207, 64, 0.25);
-  border-radius: var(--radius-pill);
+  border-radius: 8px;
   padding: 2px 8px;
   box-sizing: border-box;
 }
@@ -411,11 +411,11 @@ body.portal-body {
   font-weight: 700;
   color: rgba(255, 255, 255, 0.85);
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   text-decoration: none;
   cursor: pointer;
-  padding: 0.2rem 0.55rem;
-  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
   transition: all var(--transition-fast);
   height: 28px;
   line-height: 1;
@@ -425,6 +425,7 @@ body.portal-body {
 
 .nav-action-btn:hover {
   background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
   color: #ffffff;
 }
 
@@ -503,7 +504,7 @@ body.portal-body {
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
   border: 1px solid rgba(255, 207, 64, 0.28);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 4px 6px;
   width: 100%;
   max-width: 960px;
@@ -521,7 +522,7 @@ body.portal-body {
   justify-content: center;
   text-align: center;
   padding: 0.65rem 0.75rem;
-  border-radius: 12px;
+  border-radius: 6px;
   background: transparent;
   border: 1px solid transparent;
   color: rgba(255, 255, 255, 0.78);
@@ -1176,7 +1177,7 @@ body.portal-body {
     align-items: stretch;
     justify-content: space-between;
     padding: 3px 4px;
-    border-radius: 12px;
+    border-radius: 6px;
     width: 100%;
     max-width: 100%;
     margin-bottom: 0.35rem;
@@ -1190,7 +1191,7 @@ body.portal-body {
     font-size: 0.7rem;
     line-height: 1.2;
     min-height: 46px;
-    border-radius: 8px;
+    border-radius: 4px;
   }
 
   .portal-tab-btn .tab-label {
