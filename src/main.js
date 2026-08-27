@@ -142,6 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // --- PHASE 0: MATRIX INITIAL LOADER & CACHE MANAGEMENT ---
+  safeInit('MatrixLoader', initMatrixLoader);
+
   // --- PHASE 1: CRITICAL IMMEDIATE INITIALIZATION (FCP & LCP Priority) ---
   safeInit('WelcomeModal', initWelcomeModal);
   safeInit('Atmosphere', initAtmosphere);
@@ -2989,6 +2992,76 @@ function closeAllModals() {
   audioEngine.stopAll();
 }
 
+/* ==========================================================================
+   BENGALI MATRIX INITIAL LOADER & CACHE MANAGER (SMOOTH 5-SECOND FLOW)
+   ========================================================================== */
+
+function initMatrixLoader() {
+  const loader = document.getElementById('app-initial-loader');
+  if (!loader) return;
+
+  const hasEntered = sessionStorage.getItem('mondal_bari_welcome_entered') === 'true' || 
+                     localStorage.getItem('mondal_bari_welcome_entered') === 'true' ||
+                     document.documentElement.classList.contains('welcome-skipped');
+
+  if (hasEntered) {
+    loader.remove();
+    return;
+  }
+
+  // 1. Trigger 1.5s Fade-In immediately
+  requestAnimationFrame(() => {
+    loader.classList.add('active');
+  });
+
+  // 2. Perform intelligent background cache warmup during the hold window
+  preloadCriticalAssets();
+
+  // 3. After 3.5s (1.5s fade-in + 2.0s hold), start 1.5s fade-out
+  setTimeout(() => {
+    loader.classList.add('fade-out');
+  }, 3500);
+
+  // 4. At 5.0s (3.5s + 1.5s fade-out), completely clean up loader
+  setTimeout(() => {
+    try {
+      loader.remove();
+    } catch (_) {}
+  }, 5000);
+}
+
+function preloadCriticalAssets() {
+  try {
+    // A. Warm up audio systems
+    if (typeof audioEngine.init === 'function') audioEngine.init();
+    if (typeof ytAudioPlayer.init === 'function') ytAudioPlayer.init();
+
+    // B. Pre-cache critical images in browser cache
+    const criticalImages = [
+      '/bg/mondal-bari-hero.webp',
+      '/bg-mobile/mondal-bari-hero-mobile.webp',
+      '/invitation/invitation.webp',
+      '/images/mondal-bari-emblem.webp',
+      '/images/card-background.webp'
+    ];
+
+    criticalImages.forEach((src) => {
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = src;
+    });
+
+    // C. Cache API storage if supported
+    if ('caches' in window) {
+      caches.open('mondal-bari-critical-v1').then((cache) => {
+        cache.addAll(criticalImages).catch(() => {});
+      }).catch(() => {});
+    }
+  } catch (e) {
+    console.warn('Background cache management notice:', e);
+  }
+}
+
 function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
   if (!welcomeOverlay) return;
@@ -3007,6 +3080,7 @@ function initWelcomeModal() {
   const soundYesBtn = document.getElementById('welcome-sound-yes');
   const soundNoBtn = document.getElementById('welcome-sound-no');
   const enterBtn = document.getElementById('btn-welcome-enter');
+  const welcomeGoogleBtn = document.getElementById('btn-welcome-google-signin');
 
   let selectedLang = getLanguage() || 'bn';
   let selectedSound = 'yes';
@@ -3117,6 +3191,33 @@ function initWelcomeModal() {
       }
     }
   };
+
+  // Google Sign-In directly in Welcome Gate
+  welcomeGoogleBtn?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      const user = await loginWithGoogleLivePopup();
+      if (user) {
+        const role = await resolveUserRole(user);
+        const userData = {
+          uid: user.uid,
+          displayName: user.displayName || 'Devotee',
+          email: user.email || '',
+          photoURL: user.photoURL || generateAvatarUrl(user.displayName, user.email),
+          role: role
+        };
+        setStoredUser(userData);
+        updateAuthUI(userData);
+        handleEnterSite();
+      }
+    } catch (err) {
+      console.warn('Welcome Google OAuth notice:', err);
+      // Fallback: Open standard auth modal
+      openModal('google-signin-modal');
+    }
+  });
 
   enterBtn?.addEventListener('click', handleEnterSite);
   enterBtn?.addEventListener('touchend', (e) => {

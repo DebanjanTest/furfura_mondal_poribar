@@ -412,11 +412,14 @@ export const translations = {
     "lightbox_share_title": "ছবি শেয়ার করুন",
     "lightbox_share_aria": "ছবি শেয়ার করুন",
 
-    // Welcome Onboarding Modal
+    // Welcome Onboarding Modal & Matrix Loader
+    "loader_title": "মন্ডল বাড়ির পুজো",
+    "loader_subtitle": "ফুরফুরা মণ্ডল পরিবার • ২০২৬",
     "welcome_lang_label": "ভাষা নির্বাচন",
     "welcome_sound_label": "শারদ আবহ সঙ্গীত ও শব্দ",
     "welcome_sound_yes": "শব্দসহ প্রবেশ",
     "welcome_sound_no": "শব্দহীন প্রবেশ",
+    "welcome_google_btn": "Google দিয়ে সাইন ইন (ঐচ্ছিক)",
     "welcome_btn_enter": "উৎসব প্রাঙ্গণে প্রবেশ করুন",
 
     // Curator & Management Portal Keys
@@ -902,11 +905,14 @@ export const translations = {
     "lightbox_share_title": "Share Photo on WhatsApp",
     "lightbox_share_aria": "Share Photo",
 
-    // Welcome Onboarding Modal
+    // Welcome Onboarding Modal & Matrix Loader
+    "loader_title": "Mondal Barir Pujo",
+    "loader_subtitle": "Furfura Mondal Poribar • 2026",
     "welcome_lang_label": "Language Preference",
     "welcome_sound_label": "Festive Audio & Ambience",
     "welcome_sound_yes": "With Sound",
     "welcome_sound_no": "Without Sound",
+    "welcome_google_btn": "Sign in with Google (Optional)",
     "welcome_btn_enter": "Enter Festive Courtyard",
 
     // Curator & Management Portal Keys
