@@ -41,12 +41,23 @@ function canAccessPortal(role) {
 async function resolveUserRole(user) {
   if (!user || !user.email) return ROLES.VISITOR;
   if (user.email.trim().toLowerCase() === 'debanjanmondal8996@gmail.com') return ROLES.ADMIN;
+  if (user.role) return user.role;
   try {
     const { resolveUserRole } = await import('./services/rbacService.js');
     return await resolveUserRole(user);
   } catch (e) {
     return ROLES.VISITOR;
   }
+}
+
+async function loginWithGoogleLivePopup() {
+  const { loginWithGoogleLivePopup } = await import('./services/firebaseAuth.js');
+  return await loginWithGoogleLivePopup();
+}
+
+async function loginWithGoogleRedirect() {
+  const { loginWithGoogleRedirect } = await import('./services/firebaseAuth.js');
+  return await loginWithGoogleRedirect();
 }
 
 async function logoutUser() {
@@ -733,19 +744,14 @@ function initFirebaseAuthUI() {
     updateAuthUI(getStoredUser());
   });
 
-  // Defer live Firebase auth state listener to idle phase
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(async () => {
-      try {
-        const { subscribeAuthState } = await import('./services/firebaseAuth.js');
-        subscribeAuthState((user) => {
-          updateAuthUI(user);
-        });
-      } catch (e) {}
-    }, { timeout: 4000 });
+  // Check if returning from an OAuth redirect
+  if (typeof window !== 'undefined' && (window.location.search.includes('apiKey') || window.location.hash.includes('access_token') || sessionStorage.getItem('pujo_pending_redirect_auth'))) {
+    import('./services/firebaseAuth.js').then(({ subscribeAuthState }) => {
+      subscribeAuthState((user) => updateAuthUI(user));
+    }).catch(() => {});
   }
 
-  // Initial Sync from LocalStorage (Zero Blocking Network Call)
+  // Initial Sync from LocalStorage (Zero Network Call on Page Load)
   updateAuthUI(getStoredUser());
 }
 
