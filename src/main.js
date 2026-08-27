@@ -142,9 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // --- PHASE 0: MATRIX INITIAL LOADER & CACHE MANAGEMENT ---
-  safeInit('MatrixLoader', initMatrixLoader);
-
   // --- PHASE 1: CRITICAL IMMEDIATE INITIALIZATION (FCP & LCP Priority) ---
   safeInit('WelcomeModal', initWelcomeModal);
   safeInit('Atmosphere', initAtmosphere);
@@ -2992,30 +2989,6 @@ function closeAllModals() {
   audioEngine.stopAll();
 }
 
-/* ==========================================================================
-   BENGALI MATRIX INITIAL LOADER & CACHE MANAGER (SMOOTH 5-SECOND FLOW)
-   ========================================================================== */
-
-function initMatrixLoader() {
-  const loader = document.getElementById('app-initial-loader');
-  if (!loader) return;
-
-  // 1. Perform intelligent background cache warmup during the hold window
-  preloadCriticalAssets();
-
-  // 2. After 3.5s (1.5s fade-in + 2.0s hold), start 1.5s fade-out
-  setTimeout(() => {
-    loader.classList.add('fade-out');
-  }, 3500);
-
-  // 3. At 5.0s (3.5s + 1.5s fade-out), completely clean up loader
-  setTimeout(() => {
-    try {
-      loader.remove();
-    } catch (_) {}
-  }, 5000);
-}
-
 function preloadCriticalAssets() {
   try {
     // A. Warm up audio systems
@@ -3051,6 +3024,9 @@ function preloadCriticalAssets() {
 function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
   if (!welcomeOverlay) return;
+
+  // Pre-cache critical images & audio in background
+  preloadCriticalAssets();
 
   const langBnBtn = document.getElementById('welcome-lang-bn');
   const langEnBtn = document.getElementById('welcome-lang-en');
