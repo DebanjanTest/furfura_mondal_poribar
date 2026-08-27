@@ -217,6 +217,16 @@ button {
   display: flex;
   flex-direction: column;
   overflow: visible;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Off-screen Content Visibility Optimization (Buttery Smooth 60-120fps Mobile Scrolling) */
+.invitation-letterhead-section,
+.photo-river-section,
+.onnota-section,
+.grand-gallery-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
 }
 
 .background-container {
@@ -5867,7 +5877,7 @@ button {
   line-height: 1.6;
 }
 
-/* Marquee Tracks Wrapper */
+/* Marquee Tracks Wrapper (GPU Composited) */
 .photo-river-marquee-wrapper {
   width: 100%;
   display: flex;
@@ -5876,9 +5886,7 @@ button {
   padding: 0.75rem 0;
   position: relative;
   overflow: hidden;
-  /* Visual Edge Fade Masks */
-  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  contain: paint;
 }
 
 .marquee-track-row {
@@ -5886,6 +5894,7 @@ button {
   display: flex;
   overflow: hidden;
   user-select: none;
+  contain: paint;
 }
 
 .marquee-track-content {
@@ -5894,6 +5903,7 @@ button {
   gap: 1.25rem;
   width: max-content;
   will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Row 1 & 3: Scroll Left (Right to Left) */
@@ -5913,19 +5923,19 @@ button {
 
 @keyframes marqueeScrollLeft {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 @keyframes marqueeScrollRight {
   0% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
   100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 

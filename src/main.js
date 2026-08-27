@@ -3546,10 +3546,30 @@ function initSectionScrollLocking() {
     }
   };
 
-  window.addEventListener('scroll', updateScrollSpyLive, { passive: true });
-  document.addEventListener('scroll', updateScrollSpyLive, { passive: true });
-  window.addEventListener('resize', updateScrollSpyLive, { passive: true });
-  updateScrollSpyLive();
+  // Smooth IntersectionObserver for zero-overhead section tracking
+  const sectionObserver = new IntersectionObserver((entries) => {
+    if (isGliding) return;
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const foundIdx = snapSections.findIndex(s => s.id === entry.target.id);
+        if (foundIdx !== -1) {
+          setActiveNode(foundIdx);
+        }
+      }
+    });
+  }, { threshold: 0.35, rootMargin: '-10% 0px -10% 0px' });
+
+  snapSections.forEach((s) => {
+    const el = document.getElementById(s.id);
+    if (el) sectionObserver.observe(el);
+  });
+
+  // Desktop-Only Progress Rail Updater (Passive & Throttled)
+  if (window.innerWidth >= 768) {
+    window.addEventListener('scroll', updateScrollSpyLive, { passive: true });
+    window.addEventListener('resize', updateScrollSpyLive, { passive: true });
+    updateScrollSpyLive();
+  }
 
   // 1. Navigation Dots Click Handlers
   nodes.forEach((node, idx) => {
