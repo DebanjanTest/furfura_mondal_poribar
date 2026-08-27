@@ -6739,12 +6739,6 @@ scroll-snap-align: none !important;
   margin-bottom: 1.15rem;
 }
 
-.welcome-emblem {
-  font-size: 2.2rem;
-  margin-bottom: 0.35rem;
-  filter: drop-shadow(0 0 10px rgba(255, 207, 64, 0.5));
-}
-
 .welcome-card-title {
   font-family: var(--font-bengali-serif);
   font-size: clamp(1.4rem, 4vw, 1.75rem);
