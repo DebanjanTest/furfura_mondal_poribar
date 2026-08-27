@@ -94,8 +94,8 @@
   --font-serif: 'DM Serif Display', Georgia, serif;
 
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.86);
-  --text-muted: rgba(255, 255, 255, 0.58);
+  --text-secondary: rgba(255, 255, 255, 0.90);
+  --text-muted: rgba(255, 255, 255, 0.72);
   --text-accent: var(--heritage-gold);
 
   /* ==========================================================================
@@ -220,7 +220,7 @@ button {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Off-screen Content Visibility Optimization (Buttery Smooth 60-120fps Mobile Scrolling) */
+/* Off-screen Content Visibility Optimization (Buttery Smooth 60-120fps Mobile Scrolling & Zero TBT/INP) */
 .invitation-section,
 .formal-invitation-section,
 .invitation-letterhead-section,
@@ -229,12 +229,16 @@ button {
 .onnota-section,
 .grand-gallery-section,
 .gallery-section,
+.heritage-location-card,
+.invitation-section-footer,
+.onnota-section-footer,
+.gallery-section-footer,
 .footer-section {
   content-visibility: auto;
   contain-intrinsic-size: 1px 750px;
 }
 
-/* Mobile Touch Target and Interaction Optimization */
+/* Mobile Touch Target and Interaction Optimization (Apple HIG 44x44px Standard) */
 @media (max-width: 768px) {
   button,
   .btn,
@@ -242,11 +246,73 @@ button {
   .vibe-pill,
   .sound-trigger-pill,
   .gallery-filter-chip,
+  .onnota-filter-chip,
   .tab-btn,
+  .tab-pill,
   .welcome-choice-btn,
-  .hero-scroll-indicator {
+  .hero-scroll-indicator,
+  .island-auth-btn,
+  .island-lang-pill,
+  .island-lang-pill-mini,
+  .island-expand-btn,
+  .island-ctrl-btn,
+  .island-vibe-chip,
+  .island-quick-item,
+  .mobile-ctrl-btn,
+  .mobile-nav-item,
+  .invitation-btn,
+  .close-btn,
+  .theme-btn,
+  .engine-source-btn,
+  .dhak-tab-btn,
+  .live-ctrl-btn,
+  .mini-trigger-btn,
+  .booster-preset-btn,
+  .dhak-mode-btn,
+  .drum-pad,
+  .rhythm-loop-btn,
+  .dhak-quick-btn,
+  .lightbox-nav-btn,
+  .lightbox-action-btn,
+  .google-direct-oauth-btn,
+  .google-guest-oauth-btn,
+  .welcome-enter-btn,
+  .welcome-google-btn,
+  .story-action-btn,
+  .story-launch-modal-btn,
+  .share-invitation-btn,
+  .btn-open-google-maps {
     min-height: 44px;
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Guarantee 44x44px minimum tap target for smaller visual icons */
+  .close-btn,
+  .island-expand-btn,
+  .island-ctrl-btn,
+  .mobile-minimize-btn,
+  .upload-card-close,
+  .google-auth-close-btn,
+  .lightbox-close-btn,
+  .preview-remove-btn {
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-btn::after,
+  .upload-card-close::after,
+  .google-auth-close-btn::after,
+  .lightbox-close-btn::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    min-width: 44px;
+    min-height: 44px;
   }
 }
 
@@ -2055,7 +2121,9 @@ button {
 
   /* Viewport Layout Ergonomics */
   .app-wrapper {
+    min-height: 100vh;
     min-height: 100dvh;
+    min-height: 100svh;
     height: auto;
     overflow-y: auto;
     overflow-x: hidden;
@@ -2068,7 +2136,7 @@ button {
     right: 0;
     transform: none;
     width: 100%;
-    padding: max(8px, env(safe-area-inset-top, 0px)) 0.75rem 0;
+    padding: max(8px, env(safe-area-inset-top, 0px)) max(0.75rem, env(safe-area-inset-right, 0px)) 0 max(0.75rem, env(safe-area-inset-left, 0px));
     pointer-events: none;
   }
 
@@ -2079,10 +2147,14 @@ button {
 
   /* Hero Section on Mobile */
   .hero-viewport-section {
+    min-height: 100vh;
     min-height: 100dvh;
+    min-height: 100svh;
     height: auto;
     padding-top: calc(max(8px, env(safe-area-inset-top, 0px)) + 58px);
     padding-bottom: calc(max(10px, env(safe-area-inset-bottom, 0px)) + 12px);
+    padding-left: max(12px, env(safe-area-inset-left, 0px));
+    padding-right: max(12px, env(safe-area-inset-right, 0px));
     justify-content: space-between;
   }
 
@@ -8315,6 +8387,11 @@ button:active, [role="button"]:active {
     gap: 1.35rem;
   }
 
+  .onnota-card-img-wrap {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+  }
+
   /* Phone UI: 2 Side-by-Side Photo Cards Grid */
   .main-photo-gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -8329,6 +8406,7 @@ button:active, [role="button"]:active {
 
   .gallery-card-img-wrap {
     aspect-ratio: 4 / 3;
+    width: 100%;
   }
 
   .gallery-card-badge {
@@ -8389,7 +8467,8 @@ button:active, [role="button"]:active {
     font-size: 0.65625rem;
     gap: 0.2rem;
     border-radius: 8px;
-    min-height: 26px;
+    min-height: 36px;
+    touch-action: manipulation;
   }
 
   .gallery-photo-card .gallery-like-btn .btn-heart-wrapper {
@@ -10076,7 +10155,7 @@ button:active, [role="button"]:active {
 
 .account-email-row {
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .account-select-arrow {
@@ -10090,7 +10169,7 @@ button:active, [role="button"]:active {
   align-items: center;
   text-align: center;
   margin-bottom: 1.15rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.72);
   font-family: var(--font-bengali-sans);
   font-size: 0.72rem;
 }
@@ -10173,7 +10252,7 @@ button:active, [role="button"]:active {
 .google-auth-disclaimer {
   font-family: var(--font-bengali-sans);
   font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.72);
   text-align: center;
   margin: 0;
   line-height: 1.35;

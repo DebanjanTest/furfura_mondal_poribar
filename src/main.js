@@ -944,10 +944,19 @@ function initCountdown() {
   tick();
   setInterval(tick, 1000);
 
-  // Click on countdown card opens Mondol Barir Pujo Info / Schedule
-  document.getElementById('btn-countdown-details')?.addEventListener('click', () => {
-    openModal('pujo-info-modal');
-  });
+  // Click & Keyboard support on countdown card opens Mondol Barir Pujo Info / Schedule
+  const countdownBtn = document.getElementById('btn-countdown-details');
+  if (countdownBtn) {
+    countdownBtn.addEventListener('click', () => {
+      openModal('pujo-info-modal');
+    });
+    countdownBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal('pujo-info-modal');
+      }
+    });
+  }
 }
 
 function initOnlineCounter() {
@@ -1556,7 +1565,7 @@ function renderModalGalleryItems() {
     const category = lang === 'bn' ? (item.categoryLabel || item.category) : (item.categoryEnglish || item.categoryLabel || item.category);
 
     card.innerHTML = `
-      <img class="gallery-img" src="${item.src}" alt="${title}" loading="lazy" />
+      <img class="gallery-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" width="360" height="240" />
       <div class="gallery-overlay">
         <span class="gallery-tag">${category}</span>
         <span class="gallery-title">${title}</span>
@@ -1798,7 +1807,7 @@ function initGrandGallery() {
       const thumb = document.createElement('div');
       thumb.className = 'preview-thumb-card';
       thumb.innerHTML = `
-        <img src="${item.dataUrl}" alt="Preview" />
+        <img src="${item.dataUrl}" alt="Preview" width="60" height="60" loading="lazy" decoding="async" />
         <button type="button" class="preview-remove-btn" data-index="${index}" title="মুছে ফেলুন">✕</button>
       `;
 
