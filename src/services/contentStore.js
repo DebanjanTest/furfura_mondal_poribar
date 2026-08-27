@@ -45,7 +45,7 @@ function getInitialOnnotaSeed() {
     category: item.category || 'art',
     categoryLabel: item.categoryLabel || 'চিত্রশিল্প ও অলঙ্করণ',
     src: item.src || '/favicon.png',
-    author: item.author || 'অন্যতা ক্রিয়েশনস',
+    author: item.author || 'ভক্ত ও সুধীবৃন্দ',
     date: item.date || '২০২৬',
     likes: item.likes || 64,
     desc_bn: item.desc_bn || 'ঐতিহ্য ও শিল্পের মেলবন্ধন'
@@ -224,12 +224,12 @@ export async function addOnnotaCreation(itemData, user, role) {
   const newId = `onnota-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
   const item = {
     id: newId,
-    title: itemData.title || itemData.title_bn || 'Onnota Creation',
-    title_bn: itemData.title_bn || itemData.title || 'অন্যতা সৃষ্টি',
+    title: itemData.title || itemData.title_bn || 'Public Creation',
+    title_bn: itemData.title_bn || itemData.title || 'পাবলিক সৃষ্টি',
     category: itemData.category || 'art',
     categoryLabel: itemData.categoryLabel || 'চিত্রশিল্প ও অলঙ্করণ',
     src: itemData.src,
-    author: itemData.author || 'অন্যতা',
+    author: itemData.author || 'ভক্ত ও সুধীবৃন্দ',
     desc_bn: itemData.desc_bn || '',
     date: itemData.date || '২০২৬',
     likes: 0,

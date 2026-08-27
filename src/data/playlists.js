@@ -1625,7 +1625,7 @@ export const onnotaCreations = [
     src: "/onnota/art_hero_idol.webp",
     desc_bn: "জলরং ও ডিজিটাল ক্যানভাসে মা দুর্গার মহিষাসুরমর্দিনী রূপের পটচিত্র শৈলীর অলঙ্করণ।",
     desc_en: "Digital gouache and folk Patachitra fusion depicting Devi Durga's cosmic power.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "শরৎ ২০২৬",
     likes: 215,
     tag: "ডিজিটাল আর্ট"
@@ -1639,7 +1639,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_01.webp",
     desc_bn: "সন্ধ্যা আরতির সময় ধুনোর মেঘ ও প্রদীপের আলোর জাদুকরী ফ্রেম।",
     desc_en: "Twilight reflections and sacred evening aarti lamps inside the heritage Natmandir.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "অক্টোবর ২০২৬",
     likes: 284,
     tag: "উৎসব ফটো"
@@ -1653,7 +1653,7 @@ export const onnotaCreations = [
     src: "/onnota/user_alpona.webp",
     desc_bn: "শালুক, পদ্ম ও দেবী চরণের নিখুঁত হাতের টানে আঁকা মন্ডল বাড়ির সাবেকি পিটুলি আলপনা।",
     desc_en: "Authentic handmade sacred floor art using rice flour paste with lotus flourishes.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "মহাষষ্ঠী ২০২৬",
     likes: 398,
     tag: "ঐতিহ্য আলপনা"
@@ -1667,7 +1667,7 @@ export const onnotaCreations = [
     src: "/onnota/art_dawn_mahalaya.webp",
     desc_bn: "ভোরের রেডিওতে মহালয়ার সুর, নতুন জামার গন্ধ ও শৈশবের পুজোর আন্তরিক স্মৃতিচারণ।",
     desc_en: "An evocative prose memoir reminiscing early morning AIR broadcasts and ancestral warmth.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "শরৎ সংকলন ২০২৬",
     likes: 165,
     tag: "স্মৃতি গদ্য"
@@ -1681,7 +1681,7 @@ export const onnotaCreations = [
     src: "/onnota/art_night_grandeur.webp",
     desc_bn: "অ্যাক্রিলিক ক্যানভাসে ফুটে ওঠা মায়ের করুণাময়ী ত্রিনয়ন ও স্বর্ণাভ মুকুটের আভা।",
     desc_en: "Acrylic study focusing on the divine third eye radiating maternal benevolence.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "সেপ্টেম্বর ২০২৬",
     likes: 242,
     tag: "ক্যানভাস আর্ট"
@@ -1695,7 +1695,7 @@ export const onnotaCreations = [
     src: "/onnota/art_afternoon_kash.webp",
     desc_bn: "ফুরফুরার দিগন্তজোড়া কাশবনে বাতাসের ঢেউ ও শুভ্র মেঘমালার শারদ অভিবাদন।",
     desc_en: "Dancing white Kash plumes framed against dramatic autumn cloudscapes.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "শরৎ ২০২৬",
     likes: 198,
     tag: "প্রকৃতি চিত্র"
@@ -1709,7 +1709,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_04.webp",
     desc_bn: "কূলপুরোহিতের পঞ্চপ্রদীপ ঘূর্ণন ও সমবেত ভক্তবৃন্দের পুষ্পাঞ্জলি নিবেদন।",
     desc_en: "Sacred brass lamps rotating in rhythmic circles during the grand evening stuti.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "মহাষ্টমী ২০২৬",
     likes: 326,
     tag: "উৎসব ফটো"
@@ -1723,7 +1723,7 @@ export const onnotaCreations = [
     src: "/onnota/art_dawn_mahalaya.webp",
     desc_bn: "\"মেঘের কোলে রোদ হেসেছে, বাদল গেছে টুটি... কৈলাস থেকে ঘরের মেয়ে ফিরছে মায়ের কুটির।\"",
     desc_en: "A poetic Bengali ode capturing the bittersweet emotions of daughter Uma's arrival.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "মহালয়া ২০২৬",
     likes: 310,
     tag: "শারদ কবিতা"
@@ -1737,7 +1737,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_03.webp",
     desc_bn: "ধুনোর লালচে অঙ্গার ও ঢাকের উত্তাল তালে নাটমন্দিরে ধুনুচি নাচের আবেগঘন মুহূর্ত।",
     desc_en: "Authentic photographic capture of master dhunuchi dancers in ecstatic motion.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "মহানবমী ২০২৬",
     likes: 474,
     tag: "উৎসব ফটো"
@@ -1751,7 +1751,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_05.webp",
     desc_bn: "মন্ডল পরিবারের প্রাঙ্গণে ধুনুচি নাচ ও পরিবারের আন্তরিক উপস্থিতি।",
     desc_en: "Devotees and family gathered together during high-energy evening arati.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "বিজয়া ২০২৬",
     likes: 352,
     tag: "উৎসব ফটো"
@@ -1765,7 +1765,7 @@ export const onnotaCreations = [
     src: "/onnota/art_heritage_emblem.webp",
     desc_bn: "বনেদি প্রতিমার জন্য তৈরি সূক্ষ্ম শোলার মুকুট, কদম ফুল ও ময়ূরপঙ্খী চালচিত্র।",
     desc_en: "Ancestral heritage craftsmanship sculpted purely out of aquatic shola reed.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "মহাসপ্তমী ২০২৬",
     likes: 189,
     tag: "শোলার কাজ"
@@ -1779,7 +1779,7 @@ export const onnotaCreations = [
     src: "/onnota/user_dhunuchi_06.webp",
     desc_bn: "ঢাকের চামড়ার প্রতিটি কম্পনে ধুনুচি হাতে দেবীকে প্রণতি জানানো ভক্তের নিখাদ ভক্তি।",
     desc_en: "Poignant final salute to Maa Durga before immersion with glowing incense embers.",
-    author: "অন্যতা", authorEnglish: "Onnota",
+    author: "ভক্ত ও সুধীবৃন্দ", authorEnglish: "Devotee Community",
     date: "শরৎ ২০২৬",
     likes: 360,
     tag: "উৎসব ফটো"

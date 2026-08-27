@@ -529,7 +529,7 @@ function initOnnotaManager() {
         src: pendingOnnotaBase64
       }, currentUser, currentRole);
 
-      showPortalToast(lang === 'bn' ? 'অন্যতা সৃষ্টি সফলভাবে প্রকাশিত হয়েছে!' : 'Onnota artwork published successfully!');
+      showPortalToast(lang === 'bn' ? 'পাবলিক সৃষ্টি সফলভাবে প্রকাশিত হয়েছে!' : 'Public creation published successfully!');
       form.reset();
       clearBtn?.click();
       renderCuratedOnnotaList();
@@ -580,8 +580,8 @@ async function renderCuratedOnnotaList() {
     btn.addEventListener('click', async () => {
       const id = btn.getAttribute('data-onnota-del');
       const confirmMsg = lang === 'bn' 
-        ? 'আপনি কি এই অন্যতা সৃষ্টিটি মুছে ফেলতে চান?' 
-        : 'Are you sure you want to delete this creation?';
+        ? 'আপনি কি এই পাবলিক সৃষ্টিটি মুছে ফেলতে চান?' 
+        : 'Are you sure you want to delete this public creation?';
       if (confirm(confirmMsg)) {
         await deleteOnnotaCreation(id, currentUser, currentRole);
         showPortalToast(lang === 'bn' ? 'সৃষ্টি মুছে ফেলা হয়েছে।' : 'Creation deleted successfully.');

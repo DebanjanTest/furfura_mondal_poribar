@@ -2063,7 +2063,7 @@ function renderOnnotaGrid() {
     const title = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
     const desc = lang === 'bn' ? (item.desc_bn || item.desc_en || '') : (item.desc_en || item.desc_bn || '');
     const category = lang === 'bn' ? (item.categoryLabel || item.category) : (item.categoryEnglish || item.categoryLabel || item.category);
-    const author = lang === 'bn' ? (item.author || 'অন্যতা') : (item.authorEnglish || item.author || 'Onnota');
+    const author = lang === 'bn' ? (item.author || 'ভক্ত ও সুধীবৃন্দ') : (item.authorEnglish || item.author || 'Devotee Community');
     const date = lang === 'bn' ? (item.date || 'শরৎ ২০২৬') : (item.dateEnglish || 'Autumn 2026');
     const pranamLabel = lang === 'bn' ? 'প্রণাম' : 'Pranam';
 
