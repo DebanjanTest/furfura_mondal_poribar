@@ -17,13 +17,26 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- High-Performance Typography Preconnect & Font Loading -->
+    <!-- High-Performance Typography Preconnect & Font Loading (Non-Render-Blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="/src/styles/main.css" />
@@ -31,8 +44,7 @@
     <!-- Critical LCP Hero Image Preload with High Fetch Priority -->
     <link rel="preload" as="image" href="/bg/mondal-bari-hero.webp?v=2026082505" media="(min-width: 769px)" fetchpriority="high" type="image/webp" />
     <link rel="preload" as="image" href="/bg-mobile/mondal-bari-hero-mobile.webp?v=2026082505" media="(max-width: 768px)" fetchpriority="high" type="image/webp" />
-    <meta name="build-version" content="1.0.4-2026.08.25-rel" />
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <meta name="build-version" content="1.0.5-2026.08.27-rel" />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body>

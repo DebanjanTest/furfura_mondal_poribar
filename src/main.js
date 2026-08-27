@@ -3482,30 +3482,25 @@ function initSectionScrollLocking() {
     }, 650);
   }
 
-  // Real-time ScrollSpy & progress bar updater
+  // Real-time ScrollSpy & progress bar updater (Batched to prevent forced reflows)
   let isTicking = false;
   const updateScrollSpyLive = () => {
     if (!isTicking) {
       requestAnimationFrame(() => {
+        // --- PHASE 1: BATCHED DOM READS ---
         const scrollEl = document.scrollingElement || document.documentElement || document.body;
         const scrollY = window.pageYOffset || window.scrollY || scrollEl.scrollTop || 0;
         const vh = window.innerHeight;
         const totalHeight = scrollEl.scrollHeight;
         const maxScroll = Math.max(1, totalHeight - vh);
 
-        // Update progress bar (0% to 100%)
-        if (progressFill) {
-          const progressPercent = Math.min(100, Math.max(0, (scrollY / maxScroll) * 100));
-          progressFill.style.height = `${progressPercent.toFixed(1)}%`;
-        }
-
+        let bestIdx = 0;
         if (!isGliding) {
           const focalY = vh * 0.45;
           let highestScore = -1;
-          let bestIdx = 0;
 
-          snapSections.forEach((s, idx) => {
-            const el = document.getElementById(s.id);
+          for (let idx = 0; idx < snapSections.length; idx++) {
+            const el = document.getElementById(snapSections[idx].id);
             if (el) {
               const rect = el.getBoundingClientRect();
               const visibleTop = Math.max(0, rect.top);
@@ -3521,8 +3516,16 @@ function initSectionScrollLocking() {
                 bestIdx = idx;
               }
             }
-          });
+          }
+        }
 
+        // --- PHASE 2: BATCHED DOM WRITES ---
+        if (progressFill) {
+          const progressPercent = Math.min(100, Math.max(0, (scrollY / maxScroll) * 100));
+          progressFill.style.height = `${progressPercent.toFixed(1)}%`;
+        }
+
+        if (!isGliding) {
           setActiveNode(bestIdx);
         }
 

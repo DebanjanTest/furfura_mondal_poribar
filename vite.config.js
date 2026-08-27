@@ -14,11 +14,19 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
+    cssCodeSplit: true,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         portal: resolve(__dirname, 'portal.html'),
         admin: resolve(__dirname, 'admin.html')
+      },
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules/firebase')) {
+            return 'firebase-vendor';
+          }
+        }
       }
     }
   }

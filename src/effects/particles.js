@@ -28,9 +28,11 @@ export class ParticleSystem {
 
   resize() {
     if (!this.canvas) return;
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    this.canvas.width = window.innerWidth * dpr;
-    this.canvas.height = window.innerHeight * dpr;
+    this.canvas.width = this.width * dpr;
+    this.canvas.height = this.height * dpr;
     if (this.ctx) {
       this.ctx.resetTransform();
       this.ctx.scale(dpr, dpr);
@@ -118,8 +120,8 @@ export class ParticleSystem {
   animate() {
     if (!this.enabled || !this.ctx || !this.canvas) return;
 
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = this.width || window.innerWidth;
+    const h = this.height || window.innerHeight;
     this.ctx.clearRect(0, 0, w, h);
 
     const isNight = this.timeOfDay === 'night' || this.timeOfDay === 'midnight';
