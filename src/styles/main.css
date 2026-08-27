@@ -6584,20 +6584,29 @@ scroll-snap-align: none !important;
   visibility: visible;
   pointer-events: auto;
   animation: matrixFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.5s ease;
-  will-change: opacity;
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.5s ease-out;
+  will-change: opacity, transform, filter;
 }
 
 @keyframes matrixFadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% { opacity: 0; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 .matrix-loader-overlay.fade-out {
   opacity: 0 !important;
+  transform: scale(1.06) !important;
+  filter: blur(10px) !important;
   visibility: hidden !important;
   pointer-events: none !important;
-  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.5s ease;
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1), filter 1.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.5s ease-out;
+}
+
+.matrix-loader-overlay.fade-out .matrix-loader-centerpiece {
+  opacity: 0;
+  transform: scale(0.92) translateY(-14px);
+  filter: blur(8px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .jp-matrix {
@@ -6782,11 +6791,16 @@ scroll-snap-align: none !important;
   background: rgba(22, 3, 8, 0.94);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
-  opacity: 1;
   box-sizing: border-box;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  animation: welcomeOverlayEaseIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 3.3s both;
   transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s ease;
+}
+
+@keyframes welcomeOverlayEaseIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .welcome-modal-overlay.hidden {
@@ -6815,19 +6829,26 @@ scroll-snap-align: none !important;
   flex-direction: column;
   align-items: stretch;
   box-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 207, 64, 0.22), inset 0 1px 0 rgba(255, 207, 64, 0.25);
-  animation: welcomeModalEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: welcomeModalEaseOutEnter 1.4s cubic-bezier(0.16, 1, 0.3, 1) 3.4s both;
   box-sizing: border-box;
   margin: auto;
+  will-change: transform, opacity, filter;
 }
 
-@keyframes welcomeModalEnter {
-  from {
+@keyframes welcomeModalEaseOutEnter {
+  0% {
     opacity: 0;
-    transform: scale(0.94) translateY(14px);
+    transform: scale(0.90) translateY(32px);
+    filter: blur(8px);
   }
-  to {
+  40% {
+    opacity: 0.7;
+    filter: blur(3px);
+  }
+  100% {
     opacity: 1;
     transform: scale(1) translateY(0);
+    filter: blur(0px);
   }
 }
 
