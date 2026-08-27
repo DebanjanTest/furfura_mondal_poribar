@@ -6580,22 +6580,24 @@ scroll-snap-align: none !important;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  opacity: 0;
+  opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  animation: matrixFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.5s ease;
   will-change: opacity;
 }
 
-.matrix-loader-overlay.active {
-  opacity: 1;
-  visibility: visible;
+@keyframes matrixFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .matrix-loader-overlay.fade-out {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 1.5s ease;
 }
 
 .jp-matrix {

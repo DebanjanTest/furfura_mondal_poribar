@@ -122,19 +122,7 @@
         box-sizing: border-box;
         box-shadow: 0 24px 80px -12px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 207, 64, 0.22), inset 0 1px 0 rgba(255, 207, 64, 0.25);
       }
-      .welcome-skipped #welcome-modal-overlay {
-        display: none !important;
-      }
     </style>
-    <script>
-      (function() {
-        try {
-          if (sessionStorage.getItem('mondal_bari_welcome_entered') === 'true' || localStorage.getItem('mondal_bari_welcome_entered') === 'true') {
-            document.documentElement.classList.add('welcome-skipped');
-          }
-        } catch (_) {}
-      })();
-    </script>
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="/src/styles/main.css" />

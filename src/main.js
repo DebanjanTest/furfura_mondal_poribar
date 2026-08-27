@@ -3000,29 +3000,15 @@ function initMatrixLoader() {
   const loader = document.getElementById('app-initial-loader');
   if (!loader) return;
 
-  const hasEntered = sessionStorage.getItem('mondal_bari_welcome_entered') === 'true' || 
-                     localStorage.getItem('mondal_bari_welcome_entered') === 'true' ||
-                     document.documentElement.classList.contains('welcome-skipped');
-
-  if (hasEntered) {
-    loader.remove();
-    return;
-  }
-
-  // 1. Trigger 1.5s Fade-In immediately
-  requestAnimationFrame(() => {
-    loader.classList.add('active');
-  });
-
-  // 2. Perform intelligent background cache warmup during the hold window
+  // 1. Perform intelligent background cache warmup during the hold window
   preloadCriticalAssets();
 
-  // 3. After 3.5s (1.5s fade-in + 2.0s hold), start 1.5s fade-out
+  // 2. After 3.5s (1.5s fade-in + 2.0s hold), start 1.5s fade-out
   setTimeout(() => {
     loader.classList.add('fade-out');
   }, 3500);
 
-  // 4. At 5.0s (3.5s + 1.5s fade-out), completely clean up loader
+  // 3. At 5.0s (3.5s + 1.5s fade-out), completely clean up loader
   setTimeout(() => {
     try {
       loader.remove();
@@ -3065,15 +3051,6 @@ function preloadCriticalAssets() {
 function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
   if (!welcomeOverlay) return;
-
-  // If user has already entered in this session or previously, skip welcome modal immediately
-  const hasEntered = sessionStorage.getItem('mondal_bari_welcome_entered') === 'true' || 
-                     localStorage.getItem('mondal_bari_welcome_entered') === 'true' ||
-                     document.documentElement.classList.contains('welcome-skipped');
-  if (hasEntered) {
-    welcomeOverlay.remove();
-    return;
-  }
 
   const langBnBtn = document.getElementById('welcome-lang-bn');
   const langEnBtn = document.getElementById('welcome-lang-en');
