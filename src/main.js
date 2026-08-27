@@ -143,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // --- PHASE 1: CRITICAL IMMEDIATE INITIALIZATION (FCP & LCP Priority) ---
-  safeInit('MatrixLoader', initMatrixLoader);
   safeInit('WelcomeModal', initWelcomeModal);
   safeInit('Atmosphere', initAtmosphere);
   safeInit('Countdown', initCountdown);
@@ -3052,80 +3051,6 @@ function preloadCriticalAssets() {
   }
 }
 
-function initMatrixLoader() {
-  const loaderEl = document.getElementById('app-initial-loader');
-  const welcomeOverlay = document.getElementById('welcome-modal-overlay');
-  if (!loaderEl) return;
-
-  // Pre-cache critical images in background
-  preloadCriticalAssets();
-
-  // If user already entered or signed in in this browser session, skip loader immediately
-  const hasEntered = localStorage.getItem('mondal_bari_welcome_entered') === 'true' || sessionStorage.getItem('mondal_bari_welcome_entered') === 'true';
-  const storedUser = getStoredUser();
-
-  if (hasEntered || storedUser) {
-    loaderEl.remove();
-    if (welcomeOverlay) {
-      welcomeOverlay.remove();
-    }
-    return;
-  }
-
-  // Ensure welcomeOverlay is initially hidden while loader is active
-  if (welcomeOverlay) {
-    welcomeOverlay.style.opacity = '0';
-    welcomeOverlay.style.visibility = 'hidden';
-    welcomeOverlay.style.pointerEvents = 'none';
-  }
-
-  const progressBar = document.getElementById('loader-progress-bar');
-  const percentageEl = document.getElementById('loader-percentage-num');
-  const statusEl = document.getElementById('loader-status-text');
-
-  loaderEl.classList.add('fade-in');
-
-  // Animation timeline: 1.5s fade-in, 2.0s hold/load, 1.5s fade-out (Total: 3.5s sequence)
-  const duration = 3500;
-  const startTime = performance.now();
-
-  const updateProgress = (currentTime) => {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1.0);
-    const percent = Math.floor(progress * 100);
-
-    if (progressBar) progressBar.style.width = `${percent}%`;
-    if (percentageEl) percentageEl.textContent = `${percent}%`;
-
-    if (progress < 0.4) {
-      if (statusEl) statusEl.textContent = state.lang === 'bn' ? 'উৎসব প্রাঙ্গণ প্রস্তুত হচ্ছে...' : 'Preparing festive courtyard...';
-    } else if (progress < 0.8) {
-      if (statusEl) statusEl.textContent = state.lang === 'bn' ? 'শারদ আবহ ও স্মৃতি সংযুক্ত হচ্ছে...' : 'Connecting festive ambience & memories...';
-    } else {
-      if (statusEl) statusEl.textContent = state.lang === 'bn' ? 'স্বাগতম!' : 'Welcome!';
-    }
-
-    if (progress < 1.0) {
-      requestAnimationFrame(updateProgress);
-    } else {
-      // 1.5s ease-out transition to the welcome preferences gate
-      loaderEl.classList.add('fade-out');
-
-      if (welcomeOverlay) {
-        welcomeOverlay.style.visibility = 'visible';
-        welcomeOverlay.style.pointerEvents = 'auto';
-        welcomeOverlay.style.transition = 'opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
-        welcomeOverlay.style.opacity = '1';
-      }
-
-      setTimeout(() => {
-        try { loaderEl.remove(); } catch (_) {}
-      }, 1600);
-    }
-  };
-
-  requestAnimationFrame(updateProgress);
-}
 
 function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
