@@ -28,37 +28,56 @@ let auth = null;
 let googleProvider = null;
 const authListeners = new Set();
 
-try {
-  app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  googleProvider = new GoogleAuthProvider();
-  googleProvider.setCustomParameters({ prompt: 'select_account' });
+function getAuthContext() {
+  if (!auth) {
+    try {
+      app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      googleProvider = new GoogleAuthProvider();
+      googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-  
-  // Automatically process Google OAuth Redirect Results upon page return
-  getRedirectResult(auth).then((result) => {
-    if (result && result.user) {
-      console.log('Firebase Redirect Sign-In verified for:', result.user.displayName);
-      const user = {
-        uid: result.user.uid,
-        displayName: result.user.displayName || 'Devotee',
-        email: result.user.email || '',
-        photoURL: result.user.photoURL || generateAvatarUrl(result.user.displayName, result.user.email),
-        isFirebaseLive: true
-      };
-      setStoredUser(user);
-      if (typeof window !== 'undefined' && typeof window.completePujoUserLogin === 'function') {
-        window.completePujoUserLogin(user);
-      }
+      // Automatically process Google OAuth Redirect Results upon page return
+      getRedirectResult(auth).then((result) => {
+        if (result && result.user) {
+          const user = {
+            uid: result.user.uid,
+            displayName: result.user.displayName || 'Devotee',
+            email: result.user.email || '',
+            photoURL: result.user.photoURL || generateAvatarUrl(result.user.displayName, result.user.email),
+            isFirebaseLive: true
+          };
+          setStoredUser(user);
+          if (typeof window !== 'undefined' && typeof window.completePujoUserLogin === 'function') {
+            window.completePujoUserLogin(user);
+          }
+        }
+      }).catch((e) => {
+        console.warn('Redirect Auth handling notice:', e);
+      });
+    } catch (e) {
+      console.warn('Firebase initialization note:', e?.message || e);
     }
-  }).catch((e) => {
-    console.warn('Redirect Auth handling notice:', e);
+  }
+  return { app, auth, googleProvider };
+}
+
+let gsiScriptPromise = null;
+export function loadGoogleGsiScript() {
+  if (gsiScriptPromise) return gsiScriptPromise;
+  gsiScriptPromise = new Promise((resolve) => {
+    if (typeof window !== 'undefined' && window.google?.accounts?.id) {
+      resolve();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => resolve();
+    script.onerror = () => resolve();
+    document.body.appendChild(script);
   });
-
-
-  console.log('Firebase Authentication initialized for Mondal Barir Pujo.');
-} catch (e) {
-  console.warn('Firebase initialization note:', e?.message || e);
+  return gsiScriptPromise;
 }
 
 // Generate an authentic avatar URL with colored initial
@@ -103,6 +122,7 @@ function notifyAuthSubscribers(user) {
  * Directly execute live Google popup OAuth
  */
 export function loginWithGoogleLivePopup() {
+  const { auth, googleProvider } = getAuthContext();
   if (!auth || !googleProvider) {
     return Promise.reject(new Error('Firebase Auth instance is not initialized.'));
   }
@@ -124,6 +144,7 @@ export function loginWithGoogleLivePopup() {
  * Execute Google Sign-In via Full-Page Redirect (Bypasses popup blockers completely)
  */
 export async function loginWithGoogleRedirect() {
+  const { auth, googleProvider } = getAuthContext();
   if (!auth || !googleProvider) {
     throw new Error('Firebase Auth instance is not initialized.');
   }
@@ -137,6 +158,7 @@ export async function loginWithGoogle() {
 
 export async function logoutUser() {
   try {
+    const { auth } = getAuthContext();
     if (auth) {
       await signOut(auth).catch(() => {});
     }
@@ -147,7 +169,7 @@ export async function logoutUser() {
 export function subscribeAuthState(callback) {
   authListeners.add(callback);
 
-  // Check Firebase live auth state
+  const { auth } = getAuthContext();
   if (auth) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -172,6 +194,7 @@ export function subscribeAuthState(callback) {
 }
 
 export function getCurrentUser() {
+  const { auth } = getAuthContext();
   if (auth && auth.currentUser) {
     const u = auth.currentUser;
     return {

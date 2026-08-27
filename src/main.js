@@ -5,8 +5,58 @@ import { audioEngine } from './audio/soundEffects.js';
 import { ParticleSystem } from './effects/particles.js';
 import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils.js';
 import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations, formatNumber } from './utils/i18n.js';
-import { loginWithGoogle, loginWithGoogleLivePopup, loginWithGoogleRedirect, logoutUser, subscribeAuthState, getCurrentUser, setStoredUser, generateAvatarUrl } from './services/firebaseAuth.js';
-import { resolveUserRole, canAccessPortal, ROLES } from './services/rbacService.js';
+
+// Lightweight Local User Storage & Roles (Zero Firebase Overhead on Critical Path)
+function getStoredUser() {
+  try {
+    const raw = localStorage.getItem('mondal_bari_auth_user');
+    return raw ? JSON.parse(raw) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function setStoredUser(user) {
+  try {
+    if (user) localStorage.setItem('mondal_bari_auth_user', JSON.stringify(user));
+    else localStorage.removeItem('mondal_bari_auth_user');
+  } catch (e) {}
+}
+
+function generateAvatarUrl(name = 'Devotee', email = '') {
+  const cleanName = encodeURIComponent(name.trim() || 'D');
+  return `https://ui-avatars.com/api/?name=${cleanName}&background=d97706&color=fff&bold=true&rounded=true&size=128`;
+}
+
+const ROLES = {
+  ADMIN: 'admin',
+  EDITOR: 'editor',
+  VISITOR: 'visitor'
+};
+
+function canAccessPortal(role) {
+  return role === ROLES.ADMIN || role === ROLES.EDITOR;
+}
+
+async function resolveUserRole(user) {
+  if (!user || !user.email) return ROLES.VISITOR;
+  if (user.email.trim().toLowerCase() === 'debanjanmondal8996@gmail.com') return ROLES.ADMIN;
+  try {
+    const { resolveUserRole } = await import('./services/rbacService.js');
+    return await resolveUserRole(user);
+  } catch (e) {
+    return ROLES.VISITOR;
+  }
+}
+
+async function logoutUser() {
+  try {
+    const { logoutUser } = await import('./services/firebaseAuth.js');
+    return await logoutUser();
+  } catch (e) {
+    setStoredUser(null);
+  }
+}
 
 // Application State
 const state = {
@@ -107,9 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
     safeInit('StoryGenerator', initStoryGenerator);
     safeInit('KeyboardShortcuts', initKeyboardShortcuts);
     safeInit('PujoInfoAndGallery', initPujoInfoAndGallery);
-
-    // Lazy-initialize YouTube Audio Player during idle
-    ytAudioPlayer.init().catch(() => {});
   };
 
   if ('requestIdleCallback' in window) {
@@ -639,16 +686,20 @@ function initFirebaseAuthUI() {
         drawerAuthBtn.classList.remove('btn-signout');
         drawerAuthBtn.onclick = (e) => {
           e.stopPropagation();
-          openModal('google-signin-modal');
+          handleOpenAuthModal(e);
         };
       }
     }
   };
 
-  // Open Google Auth Modal on button clicks
-  const handleOpenAuthModal = (e) => {
+  // Open Google Auth Modal on button clicks with on-demand GSI loading
+  const handleOpenAuthModal = async (e) => {
     e?.preventDefault?.();
     e?.stopPropagation?.();
+    try {
+      const { loadGoogleGsiScript } = await import('./services/firebaseAuth.js');
+      loadGoogleGsiScript().catch(() => {});
+    } catch (_) {}
     if (typeof window.renderGoogleAccountsList === 'function') {
       window.renderGoogleAccountsList();
     }
@@ -679,17 +730,23 @@ function initFirebaseAuthUI() {
 
   // Re-sync UI on language change
   window.addEventListener('pujo_language_changed', () => {
-    updateAuthUI(getCurrentUser());
+    updateAuthUI(getStoredUser());
   });
 
-  // Listen for live Firebase auth state changes
-  subscribeAuthState((user) => {
-    updateAuthUI(user);
-  });
+  // Defer live Firebase auth state listener to idle phase
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(async () => {
+      try {
+        const { subscribeAuthState } = await import('./services/firebaseAuth.js');
+        subscribeAuthState((user) => {
+          updateAuthUI(user);
+        });
+      } catch (e) {}
+    }, { timeout: 4000 });
+  }
 
-  // Initial Sync
-  renderAccountsList();
-  updateAuthUI(getCurrentUser());
+  // Initial Sync from LocalStorage (Zero Blocking Network Call)
+  updateAuthUI(getStoredUser());
 }
 
 function initDynamicIsland() {
@@ -1045,8 +1102,6 @@ function initAudioPlayer() {
     mobileDrawer?.classList.remove('minimized');
   });
 
-  // Render Playlist Tracks inside Modal
-  renderPlaylistTracks(state.activeTab);
 
   // Playlist Category Tabs Switch
   const tabPills = document.querySelectorAll('.modal-tabs .tab-pill');
@@ -2877,13 +2932,18 @@ function openModal(modalId) {
   const el = document.getElementById(modalId);
   if (!el) return;
 
+  if (modalId === 'playlists-modal' && typeof renderPlaylistTracks === 'function') {
+    renderPlaylistTracks(state.activeTab);
+  }
   if (modalId === 'pujo-info-modal' && typeof renderPujoModalContent === 'function') {
     renderPujoModalContent();
   }
   if (modalId === 'story-generator-modal' && typeof renderStoryCanvas === 'function') {
     renderStoryCanvas();
   }
-  
+  if (modalId === 'google-signin-modal' && typeof renderAccountsList === 'function') {
+    renderAccountsList();
+  }
 
   el.classList.add('active');
   document.body.style.overflow = 'hidden';
