@@ -221,12 +221,33 @@ button {
 }
 
 /* Off-screen Content Visibility Optimization (Buttery Smooth 60-120fps Mobile Scrolling) */
+.invitation-section,
+.formal-invitation-section,
 .invitation-letterhead-section,
+.full-breadth-festive-bar,
 .photo-river-section,
 .onnota-section,
-.grand-gallery-section {
+.grand-gallery-section,
+.gallery-section,
+.footer-section {
   content-visibility: auto;
-  contain-intrinsic-size: 800px;
+  contain-intrinsic-size: 1px 750px;
+}
+
+/* Mobile Touch Target and Interaction Optimization */
+@media (max-width: 768px) {
+  button,
+  .btn,
+  .nav-action-btn,
+  .vibe-pill,
+  .sound-trigger-pill,
+  .gallery-filter-chip,
+  .tab-btn,
+  .welcome-choice-btn,
+  .hero-scroll-indicator {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
 }
 
 .background-container {

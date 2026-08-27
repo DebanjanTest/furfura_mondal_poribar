@@ -2,9 +2,13 @@
 <html lang="bn" class="h-full antialiased">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
     <title>পুজো আসছে — মন্ডল বাড়ির পুজো | Mondol Barir Pujo 2026 Countdown & Festive Radio</title>
     <meta name="description" content="মন্ডল বাড়ির পুজো (Mondol Barir Pujo) — Durga Puja 2026 live countdown, timeless Agomoni & Mahalaya radio, Dhak rhythms, 30th Year heritage celebration (Est. 1997) and Instagram Story Generator." />
+    <link rel="canonical" href="https://furfura-mondal-poribar.vercel.app/" />
+    <meta name="theme-color" content="#160308" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
     <!-- Primary Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -13,9 +17,44 @@
     <!-- Open Graph / Meta Previews -->
     <meta property="og:title" content="পুজো আসছে — মন্ডল বাড়ির পুজো (Mondol Barir Pujo 2026)" />
     <meta property="og:description" content="Durga Puja 2026 live countdown, curated Agomoni & Mahalaya radio, authentic Dhak beats, Instagram story generator, and traditional Mondol Barir Pujo celebrations." />
+    <meta property="og:url" content="https://furfura-mondal-poribar.vercel.app/" />
     <meta property="og:image" content="/og-image.png" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- JSON-LD Structured Data for Rich Search & SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Mondol Barir Durga Puja 2026",
+      "alternateName": "মন্ডল বাড়ির পুজো",
+      "startDate": "2026-10-10T05:00:00+05:30",
+      "endDate": "2026-10-21T22:00:00+05:30",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "Furfura Mondol Poribar Natmandir",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Kazipada, Furfura",
+          "addressLocality": "Hooghly",
+          "addressRegion": "West Bengal",
+          "addressCountry": "IN"
+        }
+      },
+      "image": [
+        "https://furfura-mondal-poribar.vercel.app/og-image.png"
+      ],
+      "description": "Ancestral Durga Puja celebrations of Furfura Mondol Poribar since 1997 featuring live radio, traditional Dhak rhythms, and heritage Natmandir rituals.",
+      "organizer": {
+        "@type": "Organization",
+        "name": "Furfura Mondol Poribar",
+        "url": "https://furfura-mondal-poribar.vercel.app/"
+      }
+    }
+    </script>
 
     <!-- High-Performance Typography Preconnect & Font Loading (Non-Render-Blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -141,16 +180,16 @@
       <div class="background-container" id="bg-container">
         <!-- Morning Background Layer (Bright Festive Natmandir) -->
         <picture id="bg-layer-morning" class="bg-picture-layer active">
-          <source media="(max-width: 768px)" srcset="/bg-mobile/mondal-bari-hero-mobile.webp" type="image/webp" />
-          <source srcset="/bg/mondal-bari-hero.webp" type="image/webp" />
-          <img id="bg-morning" class="bg-layer active" src="/bg/mondal-bari-hero.webp" alt="Mondol Bari Durga Puja Morning Background" fetchpriority="high" decoding="sync" />
+          <source media="(max-width: 768px)" srcset="/bg-mobile/mondal-bari-hero-mobile.webp" type="image/webp" width="768" height="1366" />
+          <source srcset="/bg/mondal-bari-hero.webp" type="image/webp" width="1920" height="1080" />
+          <img id="bg-morning" class="bg-layer active" src="/bg/mondal-bari-hero.webp" alt="Mondol Bari Durga Puja Morning Background" fetchpriority="high" decoding="sync" width="1920" height="1080" />
         </picture>
 
         <!-- Night Background Layer (Serene Dimmer Nocturnal Natmandir with no people) -->
         <picture id="bg-layer-night" class="bg-picture-layer">
-          <source media="(max-width: 768px)" srcset="/bg-mobile/night-mobile.webp" type="image/webp" />
-          <source srcset="/bg/night-1920.webp" type="image/webp" />
-          <img id="bg-night" class="bg-layer" src="/bg/night-1920.webp" alt="Mondol Bari Durga Puja Night Background" loading="lazy" decoding="async" />
+          <source media="(max-width: 768px)" srcset="/bg-mobile/night-mobile.webp" type="image/webp" width="768" height="1366" />
+          <source srcset="/bg/night-1920.webp" type="image/webp" width="1920" height="1080" />
+          <img id="bg-night" class="bg-layer" src="/bg/night-1920.webp" alt="Mondol Bari Durga Puja Night Background" loading="lazy" decoding="async" width="1920" height="1080" />
         </picture>
 
         <!-- Ambient Cinematic Lighting & Canvas Particle Overlay -->

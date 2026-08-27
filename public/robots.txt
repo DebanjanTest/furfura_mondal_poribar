@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://furfura-mondal-poribar.vercel.app/sitemap.xml
