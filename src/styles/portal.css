@@ -1140,21 +1140,34 @@ body.portal-body {
   }
 
   .nav-brand-header {
-    gap: 0.35rem;
-    justify-content: center;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 0.12rem;
+    width: 100%;
+    white-space: normal;
   }
 
   .nav-brand-title {
-    font-size: 0.84rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.15;
+    text-align: left;
+    color: #ffffff;
   }
 
   .nav-brand-dot {
-    font-size: 0.7rem;
+    display: none;
   }
 
   .nav-portal-tag {
-    font-size: 0.68rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--portal-gold);
+    text-align: left;
   }
 
   .nav-actions-ribbon {
