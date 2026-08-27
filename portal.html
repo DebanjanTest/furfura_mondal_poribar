@@ -103,32 +103,30 @@
       <!-- Top Navigation Header (Separated Brand Header on Top + Actions Ribbon Below) -->
       <header class="portal-navbar">
         <div class="portal-nav-container">
-          <!-- Top Row: Distinct Brand Header -->
-          <div class="nav-brand-header">
-            <span class="nav-brand-title" data-i18n="portal_nav_brand">মন্ডল বাড়ির পুজো</span>
-            <span class="nav-brand-dot" aria-hidden="true">•</span>
-            <span class="nav-portal-tag" data-i18n="portal_nav_tag">কিউরেটর ও ম্যানেজমেন্ট পোর্টাল</span>
+          <!-- Top Row: Left Brand (2-line) + Right User Profile & Role -->
+          <div class="portal-nav-top-row">
+            <div class="nav-brand-header">
+              <span class="nav-brand-title" data-i18n="portal_nav_brand">মন্ডল বাড়ির পুজো</span>
+              <span class="nav-portal-tag" data-i18n="portal_nav_tag">কিউরেটর ও ম্যানেজমেন্ট পোর্টাল</span>
+            </div>
+
+            <div class="nav-user-profile-group">
+              <!-- Role Badge -->
+              <div class="nav-action-item nav-role-badge" id="nav-role-badge">সুপার অ্যাডমিন</div>
+              <!-- User Info -->
+              <div class="nav-action-item nav-user-capsule">
+                <img id="nav-user-avatar" class="nav-avatar-img" src="/favicon.png" alt="Admin Avatar" />
+                <span id="nav-user-name" class="nav-user-name">দেবাঞ্জন মণ্ডল</span>
+              </div>
+            </div>
           </div>
 
-          <!-- Bottom Row: Unified Full-Breadth Divided Action Bar (Zero-Scroll Auto-Fit) -->
+          <!-- Bottom Row: Clean Divided Action Ribbon (Language | Website Link | Logout) -->
           <div class="nav-actions-ribbon" role="toolbar" aria-label="Portal Header Actions">
             <!-- Language Toggle -->
             <button type="button" id="btn-portal-lang-toggle" class="nav-action-btn" aria-label="Change Language">
               <span id="portal-lang-text">বাংলা</span>
             </button>
-
-            <span class="nav-bar-divider" aria-hidden="true">|</span>
-
-            <!-- Role Badge -->
-            <div class="nav-action-item nav-role-badge" id="nav-role-badge">সুপার অ্যাডমিন</div>
-
-            <span class="nav-bar-divider" aria-hidden="true">|</span>
-
-            <!-- User Info -->
-            <div class="nav-action-item nav-user-capsule">
-              <img id="nav-user-avatar" class="nav-avatar-img" src="/favicon.png" alt="Admin Avatar" />
-              <span id="nav-user-name" class="nav-user-name">দেবাঞ্জন মণ্ডল</span>
-            </div>
 
             <span class="nav-bar-divider" aria-hidden="true">|</span>
 
