@@ -29,21 +29,26 @@ class YouTubeAudioPlayer {
         container = document.createElement('div');
         container.id = containerId;
         container.style.position = 'fixed';
-        container.style.bottom = '8px';
-        container.style.left = '8px';
-        container.style.width = '200px';
-        container.style.height = '120px';
-        container.style.zIndex = '1';
-        container.style.opacity = '0.01';
+        container.style.bottom = '0';
+        container.style.right = '0';
+        container.style.width = '240px';
+        container.style.height = '135px';
+        container.style.zIndex = '99';
+        container.style.opacity = '0.02';
         container.style.pointerEvents = 'none';
+        container.style.overflow = 'hidden';
+        container.style.transform = 'scale(0.05)';
+        container.style.transformOrigin = 'bottom right';
         document.body.appendChild(container);
       }
 
       const onReadyCallback = () => {
         try {
+          const originUrl = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
           this.player = new window.YT.Player(containerId, {
-            height: '120',
-            width: '200',
+            height: '135',
+            width: '240',
+            host: 'https://www.youtube-nocookie.com',
             playerVars: {
               autoplay: 1,
               controls: 0,
@@ -53,17 +58,21 @@ class YouTubeAudioPlayer {
               iv_load_policy: 3,
               modestbranding: 1,
               playsinline: 1,
-              rel: 0
+              rel: 0,
+              origin: originUrl
             },
             events: {
-              onReady: () => {
+              onReady: (event) => {
                 this.isReady = true;
-                if (this.player && typeof this.player.unMute === 'function') {
-                  this.player.unMute();
-                }
-                if (this.player && typeof this.player.setVolume === 'function') {
-                  this.player.setVolume(this.getEffectiveVolume());
-                }
+                try {
+                  if (this.player && typeof this.player.unMute === 'function') {
+                    this.player.unMute();
+                  }
+                  if (this.player && typeof this.player.setVolume === 'function') {
+                    this.player.setVolume(this.getEffectiveVolume());
+                  }
+                } catch (_) {}
+
                 if (this.pendingTrack) {
                   const pt = this.pendingTrack;
                   this.pendingTrack = null;
@@ -77,8 +86,8 @@ class YouTubeAudioPlayer {
                 this.handleStateChange(event);
               },
               onError: (err) => {
-                console.warn('YouTube Player notice code:', err.data);
-                this.notify({ type: 'error', data: err.data });
+                console.warn('YouTube Player notice code:', err?.data);
+                this.notify({ type: 'error', data: err?.data, track: this.currentTrack });
               }
             }
           });
@@ -99,8 +108,9 @@ class YouTubeAudioPlayer {
         if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
           const tag = document.createElement('script');
           tag.src = 'https://www.youtube.com/iframe_api';
+          tag.async = true;
           const firstScriptTag = document.getElementsByTagName('script')[0];
-          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+          firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
         }
       }
     });
@@ -193,27 +203,43 @@ class YouTubeAudioPlayer {
       if (this.currentVideoId === targetVideoId) {
         this.player.seekTo(startSeconds, true);
         if (autoplay) {
-          this.player.playVideo();
           this.isPlaying = true;
+          this.player.playVideo();
         } else {
-          this.player.pauseVideo();
           this.isPlaying = false;
+          this.player.pauseVideo();
         }
       } else {
         this.currentVideoId = targetVideoId;
         if (autoplay) {
+          this.isPlaying = true;
           this.player.loadVideoById({
             videoId: targetVideoId,
             startSeconds: startSeconds
           });
-          this.isPlaying = true;
         } else {
+          this.isPlaying = false;
           this.player.cueVideoById({
             videoId: targetVideoId,
             startSeconds: startSeconds
           });
-          this.isPlaying = false;
         }
+      }
+
+      if (autoplay) {
+        // Immediate and deferred playVideo trigger to guarantee audio start
+        try {
+          this.player.unMute();
+          this.player.playVideo();
+        } catch (_) {}
+        setTimeout(() => {
+          try {
+            if (this.isPlaying && this.player && typeof this.player.playVideo === 'function') {
+              this.player.unMute();
+              this.player.playVideo();
+            }
+          } catch (_) {}
+        }, 180);
       }
     } catch (err) {
       console.warn('YouTube cue notice:', err);

@@ -975,6 +975,20 @@ function initOnlineCounter() {
    ========================================================================== */
 
 function initAudioPlayer() {
+  // Pre-load YouTube API and initialize audio player
+  ytAudioPlayer.init();
+
+  const warmupAudio = () => {
+    if (typeof audioEngine.resumeAudioContext === 'function') {
+      audioEngine.resumeAudioContext();
+    }
+    if (!ytAudioPlayer.isReady) {
+      ytAudioPlayer.init();
+    }
+  };
+  document.addEventListener('click', warmupAudio, { once: true });
+  document.addEventListener('touchstart', warmupAudio, { once: true, passive: true });
+
   const currentList = playlists[state.currentPlaylistKey]?.tracks || [];
   const initialTrack = currentList[0];
   updatePlayerUI(initialTrack);
@@ -986,14 +1000,19 @@ function initAudioPlayer() {
       updatePlayPauseButton(event.isPlaying);
       updateArtVinylAnimation(event.isPlaying);
       updateEqualizerAnimation();
+      updateDynamicIslandState();
     } else if (event.type === 'trackChange') {
       if (event.playlistKey) state.currentPlaylistKey = event.playlistKey;
       updatePlayerUI(event.track);
       updateEqualizerAnimation();
+      updateDynamicIslandState();
     } else if (event.type === 'timeUpdate') {
       updateScrubber(event.currentTime, event.duration, event.progress);
     } else if (event.type === 'ended') {
       playNextTrack();
+    } else if (event.type === 'error') {
+      console.warn('Audio stream error event, advancing to next track gracefully...');
+      setTimeout(() => playNextTrack(), 500);
     }
   });
 

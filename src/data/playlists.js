@@ -11,25 +11,6 @@ export const playlists = {
     tracksAreDistinctVideos: true,
     tracks: [
       {
-        id: "durga-ambient-00",
-        num: "০১",
-        title: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondal Bari Ambient)",
-        title_bn: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত",
-        title_en: "Mondal Bari Festive Ambient",
-        artist: "ফুরফুরা মণ্ডল পরিবার আবহ",
-        composer: "ঐতিহ্য শারদ সুরমালা",
-        lyricist: "শারদোৎসব",
-        videoId: "DZ21CSg22nc",
-        start: 0,
-        end: 9999,
-        duration: 9999,
-        durationLabel: "Ambient",
-        cover: "https://img.youtube.com/vi/DZ21CSg22nc/mqdefault.jpg",
-        sourceUrl: "https://youtu.be/DZ21CSg22nc",
-        description: "Serene sacred background ambient Durga Puja melody playing continuously in low tone.",
-        bengaliDesc: "মন্ডল বাড়ির পুজো প্রাঙ্গণের জন্য নির্ধারিত শান্ত, স্নিগ্ধ ও আবহ সঙ্গীত।"
-      },
-      {
         id: "durga-001",
         num: "01",
         title: "দুগ্গা এলো (Dugga Elo)",
@@ -47,6 +28,25 @@ export const playlists = {
         sourceUrl: "https://www.youtube.com/watch?v=xlElO06nQy8",
         description: "A joyful festive Agomoni song celebrating Maa Durga's auspicious arrival.",
         bengaliDesc: "মোনালি ঠাকুরের প্রাণবন্ত কণ্ঠে পুজোয় মা দুর্গার ঘরে ফেরার আনন্দ ও উচ্ছ্বাস।"
+      },
+      {
+        id: "durga-ambient-00",
+        num: "০২",
+        title: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondal Bari Ambient)",
+        title_bn: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত",
+        title_en: "Mondal Bari Festive Ambient",
+        artist: "ফুরফুরা মণ্ডল পরিবার আবহ",
+        composer: "ঐতিহ্য শারদ সুরমালা",
+        lyricist: "শারদোৎসব",
+        videoId: "DZ21CSg22nc",
+        start: 0,
+        end: 245,
+        duration: 245,
+        durationLabel: "4:05",
+        cover: "https://img.youtube.com/vi/DZ21CSg22nc/mqdefault.jpg",
+        sourceUrl: "https://youtu.be/DZ21CSg22nc",
+        description: "Serene sacred background ambient Durga Puja melody playing continuously in low tone.",
+        bengaliDesc: "মন্ডল বাড়ির পুজো প্রাঙ্গণের জন্য নির্ধারিত শান্ত, স্নিগ্ধ ও আবহ সঙ্গীত।"
       },
       {
         id: "durga-002",
