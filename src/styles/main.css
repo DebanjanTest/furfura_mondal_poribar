@@ -7610,7 +7610,7 @@ button:active, [role="button"]:active {
   background-color: #0c0104;
   background-image: 
     linear-gradient(180deg, rgba(18, 2, 6, 0.68) 0%, rgba(20, 3, 7, 0.86) 100%),
-    url('/images/card-background.jpg');
+    url('/images/card-background.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7636,7 +7636,7 @@ button:active, [role="button"]:active {
   background-color: #0c0104;
   background-image: 
     linear-gradient(180deg, rgba(18, 2, 6, 0.65) 0%, rgba(20, 3, 7, 0.85) 100%),
-    url('/images/card-background.jpg');
+    url('/images/card-background.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7661,7 +7661,7 @@ button:active, [role="button"]:active {
   background-color: #0c0104;
   background-image: 
     linear-gradient(180deg, rgba(18, 2, 6, 0.72) 0%, rgba(20, 3, 7, 0.9) 100%),
-    url('/images/card-background-landscape.jpg');
+    url('/images/card-background-landscape.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7675,7 +7675,7 @@ button:active, [role="button"]:active {
   background-color: #0c0104;
   background-image: 
     linear-gradient(180deg, rgba(18, 2, 6, 0.72) 0%, rgba(20, 3, 7, 0.9) 100%),
-    url('/images/card-background-landscape.jpg');
+    url('/images/card-background-landscape.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7687,7 +7687,7 @@ button:active, [role="button"]:active {
   background-color: #0c0104;
   background-image: 
     linear-gradient(180deg, rgba(18, 2, 6, 0.78) 0%, rgba(20, 3, 7, 0.94) 100%),
-    url('/images/card-background.jpg');
+    url('/images/card-background.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7698,7 +7698,7 @@ button:active, [role="button"]:active {
   background-color: #0c0104;
   background-image: 
     linear-gradient(180deg, rgba(18, 2, 6, 0.75) 0%, rgba(20, 3, 7, 0.92) 100%),
-    url('/images/card-background.jpg');
+    url('/images/card-background.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7709,7 +7709,7 @@ button:active, [role="button"]:active {
   background-color: rgba(18, 2, 6, 0.7);
   background-image: 
     linear-gradient(180deg, rgba(18, 2, 6, 0.65) 0%, rgba(20, 3, 7, 0.85) 100%),
-    url('/images/card-background-landscape.jpg');
+    url('/images/card-background-landscape.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -7725,7 +7725,7 @@ button:active, [role="button"]:active {
   box-sizing: border-box;
   background: 
     linear-gradient(180deg, rgba(20, 3, 7, 0.92) 0%, rgba(18, 2, 6, 0.95) 50%, rgba(18, 2, 6, 0.96) 100%),
-    url('/images/card-background-landscape.jpg') center center / cover no-repeat fixed;
+    url('/images/card-background-landscape.webp') center center / cover no-repeat fixed;
   border-top: 1px solid rgba(255, 207, 64, 0.2);
   border-bottom: 1px solid rgba(255, 207, 64, 0.2);
   display: flex;
@@ -7785,7 +7785,7 @@ button:active, [role="button"]:active {
   padding: 5.5rem 1.5rem 6.5rem;
   background: 
     linear-gradient(180deg, rgba(16, 2, 6, 0.9) 0%, rgba(18, 2, 6, 0.94) 50%, rgba(12, 1, 4, 0.98) 100%),
-    url('/images/card-background-landscape.jpg') center center / cover no-repeat fixed;
+    url('/images/card-background-landscape.webp') center center / cover no-repeat fixed;
   border-top: 1px solid rgba(255, 207, 64, 0.18);
   box-sizing: border-box;
   display: flex;
@@ -7819,7 +7819,7 @@ button:active, [role="button"]:active {
 .onnota-section {
   background: 
     linear-gradient(180deg, rgba(8, 1, 3, 0.96) 0%, rgba(18, 2, 6, 0.98) 50%, rgba(6, 1, 2, 0.98) 100%),
-    url('/images/card-background-landscape.jpg') center center / cover no-repeat fixed !important;
+    url('/images/card-background-landscape.webp') center center / cover no-repeat fixed !important;
   border-top: 1px solid rgba(255, 207, 64, 0.25) !important;
   border-bottom: 1px solid rgba(255, 207, 64, 0.25) !important;
 }
@@ -7828,7 +7828,7 @@ button:active, [role="button"]:active {
   background-color: #0a0104 !important;
   background-image: 
     linear-gradient(180deg, rgba(16, 2, 5, 0.82) 0%, rgba(8, 1, 3, 0.95) 100%),
-    url('/images/card-background.jpg') !important;
+    url('/images/card-background.webp') !important;
   background-size: cover !important;
   background-position: center center !important;
   border: 1px solid rgba(255, 207, 64, 0.25) !important;
@@ -7845,7 +7845,7 @@ button:active, [role="button"]:active {
   background-color: #0a0104 !important;
   background-image: 
     linear-gradient(180deg, rgba(16, 2, 5, 0.8) 0%, rgba(8, 1, 3, 0.95) 100%),
-    url('/images/card-background.jpg') !important;
+    url('/images/card-background.webp') !important;
   background-size: cover !important;
   border: 1px solid rgba(255, 207, 64, 0.25) !important;
   box-shadow: 0 16px 45px -6px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
@@ -7861,7 +7861,7 @@ button:active, [role="button"]:active {
   background-color: #0a0104 !important;
   background-image: 
     linear-gradient(180deg, rgba(16, 2, 5, 0.85) 0%, rgba(8, 1, 3, 0.96) 100%),
-    url('/images/card-background-landscape.jpg') !important;
+    url('/images/card-background-landscape.webp') !important;
   border: 1px solid rgba(255, 207, 64, 0.4) !important;
   box-shadow: 0 26px 75px -12px rgba(0, 0, 0, 0.98), 0 0 35px rgba(255, 207, 64, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
@@ -7879,7 +7879,7 @@ button:active, [role="button"]:active {
   background-color: #0a0104 !important;
   background-image: 
     linear-gradient(180deg, rgba(16, 2, 5, 0.88) 0%, rgba(8, 1, 3, 0.98) 100%),
-    url('/images/card-background.jpg') !important;
+    url('/images/card-background.webp') !important;
   border: 1px solid rgba(255, 207, 64, 0.3) !important;
 }
 

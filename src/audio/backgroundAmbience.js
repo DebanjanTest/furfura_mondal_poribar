@@ -59,7 +59,7 @@ class BackgroundAmbienceEngine {
         end: 9999,
         duration: 9999,
         durationLabel: 'Ambient',
-        cover: `https://img.youtube.com/vi/${this.videoId}/hqdefault.jpg`,
+        cover: `https://img.youtube.com/vi/${this.videoId}/mqdefault.jpg`,
         isAmbientBackground: true
       };
 

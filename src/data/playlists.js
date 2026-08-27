@@ -24,7 +24,7 @@ export const playlists = {
         end: 9999,
         duration: 9999,
         durationLabel: "Ambient",
-        cover: "https://img.youtube.com/vi/DZ21CSg22nc/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/DZ21CSg22nc/mqdefault.jpg",
         sourceUrl: "https://youtu.be/DZ21CSg22nc",
         description: "Serene sacred background ambient Durga Puja melody playing continuously in low tone.",
         bengaliDesc: "মন্ডল বাড়ির পুজো প্রাঙ্গণের জন্য নির্ধারিত শান্ত, স্নিগ্ধ ও আবহ সঙ্গীত।"
@@ -43,7 +43,7 @@ export const playlists = {
         end: 236,
         duration: 236,
         durationLabel: "3:56",
-        cover: "https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/xlElO06nQy8/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=xlElO06nQy8",
         description: "A joyful festive Agomoni song celebrating Maa Durga's auspicious arrival.",
         bengaliDesc: "মোনালি ঠাকুরের প্রাণবন্ত কণ্ঠে পুজোয় মা দুর্গার ঘরে ফেরার আনন্দ ও উচ্ছ্বাস।"
@@ -62,7 +62,7 @@ export const playlists = {
         end: 271,
         duration: 271,
         durationLabel: "4:31",
-        cover: "https://img.youtube.com/vi/sPuZ0Q3KDWo/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/sPuZ0Q3KDWo/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=sPuZ0Q3KDWo",
         description: "Emotional homecoming Puja song capturing childhood memories and festive vibes.",
         bengaliDesc: "অরিজিৎ সিংয়ের মিষ্টি কণ্ঠ ও ঘরে ফেরার নস্টালজিক পুজোর অনুভূতি।"
@@ -81,7 +81,7 @@ export const playlists = {
         end: 200,
         duration: 200,
         durationLabel: "3:20",
-        cover: "https://img.youtube.com/vi/XyatKcoBrPw/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/XyatKcoBrPw/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=XyatKcoBrPw",
         description: "High-energy Dhak rhythms and festive groove welcoming Devi Durga.",
         bengaliDesc: "সুনিধি চৌহানের ধামাকা কণ্ঠে ঢাকের তালের জমজমাট পুজোর গান।"
@@ -100,7 +100,7 @@ export const playlists = {
         end: 266,
         duration: 266,
         durationLabel: "4:26",
-        cover: "https://img.youtube.com/vi/id5_3dKvEBg/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/id5_3dKvEBg/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=id5_3dKvEBg",
         description: "Festive devotional melody accompanied by traditional Dhak and Kanshor.",
         bengaliDesc: "শ্রেয়া ঘোষালের মিষ্টি সুরে কাঁসর-ঘণ্টা ও ঢাকের সাবেকি বন্দনা।"
@@ -119,7 +119,7 @@ export const playlists = {
         end: 213,
         duration: 213,
         durationLabel: "3:33",
-        cover: "https://img.youtube.com/vi/E2zfQEo7Q_M/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/E2zfQEo7Q_M/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=E2zfQEo7Q_M",
         description: "Modern romantic Puja anthem expressing festive nostalgia and friendship.",
         bengaliDesc: "শারদীয় প্রেমের মিষ্টি গান ও নতুন জামার রঙিন নস্টালজিয়া।"
@@ -138,7 +138,7 @@ export const playlists = {
         end: 245,
         duration: 245,
         durationLabel: "4:05",
-        cover: "https://img.youtube.com/vi/hbXuXt7gkFY/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/hbXuXt7gkFY/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=hbXuXt7gkFY",
         description: "Timeless Bengali dance blockbuster played in every Puja pandal.",
         bengaliDesc: "মহাষ্টমীর ধুনুচি নাচে ও প্যান্ডেলে প্যান্ডেলে বাঙালির প্রাণের গান।"
@@ -157,7 +157,7 @@ export const playlists = {
         end: 282,
         duration: 282,
         durationLabel: "4:42",
-        cover: "https://img.youtube.com/vi/4h5DXcN6cd4/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/4h5DXcN6cd4/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=4h5DXcN6cd4",
         description: "Heartfelt modern Agomoni reflection on love, family reunions, and festive joy.",
         bengaliDesc: "অনুপম রায়ের কলমে ও সুরে শরৎকালীন অনুভূতির অপূর্ব মেলবন্ধন।"
@@ -176,7 +176,7 @@ export const playlists = {
         end: 320,
         duration: 320,
         durationLabel: "5:20",
-        cover: "https://img.youtube.com/vi/45O8KBhSZ0I/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/45O8KBhSZ0I/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=45O8KBhSZ0I",
         description: "A legendary classical devotional tribute to Maa Durga by Asha Bhosle.",
         bengaliDesc: "আশা ভোঁসলের অমর কণ্ঠে মহামায়ার মহিমান্বিত স্তুতি ও বন্দনা।"
@@ -195,7 +195,7 @@ export const playlists = {
         end: 290,
         duration: 290,
         durationLabel: "4:50",
-        cover: "https://img.youtube.com/vi/IfSJy3_Lkuo/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/IfSJy3_Lkuo/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=IfSJy3_Lkuo",
         description: "The divine invocation awakening Maa Durga with orchestral grandeur.",
         bengaliDesc: "দ্বিজেন মুখোপাধ্যায়ের মেঘমন্দ্র কণ্ঠে মা দুর্গার শুভ জাগরণ।"
@@ -214,7 +214,7 @@ export const playlists = {
         end: 215,
         duration: 215,
         durationLabel: "3:35",
-        cover: "https://img.youtube.com/vi/IISWE2RiDBU/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/IISWE2RiDBU/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=IISWE2RiDBU",
         description: "The dawn song that announces the arrival of autumn and Devi Durga.",
         bengaliDesc: "সুপ্রীতি ঘোষের কণ্ঠে শরতের স্নিগ্ধ প্রভাতে আলোর বেণু ধ্বনি।"
@@ -233,7 +233,7 @@ export const playlists = {
         end: 360,
         duration: 360,
         durationLabel: "6:00",
-        cover: "https://img.youtube.com/vi/VY5U96vcJ3g/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/VY5U96vcJ3g/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=VY5U96vcJ3g",
         description: "Electrifying high-octane rock-dhak fusion of the sacred Mahishasuramardini Stotram.",
         bengaliDesc: "আদি শঙ্করাচার্যের অয়িগিরি নন্দিনী স্তোত্রের তেজোদৃপ্ত আধুনিক ফিউশন।"
@@ -252,7 +252,7 @@ export const playlists = {
         end: 210,
         duration: 210,
         durationLabel: "3:30",
-        cover: "https://img.youtube.com/vi/4c_EZMco1w8/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/4c_EZMco1w8/mqdefault.jpg",
         sourceUrl: "https://www.youtube.com/watch?v=4c_EZMco1w8",
         description: "Peppy modern Durga Puja celebration song with festive beats.",
         bengaliDesc: "মিমি চক্রবর্তীর প্রাণবন্ত কণ্ঠে নতুন প্রজন্মের শারদীয় উদ্‌যাপন।"
@@ -283,7 +283,7 @@ export const playlists = {
         end: 5240,
         duration: 5240,
         durationLabel: "87:20",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg",
         description: "Complete uninterrupted broadcast of the iconic 1931 Mahishasura Mardini.",
         bengaliDesc: "বীরেন্দ্রকৃষ্ণ ভদ্রের চণ্ডীপাঠ ও পঙ্কজ মল্লিকের সুরারোপে সম্পূর্ণ আকাশবাণী মহালয়া।"
       },
@@ -301,7 +301,7 @@ export const playlists = {
         end: 420,
         duration: 420,
         durationLabel: "7:00",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg",
         description: "The morning conch blow and poetic prologue heralding the autumn dawn.",
         bengaliDesc: "পবিত্র শঙ্খধ্বনি ও বাণীকুমারের ভূমিকা পাঠে দেবী বন্দনার সূচনা।"
       },
@@ -319,7 +319,7 @@ export const playlists = {
         end: 1180,
         duration: 760,
         durationLabel: "12:40",
-        cover: "https://img.youtube.com/vi/IISWE2RiDBU/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/IISWE2RiDBU/mqdefault.jpg",
         description: "Devi Suktam stotrams invoking the Divine Mother in all living beings.",
         bengaliDesc: "যা দেবী সর্বভূতেষু মহাশক্তি বন্দনা ও আলোর বেণুর সুরে ভোরের আলো।"
       },
@@ -337,7 +337,7 @@ export const playlists = {
         end: 2240,
         duration: 1060,
         durationLabel: "17:40",
-        cover: "https://img.youtube.com/vi/IfSJy3_Lkuo/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/IfSJy3_Lkuo/mqdefault.jpg",
         description: "The core Chandipath narration awakening Devi Durga to destroy darkness.",
         bengaliDesc: "বীরেন্দ্রকৃষ্ণ ভদ্রের চণ্ডীপাঠ ও 'জাগো দুর্গা' সমবেত সঙ্গীত।"
       },
@@ -355,7 +355,7 @@ export const playlists = {
         end: 3450,
         duration: 1210,
         durationLabel: "20:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg",
         description: "Devotional Argala Stotram chanting for blessings, victory, and prosperity.",
         bengaliDesc: "মহামন্ত্র রূপং দেহি জয়ং দেহি ও সমবেত ভক্তিমূলক অর্ঘ্য।"
       },
@@ -373,7 +373,7 @@ export const playlists = {
         end: 4620,
         duration: 1170,
         durationLabel: "19:30",
-        cover: "https://img.youtube.com/vi/45O8KBhSZ0I/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/45O8KBhSZ0I/mqdefault.jpg",
         description: "Dramatic retelling of Devi Durga's triumph over Mahishasura.",
         bengaliDesc: "মহিষাসুরমর্দিনীর ত্রিশূল নিক্ষেপ ও অসুর নিধনের জয়ধ্বনি।"
       },
@@ -391,7 +391,7 @@ export const playlists = {
         end: 5240,
         duration: 620,
         durationLabel: "10:20",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg",
         description: "Closing benediction showering peace and motherly blessings upon humanity.",
         bengaliDesc: "শান্তি দিলে ভরি সমাপ্তি গান ও শারদ মিলনের শুভ প্রণাম।"
       }
@@ -420,7 +420,7 @@ export const playlists = {
         end: 220,
         duration: 220,
         durationLabel: "3:40",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-002",
@@ -435,7 +435,7 @@ export const playlists = {
         end: 450,
         duration: 230,
         durationLabel: "3:50",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-003",
@@ -450,7 +450,7 @@ export const playlists = {
         end: 215,
         duration: 215,
         durationLabel: "3:35",
-        cover: "https://img.youtube.com/vi/IISWE2RiDBU/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/IISWE2RiDBU/mqdefault.jpg"
       },
       {
         id: "ms-004",
@@ -465,7 +465,7 @@ export const playlists = {
         end: 290,
         duration: 290,
         durationLabel: "4:50",
-        cover: "https://img.youtube.com/vi/IfSJy3_Lkuo/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/IfSJy3_Lkuo/mqdefault.jpg"
       },
       {
         id: "ms-005",
@@ -480,7 +480,7 @@ export const playlists = {
         end: 1350,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-006",
@@ -495,7 +495,7 @@ export const playlists = {
         end: 1600,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-007",
@@ -510,7 +510,7 @@ export const playlists = {
         end: 1850,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-008",
@@ -525,7 +525,7 @@ export const playlists = {
         end: 2100,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-009",
@@ -540,7 +540,7 @@ export const playlists = {
         end: 2350,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-010",
@@ -555,7 +555,7 @@ export const playlists = {
         end: 2600,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-011",
@@ -570,7 +570,7 @@ export const playlists = {
         end: 2850,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-012",
@@ -585,7 +585,7 @@ export const playlists = {
         end: 3100,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-013",
@@ -600,7 +600,7 @@ export const playlists = {
         end: 3350,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-014",
@@ -615,7 +615,7 @@ export const playlists = {
         end: 3600,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-015",
@@ -630,7 +630,7 @@ export const playlists = {
         end: 3850,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-016",
@@ -645,7 +645,7 @@ export const playlists = {
         end: 4100,
         duration: 250,
         durationLabel: "4:10",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-017",
@@ -660,7 +660,7 @@ export const playlists = {
         end: 4400,
         duration: 300,
         durationLabel: "5:00",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-018",
@@ -675,7 +675,7 @@ export const playlists = {
         end: 4700,
         duration: 300,
         durationLabel: "5:00",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       },
       {
         id: "ms-019",
@@ -690,7 +690,7 @@ export const playlists = {
         end: 5240,
         duration: 540,
         durationLabel: "9:00",
-        cover: "https://img.youtube.com/vi/SFJeglBF5cg/hqdefault.jpg"
+        cover: "https://img.youtube.com/vi/SFJeglBF5cg/mqdefault.jpg"
       }
     ]
   },
@@ -716,7 +716,7 @@ export const playlists = {
         end: 180,
         duration: 180,
         durationLabel: "3:00",
-        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
         description: "Lively celebratory processional groove played during Rathyatra and early festival marches.",
         bengaliDesc: "রথযাত্রা ও উৎসব শোভাযাত্রার প্রাণবন্ত ও আনন্দঘন প্রারম্ভিক তাল।"
       },
@@ -732,7 +732,7 @@ export const playlists = {
         end: 360,
         duration: 180,
         durationLabel: "3:00",
-        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
         description: "Emotional welcoming beats played when Maa Durga enters the Natmandir.",
         bengaliDesc: "বোধন ও ঠাকুর বরণের সময় খাঁটি কাঁসর ও ঢাকের আবেগময় আগমনী বোল।"
       },
@@ -748,7 +748,7 @@ export const playlists = {
         end: 600,
         duration: 240,
         durationLabel: "4:00",
-        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
         description: "Fast, electrifying tempo matching smoky coconut-husk dhunuchi dances.",
         bengaliDesc: "ধুনুচি নাচের সাথে কাঁসর-ঘণ্টার দ্রুত ও উন্মাদনাময় তাল।"
       },
@@ -764,7 +764,7 @@ export const playlists = {
         end: 840,
         duration: 240,
         durationLabel: "4:00",
-        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
         description: "Intense climactic rhythmic surge during Ashtami-Navami junction.",
         bengaliDesc: "অষ্টমী ও নবমীর সন্ধিক্ষণে চামুণ্ডা রূপের আবাহনে ১০৮ প্রদীপের মহাতাল।"
       },
@@ -780,7 +780,7 @@ export const playlists = {
         end: 1100,
         duration: 260,
         durationLabel: "4:20",
-        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
         description: "Bittersweet victory beats echoing through riverbank farewell marches.",
         bengaliDesc: "দশমীর সিঁদুর খেলা ও গঙ্গাবক্ষে বিসর্জনের বিদায়ী সুর।"
       },
@@ -796,7 +796,7 @@ export const playlists = {
         end: 1320,
         duration: 220,
         durationLabel: "3:40",
-        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+        cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
         description: "Virtuosic exhibition of intricate stick rudiments and syncopations.",
         bengaliDesc: "ঢাকের জটিল কাঠির বোল ও নিপুণ সাবেকি বোলবাণীর যুগলবন্দী।"
       }
@@ -998,7 +998,7 @@ export const liveDhakMeta = {
   bengaliTitle: "ঐতিহ্যবাহী সাবেকি ঢাকের বিভিন্ন বোল ও বাদন শৈলী",
   totalDuration: 109,
   totalParts: 6,
-  cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+  cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
   sourceUrl: "https://www.youtube.com/watch?v=8EA8JrDMZbM"
 };
 
@@ -1020,7 +1020,7 @@ export const authenticLiveDhakParts = [
     style: "procession_swing",
     styleLabel: "শোভাযাত্রার বোল",
     videoId: "8EA8JrDMZbM",
-    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
     description: "Processional driving swing with heavy bass pulses. Stately forward momentum traditionally played during sacred Ratha Yatra and temple deity processions.",
     bengaliDesc: "রথযাত্রা ও দেবীর শোভাযাত্রায় বাজানো গুরুগম্ভীর দোলায়িত বোল। এক কাঠির ভারী বেস ও কঞ্চির ছন্দবদ্ধ কাঁপনে চতুর্দিক মুখরিত হয়ে ওঠে।",
     acousticDetails: "80Hz deep barrel hide resonance, locked swing groove on beats 1 & 3, driving Kanchi snaps."
@@ -1042,7 +1042,7 @@ export const authenticLiveDhakParts = [
     style: "ak_kathi",
     styleLabel: "এক কাঠি বরণ",
     videoId: "8EA8JrDMZbM",
-    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
     description: "Reverent Ak-kathi welcoming beat for Mother Durga's arrival at the Natmandir. Resonant single-hand bass resonance with disciplined bamboo stick punctuation.",
     bengaliDesc: "দেবী বোধন ও নবপত্রিকা বরণের পবিত্র আগমনী লয়। এক হাতের গম্ভীর বেস ও অন্য হাতে কঞ্চির অবিরাম নিয়ন্ত্রিত বোলে দেবীর আবাহন সূচিত হয়।",
     acousticDetails: "Deep open Dha pulse (74Hz), wrist damping control, solemn welcoming cadence."
@@ -1064,7 +1064,7 @@ export const authenticLiveDhakParts = [
     style: "duk_kathi",
     styleLabel: "দুক কাঠি আরতি",
     videoId: "8EA8JrDMZbM",
-    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
     description: "High-energy syncopated polyrhythms with Dhuno smoke and Kanshor. Twin bamboo sticks create blistering rolls locking with evening incense dancers.",
     bengaliDesc: "সন্ধ্যা আরতির সময় ধুনুচি নৃত্যের উন্মাদনাময় দ্রুত বোল। জোড়া কঞ্চির ক্ষিপ্র আঘাতে কাঁসর ঘণ্টার সাথে সৃষ্টি হয় সম্মোহনী ছন্দ।",
     acousticDetails: "High tension 2.1kHz Kanchi crackles, interlocking syncopated bell tones, electrifying groove."
@@ -1087,7 +1087,7 @@ export const authenticLiveDhakParts = [
     style: "accelerando",
     styleLabel: "মহোৎসব চরম লয়",
     videoId: "8EA8JrDMZbM",
-    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
     description: "Thunderous rolling accelerando and dramatic drum rolls played as 108 clay lamps and blue lotuses are offered to Devi Chamunda.",
     bengaliDesc: "সন্ধিপূজার মাহেন্দ্রক্ষণে ১০৮ পদ্ম ও প্রদীপ নিবেদনের চরম মুহূর্ত। বিদ্যুৎগতির রোল ও ক্রমাগত লয় বৃদ্ধি এক স্বর্গীয় পরিবেশ সৃষ্টি করে।",
     acousticDetails: "Rapid double-stick tremolo, continuous accelerando crescendo, explosive dynamic range."
@@ -1109,7 +1109,7 @@ export const authenticLiveDhakParts = [
     style: "bisarjan_swing",
     styleLabel: "বিসর্জন দোল",
     videoId: "8EA8JrDMZbM",
-    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
     description: "Fast, joyous yet emotional farewell groove for Maa Durga's immersion procession to the holy Ganges. Deep syncopation with infectious festival bounce.",
     bengaliDesc: "দেবী বিসর্জনের আবেগঘন কিন্তু প্রাণবন্ত বিদায় বোল। ভারী খটকা ও দোদুল নাচের তালে ভক্তদের কণ্ঠে ধ্বনিত হয় 'আসছে বছর আবার হবে'।",
     acousticDetails: "Heavy syncopated bass on beats 1 & 4, shimmering high-register stick dance, emotional swing."
@@ -1131,7 +1131,7 @@ export const authenticLiveDhakParts = [
     style: "jugalbandi_solo",
     styleLabel: "যুগলবন্দী একক",
     videoId: "8EA8JrDMZbM",
-    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/hqdefault.jpg",
+    cover: "https://img.youtube.com/vi/8EA8JrDMZbM/mqdefault.jpg",
     description: "Virtuosic solo showing wrist damping, ghost notes, and lightning-fast bamboo stick snaps. A masterclass in authentic Bengali Dhak mastery.",
     bengaliDesc: "ঢাকের খাঁটি শিল্পকলার প্রদর্শনী। কব্জির নিপুণ নিয়ন্ত্রণ, মিউটেড খটকা ও দ্রুতগতির কঞ্চি চাট্টির এক অনুপম যুগলবন্দী একক পরিবেশনা।",
     acousticDetails: "Micro-articulated finger mutes, lightning 16th-note stick snaps, full acoustic range showcase."

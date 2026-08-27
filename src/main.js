@@ -822,7 +822,7 @@ function updateDynamicIslandState() {
     if (islandArtistName) islandArtistName.textContent = track?.artist || (lang === 'bn' ? 'মন্ডল বাড়ি রেডিও' : 'Mondal Bari Radio');
     if (islandArtImg) {
       islandArtImg.src = getTrackThumbnail(track);
-      islandArtImg.onerror = () => { islandArtImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg'; };
+      islandArtImg.onerror = () => { islandArtImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/mqdefault.jpg'; };
     }
   } else {
     if (idleState) idleState.style.display = 'flex';
@@ -1090,14 +1090,14 @@ function getCurrentTrack() {
 }
 
 function getTrackThumbnail(track) {
-  if (!track) return 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg';
+  if (!track) return 'https://img.youtube.com/vi/xlElO06nQy8/mqdefault.jpg';
   if (track.cover && typeof track.cover === 'string' && track.cover.startsWith('http') && track.cover.length > 10 && track.cover !== 'https:') {
     return track.cover;
   }
   if (track.videoId && typeof track.videoId === 'string' && track.videoId.length >= 6) {
-    return `https://img.youtube.com/vi/${track.videoId}/hqdefault.jpg`;
+    return `https://img.youtube.com/vi/${track.videoId}/mqdefault.jpg`;
   }
-  return 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg';
+  return 'https://img.youtube.com/vi/xlElO06nQy8/mqdefault.jpg';
 }
 
 function updatePlayerUI(track) {
@@ -1121,7 +1121,7 @@ function updatePlayerUI(track) {
   if (artistEl) artistEl.textContent = displayArtist;
   if (coverImg) {
     coverImg.src = displayCover;
-    coverImg.onerror = () => { coverImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg'; };
+    coverImg.onerror = () => { coverImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/mqdefault.jpg'; };
   }
   if (timeEl) timeEl.textContent = `0:00 / ${displayDuration}`;
   if (launcherText) launcherText.textContent = displayPill;
@@ -1139,7 +1139,7 @@ function updatePlayerUI(track) {
   if (mobArtistEl) mobArtistEl.textContent = displayArtist;
   if (mobCoverImg) {
     mobCoverImg.src = displayCover;
-    mobCoverImg.onerror = () => { mobCoverImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg'; };
+    mobCoverImg.onerror = () => { mobCoverImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/mqdefault.jpg'; };
   }
 
   // Dynamic Island UI Sync
@@ -1248,7 +1248,7 @@ function renderPlaylistTracks(playlistKey) {
           </div>
         ` : numLabel}
       </span>
-      <img class="track-row-thumb" src="${rowCover}" alt="${rowTitle}" loading="lazy" onerror="this.onerror=null; this.src='https://img.youtube.com/vi/xlElO06nQy8/hqdefault.jpg';" />
+        <img class="track-row-thumb" src="${rowCover}" alt="${rowTitle}" loading="lazy" decoding="async" width="53" height="40" onerror="this.onerror=null; this.src='https://img.youtube.com/vi/xlElO06nQy8/mqdefault.jpg';" />
       <div class="track-row-info">
         <div class="track-row-title">${rowTitle}</div>
         <div class="track-row-artist">${rowArtist}</div>
@@ -1540,7 +1540,7 @@ function createRiverCardElement(item) {
   const likeCount = getPhotoLikeCount(item.id, item.likes || 18);
 
   card.innerHTML = `
-    <img class="river-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" />
+    <img class="river-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" width="380" height="214" />
     <div class="river-card-overlay">
       <div class="river-card-top">
         <span class="river-category-pill">${category}</span>
@@ -1850,7 +1850,7 @@ function renderGrandGalleryGrid(isNewUpload = false) {
 
     card.innerHTML = `
       <div class="gallery-card-img-wrap">
-        <img class="gallery-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" />
+        <img class="gallery-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" width="380" height="240" />
         <span class="gallery-card-badge">${category}</span>
         ${item.isCommunity ? `<span class="gallery-card-community-badge">${communityLabel}</span>` : ''}
       </div>
@@ -1998,7 +1998,7 @@ function renderOnnotaGrid() {
 
     card.innerHTML = `
       <div class="onnota-card-img-wrap">
-        <img class="onnota-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" />
+        <img class="onnota-card-img" src="${item.src}" alt="${title}" loading="lazy" decoding="async" width="380" height="214" />
         <span class="onnota-card-badge">${category}</span>
         ${item.tag ? `<span class="onnota-card-tag">${item.tag}</span>` : ''}
       </div>
