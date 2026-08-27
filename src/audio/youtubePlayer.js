@@ -16,10 +16,14 @@ class YouTubeAudioPlayer {
     this.listeners = new Set();
     this.volume = 85;
     this.isMuted = false;
+    this.initPromise = null;
   }
 
   init(containerId = 'yt-hidden-player') {
-    return new Promise((resolve) => {
+    if (this.isReady && this.player) return Promise.resolve();
+    if (this.initPromise) return this.initPromise;
+
+    this.initPromise = new Promise((resolve) => {
       let container = document.getElementById(containerId);
       if (!container) {
         container = document.createElement('div');
@@ -54,6 +58,9 @@ class YouTubeAudioPlayer {
             events: {
               onReady: () => {
                 this.isReady = true;
+                if (this.player && typeof this.player.unMute === 'function') {
+                  this.player.unMute();
+                }
                 if (this.player && typeof this.player.setVolume === 'function') {
                   this.player.setVolume(this.getEffectiveVolume());
                 }
@@ -61,6 +68,8 @@ class YouTubeAudioPlayer {
                   const pt = this.pendingTrack;
                   this.pendingTrack = null;
                   this.loadTrack(pt.track, pt.playlistKey, pt.autoplay);
+                } else if (this.isPlaying && this.currentTrack) {
+                  this.loadTrack(this.currentTrack, this.currentPlaylistKey, true);
                 }
                 resolve();
               },
@@ -82,7 +91,11 @@ class YouTubeAudioPlayer {
       if (window.YT && window.YT.Player) {
         onReadyCallback();
       } else {
-        window.onYouTubeIframeAPIReady = onReadyCallback;
+        const prevOnReady = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = () => {
+          if (typeof prevOnReady === 'function') prevOnReady();
+          onReadyCallback();
+        };
         if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
           const tag = document.createElement('script');
           tag.src = 'https://www.youtube.com/iframe_api';
@@ -91,6 +104,8 @@ class YouTubeAudioPlayer {
         }
       }
     });
+
+    return this.initPromise;
   }
 
   subscribe(callback) {
@@ -160,6 +175,7 @@ class YouTubeAudioPlayer {
 
     if (!this.player || !this.isReady || typeof this.player.loadVideoById !== 'function') {
       this.pendingTrack = { track, playlistKey, autoplay };
+      this.init();
       return;
     }
 
@@ -219,8 +235,11 @@ class YouTubeAudioPlayer {
         if (typeof this.player.setVolume === 'function') this.player.setVolume(this.getEffectiveVolume());
         this.player.playVideo();
       } catch (e) {}
-    } else if (this.currentTrack) {
-      this.loadTrack(this.currentTrack, this.currentPlaylistKey, true);
+    } else {
+      this.init();
+      if (this.currentTrack) {
+        this.loadTrack(this.currentTrack, this.currentPlaylistKey, true);
+      }
     }
 
     this.notify({
