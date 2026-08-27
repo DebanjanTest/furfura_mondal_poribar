@@ -2974,7 +2974,14 @@ function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
   if (!welcomeOverlay) return;
 
-
+  // If user has already entered in this session or previously, skip welcome modal immediately
+  const hasEntered = sessionStorage.getItem('mondal_bari_welcome_entered') === 'true' || 
+                     localStorage.getItem('mondal_bari_welcome_entered') === 'true' ||
+                     document.documentElement.classList.contains('welcome-skipped');
+  if (hasEntered) {
+    welcomeOverlay.remove();
+    return;
+  }
 
   const langBnBtn = document.getElementById('welcome-lang-bn');
   const langEnBtn = document.getElementById('welcome-lang-en');
@@ -3071,6 +3078,11 @@ function initWelcomeModal() {
       console.warn('Audio preference init notice on enter:', err);
     } finally {
       // 3. Always Animate away modal and safely unlock view
+      try {
+        sessionStorage.setItem('mondal_bari_welcome_entered', 'true');
+        localStorage.setItem('mondal_bari_welcome_entered', 'true');
+      } catch (_) {}
+
       if (welcomeOverlay) {
         welcomeOverlay.classList.add('hidden');
         setTimeout(() => {

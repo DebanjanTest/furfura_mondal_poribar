@@ -43,11 +43,54 @@ let pendingOnnotaBase64 = null;
 document.addEventListener('DOMContentLoaded', () => {
   initPortalLanguage();
   initPortalAuth();
+  initReturnToMainWebsite();
   initPortalTabs();
   initGalleryManager();
   initOnnotaManager();
   initAnnouncementsManager();
 });
+
+/* ==========================================================================
+   RETURN TO MAIN WEBSITE NAVIGATION HANDLER (ZERO FRESH POPUP)
+   ========================================================================== */
+
+function initReturnToMainWebsite() {
+  const returnLinks = document.querySelectorAll('.nav-site-link, .portal-back-link, #btn-portal-main-site, #btn-auth-back-main, #btn-denied-return-home, a[href="/"]');
+  
+  const handleReturn = (e) => {
+    e?.preventDefault?.();
+    
+    // Ensure the main site knows we are already entered in this session
+    try {
+      sessionStorage.setItem('mondal_bari_welcome_entered', 'true');
+      localStorage.setItem('mondal_bari_welcome_entered', 'true');
+    } catch (_) {}
+
+    // 1. If portal was opened in a new tab / window from the main website, focus opener & close portal
+    if (window.opener && !window.opener.closed) {
+      try {
+        window.opener.focus();
+        window.close();
+        return;
+      } catch (err) {
+        console.warn('Could not focus opener tab:', err);
+      }
+    }
+
+    // 2. If navigated in the same tab and document.referrer points to our site, go back in history
+    if (document.referrer && document.referrer.includes(window.location.origin) && window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+
+    // 3. Fallback: navigate in the same tab to '/' without opening a fresh new tab
+    window.location.href = '/';
+  };
+
+  returnLinks.forEach((link) => {
+    link.addEventListener('click', handleReturn);
+  });
+}
 
 /* ==========================================================================
    1. LANGUAGE SELECTION & LOCALIZATION ENGINE
