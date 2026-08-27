@@ -124,10 +124,10 @@ export const translations = {
     "river_row2_title": "ধুনুচি নৃত্য ও সাবেকি ঢাকের তাল",
     "river_row3_title": "পারিবারিক মিলনমেলা ও শারদীয় আনন্দ",
 
-    // Others by Onnota Section
-    "onnota_badge": "বিশেষ প্রদর্শনী • অন্যতা",
-    "onnota_badge_title": "বিশেষ প্রদর্শনী • অন্যতা",
-    "onnota_title": "অন্যান্য সৃষ্টি — অন্যতা",
+    // Others by Onnota / Public Uploads Section
+    "onnota_badge": "পাবলিক প্রদর্শনী • আপলোড",
+    "onnota_badge_title": "পাবলিক প্রদর্শনী • আপলোড",
+    "onnota_title": "পাবলিক আপলোড",
     "onnota_subtitle": "শারদ সাহিত্যের স্মৃতিচারণ, উৎসব আলোকচিত্র, সাবেকি পিটুলি আলপনা ও ডিজিটাল ক্যানভাস",
     "onnota_filter_all": "সমস্ত সৃষ্টি",
     "onnota_filter_art": "চিত্রশিল্প ও অলঙ্করণ",
@@ -190,8 +190,8 @@ export const translations = {
     "nav_invite_label": "আমন্ত্রণপত্র",
     "nav_river_title": "দৃষ্টিসুখ ও স্মৃতিধারা",
     "nav_river_label": "ফটো রিভার",
-    "nav_onnota_title": "অন্যান্য সৃষ্টি (অন্যতা)",
-    "nav_onnota_label": "অন্যতা",
+    "nav_onnota_title": "পাবলিক আপলোড (Public Uploads)",
+    "nav_onnota_label": "পাবলিক আপলোড",
     "nav_gallery_title": "ঐতিহ্যের ফটো গ্যালারি",
     "nav_gallery_label": "ফটো গ্যালারি",
 
@@ -597,11 +597,11 @@ export const translations = {
     "river_row2_title": "Dhunuchi Dance & Heritage Dhak Beats",
     "river_row3_title": "Family Reunion & Festive Celebrations",
 
-    // Others by Onnota Section
-    "onnota_badge": "Special Showcase • Onnota",
-    "onnota_badge_title": "Special Showcase • Onnota",
-    "onnota_title": "Creative Showcase — Others by Onnota",
-    "onnota_subtitle": "A curated showcase of Bengali festive literature, photography, traditional Alpana art, and fine illustrations",
+    // Others by Onnota / Public Uploads Section
+    "onnota_badge": "Public Showcase • Uploads",
+    "onnota_badge_title": "Public Showcase • Uploads",
+    "onnota_title": "Public Uploads",
+    "onnota_subtitle": "A community collection of Bengali festive literature, photography, traditional Alpana art, and fine illustrations",
     "onnota_filter_all": "All Creations",
     "onnota_filter_art": "Fine Art & Illustrations",
     "onnota_filter_photography": "Festive Photography",
@@ -663,8 +663,8 @@ export const translations = {
     "nav_invite_label": "Invitation",
     "nav_river_title": "Photo River",
     "nav_river_label": "Photo River",
-    "nav_onnota_title": "Others by Onnota",
-    "nav_onnota_label": "Onnota",
+    "nav_onnota_title": "Public Uploads",
+    "nav_onnota_label": "Uploads",
     "nav_gallery_title": "Heritage Gallery",
     "nav_gallery_label": "Gallery",
 
