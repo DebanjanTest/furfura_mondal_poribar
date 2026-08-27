@@ -23,7 +23,16 @@
       ]
     },
     {
-      "source": "/(bg|bg-mobile|invitation|music)/(.*)",
+      "source": "/(bg|bg-mobile|invitation|gallery|onnota|images|assets|music)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(webp|png|jpg|jpeg|svg|woff2|ico|css|js)",
       "headers": [
         {
           "key": "Cache-Control",

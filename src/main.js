@@ -101,12 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
   safeInit('Particles', initParticles);
   safeInit('SectionScrollLocking', initSectionScrollLocking);
 
-  // Initialize YouTube Audio Player
-  ytAudioPlayer.init().then(() => {
-    console.log('Mondal Barir Pujo Audio Player ready!');
-  }).catch((e) => {
-    console.warn('YouTube Player initialization deferred:', e);
-  });
+  // Lazy-initialize YouTube Audio Player during idle to eliminate 1.2MB 3rd party blocking on initial mobile paint
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(() => {
+      ytAudioPlayer.init().catch(() => {});
+    }, { timeout: 3500 });
+  } else {
+    setTimeout(() => {
+      ytAudioPlayer.init().catch(() => {});
+    }, 2500);
+  }
 });
 
 /* ==========================================================================
