@@ -1018,7 +1018,7 @@ export const translations = {
   }
 };
 
-let currentLanguage = 'bn';
+let currentLanguage = 'en';
 
 /**
  * Get the current active language ('bn' or 'en')
@@ -1028,13 +1028,13 @@ export function getLanguage() {
 }
 
 /**
- * Retrieve saved language preference from localStorage with graceful fallback
+ * Retrieve saved language preference from localStorage with graceful fallback (Default: English 'en')
  */
 export function getSavedLanguage() {
   try {
-    return localStorage.getItem('mondal_bari_preferred_lang') || localStorage.getItem('mondal_pujo_lang') || 'bn';
+    return localStorage.getItem('mondal_bari_preferred_lang') || localStorage.getItem('mondal_pujo_lang') || 'en';
   } catch (e) {
-    return 'bn';
+    return 'en';
   }
 }
 

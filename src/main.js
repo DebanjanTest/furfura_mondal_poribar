@@ -71,7 +71,7 @@ async function logoutUser() {
 
 // Application State
 const state = {
-  lang: 'bn', // Current active UI language ('bn' or 'en')
+  lang: getSavedLanguage() || 'en', // Current active UI language (Default: 'en' English)
   activeVibe: 'auto', // 'auto' or 'early-morning', 'morning', etc.
   currentVibeTime: 'early-morning',
   currentPlaylistKey: 'durgaPuja',
@@ -368,11 +368,14 @@ function initFirebaseAuthUI() {
     closeModal('google-signin-modal');
   });
 
-    window.completePujoUserLogin = function completeUserLogin(user) {
+  window.completePujoUserLogin = function completeUserLogin(user) {
     if (!user) return;
-    const lang = getLanguage();
+    const lang = getLanguage() || 'en';
     setStoredUser(user);
-    localStorage.setItem('mondal_bari_welcome_entered', 'true');
+    try {
+      localStorage.setItem('mondal_bari_welcome_entered', 'true');
+      sessionStorage.setItem('mondal_bari_welcome_entered', 'true');
+    } catch (_) {}
 
     // 1. Immediately Close Google Signin Modal Card
     const googleModal = document.getElementById('google-signin-modal');
@@ -394,24 +397,48 @@ function initFirebaseAuthUI() {
     // 2. Remove welcome modal if open
     const welcomeOverlay = document.getElementById('welcome-modal-overlay');
     if (welcomeOverlay) {
-      welcomeOverlay.remove();
+      welcomeOverlay.classList.add('hidden');
+      try { welcomeOverlay.remove(); } catch (_) {}
     }
 
     // 3. Update all UI elements & Dynamic Island
     updateAuthUI(user);
 
-    // 4. Redirect / Smoothly Scroll to Hero Section
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    // 4. Auto-start audio with Track 1 (Mondol Bari Ambient) if sound enabled / not playing
+    if (!state.isAudioPlaying && state.soundEnabled !== false) {
+      try {
+        state.soundEnabled = true;
+        state.isAudioPlaying = true;
+        updatePlayPauseButton(true);
+        updateArtVinylAnimation(true);
+        updateEqualizerAnimation();
+        updateDynamicIslandState();
+
+        ytAudioPlayer.setMute(false);
+        ytAudioPlayer.setVolume(85);
+        if (typeof audioEngine.resumeAudioContext === 'function') {
+          audioEngine.resumeAudioContext();
+        }
+
+        const track = getCurrentTrack();
+        ytAudioPlayer.loadTrack(track, state.currentPlaylistKey, true);
+      } catch (err) {
+        console.warn('Audio auto-play on login notice:', err);
+      }
+    }
+
+    // 5. Automatically Land / Smoothly Scroll to Hero Section
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     const heroEl = document.getElementById('hero-section') || document.querySelector('.hero-viewport-section');
     if (heroEl) {
-      heroEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      heroEl.scrollIntoView({ behavior: 'instant', block: 'start' });
     }
 
     if (typeof window.renderGoogleAccountsList === 'function') {
       window.renderGoogleAccountsList();
     }
 
-    // 5. Celebration Toast & Chime
+    // 6. Celebration Toast & Chime
     const welcomeMsg = lang === 'bn' 
       ? `Google সাইন ইন সফল হয়েছে! স্বাগতম, ${user.displayName} 🌸` 
       : `Signed in with Google! Welcome, ${user.displayName} 🌸`;
@@ -3028,6 +3055,16 @@ function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
   if (!welcomeOverlay) return;
 
+  // Check if user has already entered or signed in in this browser session
+  const hasEntered = localStorage.getItem('mondal_bari_welcome_entered') === 'true' || sessionStorage.getItem('mondal_bari_welcome_entered') === 'true';
+  const storedUser = getStoredUser();
+
+  if (hasEntered || storedUser) {
+    welcomeOverlay.classList.add('hidden');
+    try { welcomeOverlay.remove(); } catch (_) {}
+    return;
+  }
+
   // Pre-cache critical images & audio in background
   preloadCriticalAssets();
 
@@ -3038,7 +3075,8 @@ function initWelcomeModal() {
   const enterBtn = document.getElementById('btn-welcome-enter');
   const welcomeGoogleBtn = document.getElementById('btn-welcome-google-signin');
 
-  let selectedLang = getLanguage() || 'bn';
+  // Default selection: English ('en') and with sound ('yes')
+  let selectedLang = getSavedLanguage() || 'en';
   let selectedSound = 'yes';
 
   // Sync initial state of welcome modal buttons to current language
@@ -3057,10 +3095,10 @@ function initWelcomeModal() {
 
   // Language choice buttons
   const handleLangChoice = (lang) => {
-    selectedLang = lang;
-    state.lang = lang;
-    setLanguage(lang);
-    syncWelcomeLangButtons(lang);
+    selectedLang = lang || 'en';
+    state.lang = selectedLang;
+    setLanguage(selectedLang);
+    syncWelcomeLangButtons(selectedLang);
   };
 
   // Bind click/touch on welcome language buttons
@@ -3074,11 +3112,11 @@ function initWelcomeModal() {
 
   // Sound choice buttons
   const updateSoundChoices = (sound) => {
-    selectedSound = sound;
-    soundYesBtn?.classList.toggle('active', sound === 'yes');
-    soundYesBtn?.setAttribute('aria-pressed', sound === 'yes' ? 'true' : 'false');
-    soundNoBtn?.classList.toggle('active', sound === 'no');
-    soundNoBtn?.setAttribute('aria-pressed', sound === 'no' ? 'true' : 'false');
+    selectedSound = sound || 'yes';
+    soundYesBtn?.classList.toggle('active', selectedSound === 'yes');
+    soundYesBtn?.setAttribute('aria-pressed', selectedSound === 'yes' ? 'true' : 'false');
+    soundNoBtn?.classList.toggle('active', selectedSound === 'no');
+    soundNoBtn?.setAttribute('aria-pressed', selectedSound === 'no' ? 'true' : 'false');
   };
 
   soundYesBtn?.addEventListener('click', () => updateSoundChoices('yes'));
@@ -3090,11 +3128,12 @@ function initWelcomeModal() {
     e?.stopPropagation?.();
 
     try {
-      // 1. Save and apply chosen language
-      state.lang = selectedLang;
-      setLanguage(selectedLang);
+      // 1. Save and apply chosen language (default 'en')
+      const finalLang = selectedLang || 'en';
+      state.lang = finalLang;
+      setLanguage(finalLang);
 
-                  // 2. Handle audio based on user choice
+      // 2. Handle audio based on user choice (default 'yes' -> Track 1: Mondol Bari Ambient)
       if (selectedSound === 'yes') {
         state.soundEnabled = true;
         state.isAudioPlaying = true;
@@ -3126,7 +3165,7 @@ function initWelcomeModal() {
     } catch (err) {
       console.warn('Audio preference init notice on enter:', err);
     } finally {
-      // 3. Always Animate away modal and safely unlock view
+      // 3. Always mark entered in localStorage and sessionStorage so it NEVER asks again
       try {
         sessionStorage.setItem('mondal_bari_welcome_entered', 'true');
         localStorage.setItem('mondal_bari_welcome_entered', 'true');
@@ -3134,14 +3173,12 @@ function initWelcomeModal() {
 
       if (welcomeOverlay) {
         welcomeOverlay.classList.add('hidden');
-        setTimeout(() => {
-          try { welcomeOverlay.remove(); } catch (_) {}
-        }, 350);
+        try { welcomeOverlay.remove(); } catch (_) {}
       }
 
       // 4. Always ensure viewport starts at the top of Hero section
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      const heroEl = document.getElementById('hero-section');
+      const heroEl = document.getElementById('hero-section') || document.querySelector('.hero-viewport-section');
       if (heroEl) {
         heroEl.scrollIntoView({ behavior: 'instant', block: 'start' });
       }
@@ -3166,18 +3203,20 @@ function initWelcomeModal() {
         };
         setStoredUser(userData);
         updateAuthUI(userData);
+        // Automatically enter site and land on Hero section with default 'en' & with sound
         handleEnterSite();
       }
     } catch (err) {
       console.warn('Welcome Google OAuth notice:', err);
-      // Fallback: Open standard auth modal
-      openModal('google-signin-modal');
+      // Only open fallback modal if it wasn't a manual cancel by user
+      if (err?.code !== 'auth/popup-closed-by-user' && err?.code !== 'auth/cancelled-popup-request') {
+        openModal('google-signin-modal');
+      }
     }
   });
 
   enterBtn?.addEventListener('click', handleEnterSite);
   enterBtn?.addEventListener('touchend', (e) => {
-    // Prevent double firing on fast mobile tap
     if (!welcomeOverlay.classList.contains('hidden')) {
       handleEnterSite(e);
     }
