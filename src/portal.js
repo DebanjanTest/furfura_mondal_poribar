@@ -190,11 +190,9 @@ function updateNavUserInfo(user, role) {
   if (roleBadge) {
     if (role === ROLES.ADMIN) {
       roleBadge.textContent = lang === 'bn' ? 'সুপার অ্যাডমিন' : 'Super Admin';
-      roleBadge.style.borderColor = 'var(--portal-gold)';
       roleBadge.style.color = 'var(--portal-gold)';
     } else {
       roleBadge.textContent = lang === 'bn' ? 'কনটেন্ট এডিটর' : 'Content Editor';
-      roleBadge.style.borderColor = '#60a5fa';
       roleBadge.style.color = '#93c5fd';
     }
   }

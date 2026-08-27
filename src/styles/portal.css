@@ -454,12 +454,19 @@ body.portal-body {
   color: #ffffff;
 }
 
+.nav-role-text,
 .nav-role-badge {
   color: var(--portal-gold);
-  font-size: 0.72rem;
+  font-family: var(--font-bengali-sans);
+  font-size: 0.78rem;
   font-weight: 700;
   cursor: default;
-  border-radius: 4px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  line-height: 1.2;
+  user-select: none;
+  white-space: nowrap;
 }
 
 .nav-user-capsule {
@@ -1198,17 +1205,17 @@ body.portal-body {
     flex-shrink: 0;
   }
 
+  .nav-role-text,
   .nav-role-badge {
-    font-size: 0.64rem;
-    padding: 0.15rem 0.45rem;
-    height: 24px;
-    border-radius: 6px;
-    background: rgba(255, 207, 64, 0.12);
-    border: 1px solid rgba(255, 207, 64, 0.45);
+    font-size: 0.7rem;
+    font-weight: 700;
     color: var(--portal-gold);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    height: auto;
+    line-height: 1.2;
+    margin-right: 0.2rem;
   }
 
   .nav-user-capsule {
