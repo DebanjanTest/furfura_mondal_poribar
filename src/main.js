@@ -82,34 +82,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // --- PHASE 1: CRITICAL IMMEDIATE INITIALIZATION (FCP & LCP Priority) ---
   safeInit('WelcomeModal', initWelcomeModal);
   safeInit('Atmosphere', initAtmosphere);
-  safeInit('DynamicIsland', initDynamicIsland);
-  safeInit('FirebaseAuthUI', initFirebaseAuthUI);
   safeInit('Countdown', initCountdown);
-  safeInit('OnlineCounter', initOnlineCounter);
-  safeInit('AudioPlayer', initAudioPlayer);
-  safeInit('Modals', initModals);
+  safeInit('DynamicIsland', initDynamicIsland);
   safeInit('LanguageSwitcher', initLanguageSwitcher);
-  safeInit('PujoInfoAndGallery', initPujoInfoAndGallery);
-  safeInit('InvitationSection', initInvitationSection);
-  safeInit('PhotoRiver', initPhotoRiver);
-  safeInit('GrandGallery', initGrandGallery);
-  safeInit('OnnotaSection', initOnnotaSection);
-  safeInit('StoryGenerator', initStoryGenerator);
-  safeInit('KeyboardShortcuts', initKeyboardShortcuts);
-  safeInit('Particles', initParticles);
-  safeInit('SectionScrollLocking', initSectionScrollLocking);
 
-  // Lazy-initialize YouTube Audio Player during idle to eliminate 1.2MB 3rd party blocking on initial mobile paint
+  // --- PHASE 2: SECONDARY INTERACTIVE SYSTEMS (Frame 2) ---
+  requestAnimationFrame(() => {
+    safeInit('Particles', initParticles);
+    safeInit('AudioPlayer', initAudioPlayer);
+    safeInit('Modals', initModals);
+    safeInit('SectionScrollLocking', initSectionScrollLocking);
+    safeInit('OnlineCounter', initOnlineCounter);
+    safeInit('FirebaseAuthUI', initFirebaseAuthUI);
+  });
+
+  // --- PHASE 3: DEFERRED BELOW-THE-FOLD CONTENT (Idle Phase) ---
+  const initDeferredSections = () => {
+    safeInit('InvitationSection', initInvitationSection);
+    safeInit('PhotoRiver', initPhotoRiver);
+    safeInit('GrandGallery', initGrandGallery);
+    safeInit('OnnotaSection', initOnnotaSection);
+    safeInit('StoryGenerator', initStoryGenerator);
+    safeInit('KeyboardShortcuts', initKeyboardShortcuts);
+    safeInit('PujoInfoAndGallery', initPujoInfoAndGallery);
+
+    // Lazy-initialize YouTube Audio Player during idle
+    ytAudioPlayer.init().catch(() => {});
+  };
+
   if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(() => {
-      ytAudioPlayer.init().catch(() => {});
-    }, { timeout: 3500 });
+    window.requestIdleCallback(initDeferredSections, { timeout: 2000 });
   } else {
-    setTimeout(() => {
-      ytAudioPlayer.init().catch(() => {});
-    }, 2500);
+    setTimeout(initDeferredSections, 100);
   }
 });
 

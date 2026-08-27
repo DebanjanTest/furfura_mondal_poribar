@@ -23,20 +23,97 @@
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Galada&family=Hind+Siliguri:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Galada&family=Hind+Siliguri:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
       <link
-        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Galada&family=Hind+Siliguri:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap"
         rel="stylesheet"
       />
     </noscript>
+
+    <!-- Critical Inline Stylesheet for Instant FCP & Speed Index -->
+    <style>
+      :root {
+        --font-bengali-serif: 'Galada', 'DM Serif Display', serif;
+        --font-bengali-sans: 'Hind Siliguri', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --portal-gold: #ffcf40;
+        --heritage-gold: #ffcf40;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #080503;
+        color: #ffffff;
+        font-family: var(--font-bengali-sans);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      .app-wrapper {
+        min-height: 100vh;
+        min-height: 100dvh;
+        position: relative;
+      }
+      .background-container {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: #0d0906;
+      }
+      .bg-picture-layer {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+      .bg-picture-layer.active {
+        opacity: 1;
+      }
+      .bg-layer {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .hero-viewport-section {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        z-index: 10;
+        padding: max(1rem, env(safe-area-inset-top)) 1rem max(1.5rem, env(safe-area-inset-bottom));
+        box-sizing: border-box;
+      }
+      .welcome-modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .welcome-modal-card {
+        max-width: 440px;
+        width: 90%;
+        background: rgba(22, 14, 8, 0.92);
+        border: 1px solid rgba(255, 207, 64, 0.35);
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-sizing: border-box;
+      }
+    </style>
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="/src/styles/main.css" />
@@ -44,8 +121,7 @@
     <!-- Critical LCP Hero Image Preload with High Fetch Priority -->
     <link rel="preload" as="image" href="/bg/mondal-bari-hero.webp" media="(min-width: 769px)" fetchpriority="high" type="image/webp" />
     <link rel="preload" as="image" href="/bg-mobile/mondal-bari-hero-mobile.webp" media="(max-width: 768px)" fetchpriority="high" type="image/webp" />
-    <meta name="build-version" content="1.0.5-2026.08.27-rel" />
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <meta name="build-version" content="1.0.6-2026.08.27-rel" />
   </head>
   <body>
     <div id="app" class="app-wrapper">
@@ -1621,8 +1697,8 @@
 
     <!-- Main Application Entrypoint -->
     <script type="module" src="/src/main.js"></script>
-    <!-- YouTube Hidden Audio Stream Host Container -->
-  <!-- YouTube Audio Stream Host Container (Active in Viewport) -->
-  <div id="yt-hidden-player" aria-hidden="true" style="position:fixed;top:0;left:0;width:240px;height:160px;pointer-events:none;opacity:0.005;z-index:-1;"></div>
-</body>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- YouTube Audio Stream Host Container (Active in Viewport) -->
+    <div id="yt-hidden-player" aria-hidden="true" style="position:fixed;top:0;left:0;width:240px;height:160px;pointer-events:none;opacity:0.005;z-index:-1;"></div>
+  </body>
 </html>
