@@ -984,19 +984,14 @@ function initOnlineCounter() {
    ========================================================================== */
 
 function initAudioPlayer() {
-  // Pre-load YouTube API and initialize audio player
-  ytAudioPlayer.init();
-
-  const warmupAudio = () => {
+  // Lightweight native Web Audio context resume on first touch (0 network bytes)
+  const warmupNativeAudio = () => {
     if (typeof audioEngine.resumeAudioContext === 'function') {
       audioEngine.resumeAudioContext();
     }
-    if (!ytAudioPlayer.isReady) {
-      ytAudioPlayer.init();
-    }
   };
-  document.addEventListener('click', warmupAudio, { once: true });
-  document.addEventListener('touchstart', warmupAudio, { once: true, passive: true });
+  document.addEventListener('click', warmupNativeAudio, { once: true });
+  document.addEventListener('touchstart', warmupNativeAudio, { once: true, passive: true });
 
   const currentList = playlists[state.currentPlaylistKey]?.tracks || [];
   const initialTrack = currentList[0];
@@ -3000,9 +2995,8 @@ function closeAllModals() {
 
 function preloadCriticalAssets() {
   try {
-    // A. Warm up audio systems
+    // A. Warm up native Web Audio engine
     if (typeof audioEngine.init === 'function') audioEngine.init();
-    if (typeof ytAudioPlayer.init === 'function') ytAudioPlayer.init();
 
     // B. Pre-cache critical images in browser cache
     const criticalImages = [
