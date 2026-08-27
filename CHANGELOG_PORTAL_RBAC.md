@@ -1,11 +1,11 @@
-# Mondal Barir Pujo (ফুরফুরা মণ্ডল পরিবার)
+# Mondol Barir Pujo (ফুরফুরা মণ্ডল পরিবার)
 ## Access-Based Control System & Curator Portal Architecture Guide
 
 ---
 
 ### 1. Architectural Overview & 3-Tier Roles
 
-This document outlines the Role-Based Access Control (RBAC) system for the **Mondal Barir Pujo** platform. The system operates on three distinct user roles determined automatically via Google Authentication.
+This document outlines the Role-Based Access Control (RBAC) system for the **Mondol Barir Pujo** platform. The system operates on three distinct user roles determined automatically via Google Authentication.
 
 ```
                     [ User Signs In with Google ]

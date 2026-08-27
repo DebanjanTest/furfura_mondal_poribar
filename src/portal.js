@@ -1,4 +1,4 @@
-// Heritage Curator Portal Controller for Mondal Barir Pujo
+// Heritage Curator Portal Controller for Mondol Barir Pujo
 // Built with Ponytail Architectural, Internationalization (i18n), & Accessibility Standards
 
 import {
@@ -333,7 +333,7 @@ function initGalleryManager() {
     const titleEn = document.getElementById('input-title-en')?.value.trim();
     const category = document.getElementById('select-category')?.value;
     const target = document.getElementById('select-target')?.value;
-    const author = document.getElementById('input-author')?.value.trim() || (lang === 'bn' ? 'ফুরফুরা মণ্ডল পরিবার' : 'Furfura Mondal Poribar');
+    const author = document.getElementById('input-author')?.value.trim() || (lang === 'bn' ? 'ফুরফুরা মণ্ডল পরিবার' : 'Furfura Mondol Poribar');
 
     const catLabelsBn = {
       heritage: 'ঐতিহ্য ও পরিবার',
@@ -407,7 +407,7 @@ async function renderCuratedGalleryList(query = '') {
           <div class="item-meta-row">
             <span class="item-cat-badge">${item.categoryLabel || item.category}</span>
             <span>•</span>
-            <span>${item.author || (lang === 'bn' ? 'মণ্ডল পরিবার' : 'Mondal Poribar')}</span>
+            <span>${item.author || (lang === 'bn' ? 'মণ্ডল পরিবার' : 'Mondol Poribar')}</span>
           </div>
         </div>
       </div>

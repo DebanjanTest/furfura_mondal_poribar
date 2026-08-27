@@ -1,12 +1,12 @@
-# 🌸 Mondal Barir Pujo 2026 (মন্ডল বাড়ির পুজো — ফুরফুরা মণ্ডল পরিবার)
+# 🌸 Mondol Barir Pujo 2026 (মন্ডল বাড়ির পুজো — ফুরফুরা মণ্ডল পরিবার)
 ## Master Platform Architecture, Design System & Comprehensive Feature Map
 
 ---
 
 ### 🏛️ Executive Cultural Heritage & Product Overview
-- **Pujo Heritage**: **মন্ডল বাড়ির পুজো / ফুরফুরা মণ্ডল পরিবার (Furfura Mondal Poribar)**
+- **Pujo Heritage**: **মন্ডল বাড়ির পুজো / ফুরফুরা মণ্ডল পরিবার (Furfura Mondol Poribar)**
 - **Living Legacy**: **150+ Years (১৮৭০-এর দশক থেকে নিরবচ্ছিন্ন বনেদি ঐতিহ্য)**
-- **Location**: Mondal Bari Natmandir, Furfura, Hooghly, West Bengal, India
+- **Location**: Mondol Bari Natmandir, Furfura, Hooghly, West Bengal, India
 - **Official Social Channel**: **[@furfura_mondal_poribar](https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp)**
 - **Core Design System**: **Heritage Artisan UI (`heritage-artisan-ui`)** — A fusion of authentic Bengali temple warmth (Alpona Gold, Sindoor Vermilion, Natmandir Obsidian Lacquer, Shiuli White) with Apple-grade frosted glass translucent depth (`blur(28px) saturate(180%)`) and fluid Human Interface Guideline (HIG) ergonomics.
 
@@ -102,7 +102,7 @@
 - **Quick Action Hub Drawer**:
   - 5 Quick Trigger Pills: 🐚 শাঁখ, 🥁 ঢাক, 📻 রেডিও, 📸 স্টোরি, 🖼️ গ্যালারি (smoothly scrolls to gallery), 🎨 অন্যতা.
   - 6 Atmosphere Switcher Chips (`ভোর`, `সকাল`, `দুপুর`, `সন্ধ্যা`, `রাত`, `অটো`).
-  - One-tap link to Mondal Bari 150+ Year Heritage Dossier.
+  - One-tap link to Mondol Bari 150+ Year Heritage Dossier.
 
 ---
 
@@ -252,7 +252,7 @@
 | **`P`** | Open Curated Radio Playlists Modal |
 | **`I`** | Open Instagram Story Generator Modal |
 | **`F`** | Toggle Falling Shiuli Flowers Canvas Particle Effect |
-| **`M`** | Open Mondal Barir Pujo Heritage & Schedule Modal |
+| **`M`** | Open Mondol Barir Pujo Heritage & Schedule Modal |
 | **`1` – `6`** | Trigger Physical Modeling Dhak Pads (Dha, Dyang, Ta, Kut, Gurgur, Kanshor) |
 | **`←` / `→`** | Previous / Next Track in Radio or Lightbox Photo |
 | **`Esc`** | Close Active Dialog / Modal / Lightbox |

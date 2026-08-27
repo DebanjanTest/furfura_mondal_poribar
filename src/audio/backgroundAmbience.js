@@ -7,7 +7,7 @@ import { ytAudioPlayer } from './youtubePlayer.js';
 // User official link: https://youtu.be/DZ21CSg22nc
 export const DEFAULT_AMBIENT_CONFIG = {
   videoId: 'DZ21CSg22nc', // User requested YouTube ambient audio stream
-  title: 'মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondal Bari Ambient)',
+  title: 'মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondol Bari Ambient)',
   artist: 'ফুরফুরা মণ্ডল পরিবার আবহ',
   lowVolume: 80, // 18% gentle smooth low tone
   fadeInDurationMs: 2500
@@ -52,7 +52,7 @@ class BackgroundAmbienceEngine {
         id: 'bg-ambient-01',
         title: DEFAULT_AMBIENT_CONFIG.title,
         title_bn: 'মন্ডল বাড়ি শারদ আবহ সঙ্গীত',
-        title_en: 'Mondal Bari Festive Ambient',
+        title_en: 'Mondol Bari Festive Ambient',
         artist: DEFAULT_AMBIENT_CONFIG.artist,
         videoId: this.videoId,
         start: 0,

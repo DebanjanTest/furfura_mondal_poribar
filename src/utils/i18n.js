@@ -1,4 +1,4 @@
-// Bilingual Translation Dictionary & Localization Engine for Mondal Barir Pujo
+// Bilingual Translation Dictionary & Localization Engine for Mondol Barir Pujo
 // Pure Bengali (বাংলা) with zero English in bn mode, and Natural English (English) in en mode.
 
 export const translations = {
@@ -525,12 +525,12 @@ export const translations = {
   },
   en: {
     // Brand & Dynamic Island
-    "brand_title": "Mondal Barir Pujo",
+    "brand_title": "Mondol Barir Pujo",
     "google_login_title": "Sign in with Google (Optional)",
     "google_modal_title": "Sign in with Google Account",
-    "google_modal_subtitle": "Connect with Mondal Barir Pujo 2026 to save your greetings and photo contributions.",
+    "google_modal_subtitle": "Connect with Mondol Barir Pujo 2026 to save your greetings and photo contributions.",
     "quick_account_devotee": "Devotee & Visitor",
-    "quick_account_family": "Mondal Family Member / Guest",
+    "quick_account_family": "Mondol Family Member / Guest",
     "google_modal_or": "or enter your name",
     "google_input_name_label": "Your Name (Google Display Name)",
     "google_input_email_label": "Email (Optional)",
@@ -553,7 +553,7 @@ export const translations = {
     "dhak_studio": "Heritage Dhak Studio",
     "pujo_history": "Puja History & Heritage",
     "photo_story": "Festive Story Card",
-    "island_ambient_track": "Mondal Bari Festive Ambience",
+    "island_ambient_track": "Mondol Bari Festive Ambience",
     "island_quick_radio": "Puja Radio",
     "island_quick_dhak": "Dhak Studio",
     "island_quick_shankha": "Shankhadhwani",
@@ -568,7 +568,7 @@ export const translations = {
     "vibe_evening": "Evening",
     "vibe_night": "Night",
     "vibe_auto": "Auto",
-    "island_heritage_title": "Mondal Barir Pujo & Schedule",
+    "island_heritage_title": "Mondol Barir Pujo & Schedule",
     "island_heritage_desc": "Heritage established since 1997, complete puja schedule, and photo archive",
     "live_visitors_title": "Live Devotees & Visitors",
     "island_open_player": "Open Player & Dhak Studio",
@@ -577,8 +577,8 @@ export const translations = {
     // Hero Section
     "hero_title_top": "Pujo",
     "hero_title_bottom": "Asche",
-    "hero_subtag": "Mondal Barir Pujo 2026 • 30th Year of Heritage Est. 1997",
-    "hero_badge": "Furfura Mondal Poribar — Ancestral Durga Puja 2026 (30th Year)",
+    "hero_subtag": "Mondol Barir Pujo 2026 • 30th Year of Heritage Est. 1997",
+    "hero_badge": "Furfura Mondol Poribar — Ancestral Durga Puja 2026 (30th Year)",
     "hero_countdown_title": "Divine Homecoming of Maa Durga — Live Mahalaya Countdown",
     "hero_countdown_sub": "Subho Mahalaya: 10 October 2026 • Full Schedule & Rituals",
     "hero_countdown_inspect": "View Puja Schedule & Rituals",
@@ -594,7 +594,7 @@ export const translations = {
     // Formal Invitation Letterhead Section
     "invitation_badge": "Auspicious Invitation",
     "invitation_title": "Sri Sri Durga Puja Cordial Invitation",
-    "invitation_subtitle": "Furfura Mondal Poribar • Furfura, Kazipada, Hooghly",
+    "invitation_subtitle": "Furfura Mondol Poribar • Furfura, Kazipada, Hooghly",
     "invitation_download": "Download Invitation",
     "invitation_download_title": "Download Invitation Card",
     "invitation_share": "Share Invitation",
@@ -611,7 +611,7 @@ export const translations = {
     "photo_river_badge": "Visual River • Festive Memories",
     "river_badge": "Visual River • Festive Memories",
     "river_title": "River of Memories — Living Moments of Durga Puja",
-    "river_subtitle": "A seamless visual journey capturing Mondal Bari courtyard festivities, Dhunuchi dance, and festive memories",
+    "river_subtitle": "A seamless visual journey capturing Mondol Bari courtyard festivities, Dhunuchi dance, and festive memories",
     "river_hint": "Click any photo to view in full splendour • Hover to pause animation",
     "river_row1_title": "Protima Darshan & Natmandir Courtyard",
     "river_row2_title": "Dhunuchi Dance & Heritage Dhak Beats",
@@ -634,7 +634,7 @@ export const translations = {
     "gallery_badge": "Ancestral Archives (Est. 1997)",
     "gallery_badge_title": "Preserved Heritage & Memories Since 1997",
     "gallery_title": "Heritage Photo Gallery & Festive Memories",
-    "gallery_subtitle": "A preserved photographic archive of Mondal Bari traditional Ekchala idol darshan, 108-diya Sandhi Puja, and family homecoming since 1997.",
+    "gallery_subtitle": "A preserved photographic archive of Mondol Bari traditional Ekchala idol darshan, 108-diya Sandhi Puja, and family homecoming since 1997.",
     "gallery_filter_all": "All Photos",
     "gallery_filter_protima": "Divine Protima Darshan",
     "gallery_filter_aarti": "Dhunuchi Dance & Aarti",
@@ -645,14 +645,14 @@ export const translations = {
     "gallery_btn_upload": "Share Your Photos & Memories",
     "upload_badge": "Memory Collection",
     "upload_title": "Submit Festive Photos & Memories",
-    "upload_desc": "Add your cherished moments, deity darshan, and family memories from Mondal Barir Pujo to our heritage archive.",
+    "upload_desc": "Add your cherished moments, deity darshan, and family memories from Mondol Barir Pujo to our heritage archive.",
     "dropzone_text": "Drag & drop photos here or browse files",
     "dropzone_hint": "Supported formats: JPG, PNG, WebP • Max 5MB",
     "btn_browse_files": "Select Files from Device",
     "upload_caption_label": "Photo Title or Short Caption:",
     "upload_caption_placeholder": "e.g. Maha Ashtami Sandhi Puja Aarti at Natmandir",
     "upload_author_label": "Your Name & Contact:",
-    "upload_author_placeholder": "e.g. Subrata Mondal, Hooghly",
+    "upload_author_placeholder": "e.g. Subrata Mondol, Hooghly",
     "upload_category_label": "Select Category:",
     "cat_protima": "Protima Darshan",
     "cat_aarti": "Dhunuchi & Aarti",
@@ -664,7 +664,7 @@ export const translations = {
 
     // Location & Direction Card
     "location_badge": "Puja Pandal Location & Directions",
-    "location_title": "Furfura Mondal Poribar Natmandir",
+    "location_title": "Furfura Mondol Poribar Natmandir",
     "location_desc": "Furfura, Kazipada, Hooghly, West Bengal",
     "location_maps_btn": "View Live Route & Directions on Google Maps",
     "location_sub_hint": "Directly accessible from Dankuni and Chanditala",
@@ -674,7 +674,7 @@ export const translations = {
     "btn_to_gallery": "Explore Heritage Photo Gallery",
     "btn_full_schedule": "Full Puja Schedule & Rituals",
     "footer_tag_onnota": "Public Uploads & Community",
-    "footer_tag_heritage": "Sri Sri Durga Puja 2026 • Furfura Mondal Poribar",
+    "footer_tag_heritage": "Sri Sri Durga Puja 2026 • Furfura Mondol Poribar",
 
     // Desktop Snap Navigation Dots
     "nav_hero_title": "Hero & Countdown",
@@ -709,11 +709,11 @@ export const translations = {
     "nav_dhak": "Dhak",
     "nav_shankha": "Shankha",
     "nav_story": "Story",
-    "nav_mondal_bari": "Mondal Bari",
+    "nav_mondal_bari": "Mondol Bari",
 
     // Playlists Modal
     "modal_playlists_title": "Festive Audio Playlists & Agomoni Radio",
-    "modal_playlists_sub": "Mondal Bari Pujo",
+    "modal_playlists_sub": "Mondol Bari Pujo",
     "tab_puja_radio": "Puja Classics",
     "tab_mahalaya": "Mahalaya Broadcast",
     "tab_chandi_songs": "Chandi Path Songs",
@@ -724,15 +724,15 @@ export const translations = {
     "tab_dhak_vibes": "Heritage Dhak Bols",
 
     // Pujo Info Modal
-    "modal_pujo_title": "Mondal Barir Pujo & Heritage Schedule",
+    "modal_pujo_title": "Mondol Barir Pujo & Heritage Schedule",
     "modal_pujo_sub": "Bonedi Bari Heritage",
     "pujo_intro_badge": "30th Year of Heritage",
-    "pujo_intro_title": "Furfura Mondal Poribar Ancestral Durga Puja",
-    "pujo_intro_text": "Since 1997, Sri Sri Durga Puja of Furfura Mondal Poribar has been celebrated with devotion and ancestral heritage. Featuring traditional Ekchala Daker Saaj, Maha Ashtami Sandhi Puja with 108 lotuses and lamps, soulful Dhunuchi dance in the Natmandir courtyard, and Bijoya Sindoor Khela — this celebration is a sacred union of devotion and togetherness.",
+    "pujo_intro_title": "Furfura Mondol Poribar Ancestral Durga Puja",
+    "pujo_intro_text": "Since 1997, Sri Sri Durga Puja of Furfura Mondol Poribar has been celebrated with devotion and ancestral heritage. Featuring traditional Ekchala Daker Saaj, Maha Ashtami Sandhi Puja with 108 lotuses and lamps, soulful Dhunuchi dance in the Natmandir courtyard, and Bijoya Sindoor Khela — this celebration is a sacred union of devotion and togetherness.",
     "insta_banner_title": "Connect with Us on Instagram",
     "insta_banner_sub": "Follow for live festive updates, reels, and community photographs",
     "pujo_schedule_title": "Sri Sri Durga Puja 2026 Schedule & Rituals",
-    "pujo_highlights_title": "Heritage Highlights of Mondal Barir Pujo",
+    "pujo_highlights_title": "Heritage Highlights of Mondol Barir Pujo",
     "pujo_gallery_title": "Heritage Photographs & Archival Gallery",
     "pujo_gallery_hint": "Click any photograph to immerse the portal in that time-of-day atmosphere",
     "btn_create_story": "Create Festive Story Card",
@@ -906,8 +906,8 @@ export const translations = {
     "lightbox_share_aria": "Share Photo",
 
     // Welcome Onboarding Modal & Matrix Loader
-    "loader_title": "Mondal Barir Pujo",
-    "loader_subtitle": "Furfura Mondal Poribar • 2026",
+    "loader_title": "Mondol Barir Pujo",
+    "loader_subtitle": "Furfura Mondol Poribar • 2026",
     "welcome_lang_label": "Language Preference",
     "welcome_sound_label": "Festive Audio & Ambience",
     "welcome_sound_yes": "With Sound",
@@ -916,8 +916,8 @@ export const translations = {
     "welcome_btn_enter": "Enter Festive Courtyard",
 
     // Curator & Management Portal Keys
-    "portal_page_title": "Curator & Management Portal — Mondal Barir Pujo",
-    "portal_auth_badge": "Furfura Mondal Poribar",
+    "portal_page_title": "Curator & Management Portal — Mondol Barir Pujo",
+    "portal_auth_badge": "Furfura Mondol Poribar",
     "portal_auth_title": "Curator & Management Portal",
     "portal_auth_subtitle": "Exclusive management dashboard for authorized Admins and Editors. Curate photo river, heritage gallery, and public creations.",
     "portal_google_btn": "Sign in with Google",
@@ -928,7 +928,7 @@ export const translations = {
     "portal_denied_guide_msg": "If you are a family organizer, please contact the Super Admin (debanjanmondal8996@gmail.com) to add your email to the Editor whitelist in Firebase.",
     "portal_switch_account_btn": "Switch Google Account",
     "portal_return_home_btn": "Return to Public Website",
-    "portal_nav_brand": "Mondal Barir Pujo",
+    "portal_nav_brand": "Mondol Barir Pujo",
     "portal_nav_tag": "Curator & Management Portal",
     "portal_role_admin": "Super Admin",
     "portal_role_editor": "Content Editor",
@@ -958,7 +958,7 @@ export const translations = {
     "portal_target_gallery": "Heritage Gallery Only",
     "portal_target_river": "Photo River Only",
     "portal_label_author": "Photographer / Family Name",
-    "portal_ph_author": "Furfura Mondal Poribar",
+    "portal_ph_author": "Furfura Mondol Poribar",
     "portal_btn_publish": "Publish to Website",
     "portal_list_title": "Published Photo Archive",
     "portal_list_desc": "Manage, edit details, or delete published photographs",
@@ -991,7 +991,7 @@ export const translations = {
     "portal_announcement_btn_save": "Save & Broadcast Announcement",
     "portal_announcement_gate": "🔒 This section is exclusively reserved for the Super Admin (<code>debanjanmondal8996@gmail.com</code>).",
     "portal_roles_title": "⚙️ Roles & Security Architecture (RBAC)",
-    "portal_roles_desc": "3-Tier Access Control System for Furfura Mondal Poribar",
+    "portal_roles_desc": "3-Tier Access Control System for Furfura Mondol Poribar",
     "portal_role_admin_badge": "1. Super Admin (Admin)",
     "portal_role_admin_email_label": "Permanent Email:",
     "portal_role_admin_desc": "Master control over the entire platform. Highest authority to manage, edit, and moderate Photo River, Gallery, Public Uploads, live announcements, and Puja schedules.",

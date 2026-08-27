@@ -1,4 +1,4 @@
-// Complete curated Durga Puja tracks, Mahalaya segments & Mondal Barir Pujo Heritage Data
+// Complete curated Durga Puja tracks, Mahalaya segments & Mondol Barir Pujo Heritage Data
 // All video IDs and covers verified 100% active with authentic high-resolution artwork
 
 export const playlists = {
@@ -32,9 +32,9 @@ export const playlists = {
       {
         id: "durga-ambient-00",
         num: "০২",
-        title: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondal Bari Ambient)",
+        title: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত (Mondol Bari Ambient)",
         title_bn: "মন্ডল বাড়ি শারদ আবহ সঙ্গীত",
-        title_en: "Mondal Bari Festive Ambient",
+        title_en: "Mondol Bari Festive Ambient",
         artist: "ফুরফুরা মণ্ডল পরিবার আবহ",
         composer: "ঐতিহ্য শারদ সুরমালা",
         lyricist: "শারদোৎসব",
@@ -807,12 +807,12 @@ export const playlists = {
 export const nativePujoData = {
   pujoName: "মণ্ডল বাড়ির পুজো",
   bengaliName: "মণ্ডল বাড়ির পুজো (ফুরফুরা মণ্ডল পরিবার)",
-  englishName: "Furfura Mondal Poribar Pujo",
+  englishName: "Furfura Mondol Poribar Pujo",
   tagline: "Celebrating 30th Year of Heritage & Devotion (Est. 1997)",
   bengaliTagline: "১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য, সাবেকি রীতিনীতি ও আন্তরিক মিলনোৎসব",
   instagramHandle: "@furfura_mondal_poribar",
   instagramUrl: "https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp",
-  location: "Furfura Mondal Poribar Natmandir, Furfura, Kazipada, Hooghly, Bengal",
+  location: "Furfura Mondol Poribar Natmandir, Furfura, Kazipada, Hooghly, Bengal",
   history: {
     title: "মণ্ডল বাড়ির পুজোর ঐতিহ্য ও ইতিহাস",
     subtitle: "30th Year of Heritage & Ancestral Devotion • Est. 1997",
@@ -920,7 +920,7 @@ export const nativePujoData = {
       id: "gal-1",
       category: "protima",
       categoryLabel: "প্রতিমা ও বরণ",
-      title: "Mondal Bari Traditional Ekchala Protima",
+      title: "Mondol Bari Traditional Ekchala Protima",
       bengaliTitle: "সাবেকি একচালা ডাকের সাজে মা দুর্গা",
       desc: "Sacred divine Darshan with traditional clay craftsmanship, Sholar Daak ornaments, and ancestral devotion since 1997.",
       bengaliDesc: "১৯৯৭ সাল থেকে নিষ্ঠার সাথে পূজিত সাবেকি একচালা ডাকের সাজের প্রতিমার দিব্য দর্শন।",
@@ -944,7 +944,7 @@ export const nativePujoData = {
       id: "gal-3",
       category: "heritage",
       categoryLabel: "ঐতিহ্য ও পরিবার",
-      title: "Mondal Bari Festive Night Grandeur",
+      title: "Mondol Bari Festive Night Grandeur",
       bengaliTitle: "মন্ডল বাড়ির উৎসবের আলোকসজ্জা ও মিলনমেলা",
       desc: "Night celebrations uniting family, relatives, neighbors and devotees under illuminated Bonedi heritage arches.",
       bengaliDesc: "উৎসবের আলোয় ঝলমলে বনেদি নাটমন্দির প্রাঙ্গণ ও বহু দূর-দূরান্ত থেকে আসা ভক্তদের আন্তরিক মিলনমেলা।",
@@ -970,7 +970,7 @@ export const nativePujoData = {
       categoryLabel: "হস্তশিল্প ও আলপনা",
       title: "Traditional Handcrafted Rice Flour Alpana",
       bengaliTitle: "নাটমন্দির চত্বরে সাবেকি চালের গুঁড়োর আলপনা",
-      desc: "Authentic handmade sacred floor art intricately drawn with rice flour paste across the Mondal Bari Natmandir.",
+      desc: "Authentic handmade sacred floor art intricately drawn with rice flour paste across the Mondol Bari Natmandir.",
       bengaliDesc: "শালুক, পদ্ম ও দেবী চরণের নিখুঁত হাতের টানে আঁকা মন্ডল বাড়ির ঐতিহ্যবাহী সাবেকি পিটুলি আলপনা।",
       author: "ফুরফুরা মণ্ডল পরিবার",
       likes: 389,
@@ -1232,7 +1232,7 @@ export const TRADITIONAL_BOLS = [
     taal: "Dhunuchi Kaharwa Drut Polyrhythm",
     timeSignature: "4/4",
     swingFactor: 0.16,
-    description: "Electrifying rhythm played during the evening incense and Dhunuchi dance in the Mondal Bari Natmandir. Twin bamboo sticks create syncopated polyrhythms locking with Kanshor ringing.",
+    description: "Electrifying rhythm played during the evening incense and Dhunuchi dance in the Mondol Bari Natmandir. Twin bamboo sticks create syncopated polyrhythms locking with Kanshor ringing.",
     vocalPhoneticBol: "তাক দুমা দুম | তাক দুমা দুম || ঝম ঝমাকা ঝম | ঝম ঝমাকা ঝম ||",
     romanizedBol: "Tak Duma Dum | Tak Duma Dum || Jham Jhamaka Jham | Jham Jhamaka Jham ||",
     barLengthSteps: 16,
@@ -1498,7 +1498,7 @@ export const photoRiverRows = [
       },
       {
         id: "river-204",
-        title: "Authentic Mondal Bari Alpana",
+        title: "Authentic Mondol Bari Alpana",
         title_bn: "নাটমন্দিরের সাবেকি চালের গুঁড়োর আলপনা",
         category: "crafts",
         categoryLabel: "হস্তশিল্প ও আলপনা",
@@ -1583,7 +1583,7 @@ export const photoRiverRows = [
       },
       {
         id: "river-305",
-        title: "Mondal Bari Alpona Tradition",
+        title: "Mondol Bari Alpona Tradition",
         title_bn: "ঐতিহ্যবাহী আলপনা শিল্প",
         category: "crafts",
         categoryLabel: "হস্তশিল্প ও আলপনা",

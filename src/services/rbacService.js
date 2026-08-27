@@ -1,4 +1,4 @@
-// Role-Based Access Control (RBAC) Service for Mondal Barir Pujo
+// Role-Based Access Control (RBAC) Service for Mondol Barir Pujo
 // External Admin & Editor role resolution via Google OAuth + Firebase Firestore
 
 import { firebaseConfig } from './firebaseAuth.js';

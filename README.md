@@ -1,11 +1,11 @@
-# 🌸 Mondal Barir Pujo (ফুরফুরা মণ্ডল পরিবার) — Durga Puja 2026
+# 🌸 Mondol Barir Pujo (ফুরফুরা মণ্ডল পরিবার) — Durga Puja 2026
 
 [![Website Status](https://img.shields.io/badge/Status-Live%20Ready-gold?style=for-the-badge&logo=vercel)](https://furfura-mondal-poribar.vercel.app)
 [![Instagram](https://img.shields.io/badge/Instagram-@furfura__mondal__poribar-E4405F?style=for-the-badge&logo=instagram)](https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
 > **"১৫০+ বছরের ঐতিহ্য, সাবেki রীতিনীতি ও আন্তরিক মিলনোৎসব।"**  
-> An ultra-responsive, immersive digital platform celebrating the 150+ years heritage of **Mondal Barir Pujo (Furfura Mondal Poribar Natmandir, Dankuni / Hooghly, Bengal)** with a studio-grade physical modeling percussion synthesizer and live Agomoni radio.
+> An ultra-responsive, immersive digital platform celebrating the 150+ years heritage of **Mondol Barir Pujo (Furfura Mondol Poribar Natmandir, Dankuni / Hooghly, Bengal)** with a studio-grade physical modeling percussion synthesizer and live Agomoni radio.
 
 ---
 
@@ -27,7 +27,7 @@
 
 ---
 
-### 📻 2. Mondal Bari Agomoni Radio
+### 📻 2. Mondol Bari Agomoni Radio
 - Curated festive radio streams including Mahalaya Chandi Path and Agomoni songs.
 - Custom Web Audio visualizer, ambient background switching based on time of day (Dawn, Morning, Afternoon, Evening Aarti, Night, Midnight), and falling Shiuli flower particle simulation.
 
@@ -65,11 +65,11 @@ npm run build
 
 ## 🏛️ Heritage & Organization
 
-- **Puja**: Mondal Barir Pujo (মন্ডল বাড়ির পুজো)
-- **Family**: Furfura Mondal Poribar (ফুরফুরা মণ্ডল পরিবার)
-- **Location**: Furfura Mondal Poribar Natmandir, Dankuni / Hooghly, Bengal
+- **Puja**: Mondol Barir Pujo (মন্ডল বাড়ির পুজো)
+- **Family**: Furfura Mondol Poribar (ফুরফুরা মণ্ডল পরিবার)
+- **Location**: Furfura Mondol Poribar Natmandir, Dankuni / Hooghly, Bengal
 - **Official Instagram**: [@furfura_mondal_poribar](https://www.instagram.com/furfura_mondal_poribar?igsh=d3BvbzY5NTI5Z2hp)
 
-<!-- Author: Debanjan Mondal (debanjanmondal8996@gmail.com) -->
+<!-- Author: Debanjan Mondol (debanjanmondal8996@gmail.com) -->
 
 <!-- Last Sync: 2026-08-23T11:30:16.653Z -->

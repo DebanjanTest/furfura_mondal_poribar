@@ -1,18 +1,18 @@
 ---
 name: heritage-artisan-ui
-description: Design principles, modern glassmorphism recipes, chip component architecture, authentic Bengali heritage warmth tokens, and accessibility standards for the Mondal Barir Pujo (মন্ডল বাড়ির পুজো) platform.
+description: Design principles, modern glassmorphism recipes, chip component architecture, authentic Bengali heritage warmth tokens, and accessibility standards for the Mondol Barir Pujo (মন্ডল বাড়ির পুজো) platform.
 argument-hint: Which component, modal, or design token do you want to inspect or implement?
 disable-model-invocation: false
 ---
 
 # Heritage Artisan UI Design System & Engineering Specification
-### মন্ডল বাড়ির পুজো / ফুরফুরা মণ্ডল পরিবার (Furfura Mondal Poribar) — 150+ Years Heritage Platform
+### মন্ডল বাড়ির পুজো / ফুরফুরা মণ্ডল পরিবার (Furfura Mondol Poribar) — 150+ Years Heritage Platform
 
 ---
 
 ## 1. Executive Aesthetic Philosophy & Core Identity
 
-The Mondal Barir Pujo web platform represents a sacred, 150+ year living legacy dating back to the 1870s in Furfura, Hooghly. The visual and interactive experience must reflect **Authentic Bengali Bonedi Heritage Warmth** harmoniously merged with **Apple-Grade Precision Engineering and Fluid Micro-interactions (HIG-Standard)**.
+The Mondol Barir Pujo web platform represents a sacred, 150+ year living legacy dating back to the 1870s in Furfura, Hooghly. The visual and interactive experience must reflect **Authentic Bengali Bonedi Heritage Warmth** harmoniously merged with **Apple-Grade Precision Engineering and Fluid Micro-interactions (HIG-Standard)**.
 
 ```
        ┌────────────────────────────────────────────────────────┐
@@ -242,7 +242,7 @@ Chips and pills are the foundational interaction vehicles across the platform.
 | **6. Dhak Drum Studio** | Dual mode (Authentic 6-part live looper vs Synth drum pads), zero-latency Pure Engine toggle. | Specular card styling for the 6 live movement cards, pulsing rhythmic bar cycle, and zero visual latency on drum pad hits. |
 | **7. Sound Booster Panel** | 4 quick preset pills (Flat, Bass Heavy, Stick Snap, Festival Loud) + 3 tactile sliders. | High-contrast label rows with live numeric badges (`+6 dB`, `120%`), gold accent range sliders, and active boost pill badge. |
 | **8. Story Card Generator** | 9:16 Canvas preview + 5 atmosphere theme pills + Bengali quote dropdown + 3 toggle pills. | High-fidelity live canvas rendering, crisp theme pill selection, and distinct download/share action buttons. |
-| **9. Mondal Bari Heritage Showcase** | 150+ year intro banner, Instagram follow card, Puja schedule timeline, 4 heritage highlights, photo gallery with category filter pills. | Authentic Bonedi Bari cultural warmth, clean timeline hierarchy with red/gold left borders, and rich gallery card overlays. |
+| **9. Mondol Bari Heritage Showcase** | 150+ year intro banner, Instagram follow card, Puja schedule timeline, 4 heritage highlights, photo gallery with category filter pills. | Authentic Bonedi Bari cultural warmth, clean timeline hierarchy with red/gold left borders, and rich gallery card overlays. |
 
 ---
 

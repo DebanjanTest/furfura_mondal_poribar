@@ -1,4 +1,4 @@
-// Curated Content Store for Mondal Barir Pujo
+// Curated Content Store for Mondol Barir Pujo
 // Synchronizes Photo River, Grand Gallery, and Onnota Creations across Portal and Public Site
 
 import { getFirestore, collection, doc, getDocs, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
@@ -24,7 +24,7 @@ function getInitialGallerySeed() {
   const defaultList = [...(nativePujoData.gallery || [])];
   return defaultList.map((item, idx) => ({
     id: item.id || `native-gallery-${idx + 1}`,
-    title: item.title || 'Mondal Bari Pujo Moment',
+    title: item.title || 'Mondol Bari Pujo Moment',
     title_bn: item.title || 'মন্ডল বাড়ির পুজো স্মৃতি',
     category: item.category || 'heritage',
     categoryLabel: item.categoryLabel || 'ঐতিহ্য ও পরিবার',
@@ -101,7 +101,7 @@ export async function addGalleryPhoto(photoData, user, role) {
   const newId = `post-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
   const item = {
     id: newId,
-    title: photoData.title || photoData.title_bn || 'Mondal Bari Durga Puja',
+    title: photoData.title || photoData.title_bn || 'Mondol Bari Durga Puja',
     title_bn: photoData.title_bn || photoData.title || 'মন্ডল বাড়ির পুজো স্মৃতি',
     category: photoData.category || 'heritage',
     categoryLabel: photoData.categoryLabel || 'ঐতিহ্য ও পরিবার',
@@ -280,7 +280,7 @@ export async function getLiveAnnouncement() {
   return {
     enabled: false,
     text_bn: 'মন্ডল বাড়ির সাবেকি দুর্গাপূজা ২০২৬ — সানন্দ আমন্ত্রণ!',
-    text_en: 'Mondal Barir Durga Puja 2026 — Cordial Invitation!'
+    text_en: 'Mondol Barir Durga Puja 2026 — Cordial Invitation!'
   };
 }
 

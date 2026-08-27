@@ -270,7 +270,7 @@ function showAuthToast(message) {
 const DEFAULT_ACCOUNTS = [
   {
     uid: 'acc-debanjan',
-    displayName: 'Debanjan Mondal',
+    displayName: 'Debanjan Mondol',
     email: 'debanjan.mondal@gmail.com',
     bgClass: 'bg-blue',
     symbol: 'D'
@@ -299,7 +299,7 @@ function getSavedAccounts() {
       list = [
         {
           uid: 'google-debanjan-mondal',
-          displayName: 'Debanjan Mondal',
+          displayName: 'Debanjan Mondol',
           email: 'debanjanmondal8996@gmail.com',
           bgClass: 'bg-blue',
           symbol: 'D'
@@ -539,7 +539,7 @@ function initFirebaseAuthUI() {
     e.stopPropagation();
     const nameInput = document.getElementById('auth-input-name');
     const emailInput = document.getElementById('auth-input-email');
-    const nameVal = (nameInput?.value || '').trim() || 'Debanjan Mondal';
+    const nameVal = (nameInput?.value || '').trim() || 'Debanjan Mondol';
     const emailVal = (emailInput?.value || '').trim() || 'debanjan.mondal@gmail.com';
 
     // Add to saved accounts list
@@ -771,7 +771,7 @@ function initDynamicIsland() {
   btnExpand?.addEventListener('click', toggleDrawer);
   btnActiveExpand?.addEventListener('click', toggleDrawer);
 
-  // Idle Island Tap -> Opens Mondal Barir Pujo Heritage & Schedule
+  // Idle Island Tap -> Opens Mondol Barir Pujo Heritage & Schedule
   idleTapTarget?.addEventListener('click', (e) => {
     e.stopPropagation();
     openModal('pujo-info-modal');
@@ -892,7 +892,7 @@ function updateDynamicIslandState() {
 
     const track = getCurrentTrack();
     if (islandTrackTitle) islandTrackTitle.textContent = (lang === 'bn' ? (track?.title_bn || track?.title) : (track?.title || track?.title_bn)) || 'Dugga Elo';
-    if (islandArtistName) islandArtistName.textContent = track?.artist || (lang === 'bn' ? 'মন্ডল বাড়ি রেডিও' : 'Mondal Bari Radio');
+    if (islandArtistName) islandArtistName.textContent = track?.artist || (lang === 'bn' ? 'মন্ডল বাড়ি রেডিও' : 'Mondol Bari Radio');
     if (islandArtImg) {
       islandArtImg.src = getTrackThumbnail(track);
       islandArtImg.onerror = () => { islandArtImg.src = 'https://img.youtube.com/vi/xlElO06nQy8/mqdefault.jpg'; };
@@ -944,7 +944,7 @@ function initCountdown() {
   tick();
   setInterval(tick, 1000);
 
-  // Click on countdown card opens Mondal Barir Pujo Info / Schedule
+  // Click on countdown card opens Mondol Barir Pujo Info / Schedule
   document.getElementById('btn-countdown-details')?.addEventListener('click', () => {
     openModal('pujo-info-modal');
   });
@@ -1430,7 +1430,7 @@ function getAllGalleryPhotos() {
 function initPujoInfoAndGallery() {
   renderPujoModalContent();
 
-  // Open Mondal Barir Pujo Modal
+  // Open Mondol Barir Pujo Modal
   document.getElementById('btn-open-pujo-info')?.addEventListener('click', () => {
     openModal('pujo-info-modal');
   });
@@ -1454,7 +1454,7 @@ function initPujoInfoAndGallery() {
 মহালয়া: ১০ অক্টোবর | মহাষ্টমী ও সন্ধিপূজা: ১৮ অক্টোবর ২০২৬
 লাইভ কাউন্টডাউন ও আগমনী রেডিও: ${window.location.href}
 Instagram: @furfura_mondal_poribar (${nativePujoData.instagramUrl})`
-      : `Durga Puja 2026! Mondal Barir Pujo (Furfura Mondal Poribar) • Heritage since 1997.
+      : `Durga Puja 2026! Mondol Barir Pujo (Furfura Mondol Poribar) • Heritage since 1997.
 Mahalaya: 10 October | Maha Ashtami & Sandhi Puja: 18 October 2026
 Live Countdown & Festive Radio: ${window.location.href}
 Instagram: @furfura_mondal_poribar (${nativePujoData.instagramUrl})`;
@@ -1462,7 +1462,7 @@ Instagram: @furfura_mondal_poribar (${nativePujoData.instagramUrl})`;
     if (navigator.share) {
       try {
         await navigator.share({
-          title: lang === 'bn' ? 'মন্ডল বাড়ির পুজো ২০২৬ — পুজো আসছে' : 'Mondal Barir Pujo 2026 — Festive Portal',
+          title: lang === 'bn' ? 'মন্ডল বাড়ির পুজো ২০২৬ — পুজো আসছে' : 'Mondol Barir Pujo 2026 — Festive Portal',
           text: shareText,
           url: window.location.href
         });
@@ -1934,7 +1934,7 @@ function renderGrandGalleryGrid(isNewUpload = false) {
     const title = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
     const desc = lang === 'bn' ? (item.bengaliDesc || item.title) : (item.englishDesc || item.description || item.title);
     const category = lang === 'bn' ? (item.categoryLabel || item.category) : (item.categoryEnglish || item.categoryLabel || item.category);
-    const author = lang === 'bn' ? (item.author || 'মন্ডল পরিবার') : (item.authorEnglish || item.author || 'Mondal Family');
+    const author = lang === 'bn' ? (item.author || 'মন্ডল পরিবার') : (item.authorEnglish || item.author || 'Mondol Family');
     const pranamLabel = lang === 'bn' ? 'প্রণাম' : 'Pranam';
     const communityLabel = lang === 'bn' ? 'ভক্তের ছবি' : 'Community';
 
@@ -2219,7 +2219,7 @@ function initGalleryLightbox() {
     const shareText = lang === 'bn' 
       ? `মন্ডল বাড়ির পুজো ২০২৬ (১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য): "${shareTitle}"
 @furfura_mondal_poribar • লাইভ ফটো গ্যালারি ও আগমনী রেডিও: ${window.location.href}`
-      : `Mondal Barir Pujo 2026 (Heritage since 1997): "${shareTitle}"
+      : `Mondol Barir Pujo 2026 (Heritage since 1997): "${shareTitle}"
 @furfura_mondal_poribar • Live Photo Gallery & Festive Radio: ${window.location.href}`;
 
     if (navigator.share) {
@@ -2279,7 +2279,7 @@ function updateLightboxUI() {
   const title = lang === 'bn' ? (item.bengaliTitle || item.title) : (item.englishTitle || item.title || item.bengaliTitle);
   const desc = lang === 'bn' ? (item.bengaliDesc || item.desc_bn || item.desc || item.title) : (item.englishDesc || item.desc_en || item.description || item.desc || item.title);
   const category = lang === 'bn' ? (item.categoryLabel || item.category) : (item.categoryEnglish || item.categoryLabel || item.category);
-  const author = lang === 'bn' ? (item.author || 'মন্ডল পরিবার') : (item.authorEnglish || item.author || 'Mondal Family');
+  const author = lang === 'bn' ? (item.author || 'মন্ডল পরিবার') : (item.authorEnglish || item.author || 'Mondol Family');
   const date = lang === 'bn' ? (item.date || '') : (item.dateEnglish || item.date || '');
 
   if (imgEl) {
@@ -2374,7 +2374,7 @@ function initStoryGenerator() {
     const shareBtn = document.getElementById('btn-share-story-native');
     if (!canvas) return;
 
-    const shareText = `পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondal Poribar) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য। Follow @furfura_mondal_poribar ${nativePujoData.instagramUrl}`;
+    const shareText = `পুজো আসছে! মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondol Poribar) • ১৯৯৭ সাল থেকে প্রতিষ্ঠিত ঐতিহ্য। Follow @furfura_mondal_poribar ${nativePujoData.instagramUrl}`;
 
     if (navigator.share && canvas.toBlob) {
       canvas.toBlob(async (blob) => {
@@ -2408,7 +2408,7 @@ function initStoryGenerator() {
     const cd = getCountdown();
     const caption = `মা আসছেন ঘরে! 
 
-মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondal Poribar Pujo)
+মন্ডল বাড়ির পুজো ২০২৬ (Furfura Mondol Poribar Pujo)
 নাটমন্দির, ফুরফুরা, হুগলী, পশ্চিমবঙ্গ
 আর মাত্র ${cd.days} দিন বাকি (Maha Shasthi: 16 Oct 2026)
 
@@ -2417,7 +2417,7 @@ function initStoryGenerator() {
 
 Follow on Instagram: @furfura_mondal_poribar
 ${nativePujoData.instagramUrl}
-#FurfuraMondalPoribar #MondalBarirPujo #মন্ডলবাড়িরপুজো #DurgaPuja2026 #PujoAsche #MondalBariRadio #Agomoni #KolkataDurgaPuja #BonediBariPujo #Dankuni #Hooghly`;
+#FurfuraMondolPoribar #MondolBarirPujo #মন্ডলবাড়িরপুজো #DurgaPuja2026 #PujoAsche #MondolBariRadio #Agomoni #KolkataDurgaPuja #BonediBariPujo #Dankuni #Hooghly`;
 
     copyTextToClipboard(caption, copyBtn, 'সম্পূর্ণ ক্যাপশন ও হ্যাশট্যাগ কপি হয়েছে!');
   });
@@ -2512,7 +2512,7 @@ function renderStoryCanvas() {
   ctx.fillStyle = '#ffffff';
   ctx.font = '600 24px "Noto Sans Bengali", "Poppins", sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText(lang === 'bn' ? 'মন্ডল বাড়ির পুজো • ১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য' : 'Mondal Barir Pujo • Heritage Since 1997', width / 2, 138);
+  ctx.fillText(lang === 'bn' ? 'মন্ডল বাড়ির পুজো • ১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য' : 'Mondol Barir Pujo • Heritage Since 1997', width / 2, 138);
   ctx.restore();
 
   // 6. Central Sacred Maa Durga Iconography / Mandala
@@ -2549,10 +2549,10 @@ function renderStoryCanvas() {
   const headlinesMap = {
     'pujo-asche': lang === 'bn' 
       ? { top: 'পুজো', bot: 'আসছে', full: 'মন্ডল বাড়ির পুজো ২০২৬' }
-      : { top: 'PUJO', bot: 'ASCHE', full: 'Mondal Barir Pujo 2026' },
+      : { top: 'PUJO', bot: 'ASCHE', full: 'Mondol Barir Pujo 2026' },
     'subho-saradiya': lang === 'bn'
       ? { top: 'শুভ', bot: 'শারদীয়া', full: 'মন্ডল বাড়ির দুর্গাপূজা' }
-      : { top: 'SUBHO', bot: 'SARADIYA', full: 'Mondal Bari Durga Puja' },
+      : { top: 'SUBHO', bot: 'SARADIYA', full: 'Mondol Bari Durga Puja' },
     'maa-aschen': lang === 'bn'
       ? { top: 'মা আসছেন', bot: 'ঘরে', full: '১৯৯৭ থেকে প্রতিষ্ঠিত ঐতিহ্য ও আনন্দ' }
       : { top: 'MAA', bot: 'ASCHEN', full: 'Heritage & Celebrations Since 1997' },
@@ -2806,7 +2806,7 @@ function initKeyboardShortcuts() {
         if (toggleBtn) toggleBtn.style.opacity = isRunning ? '1' : '0.4';
       }
     }
-    // 'M': Mondal Barir Pujo Info
+    // 'M': Mondol Barir Pujo Info
     else if (key.toLowerCase() === 'm') {
       openModal('pujo-info-modal');
     }

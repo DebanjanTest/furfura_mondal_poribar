@@ -1,4 +1,4 @@
-// Firebase Modular Authentication Service for Mondal Barir Pujo
+// Firebase Modular Authentication Service for Mondol Barir Pujo
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import {
   getAuth,
@@ -12,7 +12,7 @@ import {
 
 const STORAGE_KEY = 'mondal_bari_auth_user';
 
-// Authentic Firebase Project Configuration for Mondal Barir Pujo
+// Authentic Firebase Project Configuration for Mondol Barir Pujo
 export const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDTIahFo-QmOsZcGft5SxOSmslJsW_Jm-Y",
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "mondal-barir-pujo.firebaseapp.com",
