@@ -374,7 +374,7 @@ function initFirebaseAuthUI() {
     setStoredUser(user);
     try {
       localStorage.setItem('mondal_bari_welcome_entered', 'true');
-      sessionStorage.setItem('mondal_bari_welcome_entered', 'true');
+      sessionStorage.setItem('mondal_bari_welcome_session_entered', 'true');
     } catch (_) {}
 
     // 1. Immediately Close Google Signin Modal Card
@@ -3056,11 +3056,9 @@ function initWelcomeModal() {
   const welcomeOverlay = document.getElementById('welcome-modal-overlay');
   if (!welcomeOverlay) return;
 
-  // Check if user has already entered or signed in in this browser session
-  const hasEntered = localStorage.getItem('mondal_bari_welcome_entered') === 'true' || sessionStorage.getItem('mondal_bari_welcome_entered') === 'true';
-  const storedUser = getStoredUser();
-
-  if (hasEntered || storedUser) {
+  // Check if user has already entered in THIS active browser session
+  const sessionEntered = sessionStorage.getItem('mondal_bari_welcome_session_entered') === 'true';
+  if (sessionEntered) {
     welcomeOverlay.classList.add('hidden');
     try { welcomeOverlay.remove(); } catch (_) {}
     return;
@@ -3166,9 +3164,9 @@ function initWelcomeModal() {
     } catch (err) {
       console.warn('Audio preference init notice on enter:', err);
     } finally {
-      // 3. Always mark entered in localStorage and sessionStorage so it NEVER asks again
+      // 3. Mark entered in active session
       try {
-        sessionStorage.setItem('mondal_bari_welcome_entered', 'true');
+        sessionStorage.setItem('mondal_bari_welcome_session_entered', 'true');
         localStorage.setItem('mondal_bari_welcome_entered', 'true');
       } catch (_) {}
 
