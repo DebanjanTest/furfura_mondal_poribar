@@ -7,7 +7,6 @@ import { getTimeOfDay, getCountdown, toBengaliNumerals } from './utils/timeUtils
 import { getLanguage, setLanguage, updateAppLanguage, getSavedLanguage, t, applyTranslations, formatNumber } from './utils/i18n.js';
 import { loginWithGoogle, loginWithGoogleLivePopup, loginWithGoogleRedirect, logoutUser, subscribeAuthState, getCurrentUser, setStoredUser, generateAvatarUrl } from './services/firebaseAuth.js';
 import { resolveUserRole, canAccessPortal, ROLES } from './services/rbacService.js';
-import { getCuratedGallery, getCuratedOnnota, getLiveAnnouncement } from './services/contentStore.js';
 
 // Application State
 const state = {
