@@ -28,7 +28,7 @@ let auth = null;
 let googleProvider = null;
 const authListeners = new Set();
 
-function getAuthContext() {
+export function getAuthContext() {
   if (!auth) {
     try {
       app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
@@ -87,7 +87,7 @@ export function generateAvatarUrl(name = 'Devotee', email = '') {
 }
 
 // Get saved user session from LocalStorage
-function getStoredUser() {
+export function getStoredUser() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
